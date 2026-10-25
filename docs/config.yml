@@ -1,0 +1,267 @@
+# =====================================================================
+#  Family tree site configuration
+#  Edit this file, rebuild the data (see docs/README.md), and reload.
+#  Any key you delete falls back to a sensible default.
+# =====================================================================
+
+site:
+  title: "The Viswanatha Iyer Family"
+  subtitle: "Perumbavoor · Four generations and counting"
+  intro: "Trace how we are connected, read the stories behind the names."
+  footer: "Built from our Gramps family tree"
+  # Who the tree opens on: "home" (the Gramps home person) or a Gramps ID like I0001
+  default_person: home
+  # GitHub repo (owner/name) that receives "suggest a correction" issues.
+  # Leave empty to hide the links.
+  repo: "evolvedHow/kula-family-tree"
+
+theme:
+  # Pick a palette from the `presets:` section below (or add your own there)
+  preset: sage
+  # auto follows the visitor's device setting; light and dark are fixed
+  mode: auto
+  # Optional per-colour overrides, applied on top of the preset
+  colors:
+    light: {}
+    dark: {}
+
+fonts:
+  # Bundled in docs/assets/fonts (Cormorant Garamond, Inter). To use other fonts,
+  # replace those files and the @font-face rules in docs/assets/fonts.css.
+  # Any name not bundled falls back to the visitor's installed fonts.
+  heading: "Cormorant Garamond"
+  body: "Inter"
+
+layout:
+  # hourglass = ancestors above, descendants below · ancestors · descendants
+  default_view: hourglass
+  generations_up: 4
+  generations_down: 4
+  card_width: 188
+  card_height: 84
+  gap_x: 26
+  gap_y: 92
+  corner_radius: 18
+  # curved | angular
+  connector_style: curved
+  show_years: true
+  show_places: true
+  show_child_counts: true
+
+narratives:
+  enabled: true
+  # Shown in navigation and headings
+  section_title: "Stories"
+  # Gramps note types always treated as stories
+  note_types: [Blog, Narrative, Story, Biography, Memoir]
+  # Gramps note tags that mark a note as a story (case-insensitive)
+  tags: [blog, story, narrative]
+  # Ordinary Person/Family/Event/Place notes become stories when they are at least min_words long
+  auto_detect_types: [Person Note, Family Note, Event Note, Place Note]
+  min_words: 200
+
+privacy:
+  # Applied by scripts/build_site.py before data is written. Privacy is only
+  # real if it happens at build time: the published JSON contains only what
+  # survives these rules.
+  hide_living: true
+  # A person with no death event is treated as living if born within this many years
+  living_years: 100
+  # Shown in place of a living person's name
+  living_label: "Living"
+  # Gramps IDs to publish even if the rules above would hide them, e.g. ["I0000"].
+  # Only use this for people you are sure have died or agree to be shown.
+  always_public: []
+  # Gramps records marked private are removed completely
+  respect_private_flag: true
+  # Notes with any of these tags are never published
+  exclude_tags: [private, draft]
+  # Stories that name a living person in full: redact = replace the name with living_label
+  # (the story still publishes); drop = leave the story out entirely
+  scan_stories_for_living_names: true
+  living_names_in_stories: redact
+  include_notes: true
+
+text:
+  search_placeholder: "Find a family member…"
+  tree_tab: "Tree"
+  people_tab: "Everyone"
+  stories_tab: "Stories"
+  set_me: "This is me"
+  view_hourglass: "Both"
+  view_ancestors: "Ancestors"
+  view_descendants: "Descendants"
+  read_story: "Read story"
+  back: "Back"
+
+# ---------------------------------------------------------------------
+#  Palettes. Each preset has a light and a dark version.
+# ---------------------------------------------------------------------
+presets:
+  saffron:
+    light:
+      background: "#fdf6ec"
+      surface: "#ffffff"
+      surface_strong: "#fbe9cf"
+      text: "#3b1d0e"
+      muted: "#8a6a55"
+      accent: "#d9730d"
+      accent_contrast: "#ffffff"
+      line: "#e2c9a6"
+      male: "#2f6f9f"
+      female: "#b5486a"
+      other: "#7a6a9e"
+      highlight: "#f4b740"
+    dark:
+      background: "#1d130c"
+      surface: "#2b1d12"
+      surface_strong: "#3a2818"
+      text: "#fbeedc"
+      muted: "#c3a989"
+      accent: "#f4a340"
+      accent_contrast: "#2b1205"
+      line: "#5a4128"
+      male: "#6fb1e0"
+      female: "#f08aa6"
+      other: "#b8a4e6"
+      highlight: "#ffd27a"
+
+  heirloom:
+    light:
+      background: "#f5efe4"
+      surface: "#fffdf8"
+      surface_strong: "#efe5d2"
+      text: "#2c1f1a"
+      muted: "#7d6a5d"
+      accent: "#7a1f2b"
+      accent_contrast: "#fff8ef"
+      line: "#d6c6ad"
+      male: "#2d4f6e"
+      female: "#8e3b5a"
+      other: "#5b6b4e"
+      highlight: "#c9a35b"
+    dark:
+      background: "#1b1412"
+      surface: "#271d19"
+      surface_strong: "#33261f"
+      text: "#f3e7d6"
+      muted: "#b19d89"
+      accent: "#e0a0a8"
+      accent_contrast: "#2a0d12"
+      line: "#4d3c33"
+      male: "#8fb4d9"
+      female: "#e8a5b6"
+      other: "#b6c9a0"
+      highlight: "#d8b56d"
+
+  midnight:
+    light:
+      background: "#eef2f8"
+      surface: "#ffffff"
+      surface_strong: "#dfe7f3"
+      text: "#14213d"
+      muted: "#5c6b89"
+      accent: "#b8901c"
+      accent_contrast: "#14213d"
+      line: "#c5d0e3"
+      male: "#2a6fdb"
+      female: "#d6336c"
+      other: "#6a4c93"
+      highlight: "#c9a227"
+    dark:
+      background: "#0b1220"
+      surface: "#131d31"
+      surface_strong: "#1b2a45"
+      text: "#e8edf7"
+      muted: "#8c9bb8"
+      accent: "#e0bb4d"
+      accent_contrast: "#0b1220"
+      line: "#27385a"
+      male: "#6ea8ff"
+      female: "#ff8fb1"
+      other: "#b59cf0"
+      highlight: "#f2d26b"
+
+  sage:
+    light:
+      background: "#f1f5ef"
+      surface: "#ffffff"
+      surface_strong: "#e2ebdd"
+      text: "#1f2e24"
+      muted: "#66786b"
+      accent: "#3f7d5c"
+      accent_contrast: "#ffffff"
+      line: "#c6d6c6"
+      male: "#3d6fa3"
+      female: "#b35c7a"
+      other: "#8a7a4d"
+      highlight: "#e0b65a"
+    dark:
+      background: "#101913"
+      surface: "#17231b"
+      surface_strong: "#203025"
+      text: "#e6efe6"
+      muted: "#9db3a1"
+      accent: "#7fc29b"
+      accent_contrast: "#0d1a12"
+      line: "#2f4536"
+      male: "#7fb2e0"
+      female: "#eca0b6"
+      other: "#d6c48a"
+      highlight: "#e8c46f"
+
+  ocean:
+    light:
+      background: "#eef7f9"
+      surface: "#ffffff"
+      surface_strong: "#d9eef2"
+      text: "#0e2f3a"
+      muted: "#557a86"
+      accent: "#0f8b8d"
+      accent_contrast: "#ffffff"
+      line: "#bcdde2"
+      male: "#2b6cb0"
+      female: "#c2407a"
+      other: "#7b61a8"
+      highlight: "#f2a65a"
+    dark:
+      background: "#081b22"
+      surface: "#0e2630"
+      surface_strong: "#163442"
+      text: "#e0f4f6"
+      muted: "#8fb5bd"
+      accent: "#4fd1c5"
+      accent_contrast: "#04191e"
+      line: "#22485a"
+      male: "#79b6f2"
+      female: "#f49ac1"
+      other: "#b9a2f0"
+      highlight: "#ffc06b"
+
+  rose:
+    light:
+      background: "#fdf3f5"
+      surface: "#ffffff"
+      surface_strong: "#f8e1e7"
+      text: "#3a1a24"
+      muted: "#8c6170"
+      accent: "#b83c64"
+      accent_contrast: "#ffffff"
+      line: "#eccbd5"
+      male: "#3e6fae"
+      female: "#b83c64"
+      other: "#7d6b9a"
+      highlight: "#e7b15c"
+    dark:
+      background: "#1f1016"
+      surface: "#2b161f"
+      surface_strong: "#38202b"
+      text: "#fbe9ee"
+      muted: "#c9a0ae"
+      accent: "#f08aa8"
+      accent_contrast: "#2a0b16"
+      line: "#55303d"
+      male: "#8db8ea"
+      female: "#f4a0bb"
+      other: "#c2b3e4"
+      highlight: "#f2c572"

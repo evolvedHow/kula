@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Family Tree</title>
+  <meta name="description" content="Explore our family tree and the stories behind it.">
+  <link rel="icon" href="assets/kula.jpg" type="image/jpeg">
+  <link rel="stylesheet" href="assets/fonts.css">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <div id="app" class="app" data-view="loading">
+    <header class="topbar">
+      <a class="brand" href="#/tree" aria-label="Home">
+        <img class="brand-logo" src="assets/kula.jpg" width="44" height="44" alt="Kula logo">
+        <span class="brand-text">
+          <span class="brand-title" id="site-title">Family Tree</span>
+          <span class="brand-subtitle" id="site-subtitle"></span>
+        </span>
+      </a>
+      <nav class="tabs" id="tabs" aria-label="Sections">
+        <a href="#/tree" data-tab="tree" id="tab-tree">Tree</a>
+        <a href="#/people" data-tab="people" id="tab-people">Everyone</a>
+        <a href="#/stories" data-tab="stories" id="tab-stories" hidden>Stories</a>
+      </nav>
+      <div class="search" role="search">
+        <input id="search" type="search" autocomplete="off" placeholder="Find a family member…" aria-label="Search people">
+        <ul id="search-results" class="search-results" role="listbox" hidden></ul>
+      </div>
+      <button class="me-chip" id="me-chip" type="button" hidden></button>
+    </header>
+
+    <main class="main">
+      <section class="view view-tree" id="view-tree" hidden>
+        <div class="tree-toolbar">
+          <div class="segmented" id="view-switch" role="tablist" aria-label="Tree view">
+            <button type="button" data-view="hourglass" role="tab">Both</button>
+            <button type="button" data-view="ancestors" role="tab">Ancestors</button>
+            <button type="button" data-view="descendants" role="tab">Descendants</button>
+          </div>
+          <div class="zoom">
+            <button type="button" id="zoom-out" aria-label="Zoom out">−</button>
+            <button type="button" id="zoom-fit" aria-label="Center on focus">⌖</button>
+            <button type="button" id="zoom-in" aria-label="Zoom in">+</button>
+          </div>
+        </div>
+        <div class="stage-wrap">
+          <div class="viewport" id="viewport">
+            <div class="canvas" id="canvas">
+              <svg class="links" id="links" aria-hidden="true"></svg>
+              <div class="cards" id="cards"></div>
+            </div>
+          </div>
+          <div class="empty" id="tree-empty" hidden>
+            <p>No one to show yet. Check <code>docs/data/tree.json</code>.</p>
+          </div>
+          <aside class="panel" id="panel" aria-live="polite" hidden></aside>
+        </div>
+      </section>
+
+      <section class="view view-people" id="view-people" hidden>
+        <div class="list-head">
+          <h2 id="people-heading">Everyone</h2>
+          <input id="people-filter" type="search" placeholder="Filter by name or place…" aria-label="Filter people">
+        </div>
+        <div class="people-list" id="people-list"></div>
+      </section>
+
+      <section class="view view-stories" id="view-stories" hidden>
+        <div class="list-head">
+          <h2 id="stories-heading">Stories</h2>
+          <div class="story-filters">
+            <input id="stories-filter" type="search" placeholder="Search stories…" aria-label="Search stories">
+            <select id="stories-person" aria-label="Filter by person"></select>
+          </div>
+        </div>
+        <div class="story-grid" id="story-grid"></div>
+      </section>
+
+      <section class="view view-story" id="view-story" hidden>
+        <article class="story" id="story"></article>
+      </section>
+
+      <div class="loading" id="loading">
+        <div class="spinner" aria-hidden="true"></div>
+        <p>Gathering the family…</p>
+      </div>
+      <div class="error" id="error" hidden></div>
+    </main>
+
+    <footer class="footer" id="footer"></footer>
+  </div>
+
+  <script src="vendor/js-yaml.min.js"></script>
+  <script type="module" src="assets/app.js"></script>
+</body>
+</html>
