@@ -1,14 +1,14 @@
 {
  "schema": "kula.site/1.0",
- "generated_at": "2026-10-25T23:08:36+00:00",
+ "generated_at": "2026-10-25T23:14:29+00:00",
  "source": "export.gramps",
  "home": "I0023",
  "counts": {
   "people": 118,
-  "hidden_living": 97,
+  "hidden_living": 0,
   "families": 44,
   "stories": 1,
-  "notes": 16,
+  "notes": 48,
   "places": 33
  },
  "people": [
@@ -17,9 +17,9 @@
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Annam Ambal Iyer",
+    "given": "Annam Ambal",
+    "surname": "Iyer",
     "alternates": []
    },
    "birth": null,
@@ -27,18 +27,19 @@
    "events": [],
    "families": [],
    "parent_family": "F0000",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0045"
+   ],
+   "stories": []
   },
   {
    "id": "I0117",
    "gender": "U",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Bhagavathy Ambal Iyer",
+    "given": "Bhagavathy Ambal",
+    "surname": "Iyer",
     "alternates": []
    },
    "birth": null,
@@ -47,17 +48,16 @@
    "families": [],
    "parent_family": "F0000",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0116",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Ponnammal Iyer",
+    "given": "Ponnammal",
+    "surname": "Iyer",
     "alternates": []
    },
    "birth": null,
@@ -65,9 +65,10 @@
    "events": [],
    "families": [],
    "parent_family": "F0000",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0046"
+   ],
+   "stories": []
   },
   {
    "id": "I0113",
@@ -120,9 +121,9 @@
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Gopalakrishna Iyer",
+    "given": "Gopalakrishna",
+    "surname": "Iyer",
     "alternates": []
    },
    "birth": null,
@@ -130,21 +131,26 @@
    "events": [],
    "families": [],
    "parent_family": "F0000",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0044"
+   ],
+   "stories": []
   },
   {
    "id": "I0000",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Venkiteswara Iyer",
+    "given": "Venkiteswara",
+    "surname": "Iyer",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": null,
+    "year": null,
+    "place": "Vallioor"
+   },
    "death": null,
    "events": [],
    "families": [
@@ -152,8 +158,7 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0001",
@@ -294,12 +299,16 @@
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "V Santhanam",
+    "given": "V",
+    "surname": "Santhanam",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "24 Sep 1944",
+    "year": 1944,
+    "place": ""
+   },
    "death": null,
    "events": [],
    "families": [
@@ -307,20 +316,23 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0007",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Prabha Santhanam",
+    "given": "Prabha",
+    "surname": "Santhanam",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "20 Dec 1972",
+    "year": 1972,
+    "place": "Calcutta"
+   },
    "death": null,
    "events": [],
    "families": [
@@ -328,20 +340,23 @@
    ],
    "parent_family": "F0003",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0008",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "K S Sankaranarayanan",
+    "given": "K S",
+    "surname": "Sankaranarayanan",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "12 Dec 1971",
+    "year": 1971,
+    "place": ""
+   },
    "death": null,
    "events": [],
    "families": [
@@ -349,58 +364,67 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0009",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Adi Amartya Shankar",
+    "given": "Adi Amartya",
+    "surname": "Shankar",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "27 Oct 2005",
+    "year": 2005,
+    "place": "Chennai"
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0004",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0010",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Viraj Ved Shankar",
+    "given": "Viraj Ved",
+    "surname": "Shankar",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": null,
+    "year": null,
+    "place": "Chennai"
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0004",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0011",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Deepak Venkatnarayan Santhanam",
+    "given": "Deepak Venkatnarayan",
+    "surname": "Santhanam",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "21 Dec 1979",
+    "year": 1979,
+    "place": "Calcutta"
+   },
    "death": null,
    "events": [],
    "families": [
@@ -408,20 +432,23 @@
    ],
    "parent_family": "F0003",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0012",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Spandana Arvapalli",
+    "given": "Spandana",
+    "surname": "Arvapalli",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "25 Apr 1982",
+    "year": 1982,
+    "place": ""
+   },
    "death": null,
    "events": [],
    "families": [
@@ -429,48 +456,55 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0013",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Svaksha",
+    "given": "Svaksha",
     "surname": "",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "27 Sep 2013",
+    "year": 2013,
+    "place": "Calcutta"
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0005",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0014",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Vasantha Priya Ram Mohan",
+    "given": "Vasantha Priya Ram Mohan",
     "surname": "",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "16 Sep 1949",
+    "year": 1949,
+    "place": "Perumbavoor"
+   },
    "death": null,
    "events": [],
    "families": [
     "F0006"
    ],
    "parent_family": "F0002",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0006"
+   ],
+   "stories": []
   },
   {
    "id": "I0015",
@@ -507,12 +541,16 @@
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Karthik Ram Mohan",
+    "given": "Karthik Ram",
+    "surname": "Mohan",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "9 Dec 1973",
+    "year": 1973,
+    "place": "Calcutta"
+   },
    "death": null,
    "events": [],
    "families": [
@@ -520,60 +558,71 @@
    ],
    "parent_family": "F0006",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0017",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Roopa Karthik",
+    "given": "Roopa",
+    "surname": "Karthik",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "7 Jan 1976",
+    "year": 1976,
+    "place": "Bombay"
+   },
    "death": null,
    "events": [],
    "families": [
     "F0007"
    ],
    "parent_family": null,
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0008"
+   ],
+   "stories": []
   },
   {
    "id": "I0018",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Raksha Karthik Mohan",
+    "given": "Raksha Karthik",
+    "surname": "Mohan",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "6 Aug 2003",
+    "year": 2003,
+    "place": "New Delhi"
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0007",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0019",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Jaidev Ram Mohan",
+    "given": "Jaidev Ram",
+    "surname": "Mohan",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "19 Jan 1977",
+    "year": 1977,
+    "place": "Singapore"
+   },
    "death": null,
    "events": [],
    "families": [
@@ -581,20 +630,23 @@
    ],
    "parent_family": "F0006",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0020",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Shruti Anand",
+    "given": "Shruti",
+    "surname": "Anand",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "17 Dec 1979",
+    "year": 1979,
+    "place": "Bangalore"
+   },
    "death": null,
    "events": [],
    "families": [
@@ -602,46 +654,51 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0021",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Tejas",
+    "given": "Tejas",
     "surname": "",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "27 Jan 2009",
+    "year": 2009,
+    "place": "Singapore"
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0008",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0022",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Sanjit",
+    "given": "Sanjit",
     "surname": "",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "15 Apr 2011",
+    "year": 2011,
+    "place": "Singapore"
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0008",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0023",
@@ -706,9 +763,9 @@
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Malathi Narayanan",
+    "given": "Malathi",
+    "surname": "Narayanan",
     "alternates": []
    },
    "birth": null,
@@ -719,97 +776,112 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0026",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Rajasree Venkatesh",
+    "given": "Rajasree",
+    "surname": "Venkatesh",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "13 Dec 1989",
+    "year": 1989,
+    "place": "Trichy"
+   },
    "death": null,
    "events": [],
    "families": [
     "F0011"
    ],
    "parent_family": "F0009",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0010"
+   ],
+   "stories": []
   },
   {
    "id": "I0027",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Venkatesh",
+    "given": "Venkatesh",
     "surname": "",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "29 June",
+    "year": null,
+    "place": "Dindigul"
+   },
    "death": null,
    "events": [],
    "families": [
     "F0011"
    ],
    "parent_family": null,
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0011"
+   ],
+   "stories": []
   },
   {
    "id": "I0028",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Pranita Venkatesh",
+    "given": "Pranita",
+    "surname": "Venkatesh",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "7 Feb 2013",
+    "year": 2013,
+    "place": "Chennai"
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0011",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0029",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Saatvika Venkatesh",
+    "given": "Saatvika",
+    "surname": "Venkatesh",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "12 Nov 2016",
+    "year": 2016,
+    "place": "Chennai"
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0011",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0030",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Badri Jairam",
+    "given": "Badri",
+    "surname": "Jairam",
     "alternates": []
    },
    "birth": null,
@@ -819,17 +891,18 @@
     "F0012"
    ],
    "parent_family": "F0009",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0012"
+   ],
+   "stories": []
   },
   {
    "id": "I0031",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Ranjani",
+    "given": "Ranjani",
     "surname": "",
     "alternates": []
    },
@@ -841,17 +914,16 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0032",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Adhiya Sakhti",
+    "given": "Adhiya",
+    "surname": "Sakhti",
     "alternates": []
    },
    "birth": null,
@@ -860,20 +932,23 @@
    "families": [],
    "parent_family": "F0012",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0033",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Suresh Vish Narayan",
+    "given": "Suresh Vish",
+    "surname": "Narayan",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "25 Aug 1956",
+    "year": 1956,
+    "place": "Calcutta"
+   },
    "death": null,
    "events": [],
    "families": [
@@ -881,20 +956,23 @@
    ],
    "parent_family": "F0002",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0034",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Jyothirmai Narayan",
+    "given": "Jyothirmai",
+    "surname": "Narayan",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "19 Jan 1959",
+    "year": 1959,
+    "place": "Bangalore"
+   },
    "death": null,
    "events": [],
    "families": [
@@ -902,20 +980,23 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0035",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Rishi Guha Narayan",
+    "given": "Rishi Guha",
+    "surname": "Narayan",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "4 Apr 1994",
+    "year": 1994,
+    "place": "Superior Township, Michigan"
+   },
    "death": null,
    "events": [],
    "families": [
@@ -923,29 +1004,33 @@
    ],
    "parent_family": "F0013",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0036",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Abby Chen",
+    "given": "Abby",
+    "surname": "Chen",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "13 Dec 1990",
+    "year": 1990,
+    "place": "Taiwan"
+   },
    "death": null,
    "events": [],
    "families": [
     "F0014"
    ],
    "parent_family": null,
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0013"
+   ],
+   "stories": []
   },
   {
    "id": "I0037",
@@ -1010,33 +1095,42 @@
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "V Viswanath Shreedhar",
+    "given": "V Viswanath Shreedhar",
     "surname": "",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "15 Dec 1960",
+    "year": 1960,
+    "place": ""
+   },
    "death": null,
    "events": [],
    "families": [
     "F0016"
    ],
    "parent_family": "F0015",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0015"
+   ],
+   "stories": []
   },
   {
    "id": "I0040",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Sumitra Viswanath",
+    "given": "Sumitra",
+    "surname": "Viswanath",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "26 Sep 1964",
+    "year": 1964,
+    "place": ""
+   },
    "death": null,
    "events": [],
    "families": [
@@ -1044,8 +1138,7 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0041",
@@ -1078,12 +1171,16 @@
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Shreya Viswanath",
+    "given": "Shreya",
+    "surname": "Viswanath",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "17 May 1992",
+    "year": 1992,
+    "place": ""
+   },
    "death": null,
    "events": [],
    "families": [
@@ -1091,20 +1188,23 @@
    ],
    "parent_family": "F0016",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0043",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Sharath Kumar Surendra",
+    "given": "Sharath Kumar",
+    "surname": "Surendra",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "26 May 1991",
+    "year": 1991,
+    "place": ""
+   },
    "death": null,
    "events": [],
    "families": [
@@ -1112,20 +1212,23 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0044",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Shreekant Parasuraman",
+    "given": "Shreekant",
+    "surname": "Parasuraman",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "5 Jun 1965",
+    "year": 1965,
+    "place": ""
+   },
    "death": null,
    "events": [],
    "families": [
@@ -1133,20 +1236,23 @@
    ],
    "parent_family": "F0015",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0045",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Bhaswati Parasuraman",
+    "given": "Bhaswati",
+    "surname": "Parasuraman",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "2 Aug 1964",
+    "year": 1964,
+    "place": ""
+   },
    "death": null,
    "events": [],
    "families": [
@@ -1154,79 +1260,93 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0046",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Kurran Parasuraman Iyer",
+    "given": "Kurran Parasuraman",
+    "surname": "Iyer",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "27 Aug 1997",
+    "year": 1997,
+    "place": ""
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0018",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0047",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Rajat Iyer",
+    "given": "Rajat",
+    "surname": "Iyer",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "28 Feb 1999",
+    "year": 1999,
+    "place": ""
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0018",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0048",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Srinivas V Natarajan",
+    "given": "Srinivas V Natarajan",
     "surname": "",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "13 Sep 1969",
+    "year": 1969,
+    "place": ""
+   },
    "death": null,
    "events": [],
    "families": [
     "F0019"
    ],
    "parent_family": "F0015",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0016"
+   ],
+   "stories": []
   },
   {
    "id": "I0049",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Navina Natarajan",
+    "given": "Navina",
+    "surname": "Natarajan",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "21 Jan 1969",
+    "year": 1969,
+    "place": ""
+   },
    "death": null,
    "events": [],
    "families": [
@@ -1234,20 +1354,23 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0050",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Namrata Natarajan",
+    "given": "Namrata",
+    "surname": "Natarajan",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "14 Sep 1993",
+    "year": 1993,
+    "place": ""
+   },
    "death": null,
    "events": [],
    "families": [
@@ -1255,8 +1378,7 @@
    ],
    "parent_family": "F0019",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0051",
@@ -1291,50 +1413,62 @@
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Aadya",
+    "given": "Aadya",
     "surname": "",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "25 Oct 2023",
+    "year": 2023,
+    "place": "New Delhi"
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0020",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0053",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Nikita Natarajan",
+    "given": "Nikita",
+    "surname": "Natarajan",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "19 Jul 1994",
+    "year": 1994,
+    "place": ""
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0019",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0017"
+   ],
+   "stories": []
   },
   {
    "id": "I0054",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Divya Valli Rajaram",
+    "given": "Divya Valli",
+    "surname": "Rajaram",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "28 Mar 1972",
+    "year": 1972,
+    "place": ""
+   },
    "death": null,
    "events": [],
    "families": [
@@ -1342,20 +1476,23 @@
    ],
    "parent_family": "F0015",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0055",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "P V Rajaram",
+    "given": "P V",
+    "surname": "Rajaram",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "10 Dec 1968",
+    "year": 1968,
+    "place": ""
+   },
    "death": null,
    "events": [],
    "families": [
@@ -1363,46 +1500,51 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0056",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Raksha Subhadra Rajaram",
+    "given": "Raksha Subhadra",
+    "surname": "Rajaram",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "14 Aug 2000",
+    "year": 2000,
+    "place": ""
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0021",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0057",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Dhruv Viraj Venkatesan Rajaram",
+    "given": "Dhruv Viraj Venkatesan",
+    "surname": "Rajaram",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "3 Sep 2003",
+    "year": 2003,
+    "place": ""
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0021",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0058",
@@ -1437,29 +1579,34 @@
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Seethalakshmi Vijaya Narayanan",
+    "given": "Seethalakshmi Vijaya Narayanan",
     "surname": "",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "10 Jan 1940",
+    "year": 1940,
+    "place": "Trivandrum"
+   },
    "death": null,
    "events": [],
    "families": [
     "F0022"
    ],
    "parent_family": null,
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0018"
+   ],
+   "stories": []
   },
   {
    "id": "I0060",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Viswanathan Kumar Narayanan",
+    "given": "Viswanathan Kumar Narayanan",
     "surname": "",
     "alternates": []
    },
@@ -1470,17 +1617,18 @@
     "F0023"
    ],
    "parent_family": "F0022",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0019"
+   ],
+   "stories": []
   },
   {
    "id": "I0061",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Hema",
+    "given": "Hema",
     "surname": "",
     "alternates": []
    },
@@ -1492,16 +1640,15 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0062",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Sneha",
+    "given": "Sneha",
     "surname": "",
     "alternates": []
    },
@@ -1513,16 +1660,15 @@
    ],
    "parent_family": "F0023",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0063",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Venkatesh",
+    "given": "Venkatesh",
     "surname": "",
     "alternates": []
    },
@@ -1534,41 +1680,49 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0064",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Ramachandran Ajoy Narayanan",
+    "given": "Ramachandran Ajoy Narayanan",
     "surname": "",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "21 Feb 1971",
+    "year": 1971,
+    "place": "Udyogamandal"
+   },
    "death": null,
    "events": [],
    "families": [
     "F0025"
    ],
    "parent_family": "F0022",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0020"
+   ],
+   "stories": []
   },
   {
    "id": "I0065",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Vidya Ramachandran",
+    "given": "Vidya",
+    "surname": "Ramachandran",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "19 Jun 1971",
+    "year": 1971,
+    "place": "Jamshedpur"
+   },
    "death": null,
    "events": [],
    "families": [
@@ -1576,67 +1730,77 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0066",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Nikhil Ramachandran",
+    "given": "Nikhil",
+    "surname": "Ramachandran",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "26 Dec 2014",
+    "year": 2014,
+    "place": "Bangalore"
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0025",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0067",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Nishanth Ramachandran",
+    "given": "Nishanth",
+    "surname": "Ramachandran",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": null,
+    "year": null,
+    "place": "Bangalore"
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0025",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0068",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Viswanathan Ganapathy Kesavan Iyer",
+    "given": "Viswanathan Ganapathy Kesavan Iyer",
     "surname": "",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "19 Apr 1936",
+    "year": 1936,
+    "place": "Paramakkudi"
+   },
    "death": null,
    "events": [],
    "families": [
     "F0026"
    ],
    "parent_family": "F0001",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0021"
+   ],
+   "stories": []
   },
   {
    "id": "I0069",
@@ -1671,33 +1835,42 @@
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Viswanath Sriram Ganapathy",
+    "given": "Viswanath Sriram Ganapathy",
     "surname": "",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "15 Jul 1966",
+    "year": 1966,
+    "place": "Ranchi"
+   },
    "death": null,
    "events": [],
    "families": [
     "F0027"
    ],
    "parent_family": "F0026",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0022"
+   ],
+   "stories": []
   },
   {
    "id": "I0071",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Chetna Bhargava",
+    "given": "Chetna",
+    "surname": "Bhargava",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "9 Sep 1966",
+    "year": 1966,
+    "place": "Mumbai"
+   },
    "death": null,
    "events": [],
    "families": [
@@ -1705,20 +1878,23 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0072",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Varun Bhargava Ganapathy",
+    "given": "Varun Bhargava",
+    "surname": "Ganapathy",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "29 Nov 1993",
+    "year": 1993,
+    "place": "Charlotte"
+   },
    "death": null,
    "events": [],
    "families": [
@@ -1726,60 +1902,73 @@
    ],
    "parent_family": "F0027",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0073",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Priyal Shah Ganapathy",
+    "given": "Priyal Shah",
+    "surname": "Ganapathy",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "14 Oct",
+    "year": null,
+    "place": ""
+   },
    "death": null,
    "events": [],
    "families": [
     "F0028"
    ],
    "parent_family": null,
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0023"
+   ],
+   "stories": []
   },
   {
    "id": "I0074",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Devika Lakshmi Ganapathy",
+    "given": "Devika Lakshmi",
+    "surname": "Ganapathy",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "13 Dec 1998",
+    "year": 1998,
+    "place": "Kennesaw"
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0027",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0024"
+   ],
+   "stories": []
   },
   {
    "id": "I0075",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Lata Ganapathy",
+    "given": "Lata",
+    "surname": "Ganapathy",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "9 Mar 1971",
+    "year": 1971,
+    "place": "Ranchi"
+   },
    "death": null,
    "events": [],
    "families": [
@@ -1787,20 +1976,23 @@
    ],
    "parent_family": "F0026",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0076",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Narasimhan Ravikiran",
+    "given": "Narasimhan",
+    "surname": "Ravikiran",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "12 Feb 1967",
+    "year": 1967,
+    "place": "Mysore"
+   },
    "death": null,
    "events": [],
    "families": [
@@ -1808,67 +2000,79 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0077",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Kala Ganapathy",
+    "given": "Kala",
+    "surname": "Ganapathy",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "9 Mar 1971",
+    "year": 1971,
+    "place": "Ranchi"
+   },
    "death": null,
    "events": [],
    "families": [
     "F0030"
    ],
    "parent_family": "F0026",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0039"
+   ],
+   "stories": []
   },
   {
    "id": "I0078",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Dyuti Lakshmi Ganapathy",
+    "given": "Dyuti Lakshmi",
+    "surname": "Ganapathy",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "26 Aug 2004",
+    "year": 2004,
+    "place": "Davis, CA"
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0030",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0025"
+   ],
+   "stories": []
   },
   {
    "id": "I0079",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Vidyut Keshav Ganapathy",
+    "given": "Vidyut Keshav",
+    "surname": "Ganapathy",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "8 Nov 2007",
+    "year": 2007,
+    "place": "Houston, TX"
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0030",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0080",
@@ -1905,12 +2109,16 @@
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Sudha Venkatraman",
+    "given": "Sudha",
+    "surname": "Venkatraman",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "23 Dec 1943",
+    "year": 1943,
+    "place": "Trivandrum"
+   },
    "death": null,
    "events": [],
    "families": [
@@ -1918,41 +2126,49 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0082",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Indu Valli Mani Iyer",
+    "given": "Indu Valli Mani Iyer",
     "surname": "",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "1 Feb 1972",
+    "year": 1972,
+    "place": "Bombay"
+   },
    "death": null,
    "events": [],
    "families": [
     "F0032"
    ],
    "parent_family": "F0031",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0027"
+   ],
+   "stories": []
   },
   {
    "id": "I0083",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Arvind Mani Iyer",
+    "given": "Arvind Mani",
+    "surname": "Iyer",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "16 Jun 1968",
+    "year": 1968,
+    "place": ""
+   },
    "death": null,
    "events": [],
    "families": [
@@ -1960,60 +2176,71 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0084",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Agustya Mani Iyer",
+    "given": "Agustya Mani",
+    "surname": "Iyer",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "26 Sep 2004",
+    "year": 2004,
+    "place": "Ottawa"
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0032",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0085",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Viswanath Vicky Venkatraman",
+    "given": "Viswanath Vicky Venkatraman",
     "surname": "",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "22 Jan 1975",
+    "year": 1975,
+    "place": "Bombay"
+   },
    "death": null,
    "events": [],
    "families": [
     "F0033"
    ],
    "parent_family": "F0031",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0028"
+   ],
+   "stories": []
   },
   {
    "id": "I0086",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Sandhya Iyer",
+    "given": "Sandhya",
+    "surname": "Iyer",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "25 Apr 1981",
+    "year": 1981,
+    "place": "Chennai"
+   },
    "death": null,
    "events": [],
    "families": [
@@ -2021,16 +2248,15 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0087",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Lakshmi Annam Ramasubban",
+    "given": "Lakshmi Annam Ramasubban",
     "surname": "",
     "alternates": []
    },
@@ -2041,9 +2267,10 @@
     "F0034"
    ],
    "parent_family": "F0001",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0029"
+   ],
+   "stories": []
   },
   {
    "id": "I0088",
@@ -2076,9 +2303,9 @@
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Sandhya Ashok",
+    "given": "Sandhya",
+    "surname": "Ashok",
     "alternates": []
    },
    "birth": null,
@@ -2089,17 +2316,16 @@
    ],
    "parent_family": "F0034",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0090",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Ashok Subramaniam",
+    "given": "Ashok",
+    "surname": "Subramaniam",
     "alternates": []
    },
    "birth": null,
@@ -2110,17 +2336,16 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0091",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Ananya Ashok",
+    "given": "Ananya",
+    "surname": "Ashok",
     "alternates": []
    },
    "birth": null,
@@ -2131,16 +2356,15 @@
    ],
    "parent_family": "F0035",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0092",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Prasad",
+    "given": "Prasad",
     "surname": "",
     "alternates": []
    },
@@ -2152,16 +2376,15 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0093",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Nitara",
+    "given": "Nitara",
     "surname": "",
     "alternates": []
    },
@@ -2171,17 +2394,16 @@
    "families": [],
    "parent_family": "F0036",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0094",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Sathvika Ashok",
+    "given": "Sathvika",
+    "surname": "Ashok",
     "alternates": []
    },
    "birth": null,
@@ -2192,16 +2414,15 @@
    ],
    "parent_family": "F0034",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0095",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Miachael",
+    "given": "Miachael",
     "surname": "",
     "alternates": []
    },
@@ -2212,9 +2433,10 @@
     "F0037"
    ],
    "parent_family": null,
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0031"
+   ],
+   "stories": []
   },
   {
    "id": "I0096",
@@ -2279,73 +2501,90 @@
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Subramanian Krishnan",
+    "given": "Subramanian",
+    "surname": "Krishnan",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "17 Feb 1968",
+    "year": 1968,
+    "place": "Calcutta"
+   },
    "death": null,
    "events": [],
    "families": [
     "F0039"
    ],
    "parent_family": "F0038",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0040"
+   ],
+   "stories": []
   },
   {
    "id": "I0099",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Vidya Rao",
+    "given": "Vidya",
+    "surname": "Rao",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "26 Oct 1975",
+    "year": 1975,
+    "place": "Chennai"
+   },
    "death": null,
    "events": [],
    "families": [
     "F0039"
    ],
    "parent_family": null,
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0040"
+   ],
+   "stories": []
   },
   {
    "id": "I0100",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Uttara Krishnan",
+    "given": "Uttara",
+    "surname": "Krishnan",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "15 Apr 2003",
+    "year": 2003,
+    "place": "Chennai"
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0039",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0101",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Bharathi Mani",
+    "given": "Bharathi",
+    "surname": "Mani",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "15 Aug 1971",
+    "year": 1971,
+    "place": "Udyogamandal"
+   },
    "death": null,
    "events": [],
    "families": [
@@ -2353,20 +2592,23 @@
    ],
    "parent_family": "F0038",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0102",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Ravi Manik",
+    "given": "Ravi",
+    "surname": "Manik",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "28 Jul 1974",
+    "year": 1974,
+    "place": "Ranchi"
+   },
    "death": null,
    "events": [],
    "families": [
@@ -2374,67 +2616,78 @@
    ],
    "parent_family": null,
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0103",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Anoushka Mani",
+    "given": "Anoushka",
+    "surname": "Mani",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "15 Jun 2003",
+    "year": 2003,
+    "place": "Newport Beach, CA"
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0040",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0104",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Aryaman Mani",
+    "given": "Aryaman",
+    "surname": "Mani",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "11 Jan 2006",
+    "year": 2006,
+    "place": "Newport Beach, CA"
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0040",
    "notes": [],
-   "stories": [],
-   "hidden": true
+   "stories": []
   },
   {
    "id": "I0105",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Gayathri Rukmini Ramachandran",
+    "given": "Gayathri Rukmini Ramachandran",
     "surname": "",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "10 August",
+    "year": null,
+    "place": "Perumbavoor"
+   },
    "death": null,
    "events": [],
    "families": [
     "F0041"
    ],
    "parent_family": "F0001",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0033",
+    "N0041"
+   ],
+   "stories": []
   },
   {
    "id": "I0106",
@@ -2472,103 +2725,130 @@
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Deepa Ramachandran",
+    "given": "Deepa",
+    "surname": "Ramachandran",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "18 Aug 1974",
+    "year": 1974,
+    "place": "Calicut"
+   },
    "death": null,
    "events": [],
    "families": [
     "F0042"
    ],
    "parent_family": "F0041",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0042"
+   ],
+   "stories": []
   },
   {
    "id": "I0108",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "K Venkateswara Rao",
+    "given": "K Venkateswara",
+    "surname": "Rao",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "15 Aug",
+    "year": null,
+    "place": "Ponnur, AP"
+   },
    "death": null,
    "events": [],
    "families": [
     "F0042"
    ],
    "parent_family": null,
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0035",
+    "N0042"
+   ],
+   "stories": []
   },
   {
    "id": "I0109",
    "gender": "M",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Vijay Ramachandran",
+    "given": "Vijay",
+    "surname": "Ramachandran",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "25 Jan 1978",
+    "year": 1978,
+    "place": "Palakkad"
+   },
    "death": null,
    "events": [],
    "families": [
     "F0043"
    ],
    "parent_family": "F0041",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0043"
+   ],
+   "stories": []
   },
   {
    "id": "I0110",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
+    "display": "Priya",
+    "given": "Priya",
     "surname": "",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "10 Nov",
+    "year": null,
+    "place": "Ponnur, AP"
+   },
    "death": null,
    "events": [],
    "families": [
     "F0043"
    ],
    "parent_family": null,
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0036",
+    "N0043"
+   ],
+   "stories": []
   },
   {
    "id": "I0111",
    "gender": "F",
    "living": true,
    "name": {
-    "display": "Living",
-    "given": "",
-    "surname": "",
+    "display": "Anahita Vijay",
+    "given": "Anahita",
+    "surname": "Vijay",
     "alternates": []
    },
-   "birth": null,
+   "birth": {
+    "date": "16 Oct",
+    "year": null,
+    "place": "Coimbatore"
+   },
    "death": null,
    "events": [],
    "families": [],
    "parent_family": "F0043",
-   "notes": [],
-   "stories": [],
-   "hidden": true
+   "notes": [
+    "N0037"
+   ],
+   "stories": []
   }
  ],
  "families": [
@@ -3173,6 +3453,54 @@
    "updated": "2026-10-25"
   },
   {
+   "id": "N0044",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 13,
+   "paragraphs": [
+    "father of Venkittu, Sankaran etc was also a hotelier in Paramakkudy or Elayangudi."
+   ],
+   "people": [
+    "I0114"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0046",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 4,
+   "paragraphs": [
+    "Bombay Ramanathan's mother"
+   ],
+   "people": [
+    "I0116"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0045",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 7,
+   "paragraphs": [
+    "mother of Vallikutty and Lakshmi of Cochin"
+   ],
+   "people": [
+    "I0115"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
    "id": "N0047",
    "type": "General",
    "title": null,
@@ -3182,14 +3510,14 @@
    ],
    "words": 404,
    "paragraphs": [
-    "The Patriarch and Matriarch: Sri. Living & Rajammal At the heart of our family’s history are Sri. Living and his wife, Rajammal, who built their lives around our ancestral home of Ezhakaram in Vallioor. Sri. Living was a man of remarkable intellect and charisma. Fluent in English, Sanskrit, and Malayalam, he served as a \"Dvibhashi\" (translator) at the Maharaja’s palace in Trivandrum. A natural wanderer, he acted as a sort of roving ambassador, frequently traveling to various temples and festivals. He was also the only man in the family of his era to undertake the grueling pilgrimage to Kasi. In a time when such a journey meant a perilous two-to-three-year trek on foot from which many never returned, he completed it in style and safely returned to Vallioor. Always thoughtful, he left a quiet final legacy: at the time of his passing, he had tucked loose change under his pillow, seemingly to ensure no one else would have to bear the expenses for his funeral.",
+    "The Patriarch and Matriarch: Sri. Venkiteswara Iyer & Rajammal At the heart of our family’s history are Sri. Venkiteswara Iyer and his wife, Rajammal, who built their lives around our ancestral home of Ezhakaram in Vallioor. Sri. Venkiteswara Iyer was a man of remarkable intellect and charisma. Fluent in English, Sanskrit, and Malayalam, he served as a \"Dvibhashi\" (translator) at the Maharaja’s palace in Trivandrum. A natural wanderer, he acted as a sort of roving ambassador, frequently traveling to various temples and festivals. He was also the only man in the family of his era to undertake the grueling pilgrimage to Kasi. In a time when such a journey meant a perilous two-to-three-year trek on foot from which many never returned, he completed it in style and safely returned to Vallioor. Always thoughtful, he left a quiet final legacy: at the time of his passing, he had tucked loose change under his pillow, seemingly to ensure no one else would have to bear the expenses for his funeral.",
     "While he traveled, the brilliant and deeply admired Rajammal held the family together. With the support of her father-in-law, Andi Iyer, she not only raised eight children but also served the surrounding villages of Vallioor as a respected midwife and nadi doctor. She is remembered as a woman of striking beauty (often compared to Kannan's mother in family lore) and immense resilience.",
-    "The Second Generation Together, Sri. Living and Rajammal had four sons and four daughters. Though none of this generation are alive today, their lives form the foundational branches of our family tree:",
+    "The Second Generation Together, Sri. Venkiteswara Iyer and Rajammal had four sons and four daughters. Though none of this generation are alive today, their lives form the foundational branches of our family tree:",
     "The Sons",
     "• Venkataraman (Eldest): Tragically passed away around the age of 22 before his marriage could be consummated. His young widow is believed to have taken Sanyasam before passing away years later.",
     "• Viswanatha Iyer: A ration merchant based in Perumbavoor. He passed away in 1953 at the age of 58 due to a kidney condition.",
     "• Sivarama Krishna Iyer: A hotelier in Elayangudi, who passed away around 1959. He is the father of Mookandi (of Delhi).",
-    "• Living: A hotelier in Paramakkudy or Elayangudi. He is the father of Venkittu, Sankaran, and others.",
+    "• Gopalakrishna Iyer: A hotelier in Paramakkudy or Elayangudi. He is the father of Venkittu, Sankaran, and others.",
     "The Daughters",
     "• Annam Ammal (Eldest): Mother of Vallikutty and Lakshmi (of Cochin). Lakshmi married Sattanatha Iyer (originally from Perumazhanchi, later settled in Cochin).",
     "• Ponnammal: Mother of Bombay Ramanathan.",
@@ -3281,6 +3609,22 @@
    "updated": "2026-10-25"
   },
   {
+   "id": "N0006",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 27,
+   "paragraphs": [
+    "Source records the name as 'Vasantha/Priya Ram Mohan'; the slash separates name variants. Recorded here as a single given name to avoid inventing a surname boundary."
+   ],
+   "people": [
+    "I0014"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
    "id": "N0007",
    "type": "Person Note",
    "title": null,
@@ -3292,6 +3636,22 @@
    ],
    "people": [
     "I0015"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0008",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 12,
+   "paragraphs": [
+    "Source marks the place of birth as uncertain: 'Bombay (?)' (recorded as Bombay)."
+   ],
+   "people": [
+    "I0017"
    ],
    "places": [],
    "updated": "2026-10-25"
@@ -3313,6 +3673,70 @@
    "updated": "2026-10-25"
   },
   {
+   "id": "N0010",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 26,
+   "paragraphs": [
+    "Source lists 2 spouses for Jairam/Kannan Narayanan. Attached to Usha Narayanan because the other marriage is dated after this person's birth. Verify this parentage."
+   ],
+   "people": [
+    "I0026"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0011",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 9,
+   "paragraphs": [
+    "Source birth date is partial or unstructured: '29 June'."
+   ],
+   "people": [
+    "I0027"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0012",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 29,
+   "paragraphs": [
+    "Source lists 2 spouses for Jairam/Kannan Narayanan. Attached to Usha Narayanan because no birth date is given, so the preceding sibling's family was used. Verify this parentage."
+   ],
+   "people": [
+    "I0030"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0013",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 16,
+   "paragraphs": [
+    "No relation label in source row 41; inferred to be the spouse of Rishi Guha Narayan."
+   ],
+   "people": [
+    "I0036"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
    "id": "N0014",
    "type": "Person Note",
    "title": null,
@@ -3324,6 +3748,182 @@
    ],
    "people": [
     "I0037"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0015",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 26,
+   "paragraphs": [
+    "Source records the name as 'V Viswanath/Shreedhar'; the slash separates name variants. Recorded here as a single given name to avoid inventing a surname boundary."
+   ],
+   "people": [
+    "I0039"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0016",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 26,
+   "paragraphs": [
+    "Source records the name as 'Srinivas/V Natarajan'; the slash separates name variants. Recorded here as a single given name to avoid inventing a surname boundary."
+   ],
+   "people": [
+    "I0048"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0017",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 33,
+   "paragraphs": [
+    "Source row 59 follows a grandchild row. Attached to Srinivas/V Natarajan and spouse rather than to Hindol Mukherjee and Namrata Natarajan: the younger parent would have been under 12 at the birth."
+   ],
+   "people": [
+    "I0053"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0018",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 26,
+   "paragraphs": [
+    "Source records the name as 'Seethalakshmi/Vijaya Narayanan'; the slash separates name variants. Recorded here as a single given name to avoid inventing a surname boundary."
+   ],
+   "people": [
+    "I0059"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0019",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 26,
+   "paragraphs": [
+    "Source records the name as 'Viswanathan/Kumar Narayanan'; the slash separates name variants. Recorded here as a single given name to avoid inventing a surname boundary."
+   ],
+   "people": [
+    "I0060"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0020",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 26,
+   "paragraphs": [
+    "Source records the name as 'Ramachandran/Ajoy Narayanan'; the slash separates name variants. Recorded here as a single given name to avoid inventing a surname boundary."
+   ],
+   "people": [
+    "I0064"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0021",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 27,
+   "paragraphs": [
+    "Source records the name as 'Viswanathan Ganapathy/Kesavan Iyer'; the slash separates name variants. Recorded here as a single given name to avoid inventing a surname boundary."
+   ],
+   "people": [
+    "I0068"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0022",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 26,
+   "paragraphs": [
+    "Source records the name as 'Viswanath/Sriram Ganapathy'; the slash separates name variants. Recorded here as a single given name to avoid inventing a surname boundary."
+   ],
+   "people": [
+    "I0070"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0023",
+   "type": "Person Note",
+   "title": "Source birth date is partial or unstructured: '14 Oct'.",
+   "is_story": false,
+   "tags": [],
+   "words": 17,
+   "paragraphs": [
+    "Source gives the place of birth as '?' (unknown)."
+   ],
+   "people": [
+    "I0073"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0024",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 35,
+   "paragraphs": [
+    "Source row 82 follows a grandchild row. Attached to Viswanath/Sriram Ganapathy and spouse rather than to Varun Bhargava Ganapathy and Priyal Shah Ganapathy: the younger parent would have been under 12 at the birth."
+   ],
+   "people": [
+    "I0074"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0025",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 13,
+   "paragraphs": [
+    "Single-parent family: no spouse is recorded for Kala Ganapathy in the source."
+   ],
+   "people": [
+    "I0078"
    ],
    "places": [],
    "updated": "2026-10-25"
@@ -3345,6 +3945,54 @@
    "updated": "2026-10-25"
   },
   {
+   "id": "N0027",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 27,
+   "paragraphs": [
+    "Source records the name as 'Indu/Valli Mani Iyer'; the slash separates name variants. Recorded here as a single given name to avoid inventing a surname boundary."
+   ],
+   "people": [
+    "I0082"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0028",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 26,
+   "paragraphs": [
+    "Source records the name as 'Viswanath/Vicky Venkatraman'; the slash separates name variants. Recorded here as a single given name to avoid inventing a surname boundary."
+   ],
+   "people": [
+    "I0085"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0029",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 26,
+   "paragraphs": [
+    "Source records the name as 'Lakshmi/Annam Ramasubban'; the slash separates name variants. Recorded here as a single given name to avoid inventing a surname boundary."
+   ],
+   "people": [
+    "I0087"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
    "id": "N0030",
    "type": "Person Note",
    "title": null,
@@ -3356,6 +4004,22 @@
    ],
    "people": [
     "I0088"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0031",
+   "type": "Person Note",
+   "title": "No relation label in source row 105; inferred to be the spouse of Sathvika Ashok.",
+   "is_story": false,
+   "tags": [],
+   "words": 24,
+   "paragraphs": [
+    "Name is spelled 'Miachael' in the source (possibly Michael)."
+   ],
+   "people": [
+    "I0095"
    ],
    "places": [],
    "updated": "2026-10-25"
@@ -3377,6 +4041,22 @@
    "updated": "2026-10-25"
   },
   {
+   "id": "N0033",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 35,
+   "paragraphs": [
+    "Source records the name as 'Gayathri/Rukmini Ramachandran'; the slash separates name variants. Recorded here as a single given name to avoid inventing a surname boundary.\nSource birth date is partial or unstructured: '10 August'."
+   ],
+   "people": [
+    "I0105"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
    "id": "N0034",
    "type": "Person Note",
    "title": null,
@@ -3388,6 +4068,54 @@
    ],
    "people": [
     "I0106"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0035",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 9,
+   "paragraphs": [
+    "Source birth date is partial or unstructured: '15 Aug'."
+   ],
+   "people": [
+    "I0108"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0036",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 9,
+   "paragraphs": [
+    "Source birth date is partial or unstructured: '10 Nov'."
+   ],
+   "people": [
+    "I0110"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0037",
+   "type": "Person Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 9,
+   "paragraphs": [
+    "Source birth date is partial or unstructured: '16 Oct'."
+   ],
+   "people": [
+    "I0111"
    ],
    "places": [],
    "updated": "2026-10-25"
@@ -3410,6 +4138,39 @@
    "updated": "2026-10-25"
   },
   {
+   "id": "N0039",
+   "type": "Family Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 13,
+   "paragraphs": [
+    "Single-parent family: no spouse is recorded for Kala Ganapathy in the source."
+   ],
+   "people": [
+    "I0077"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0040",
+   "type": "Family Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 11,
+   "paragraphs": [
+    "Marriage date is partial or unstructured in the source: '16 Nov'."
+   ],
+   "people": [
+    "I0098",
+    "I0099"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
    "id": "N0041",
    "type": "Family Note",
    "title": null,
@@ -3420,7 +4181,42 @@
     "Marriage date is partial or unstructured in the source: '22 Oct'."
    ],
    "people": [
+    "I0105",
     "I0106"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0042",
+   "type": "Family Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 11,
+   "paragraphs": [
+    "Marriage date is partial or unstructured in the source: '16 Nov'."
+   ],
+   "people": [
+    "I0107",
+    "I0108"
+   ],
+   "places": [],
+   "updated": "2026-10-25"
+  },
+  {
+   "id": "N0043",
+   "type": "Family Note",
+   "title": null,
+   "is_story": false,
+   "tags": [],
+   "words": 11,
+   "paragraphs": [
+    "Marriage date is partial or unstructured in the source: '4 Dec'."
+   ],
+   "people": [
+    "I0109",
+    "I0110"
    ],
    "places": [],
    "updated": "2026-10-25"

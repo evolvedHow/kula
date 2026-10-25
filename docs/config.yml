@@ -5,15 +5,15 @@
 # =====================================================================
 
 site:
-  title: "The Viswanatha Iyer Family"
-  subtitle: "Perumbavoor · Four generations and counting"
+  title: "Peru Iyers (Perumbavoor Iyers)"
+  subtitle: "Family tree and stories"
   intro: "Trace how we are connected, read the stories behind the names."
   footer: "Built from our Gramps family tree"
   # Who the tree opens on: "home" (the Gramps home person) or a Gramps ID like I0001
   default_person: home
   # GitHub repo (owner/name) that receives "suggest a correction" issues.
   # Leave empty to hide the links.
-  repo: "evolvedHow/kula-family-tree"
+  repo: "evolvedHow/kula"
 
 theme:
   # Pick a palette from the `presets:` section below (or add your own there)
@@ -26,10 +26,9 @@ theme:
     dark: {}
 
 fonts:
-  # Bundled in docs/assets/fonts (Cormorant Garamond, Inter). To use other fonts,
-  # replace those files and the @font-face rules in docs/assets/fonts.css.
-  # Any name not bundled falls back to the visitor's installed fonts.
-  heading: "Cormorant Garamond"
+  # Bundled in docs/assets/fonts. Tiro Devanagari Sanskrit covers Devanagari (Sanskrit) and Latin.
+  # To use other fonts, replace the files and @font-face rules in docs/assets/fonts.css.
+  heading: "Tiro Devanagari Sanskrit"
   body: "Inter"
 
 layout:
@@ -64,21 +63,21 @@ privacy:
   # Applied by scripts/build_site.py before data is written. Privacy is only
   # real if it happens at build time: the published JSON contains only what
   # survives these rules.
-  hide_living: true
+  # Everything in Gramps is published. Set to true to hide living people again.
+  hide_living: false
   # A person with no death event is treated as living if born within this many years
   living_years: 100
-  # Shown in place of a living person's name
+  # Shown in place of a living person's name (only when hide_living is true)
   living_label: "Living"
   # Gramps IDs to publish even if the rules above would hide them, e.g. ["I0000"].
-  # Only use this for people you are sure have died or agree to be shown.
   always_public: []
-  # Gramps records marked private are removed completely
-  respect_private_flag: true
-  # Notes with any of these tags are never published
-  exclude_tags: [private, draft]
+  # Gramps records marked private are removed completely (false = publish them too)
+  respect_private_flag: false
+  # Notes with any of these tags are never published (empty = publish everything)
+  exclude_tags: []
   # Stories that name a living person in full: redact = replace the name with living_label
   # (the story still publishes); drop = leave the story out entirely
-  scan_stories_for_living_names: true
+  scan_stories_for_living_names: false
   living_names_in_stories: redact
   include_notes: true
 

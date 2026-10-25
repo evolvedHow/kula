@@ -363,15 +363,22 @@ function centerOn(L) {
   if (!vw || !vh) return;
   const cw = CFG.layout.card_width;
   const ch = CFG.layout.card_height;
-  const k = clamp(vw / (cw * 2.2), 0.55, 1.05);
   const narrow = vw < 640;
   const panelOpen = !$("#panel").hidden && !narrow;
   const usableW = vw - (panelOpen ? 400 : 0);
-  const fx = L.focus.x + cw / 2;
-  const fy = L.focus.y + ch / 2;
+  const pad = 24;
+  const fitK = Math.min((usableW - pad * 2) / (L.width + cw), (vh - pad * 2) / (L.height + ch));
+  const k = clamp(fitK, 0.4, 1.0);
   state.k = k;
-  state.x = usableW / 2 - fx * k;
-  state.y = (narrow ? vh * 0.3 : vh * 0.42) - fy * k;
+  if (fitK >= 0.4) {
+    state.x = usableW / 2 - (L.width / 2) * k;
+    state.y = vh / 2 - (L.height / 2) * k;
+  } else {
+    const fx = L.focus.x + cw / 2;
+    const fy = L.focus.y + ch / 2;
+    state.x = usableW / 2 - fx * k;
+    state.y = (narrow ? vh * 0.3 : vh * 0.42) - fy * k;
+  }
   applyTransform();
 }
 
