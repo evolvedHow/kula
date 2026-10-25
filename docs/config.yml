@@ -10,7 +10,7 @@ site:
   intro: "Trace how we are connected, read the stories behind the names."
   footer: "Built from our Gramps family tree"
   # Who the tree opens on: "home" (the Gramps home person) or a Gramps ID like I0001
-  default_person: home
+  default_person: I0000
   # GitHub repo (owner/name) that receives "suggest a correction" issues.
   # Leave empty to hide the links.
   repo: "evolvedHow/kula"
