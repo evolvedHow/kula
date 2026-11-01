@@ -124,9 +124,9 @@ auth:
     # Map Google account emails to Gramps IDs. On sign-in "This is me" is set
     # to that person, and the panel shows how they are related.
     people: {
-      "vish.ganapathy@gmail.com": I0023
+      "vish.ganapathy@gmail.com": I0070
     }
-      # "you@gmail.com": I0023
+      # "you@gmail.com": I0070
     # Set to false to sign in without changing the visitor's "This is me".
     auto_me: true
 
