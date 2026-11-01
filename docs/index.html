@@ -29,15 +29,22 @@
         <ul id="search-results" class="search-results" role="listbox" hidden></ul>
       </div>
       <button class="me-chip" id="me-chip" type="button" hidden></button>
+      <div class="auth" id="auth" hidden></div>
     </header>
 
     <main class="main">
       <section class="view view-tree" id="view-tree" hidden>
         <div class="tree-toolbar">
-          <div class="segmented" id="view-switch" role="tablist" aria-label="Tree view">
-            <button type="button" data-view="hourglass" role="tab">Both</button>
-            <button type="button" data-view="ancestors" role="tab">Ancestors</button>
-            <button type="button" data-view="descendants" role="tab">Descendants</button>
+          <div class="toolbar-group">
+            <div class="segmented" id="view-switch" role="tablist" aria-label="Tree view">
+              <button type="button" data-view="hourglass" role="tab">Both</button>
+              <button type="button" data-view="ancestors" role="tab">Ancestors</button>
+              <button type="button" data-view="descendants" role="tab">Descendants</button>
+            </div>
+            <div class="segmented" id="orientation-switch" role="tablist" aria-label="Tree orientation">
+              <button type="button" data-orientation="vertical" role="tab">Vertical</button>
+              <button type="button" data-orientation="horizontal" role="tab">Horizontal</button>
+            </div>
           </div>
           <div class="zoom">
             <button type="button" id="zoom-out" aria-label="Zoom out">−</button>

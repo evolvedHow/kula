@@ -4,22 +4,28 @@ import { relationship, sentenceFor } from "./relate.js";
 const DEFAULTS = {
   site: { title: "Family Tree", subtitle: "", intro: "", footer: "", default_person: "home", repo: "" },
   theme: { preset: "", mode: "auto", colors: { light: {}, dark: {} } },
-  fonts: { heading: "Georgia", body: "system-ui", load_from_google: false },
+  fonts: { heading: "Roboto", body: "Roboto", load_from_google: false },
   layout: {
-    default_view: "hourglass", generations_up: 4, generations_down: 4,
-    card_width: 188, card_height: 84, gap_x: 26, gap_y: 92, corner_radius: 18,
-    connector_style: "curved", show_years: true, show_places: true, show_child_counts: true,
+    default_view: "hourglass", orientation: "vertical", generations_up: 4, generations_down: 4,
+    card_width: 188, card_height: 84, gap_x: 26, gap_y: 92, corner_radius: 16,
+    connector_style: "angular", show_years: true, show_places: true, show_child_counts: true,
   },
   narratives: { enabled: true, section_title: "Stories" },
+  auth: {
+    google: { client_id: "", allowed_domains: [], people: {}, auto_me: true },
+  },
   text: {
     search_placeholder: "Find a family member…", tree_tab: "Tree", people_tab: "Everyone",
     stories_tab: "Stories", set_me: "This is me", view_hourglass: "Both",
-    view_ancestors: "Ancestors", view_descendants: "Descendants", read_story: "Read story", back: "Back",
+    view_ancestors: "Ancestors", view_descendants: "Descendants",
+    view_vertical: "Vertical", view_horizontal: "Horizontal", tagged_people: "Tagged relatives",
+    read_story: "Read story", back: "Back",
   },
   presets: {},
 };
 
 const ME_KEY = "family-tree:me";
+const AUTH_KEY = "family-tree:google";
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
@@ -41,7 +47,11 @@ function merge(base, extra) {
 let CFG = DEFAULTS;
 let DATA = null;
 let IDX = null;
-const state = { focus: null, view: "hourglass", selected: null, layout: null, k: 1, x: 0, y: 0, meId: null };
+const state = {
+  focus: null, view: "hourglass", orientation: "vertical", selected: null, layout: null,
+  k: 1, x: 0, y: 0, meId: null, auth: null, authError: null, authMe: false,
+};
+let googleReady = false;
 
 const el = {
   viewport: () => $("#viewport"),
@@ -65,11 +75,25 @@ async function boot() {
   IDX = buildIndex(DATA);
   state.meId = localStorage.getItem(ME_KEY);
   if (state.meId && !IDX.people[state.meId]) state.meId = null;
+  state.auth = readStoredAuth();
+  const google = CFG.auth?.google;
+  if (!google?.client_id) {
+    state.auth = null;
+  } else if (state.auth?.email) {
+    // Re-resolve the mapping so config changes take effect on the next load.
+    state.auth.pid = mappedPersonId(google, state.auth.email);
+    if (google.auto_me !== false && state.auth.pid) {
+      state.meId = state.auth.pid;
+      state.authMe = true;
+    }
+  }
   state.view = CFG.layout.default_view || "hourglass";
+  state.orientation = CFG.layout.orientation === "horizontal" ? "horizontal" : "vertical";
 
   applyTheme();
   applyText();
   bindEvents();
+  initAuth();
   window.addEventListener("hashchange", route);
   route();
   $("#loading").hidden = true;
@@ -98,9 +122,10 @@ function applyTheme() {
   for (const [key, value] of Object.entries(palette)) {
     root.style.setProperty(`--${key.replace(/_/g, "-")}`, value);
   }
-  root.style.setProperty("--font-heading", `"${CFG.fonts.heading}", Georgia, serif`);
+  root.style.setProperty("--font-heading", `"${CFG.fonts.heading}", system-ui, sans-serif`);
   root.style.setProperty("--font-body", `"${CFG.fonts.body}", system-ui, sans-serif`);
   root.style.setProperty("--card-radius", `${CFG.layout.corner_radius}px`);
+  renderAuth();
 }
 
 function applyText() {
@@ -118,6 +143,9 @@ function applyText() {
   views[0].textContent = text.view_hourglass;
   views[1].textContent = text.view_ancestors;
   views[2].textContent = text.view_descendants;
+  const orientations = $$("#orientation-switch button");
+  orientations[0].textContent = text.view_vertical;
+  orientations[1].textContent = text.view_horizontal;
   const visible = DATA.people.filter((p) => !p.hidden).length;
   const counts = DATA.counts || {};
   $("#footer").innerHTML = `<span>${esc(site.footer || "")}</span>
@@ -239,8 +267,10 @@ function route() {
     showView("tree");
     const focus = arg && IDX.people[arg] ? arg : defaultFocus();
     const view = ["hourglass", "ancestors", "descendants"].includes(params.v) ? params.v : state.view;
-    const changed = focus !== state.focus || view !== state.view;
+    const orientation = ["vertical", "horizontal"].includes(params.o) ? params.o : state.orientation;
+    const changed = focus !== state.focus || view !== state.view || orientation !== state.orientation;
     state.view = view;
+    state.orientation = orientation;
     if (changed || !state.layout) {
       renderTree(focus);
       if (focus !== state.selected) {
@@ -259,6 +289,7 @@ function layoutOptions(view) {
   const L = CFG.layout;
   return {
     view,
+    orientation: state.orientation,
     up: L.generations_up,
     down: L.generations_down,
     cardW: L.card_width,
@@ -289,6 +320,11 @@ function renderTree(focusId) {
 
   for (const b of $$("#view-switch button")) {
     const on = b.dataset.view === state.view;
+    b.setAttribute("aria-selected", on);
+    b.setAttribute("aria-checked", on);
+  }
+  for (const b of $$("#orientation-switch button")) {
+    const on = b.dataset.orientation === state.orientation;
     b.setAttribute("aria-selected", on);
     b.setAttribute("aria-checked", on);
   }
@@ -329,6 +365,35 @@ function linksSVG(L) {
   let d = "";
   let extras = "";
   for (const l of L.links) {
+    if (l.horizontal) {
+      // Horizontal links: one x per generation, one y per source/target card.
+      const sx = l.sx;
+      const sy = l.sy;
+      const tx = l.tx;
+      const ty = l.ty;
+      if (ty.length) {
+        if (angular) {
+          const bus = sx + (tx - sx) / 2;
+          for (const y of sy) d += `M${f(sx)} ${f(y)}H${f(bus)}`;
+          const all = [...sy, ...ty];
+          d += `M${f(bus)} ${f(Math.min(...all))}V${f(Math.max(...all))}`;
+          for (const y of ty) d += `M${f(bus)} ${f(y)}H${f(tx)}`;
+        } else {
+          const m = (tx - sx) * 0.5;
+          for (const y1 of sy) {
+            for (const y2 of ty) {
+              d += `M${f(sx)} ${f(y1)}C${f(sx + m)} ${f(y1)} ${f(tx - m)} ${f(y2)} ${f(tx)} ${f(y2)}`;
+            }
+          }
+        }
+      }
+      if (l.kind === "family" && sy.length) {
+        const my = f(sy[0]);
+        extras += `<circle class="marriage" cx="${f(sx)}" cy="${my}" r="6"/>`;
+        if (l.label) extras += `<text x="${f(sx + 12)}" y="${f(my + 4)}">${esc(l.label)}</text>`;
+      }
+      continue;
+    }
     const sy = l.sy;
     const ty = l.ty;
     if (l.tx.length) {
@@ -544,6 +609,200 @@ function refreshMeChip() {
   }
 }
 
+// ---------- Google sign-in ----------
+//
+// Client-side Google Identity Services. This identifies a visitor and can
+// auto-set "This is me"; it is not access control. The published tree data is
+// still public, so keep the privacy rules in build_site.py as the real gate.
+
+function readStoredAuth() {
+  try {
+    const raw = localStorage.getItem(AUTH_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    return parsed && parsed.email ? parsed : null;
+  } catch {
+    return null;
+  }
+}
+
+function decodeJwt(token) {
+  const part = String(token || "").split(".")[1];
+  if (!part) throw new Error("Invalid Google credential");
+  const padded = part.replace(/-/g, "+").replace(/_/g, "/").padEnd(Math.ceil(part.length / 4) * 4, "=");
+  const bytes = Uint8Array.from(atob(padded), (c) => c.charCodeAt(0));
+  return JSON.parse(new TextDecoder().decode(bytes));
+}
+
+function mappedPersonId(google, email) {
+  const key = String(email || "").toLowerCase();
+  if (!key) return null;
+  const people = Object.fromEntries(
+    Object.entries(google?.people || {}).map(([k, v]) => [String(k).toLowerCase(), v]),
+  );
+  const pid = people[key];
+  return pid && IDX?.people[pid] && !IDX.people[pid].hidden ? pid : null;
+}
+
+function initAuth() {
+  const google = CFG.auth?.google;
+  const box = $("#auth");
+  if (!box) return;
+  if (!google?.client_id) {
+    box.hidden = true;
+    box.innerHTML = "";
+    return;
+  }
+  box.hidden = false;
+  if (window.google?.accounts?.id) {
+    setupGoogle();
+    return;
+  }
+  const script = document.createElement("script");
+  script.src = "https://accounts.google.com/gsi/client";
+  script.async = true;
+  script.defer = true;
+  script.onload = () => setupGoogle();
+  script.onerror = () => {
+    googleReady = false;
+    renderAuth();
+    if (!state.auth) box.hidden = true;
+  };
+  document.head.appendChild(script);
+  renderAuth();
+}
+
+function setupGoogle() {
+  const google = CFG.auth?.google;
+  if (!google?.client_id || !window.google?.accounts?.id) return;
+  googleReady = true;
+  window.google.accounts.id.initialize({
+    client_id: google.client_id,
+    callback: handleGoogleCredential,
+    auto_select: false,
+    cancel_on_tap_outside: true,
+  });
+  renderAuth();
+}
+
+function renderAuth() {
+  const box = $("#auth");
+  if (!box) return;
+  const google = CFG.auth?.google;
+  if (!google?.client_id) {
+    box.hidden = true;
+    box.innerHTML = "";
+    return;
+  }
+  box.hidden = false;
+
+  if (state.auth) {
+    const name = state.auth.name || state.auth.email || "Google account";
+    const person = state.auth.pid && IDX?.people[state.auth.pid] && !IDX.people[state.auth.pid].hidden
+      ? IDX.people[state.auth.pid]
+      : null;
+    const avatar = state.auth.picture
+      ? `<img class="auth-avatar" src="${esc(state.auth.picture)}" alt="" referrerpolicy="no-referrer">`
+      : `<span class="auth-avatar">${esc((name[0] || "G").toUpperCase())}</span>`;
+    box.innerHTML = `
+      <button class="auth-chip" type="button" data-auth="toggle" aria-haspopup="menu" aria-expanded="false">
+        ${avatar}<span class="auth-name">${esc(name)}</span>
+      </button>
+      <div class="auth-menu" id="auth-menu" role="menu" hidden>
+        <div class="auth-menu-head"><strong>${esc(name)}</strong><span>${esc(state.auth.email || "")}</span></div>
+        <div class="auth-menu-link">${person ? `Linked to ${esc(displayName(person))}` : "No family member is linked to this account."}</div>
+        <button type="button" role="menuitem" data-auth="signout">Sign out</button>
+      </div>`;
+    return;
+  }
+
+  box.innerHTML = `${state.authError ? `<span class="auth-error" role="status">${esc(state.authError)}</span>` : ""}<div id="google-signin"></div>`;
+  if (googleReady && window.google?.accounts?.id) {
+    const slot = box.querySelector("#google-signin");
+    if (slot) {
+      window.google.accounts.id.renderButton(slot, {
+        type: "standard",
+        theme: document.documentElement.dataset.mode === "dark" ? "filled_black" : "outline",
+        size: "large",
+        shape: "pill",
+        text: "signin_with",
+        logo_alignment: "left",
+        width: 190,
+      });
+    }
+  }
+}
+
+function handleGoogleCredential(response) {
+  const google = CFG.auth?.google;
+  let payload;
+  try {
+    payload = decodeJwt(response.credential);
+  } catch {
+    setAuthError("Google sign-in failed. Please try again.");
+    return;
+  }
+  if (!payload?.email) {
+    setAuthError("Google did not return an email address.");
+    return;
+  }
+  if (payload.email_verified === false) {
+    setAuthError("Please verify your Google email first.");
+    return;
+  }
+
+  const email = payload.email.toLowerCase();
+  const allowed = (google.allowed_domains || []).map((d) => String(d).toLowerCase()).filter(Boolean);
+  const domain = email.split("@")[1] || "";
+  if (allowed.length && !allowed.includes(domain)) {
+    setAuthError(`Only ${allowed.join(", ")} accounts can sign in.`);
+    return;
+  }
+
+  const linked = mappedPersonId(google, email);
+  state.auth = {
+    email,
+    name: payload.name || "",
+    picture: payload.picture || "",
+    sub: payload.sub || "",
+    pid: linked,
+  };
+  state.authError = null;
+  localStorage.setItem(AUTH_KEY, JSON.stringify(state.auth));
+  if (linked && google.auto_me !== false) {
+    setMe(linked);
+    state.authMe = true;
+  }
+  renderAuth();
+  refreshMeChip();
+  if (state.selected) selectPerson(state.selected, { silent: true });
+}
+
+function signOutGoogle() {
+  const id = window.google?.accounts?.id;
+  if (id?.disableAutoSelect) id.disableAutoSelect();
+  const authPid = state.auth?.pid;
+  localStorage.removeItem(AUTH_KEY);
+  state.auth = null;
+  state.authError = null;
+  if (state.authMe && authPid && state.meId === authPid) setMe(null);
+  state.authMe = false;
+  renderAuth();
+  refreshMeChip();
+  if (state.selected) selectPerson(state.selected, { silent: true });
+}
+
+function setAuthError(message) {
+  state.authError = message;
+  renderAuth();
+  window.setTimeout(() => {
+    if (state.authError === message) {
+      state.authError = null;
+      renderAuth();
+    }
+  }, 6000);
+}
+
 // ---------- People list ----------
 
 function renderPeople() {
@@ -621,7 +880,7 @@ function renderStory(id) {
     </div>
     <div class="story-body">${n.paragraphs.map((t) => `<p>${esc(t).replace(/\n/g, "<br>")}</p>`).join("")}</div>
     <div class="story-foot">
-      ${names ? `<div class="section-title">About</div><div class="chips">${names}</div>` : ""}
+      ${names ? `<div class="section-title">${esc(CFG.text.tagged_people)}</div><div class="chips">${names}</div>` : ""}
       ${others.length ? `<div class="section-title">More stories</div>${others.map((o) => `<button type="button" class="story-card-mini" data-story="${esc(o.id)}"><strong>${esc(storyTitle(o))}</strong><span>${readMinutes(o.words)} min read</span></button>`).join("")}` : ""}
     </div>`;
   window.scrollTo?.(0, 0);
@@ -732,7 +991,13 @@ function bindEvents() {
   $("#view-switch").addEventListener("click", (e) => {
     const b = e.target.closest("button[data-view]");
     if (!b) return;
-    go("tree", state.focus, { v: b.dataset.view });
+    go("tree", state.focus, { v: b.dataset.view, o: state.orientation });
+  });
+
+  $("#orientation-switch").addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-orientation]");
+    if (!b) return;
+    go("tree", state.focus, { v: state.view, o: b.dataset.orientation });
   });
 
   $("#cards").addEventListener("click", (e) => {
@@ -754,7 +1019,7 @@ function bindEvents() {
       return selectPerson(state.selected);
     }
     if (t.dataset.story) return go("story", t.dataset.story);
-    if (t.dataset.focus) return go("tree", t.dataset.focus, { v: state.view });
+    if (t.dataset.focus) return go("tree", t.dataset.focus, { v: state.view, o: state.orientation });
   });
 
   document.addEventListener("click", (e) => {
@@ -769,12 +1034,34 @@ function bindEvents() {
     if (t.dataset.story) return go("story", t.dataset.story);
     if (t.dataset.focus) {
       closeSearch();
-      return go("tree", t.dataset.focus, { v: state.view });
+      return go("tree", t.dataset.focus, { v: state.view, o: state.orientation });
     }
   });
 
   $("#me-chip").addEventListener("click", () => {
-    if (state.meId) go("tree", state.meId, { v: state.view });
+    if (state.meId) go("tree", state.meId, { v: state.view, o: state.orientation });
+  });
+
+  $("#auth").addEventListener("click", (e) => {
+    const toggle = e.target.closest('[data-auth="toggle"]');
+    if (toggle) {
+      const menu = $("#auth-menu");
+      if (menu) {
+        menu.hidden = !menu.hidden;
+        toggle.setAttribute("aria-expanded", String(!menu.hidden));
+      }
+      return;
+    }
+    if (e.target.closest('[data-auth="signout"]')) signOutGoogle();
+  });
+
+  document.addEventListener("click", (e) => {
+    if (e.target.closest("#auth")) return;
+    const menu = $("#auth-menu");
+    if (menu && !menu.hidden) {
+      menu.hidden = true;
+      $('[data-auth="toggle"]')?.setAttribute("aria-expanded", "false");
+    }
   });
 
   const search = $("#search");
@@ -787,7 +1074,7 @@ function bindEvents() {
       const id = searchItems[activeIndex].id;
       search.value = "";
       closeSearch();
-      go("tree", id, { v: state.view });
+      go("tree", id, { v: state.view, o: state.orientation });
     } else if (e.key === "Escape") {
       search.value = "";
       closeSearch();

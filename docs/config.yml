@@ -1,6 +1,6 @@
 # =====================================================================
 #  Family tree site configuration
-#  Edit this file, rebuild the data (see docs/README.md), and reload.
+#  Edit this file, rebuild the data (see README.md), and reload.
 #  Any key you delete falls back to a sensible default.
 # =====================================================================
 
@@ -26,23 +26,25 @@ theme:
     dark: {}
 
 fonts:
-  # Bundled in docs/assets/fonts. Tiro Devanagari Sanskrit covers Devanagari (Sanskrit) and Latin.
+  # Bundled in docs/assets/fonts. Roboto is self-hosted (variable, 100–900).
   # To use other fonts, replace the files and @font-face rules in docs/assets/fonts.css.
-  heading: "Tiro Devanagari Sanskrit"
-  body: "Inter"
+  heading: "Roboto"
+  body: "Roboto"
 
 layout:
   # hourglass = ancestors above, descendants below · ancestors · descendants
   default_view: hourglass
+  # vertical = generations top-to-bottom · horizontal = generations left-to-right
+  orientation: vertical
   generations_up: 4
   generations_down: 4
   card_width: 188
   card_height: 84
   gap_x: 26
   gap_y: 92
-  corner_radius: 18
-  # curved | angular
-  connector_style: curved
+  corner_radius: 16
+  # angular = right-angled connectors · curved = bezier connectors
+  connector_style: angular
   show_years: true
   show_places: true
   show_child_counts: true
@@ -58,6 +60,15 @@ narratives:
   # Ordinary Person/Family/Event/Place notes become stories when they are at least min_words long
   auto_detect_types: [Person Note, Family Note, Event Note, Place Note]
   min_words: 200
+  # Optional display titles by Gramps note ID. Without an override the first
+  # line of the note is used, or the story is shown as "Untitled story".
+  story_titles:
+    N0047: "The Patriarch and Matriarch"
+  # Attach a story/note to extra relatives (Gramps IDs) without editing the
+  # note in Gramps. It then appears on each listed person's panel and in the
+  # story's "Tagged relatives" section. Rebuild after changing this.
+  story_tags:
+    N0047: [I0000]
 
 privacy:
   # Applied by scripts/build_site.py before data is written. Privacy is only
@@ -90,8 +101,32 @@ text:
   view_hourglass: "Both"
   view_ancestors: "Ancestors"
   view_descendants: "Descendants"
+  view_vertical: "Vertical"
+  view_horizontal: "Horizontal"
+  tagged_people: "Tagged relatives"
   read_story: "Read story"
   back: "Back"
+
+# ---------------------------------------------------------------------
+#  Google sign-in (optional)
+#  Client-side only: it identifies a visitor and can set "This is me".
+#  It does not make the site private. Keep privacy rules in the build.
+# ---------------------------------------------------------------------
+auth:
+  google:
+    # Create an OAuth 2.0 Web client at https://console.cloud.google.com/apis/credentials
+    # and add the site origin (for example https://evolvedhow.github.io) to
+    # "Authorized JavaScript origins". Leave empty to hide Google sign-in.
+    client_id: ""
+    # Optional email-domain allowlist, e.g. ["gmail.com"] or ["example.org"].
+    # Empty means any Google account may sign in.
+    allowed_domains: []
+    # Map Google account emails to Gramps IDs. On sign-in "This is me" is set
+    # to that person, and the panel shows how they are related.
+    people: {}
+      # "you@gmail.com": I0023
+    # Set to false to sign in without changing the visitor's "This is me".
+    auto_me: true
 
 # ---------------------------------------------------------------------
 #  Palettes. Each preset has a light and a dark version.
@@ -181,33 +216,34 @@ presets:
       other: "#b59cf0"
       highlight: "#f2d26b"
 
+  # Material 3 sage green
   sage:
     light:
-      background: "#f1f5ef"
+      background: "#f6faf2"
       surface: "#ffffff"
-      surface_strong: "#e2ebdd"
-      text: "#1f2e24"
-      muted: "#66786b"
-      accent: "#3f7d5c"
+      surface_strong: "#e6f0e2"
+      text: "#1a1c18"
+      muted: "#5d665a"
+      accent: "#4f6f52"
       accent_contrast: "#ffffff"
-      line: "#c6d6c6"
-      male: "#3d6fa3"
-      female: "#b35c7a"
-      other: "#8a7a4d"
-      highlight: "#e0b65a"
+      line: "#c4ccbf"
+      male: "#3f6c8f"
+      female: "#8e4e63"
+      other: "#6e6259"
+      highlight: "#a5d6a7"
     dark:
-      background: "#101913"
-      surface: "#17231b"
-      surface_strong: "#203025"
-      text: "#e6efe6"
-      muted: "#9db3a1"
-      accent: "#7fc29b"
-      accent_contrast: "#0d1a12"
-      line: "#2f4536"
-      male: "#7fb2e0"
-      female: "#eca0b6"
-      other: "#d6c48a"
-      highlight: "#e8c46f"
+      background: "#0f140f"
+      surface: "#171d16"
+      surface_strong: "#222b21"
+      text: "#e3e6de"
+      muted: "#a8b0a3"
+      accent: "#a8c8a8"
+      accent_contrast: "#142016"
+      line: "#3f4a3d"
+      male: "#9bc4e2"
+      female: "#e3a4b7"
+      other: "#d0c3a8"
+      highlight: "#81c784"
 
   ocean:
     light:

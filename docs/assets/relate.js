@@ -38,19 +38,18 @@ function pick(gender, male, female, neutral) {
   return neutral;
 }
 
-function describeRelation(a, b, gender) {
-  const up = a;
-  const down = b;
-  if (down === 0) return "self";
-  if (up === 0) {
-    // b is a descendant of the start person, `down` generations below
-    if (down === 1) return pick(gender, "son", "daughter", "child");
-    return greats(down - 2) + pick(gender, "grandson", "granddaughter", "grandchild");
-  }
+function describeRelation(up, down, gender) {
+  if (up === 0 && down === 0) return "self";
   if (down === 0) {
+    // The other person is `up` generations above the start person.
     if (up === 1) return pick(gender, "father", "mother", "parent");
     if (up === 2) return pick(gender, "grandfather", "grandmother", "grandparent");
     return greats(up - 2) + pick(gender, "grandfather", "grandmother", "grandparent");
+  }
+  if (up === 0) {
+    // The other person is `down` generations below the start person.
+    if (down === 1) return pick(gender, "son", "daughter", "child");
+    return greats(down - 2) + pick(gender, "grandson", "granddaughter", "grandchild");
   }
   return null;
 }

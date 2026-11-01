@@ -169,12 +169,35 @@ function descendantBlock(pid, depth, ctx) {
   return { w: maxX - minX, h, rootCx: rootCx + dx, cards: out.cards, links: out.links };
 }
 
+// Turn a top-to-bottom layout into a left-to-right one. The layout is first
+// computed with the card dimensions and gaps transposed, so cards keep their
+// real width/height after the swap.
+function transposeLayout(layout) {
+  return {
+    width: layout.height,
+    height: layout.width,
+    focus: { x: layout.focus.y, y: layout.focus.x },
+    cards: layout.cards.map((c) => ({ ...c, x: c.y, y: c.x })),
+    links: layout.links.map((l) => ({
+      ...l,
+      horizontal: true,
+      sx: l.sy,
+      sy: l.sx,
+      tx: l.ty,
+      ty: l.tx,
+    })),
+  };
+}
+
 // ---- Public API --------------------------------------------------------
 
 export function layoutTree(index, focusId, options = {}) {
   if (!index.people[focusId]) return null;
-  const cw = options.cardW ?? 188;
-  const ch = options.cardH ?? 84;
+  const horizontal = options.orientation === "horizontal";
+  const cardW = options.cardW ?? 188;
+  const cardH = options.cardH ?? 84;
+  const cw = horizontal ? cardH : cardW;
+  const ch = horizontal ? cardW : cardH;
   const gx = options.gapX ?? 26;
   const gy = options.gapY ?? 92;
   const view = options.view ?? "hourglass";
@@ -182,14 +205,15 @@ export function layoutTree(index, focusId, options = {}) {
   const down = options.down ?? 4;
 
   const ctx = (extra) => ({ cw, ch, gx, gy, idx: index, seenFam: new Set(), seenPeople: new Set(), ...extra });
+  const done = (layout) => (horizontal ? transposeLayout(layout) : layout);
 
   if (view === "ancestors") {
     const a = ancestorBlock(focusId, up, ctx());
-    return { width: a.w, height: a.h, focus: { x: a.rootCx - cw / 2, y: a.h - ch }, cards: a.cards, links: a.links };
+    return done({ width: a.w, height: a.h, focus: { x: a.rootCx - cw / 2, y: a.h - ch }, cards: a.cards, links: a.links });
   }
   if (view === "descendants") {
     const d = descendantBlock(focusId, down, ctx());
-    return { width: d.w, height: d.h, focus: { x: d.rootCx - cw / 2, y: 0 }, cards: d.cards, links: d.links };
+    return done({ width: d.w, height: d.h, focus: { x: d.rootCx - cw / 2, y: 0 }, cards: d.cards, links: d.links });
   }
 
   const anc = ancestorBlock(focusId, up, ctx());
@@ -215,11 +239,11 @@ export function layoutTree(index, focusId, options = {}) {
     l.sx = l.sx.map((v) => v - minX);
     l.tx = l.tx.map((v) => v - minX);
   }
-  return {
+  return done({
     width: maxX - minX,
     height: max(anc.h, dy + desc.h),
     focus: { x: anc.rootCx - minX - cw / 2, y: focusTop },
     cards,
     links,
-  };
+  });
 }

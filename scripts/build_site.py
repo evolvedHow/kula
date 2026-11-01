@@ -173,6 +173,15 @@ def main(argv=None):
     min_words = int(narr.get("min_words", 200))
     auto_types = {t.lower() for t in narr.get("auto_detect_types", ["Person Note", "Family Note", "Event Note", "Place Note"])}
     narratives_enabled = narr.get("enabled", True)
+    story_titles = {str(k): str(v) for k, v in (narr.get("story_titles") or {}).items()}
+    story_tags = {}
+    for note_id, ids in (narr.get("story_tags") or {}).items():
+        if isinstance(ids, str):
+            story_tags[str(note_id)] = [ids]
+        elif isinstance(ids, (list, tuple, set)):
+            story_tags[str(note_id)] = [str(pid) for pid in ids]
+        elif ids:
+            story_tags[str(note_id)] = [str(ids)]
 
     root = load_tree(args.export)
     today = dt.date.today().year
@@ -390,6 +399,13 @@ def main(argv=None):
 
         subj = subjects.get(handle, {"people": set(), "places": set()})
         subj_people = sorted(p for p in subj["people"] if p in people and not people[p].get("hidden"))
+        extra_people = story_tags.get(n.get("id"), [])
+        unknown = sorted(p for p in extra_people if p not in people)
+        if unknown:
+            warnings.append(f"note {n.get('id')}: unknown tagged person(s): {', '.join(unknown)}")
+        tagged_people = [p for p in extra_people if p in people and not people[p].get("hidden")]
+        if tagged_people:
+            subj_people = sorted(set(subj_people) | set(tagged_people))
         subj_places = sorted(p for p in subj["places"] if p)
         if subj["people"] and not subj_people and not subj_places:
             continue  # only about private or living people
@@ -427,6 +443,7 @@ def main(argv=None):
             body_text = body
         if not body_text:
             body_text, title = title or body, None
+        title = story_titles.get(n.get("id")) or title
 
         if not include_notes and not is_story:
             continue
@@ -494,6 +511,8 @@ def main(argv=None):
         print(f"  redacted {count}x '{label}' in story {handle}")
     for handle, label in stories_dropped:
         print(f"  WARNING: story {handle} excluded: mentions living person '{label}'", file=sys.stderr)
+    for warning in warnings:
+        print(f"  WARNING: {warning}", file=sys.stderr)
     return 0
 
 

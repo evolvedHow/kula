@@ -1,6 +1,6 @@
 {
  "schema": "kula.site/1.0",
- "generated_at": "2026-10-25T23:14:29+00:00",
+ "generated_at": "2026-11-01T14:34:27+00:00",
  "source": "export.gramps",
  "home": "I0023",
  "counts": {
@@ -157,8 +157,12 @@
     "F0000"
    ],
    "parent_family": null,
-   "notes": [],
-   "stories": []
+   "notes": [
+    "N0047"
+   ],
+   "stories": [
+    "N0047"
+   ]
   },
   {
    "id": "I0001",
@@ -3503,7 +3507,7 @@
   {
    "id": "N0047",
    "type": "General",
-   "title": null,
+   "title": "The Patriarch and Matriarch",
    "is_story": true,
    "tags": [
     "Blog"
@@ -3524,7 +3528,9 @@
     "• Bhagavathy: Mother of Chuppayya.",
     "• Valli (Youngest): Mother of Calcutta Lakshmanan, and grandmother to Naresh."
    ],
-   "people": [],
+   "people": [
+    "I0000"
+   ],
    "places": [],
    "updated": "2026-10-25"
   },
