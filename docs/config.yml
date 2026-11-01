@@ -117,13 +117,15 @@ auth:
     # Create an OAuth 2.0 Web client at https://console.cloud.google.com/apis/credentials
     # and add the site origin (for example https://evolvedhow.github.io) to
     # "Authorized JavaScript origins". Leave empty to hide Google sign-in.
-    client_id: ""
+    client_id: "941843963930-a7hb8en18pcguhbj01j30t054kt358ul.apps.googleusercontent.com"
     # Optional email-domain allowlist, e.g. ["gmail.com"] or ["example.org"].
     # Empty means any Google account may sign in.
     allowed_domains: []
     # Map Google account emails to Gramps IDs. On sign-in "This is me" is set
     # to that person, and the panel shows how they are related.
-    people: {}
+    people: {
+      "vish.ganapathy@gmail.com": I0023
+    }
       # "you@gmail.com": I0023
     # Set to false to sign in without changing the visitor's "This is me".
     auto_me: true
