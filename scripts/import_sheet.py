@@ -529,9 +529,16 @@ def build(sheets, config, tabs=None):
                 "attributes": {"role": "partner", "union": fam["id"]},
             })
     offspring_attrs = {}
+    seen_oids = set()
     for row in offspring_raw:
         uid = resolve_union(row.get("UNION_OF"))
         child = resolve(row.get("OFFSPRING"))
+        oid = (row.get("OID") or "").strip()
+        if oid and oid in seen_oids:
+            warnings.append(f"Duplicate offspring ID {oid}, using first occurrence")
+            continue
+        if oid:
+            seen_oids.add(oid)
         if uid and child and child in family_by_uid[uid]["children"]:
             offspring_attrs.setdefault((uid, child), []).append(row)
     for (uid, child), rows in offspring_attrs.items():

@@ -1,8 +1,8 @@
 {
  "schema": "kula.site/2.0",
- "generated_at": "2026-11-02T06:39:57+00:00",
+ "generated_at": "2026-11-02T06:42:25+00:00",
  "source": "Google Sheet",
- "home": "P001",
+ "home": "I000",
  "counts": {
   "people": 120,
   "hidden_living": 0,
@@ -10560,18 +10560,6 @@
      "OID": "O006",
      "UNION_OF": "P001-Viswanatha Tatha & P002-Valliammal",
      "OFFSPRING": "P091-Rajamani",
-     "NOTES": ""
-    }
-   },
-   {
-    "id": "O067",
-    "type": "offspring",
-    "from": "U001",
-    "to": "P119",
-    "attributes": {
-     "OID": "O067",
-     "UNION_OF": "P001-Viswanatha Tatha & P002-Valliammal",
-     "OFFSPRING": "P119-Bhagavthy",
      "NOTES": ""
     }
    },
