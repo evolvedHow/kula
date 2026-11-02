@@ -1,6 +1,6 @@
 {
  "schema": "kula.site/2.0",
- "generated_at": "2026-11-02T04:02:04+00:00",
+ "generated_at": "2026-11-02T04:12:47+00:00",
  "source": "Google Sheet",
  "home": "P001",
  "counts": {
@@ -5516,12 +5516,12 @@
    "relation": "Unknown",
    "marriage": null,
    "notes": "",
-   "ref_name": "P056-Kala &",
+   "ref_name": "P056-Kala",
    "attributes": {
     "UID": "U041",
     "PID1": "P056",
     "PID2": "",
-    "REF_NAME": "P056-Kala &",
+    "REF_NAME": "P056-Kala",
     "REL_START": "",
     "REL_END": "",
     "NOTES": "",
@@ -8215,12 +8215,12 @@
     "id": "U041",
     "type": "union",
     "union_id": "U041",
-    "ref_name": "P056-Kala &",
+    "ref_name": "P056-Kala",
     "attributes": {
      "UID": "U041",
      "PID1": "P056",
      "PID2": "",
-     "REF_NAME": "P056-Kala &",
+     "REF_NAME": "P056-Kala",
      "REL_START": "",
      "REL_END": "",
      "NOTES": "",

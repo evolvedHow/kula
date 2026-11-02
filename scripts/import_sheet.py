@@ -14,11 +14,16 @@ Usage:
     python3 scripts/import_sheet.py private/relatives.xlsx
     python3 scripts/import_sheet.py --url "https://docs.google.com/spreadsheets/d/.../edit"
 
-The tab values PID1/PID2/UNION_OF/OFFSPRING are REF_NAMEs. They are resolved
-back to PIDs through the Persons tab, so a REF_NAME can be edited in the sheet
-without breaking the graph. Every original column is kept as a node or edge
-attribute, and the site also gets a compact people/families/notes view so the
-existing tree, list and profile panels keep working.
+The tab values PID1/PID2/UNION_OF/OFFSPRING are readable keys of the form
+"<PID>-<KNOWN_NAME>", for example "P049-Sriram". KNOWN_NAME is the pseudo key
+people use while entering data; the PID prefix keeps it unique when known
+names repeat. The importer resolves each reference by that PID prefix (with
+REF_NAME and unique-known-name fallbacks for hand-edited sheets), so a name
+edit in the Persons tab cannot break the union or offspring links.
+
+Every original column is kept as a node or edge attribute, and the site also
+gets a compact people/families/notes view so the existing tree, list and
+profile panels keep working.
 
 Pravara is deliberately NOT written here. It is derived from gotra at runtime
 by docs/assets/vedic.js, so a stale PRAVARA column can never disagree.
@@ -228,29 +233,105 @@ def city_only(value):
     return text
 
 
-def person_ref_map(persons):
-    """Map REF_NAME -> PID, with a PID-prefix fallback for edited REF_NAMEs."""
-    by_ref = {}
+PID_RE = re.compile(r"^\s*(P\d+)\b", re.IGNORECASE)
+ANY_PID_RE = re.compile(r"\b(P\d+)\b", re.IGNORECASE)
+UNION_RE = re.compile(r"^\s*(U\d+)\b", re.IGNORECASE)
+
+
+def pid_prefix(value):
+    """Return the PID at the start of a sheet reference.
+
+    Relationship cells are written as "<PID>-<KNOWN_NAME>", for example
+    "P049-Sriram". KNOWN_NAME is the human-friendly pseudo key people use
+    while entering data, and the PID prefix keeps it unique when two people
+    share a known name. The PID is therefore the real lookup key; the name
+    part is only there to make the sheet readable.
+    """
+    match = PID_RE.match(value or "")
+    return match.group(1).upper() if match else None
+
+
+def make_ref(pid, known_name):
+    """Build the canonical "<PID>-<KNOWN_NAME>" reference."""
+    known = (known_name or "").strip()
+    return f"{pid}-{known}" if pid and known else (pid or "")
+
+
+def person_resolver(persons):
+    """Resolve "<PID>-<KNOWN_NAME>" cells back to a person ID.
+
+    The PID prefix is authoritative. Exact REF_NAME and unique KNOWN_NAME
+    matches are kept as fallbacks for hand-edited sheets that dropped the
+    prefix.
+    """
     by_pid = {}
-    for p in persons:
-        pid = p["PID"]
+    by_ref = {}
+    by_known = {}
+    for person in persons:
+        pid = (person.get("PID") or "").strip().upper()
+        if not pid:
+            continue
+        known = (person.get("KNOWN_NAME") or "").strip()
+        ref = (person.get("REF_NAME") or "").strip() or make_ref(pid, known)
         by_pid[pid] = pid
-        ref = p.get("REF_NAME") or pid
-        by_ref[ref] = pid
-        by_ref[ref.strip().lower()] = pid
+        by_ref[ref.lower()] = pid
+        by_ref[make_ref(pid, known).lower()] = pid
+        if known:
+            by_known.setdefault(known.lower(), []).append(pid)
+
     def resolve(value):
-        v = (value or "").strip()
-        if not v:
+        text = (value or "").strip()
+        if not text:
             return None
-        if v in by_ref:
-            return by_ref[v]
-        low = v.lower()
-        if low in by_ref:
-            return by_ref[low]
-        m = re.match(r"^(P\d+)\b", v, re.IGNORECASE)
-        if m and m.group(1).upper() in by_pid:
-            return m.group(1).upper()
+        pid = pid_prefix(text)
+        if pid and pid in by_pid:
+            return pid
+        if text.lower() in by_ref:
+            return by_ref[text.lower()]
+        matches = by_known.get(text.lower(), [])
+        if len(matches) == 1:
+            return matches[0]
         return None
+
+    return resolve
+
+
+def union_resolver(families):
+    """Resolve a union reference from UID, REF_NAME or partner IDs.
+
+    Offspring rows point at a union with its readable REF_NAME, such as
+    "P001-Viswanatha Tatha & P002-Valliammal". The partner PIDs embedded in
+    that string are the stable key, so a ref-name edit cannot break the link.
+    """
+    by_uid = {}
+    by_ref = {}
+    by_partners = {}
+    for family in families:
+        uid = family["id"]
+        by_uid[uid.lower()] = uid
+        ref = (family.get("ref_name") or "").strip()
+        if ref:
+            by_ref[ref.lower()] = uid
+        partners = tuple(sorted(p for p in (family.get("father"), family.get("mother")) if p))
+        if partners:
+            by_partners[frozenset(partners)] = uid
+
+    def resolve(value):
+        text = (value or "").strip()
+        if not text:
+            return None
+        uid = UNION_RE.match(text)
+        if uid and uid.group(1).lower() in by_uid:
+            return by_uid[uid.group(1).lower()]
+        if text.lower() in by_ref:
+            return by_ref[text.lower()]
+        partner_ids = {p.upper() for p in ANY_PID_RE.findall(text)}
+        if partner_ids:
+            key = frozenset(partner_ids)
+            if key in by_partners:
+                return by_partners[key]
+        return None
+
     return resolve
 
 
@@ -262,7 +343,11 @@ def build(sheets, config, tabs=None):
     vedic_raw = records(sheets.get(tabs["vedic"], []), ["PERSON", *VEDIC_FIELDS])
     config_raw = records(sheets.get(tabs["config"], []), ["GOTRA"])
 
-    resolve = person_ref_map(persons_raw)
+    resolve = person_resolver(persons_raw)
+    known_by_pid = {
+        (p.get("PID") or "").strip().upper(): (p.get("KNOWN_NAME") or "").strip()
+        for p in persons_raw
+    }
     warnings = []
 
     vedic_by_pid = {}
@@ -282,7 +367,6 @@ def build(sheets, config, tabs=None):
     # Families first so people can list their unions and parent family.
     families = []
     family_by_uid = {}
-    union_ref_to_uid = {}
     for row in unions_raw:
         uid = (row.get("UID") or "").strip()
         if not uid:
@@ -296,9 +380,10 @@ def build(sheets, config, tabs=None):
             warnings.append(f"Union {uid}: unknown PID1 {row.get('PID1')!r}")
         if not p2 and (row.get("PID2") or "").strip():
             warnings.append(f"Union {uid}: unknown PID2 {row.get('PID2')!r}")
-        ref = (row.get("REF_NAME") or "").strip()
-        union_ref_to_uid[ref] = uid
-        union_ref_to_uid[ref.lower()] = uid
+        ref = " & ".join(
+            make_ref(pid, known_by_pid.get(pid, ""))
+            for pid in (p1, p2) if pid
+        ) or (row.get("REF_NAME") or "").strip() or uid
         attrs = dict(row)
         attrs["UID"] = uid
         attrs["PID1"] = p1 or ""
@@ -333,14 +418,12 @@ def build(sheets, config, tabs=None):
         families.append(fam)
         family_by_uid[uid] = fam
 
-    def union_uid(value):
-        v = (value or "").strip()
-        return union_ref_to_uid.get(v) or union_ref_to_uid.get(v.lower())
+    resolve_union = union_resolver(families)
 
     # Offspring edges create both the family's children and the person's
     # parent_family link.
     for row in offspring_raw:
-        uid = union_uid(row.get("UNION_OF"))
+        uid = resolve_union(row.get("UNION_OF"))
         child = resolve(row.get("OFFSPRING"))
         if not uid or not child:
             warnings.append(f"Offspring {row.get('OID')}: could not resolve "
@@ -397,7 +480,7 @@ def build(sheets, config, tabs=None):
             "notes": [],
             "stories": [],
             "attributes": dict(row),
-            "ref_name": row.get("REF_NAME") or pid,
+            "ref_name": make_ref(pid, known) or (row.get("REF_NAME") or "").strip() or pid,
         }
         if pid in vedic_by_pid:
             person["vedic"] = vedic_by_pid[pid]
@@ -442,7 +525,7 @@ def build(sheets, config, tabs=None):
             })
     offspring_attrs = {}
     for row in offspring_raw:
-        uid = union_uid(row.get("UNION_OF"))
+        uid = resolve_union(row.get("UNION_OF"))
         child = resolve(row.get("OFFSPRING"))
         if uid and child and child in family_by_uid[uid]["children"]:
             offspring_attrs.setdefault((uid, child), []).append(row)

@@ -25,10 +25,12 @@ The older Gramps importer remains available as a fallback.
    python3 scripts/import_sheet.py private/relatives.xlsx
    ```
 
-3. Run the front-end tests, then commit and push the changed data/config:
+3. Run the front-end and importer tests, then commit and push the changed
+   data/config:
 
    ```
    node --test scripts/test_frontend.mjs
+   python3 -m unittest scripts/test_import_sheet.py
    git add docs scripts README.md
    git commit -m "Update family data"
    git push
@@ -61,9 +63,13 @@ can be overridden in `source.tabs`.
 | `Unions` | `UID`, `PID1`, `PID2`, `REF_NAME`, relationship dates and notes |
 | `Offsprings` | `OID`, `UNION_OF`, `OFFSPRING`, notes |
 
-`PID1`, `PID2`, `UNION_OF` and `OFFSPRING` contain `REF_NAME` values. The
-importer resolves them back to PIDs, so editing a `REF_NAME` in the sheet does
-not break the links.
+`PID1`, `PID2`, `UNION_OF` and `OFFSPRING` contain readable keys of the form
+`<PID>-<KNOWN_NAME>`, for example `P049-Sriram`. The known name is only a
+data-entry convenience: the PID prefix is the real key, and it keeps the
+reference unambiguous when two people share a known name. The importer resolves
+every relationship by that PID (falling back to an exact `REF_NAME` or a unique
+known name for hand-edited sheets), and all internal relationships are stored
+by PID. A name edit therefore does not break a union or offspring link.
 
 The generated JSON keeps every original column as an attribute on the person
 or union node and on the offspring edge. The site graph has:
