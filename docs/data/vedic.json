@@ -1,0 +1,167 @@
+{
+  "schema": "kula.vedic/1.0",
+  "note": "Pravara is derived from gotra, never stored independently. Add new gotras here; aliases are matched after normalising case, spaces, punctuation and a trailing 'gotra'.",
+  "disclaimer": "Traditional lineage information. Pronunciation, spelling and customs vary by region and family.",
+  "concepts": {
+    "vedic_roots": {
+      "title": "Vedic roots",
+      "text": "The family's gotra and pravara lineage, together with birth details used in Vedic astrology. These are traditional identifiers, not genetic or legal records.",
+      "source": "https://en.wikipedia.org/wiki/Gotra"
+    },
+    "gotra": {
+      "title": "Gotra",
+      "text": "A patrilineal clan or lineage, traditionally traced to a founding rishi. Gotra is used in ritual identification and in marriage rules that prohibit marrying within the same gotra.",
+      "source": "https://en.wikipedia.org/wiki/Gotra"
+    },
+    "pravara": {
+      "title": "Pravara",
+      "text": "The set of illustrious rishis in a gotra lineage, recited during rituals and used alongside gotra in marriage matching. The list and its order are fixed by lineage.",
+      "source": "https://en.wikipedia.org/wiki/Pravaras"
+    },
+    "rishi": {
+      "title": "Rishi",
+      "text": "A Vedic seer or sage. A pravara names the ancestral rishis associated with the lineage.",
+      "source": "https://en.wikipedia.org/wiki/Rishi"
+    },
+    "tryarsheya": {
+      "title": "Tryarsheya",
+      "text": "A pravara made up of three rishis (tri + arsheya). It is the most common form of pravara.",
+      "source": "https://www.indica.today/long-reads/gotras-and-pravaras"
+    },
+    "pancharsheya": {
+      "title": "Pancharsheya",
+      "text": "A pravara made up of five rishis (pancha + arsheya).",
+      "source": "https://www.indica.today/long-reads/gotras-and-pravaras"
+    },
+    "rashi": {
+      "title": "Rashi",
+      "text": "The moon sign (janma rashi): the zodiac sign the Moon occupied at the time of birth in Vedic astrology.",
+      "source": "https://en.wikipedia.org/wiki/Hindu_astrology"
+    },
+    "nakshatra": {
+      "title": "Nakshatra",
+      "text": "A lunar mansion, one of the 27 divisions of the zodiac used in Vedic astrology. The birth nakshatra is used in naming and in marriage matching.",
+      "source": "https://en.wikipedia.org/wiki/Nakshatra"
+    },
+    "birth_time": {
+      "title": "Birth time",
+      "text": "The time of birth used, together with the date and place, to cast a Vedic birth chart.",
+      "source": "https://en.wikipedia.org/wiki/Hindu_astrology"
+    },
+    "birth_place": {
+      "title": "Vedic birth place",
+      "text": "The place of birth used to fix the local horizon when casting a Vedic birth chart.",
+      "source": "https://en.wikipedia.org/wiki/Hindu_astrology"
+    },
+    "chart_url": {
+      "title": "Birth chart",
+      "text": "A link to the person's kundali or birth chart, if one has been prepared.",
+      "source": ""
+    },
+    "notes": {
+      "title": "Notes",
+      "text": "Additional Vedic or family-lineage notes recorded for this person.",
+      "source": ""
+    },
+    "veda": {
+      "title": "Veda",
+      "text": "The Veda followed by the family: Rig, Yajur, Sama or Atharva. It shapes the ritual tradition and the texts used in ceremonies.",
+      "source": "https://en.wikipedia.org/wiki/Vedas"
+    },
+    "shakha": {
+      "title": "Shakha",
+      "text": "A branch or recension of a Veda. Families often preserve a particular shakha and its recitation style.",
+      "source": "https://en.wikipedia.org/wiki/Shakha"
+    },
+    "sutra": {
+      "title": "Sutra",
+      "text": "The ritual or household sutra followed by the family, such as Apastamba, Bodhayana or Ashvalayana. It guides domestic ceremonies.",
+      "source": "https://en.wikipedia.org/wiki/Kalpa_(Vedanga)"
+    },
+    "purvikam": {
+      "title": "Purvikam",
+      "text": "The ancestral or family tradition recorded for this person, where the sheet provides it.",
+      "source": ""
+    },
+    "kula_devatha": {
+      "title": "Kula Devatha",
+      "text": "The family deity (kula devata) worshipped by the lineage.",
+      "source": "https://en.wikipedia.org/wiki/Kuladevata"
+    },
+    "parvata": {
+      "title": "Parvata",
+      "text": "The family or lineage mountain, where the sheet records one.",
+      "source": ""
+    }
+  },
+  "gotras": {
+    "bharadwaja": {
+      "display": "Bharadwaja",
+      "aliases": [
+        "bharadvaja",
+        "bharadwaj",
+        "bharadhwaja",
+        "bharadhwaj"
+      ],
+      "pravara": [
+        "Angirasa",
+        "Barhaspatya",
+        "Bharadwaja"
+      ],
+      "type": "Tryarsheya",
+      "about": "Named after Rishi Bharadwaja, a Saptarishi of the Angirasa lineage. The pravara invokes Angirasa, Barhaspatya and Bharadwaja.",
+      "source": "https://en.wikipedia.org/wiki/Bharadwaja"
+    },
+    "kashyapa": {
+      "display": "Kashyapa",
+      "aliases": [
+        "kasyapa",
+        "kashyap",
+        "kasyap"
+      ],
+      "pravara": [
+        "Kashyapa",
+        "Avatsara",
+        "Naidhruva"
+      ],
+      "type": "Tryarsheya",
+      "about": "Named after Rishi Kashyapa, a Saptarishi. The pravara invokes Kashyapa, Avatsara and Naidhruva.",
+      "source": "https://en.wikipedia.org/wiki/Kashyapa"
+    },
+    "srivatsa": {
+      "display": "Srivatsa",
+      "aliases": [
+        "shrivatsa",
+        "sri vatsa",
+        "shri vatsa",
+        "sreevatsa"
+      ],
+      "pravara": [
+        "Bhargava",
+        "Chyavana",
+        "Apnavana",
+        "Aurva",
+        "Jamadagnya"
+      ],
+      "type": "Pancharsheya",
+      "about": "A Bhargava-lineage gotra. Its five-rishi pravara invokes Bhargava, Chyavana, Apnavana, Aurva and Jamadagnya.",
+      "source": "https://en.wikipedia.org/wiki/Pravaras"
+    },
+    "harita": {
+      "display": "Harita",
+      "aliases": [
+        "haritasa",
+        "haritha",
+        "harithasa"
+      ],
+      "pravara": [
+        "Angirasa",
+        "Ambarisha",
+        "Yuvanasva"
+      ],
+      "type": "Tryarsheya",
+      "about": "Named after Harita. The most widely used pravara invokes Angirasa, Ambarisha and Yuvanasva; some families recite Harita, Ambarisha and Yuvanasva instead.",
+      "source": "https://en.wikipedia.org/wiki/Harita_(Hinduism)"
+    }
+  }
+}

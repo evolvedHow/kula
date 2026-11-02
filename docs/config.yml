@@ -2,18 +2,36 @@
 #  Family tree site configuration
 #  Edit this file, rebuild the data (see README.md), and reload.
 #  Any key you delete falls back to a sensible default.
+#  This is the per-site configuration: family details, sheet URL and
+#  Google account mappings live here, not in the application code.
 # =====================================================================
 
 site:
   title: "Peru Iyers (Perumbavoor Iyers)"
   subtitle: "Family tree and stories"
   intro: "Trace how we are connected, read the stories behind the names."
-  footer: "Built from our Gramps family tree"
-  # Who the tree opens on: "home" (the Gramps home person) or a Gramps ID like I0001
-  default_person: I0000
+  footer: "Built from our family relatives sheet"
+  # Who the tree opens on: a sheet PID such as P001, or "home" for the
+  # importer's fallback (the first visible person).
+  default_person: P001
   # GitHub repo (owner/name) that receives "suggest a correction" issues.
   # Leave empty to hide the links.
   repo: "evolvedHow/kula"
+
+# Where the public data comes from. The Google Sheet is the source of truth.
+# Share it as "Anyone with the link can view", then run scripts/import_sheet.py.
+source:
+  sheet_url: "https://docs.google.com/spreadsheets/d/1qlGP7U0z3hRp9aeq_S4KUj5p9bfbHZjdZS6tuMkucjc/edit?usp=sharing"
+  # Optional local cache written by the importer (git-ignored).
+  cache: "private/relatives-sheet.xlsx"
+  # Tab names in the workbook. Change these if you reuse the app with a
+  # workbook that uses different tab names.
+  tabs:
+    persons: "Persons"
+    vedic: "Vedic"
+    config: "$Config"
+    unions: "Unions"
+    offsprings: "Offsprings"
 
 theme:
   # Pick a palette from the `presets:` section below (or add your own there)
@@ -33,7 +51,7 @@ fonts:
 
 layout:
   # hourglass = ancestors above, descendants below · ancestors · descendants
-  default_view: hourglass
+  default_view: graph
   # vertical = generations top-to-bottom · horizontal = generations left-to-right
   orientation: vertical
   generations_up: 4
@@ -101,6 +119,7 @@ text:
   view_hourglass: "Both"
   view_ancestors: "Ancestors"
   view_descendants: "Descendants"
+  view_graph: "Relatives"
   view_vertical: "Vertical"
   view_horizontal: "Horizontal"
   tagged_people: "Tagged relatives"
@@ -121,12 +140,13 @@ auth:
     # Optional email-domain allowlist, e.g. ["gmail.com"] or ["example.org"].
     # Empty means any Google account may sign in.
     allowed_domains: []
-    # Map Google account emails to Gramps IDs. On sign-in "This is me" is set
-    # to that person, and the panel shows how they are related.
+    # Map Google account emails to sheet PIDs. On sign-in "This is me" is set
+    # to that person, the person card inherits the Gmail avatar, and the panel
+    # shows how they are related. Nothing is written to the public JSON.
     people: {
-      "vish.ganapathy@gmail.com": I0070
+      "vish.ganapathy@gmail.com": P049
     }
-      # "you@gmail.com": I0070
+      # "you@gmail.com": P049
     # Set to false to sign in without changing the visitor's "This is me".
     auto_me: true
 

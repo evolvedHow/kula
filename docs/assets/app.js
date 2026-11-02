@@ -1,5 +1,7 @@
 import { layoutTree } from "./layout.js";
+import { layoutGraph } from "./graph.js";
 import { relationship, sentenceFor } from "./relate.js";
+import { pravaraFor } from "./vedic.js";
 
 const DEFAULTS = {
   site: { title: "Family Tree", subtitle: "", intro: "", footer: "", default_person: "home", repo: "" },
@@ -18,6 +20,7 @@ const DEFAULTS = {
     search_placeholder: "Find a family member…", tree_tab: "Tree", people_tab: "Everyone",
     stories_tab: "Stories", set_me: "This is me", view_hourglass: "Both",
     view_ancestors: "Ancestors", view_descendants: "Descendants",
+    view_graph: "Relatives",
     view_vertical: "Vertical", view_horizontal: "Horizontal", tagged_people: "Tagged relatives",
     read_story: "Read story", back: "Back",
   },
@@ -47,6 +50,7 @@ function merge(base, extra) {
 let CFG = DEFAULTS;
 let DATA = null;
 let IDX = null;
+let VEDIC = { gotras: {} };
 const state = {
   focus: null, view: "hourglass", orientation: "vertical", selected: null, layout: null,
   k: 1, x: 0, y: 0, meId: null, auth: null, authError: null, authMe: false,
@@ -64,13 +68,15 @@ const el = {
 // ---------- Boot ----------
 
 async function boot() {
-  const [cfgText, dataRes] = await Promise.all([
+  const [cfgText, dataRes, vedicData] = await Promise.all([
     fetch("config.yml", { cache: "no-cache" }).then((r) => (r.ok ? r.text() : "")).catch(() => ""),
     fetch("data/tree.json", { cache: "no-cache" }),
+    fetch("data/vedic.json", { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
   ]);
   if (!dataRes.ok) throw new Error("Could not load data/tree.json. Run scripts/build_site.py first.");
   const userCfg = cfgText && window.jsyaml ? window.jsyaml.load(cfgText) : {};
   CFG = merge(DEFAULTS, userCfg || {});
+  if (vedicData && typeof vedicData === "object") VEDIC = vedicData;
   DATA = await dataRes.json();
   IDX = buildIndex(DATA);
   state.meId = localStorage.getItem(ME_KEY);
@@ -88,6 +94,7 @@ async function boot() {
     }
   }
   state.view = CFG.layout.default_view || "hourglass";
+  if (state.view === "graph" && !DATA.graph) state.view = "hourglass";
   state.orientation = CFG.layout.orientation === "horizontal" ? "horizontal" : "vertical";
 
   applyTheme();
@@ -143,6 +150,10 @@ function applyText() {
   views[0].textContent = text.view_hourglass;
   views[1].textContent = text.view_ancestors;
   views[2].textContent = text.view_descendants;
+  if (views[3]) {
+    views[3].textContent = text.view_graph || "Relatives";
+    views[3].hidden = !DATA.graph;
+  }
   const orientations = $$("#orientation-switch button");
   orientations[0].textContent = text.view_vertical;
   orientations[1].textContent = text.view_horizontal;
@@ -211,6 +222,118 @@ function formatDate(iso) {
   return isNaN(d) ? iso : d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
 }
 
+// Vedic data may arrive either as a nested `vedic` object or as flat
+// `vedic.*` attributes from the relatives sheet. Pravara is always derived
+// from the gotra, never read from the sheet, so the two cannot disagree.
+function attributeValue(person, key) {
+  const attrs = person?.attributes || {};
+  if (Object.prototype.hasOwnProperty.call(attrs, key)) return attrs[key];
+  if (Object.prototype.hasOwnProperty.call(attrs, `vedic.${key}`)) return attrs[`vedic.${key}`];
+  return "";
+}
+
+const VEDIC_LABELS = {
+  veda: "Veda",
+  shakha: "Shakha",
+  sutra: "Sutra",
+  purvikam: "Purvikam",
+  kula_devatha: "Kula Devatha",
+  parvata: "Parvata",
+  rashi: "Rashi",
+  nakshatra: "Nakshatra",
+  birth_time: "Birth time",
+  birth_place: "Vedic birth place",
+  chart_url: "Birth chart",
+  notes: "Notes",
+};
+
+function vedicFor(person) {
+  if (!person || person.hidden) return null;
+  const vedic = person.vedic && typeof person.vedic === "object" ? person.vedic : {};
+  const gotra = String(vedic.gotra || attributeValue(person, "gotra") || "").trim();
+  const pravara = pravaraFor(gotra, VEDIC);
+  const concepts = VEDIC.concepts || {};
+  const fields = [];
+  const helps = {};
+  const seen = new Set(["gotra", "pravara"]);
+
+  const addHelp = (key, extraText = "", source = "") => {
+    const concept = concepts[key];
+    if (!concept && !extraText) return;
+    const parts = [concept?.text, extraText].filter(Boolean);
+    if (!parts.length) return;
+    helps[key] = {
+      title: concept?.title || key,
+      text: parts.join(" "),
+      source: source || concept?.source || "",
+    };
+  };
+
+  addHelp("vedic_roots");
+  if (gotra) {
+    fields.push({ key: "gotra", label: "Gotra", html: esc(gotra) });
+    addHelp("gotra", pravara?.about || "", pravara?.source || "");
+  }
+  if (pravara) {
+    fields.push({ key: "pravara", label: "Pravara", html: esc(pravara.rishis.join(", ")) });
+    addHelp("pravara");
+    if (pravara.type) {
+      const typeKey = pravara.type.toLowerCase();
+      seen.add(typeKey);
+      fields.push({ key: typeKey, label: "Pravara type", html: esc(pravara.type) });
+      addHelp(typeKey);
+    }
+  }
+
+  for (const [key, label] of Object.entries(VEDIC_LABELS)) {
+    seen.add(key);
+    const value = String(vedic[key] ?? attributeValue(person, key) ?? "").trim();
+    if (!value) continue;
+    if (key === "chart_url") {
+      if (/^https?:\/\//i.test(value)) {
+        fields.push({ key, label, html: `<a href="${esc(value)}" target="_blank" rel="noopener noreferrer">View chart</a>` });
+      }
+      continue;
+    }
+    fields.push({ key, label, html: esc(value) });
+    addHelp(key);
+  }
+
+  for (const [key, value] of Object.entries(vedic)) {
+    if (seen.has(key) || value == null || value === "") continue;
+    fields.push({
+      key,
+      label: key.replace(/[_.]+/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
+      html: esc(value),
+    });
+  }
+  for (const [key, value] of Object.entries(person.attributes || {})) {
+    const match = key.match(/^vedic\.(.+)$/);
+    if (!match || seen.has(match[1]) || value == null || value === "") continue;
+    fields.push({
+      key: match[1],
+      label: match[1].replace(/[_.]+/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
+      html: esc(value),
+    });
+    addHelp(match[1]);
+  }
+
+  if (!fields.length) return null;
+  return { fields, helps, gotra, pravara };
+}
+
+function googleAuthFor(person) {
+  return state.auth && state.auth.pid === person?.id && !person.hidden ? state.auth : null;
+}
+
+function avatarHTML(person, className = "avatar") {
+  const auth = googleAuthFor(person);
+  const face = auth?.picture
+    ? `<img src="${esc(auth.picture)}" alt="" referrerpolicy="no-referrer" loading="lazy">`
+    : esc(initials(person));
+  return `<span class="${className}">${face}</span>`;
+}
+
 function clamp(v, lo, hi) {
   return Math.min(hi, Math.max(lo, v));
 }
@@ -266,10 +389,11 @@ function route() {
   } else {
     showView("tree");
     const focus = arg && IDX.people[arg] ? arg : defaultFocus();
-    const view = ["hourglass", "ancestors", "descendants"].includes(params.v) ? params.v : state.view;
+    const view = ["hourglass", "ancestors", "descendants", "graph"].includes(params.v) ? params.v : state.view;
     const orientation = ["vertical", "horizontal"].includes(params.o) ? params.o : state.orientation;
-    const changed = focus !== state.focus || view !== state.view || orientation !== state.orientation;
-    state.view = view;
+    const safeView = view === "graph" && !DATA.graph ? "hourglass" : view;
+    const changed = focus !== state.focus || safeView !== state.view || orientation !== state.orientation;
+    state.view = safeView;
     state.orientation = orientation;
     if (changed || !state.layout) {
       renderTree(focus);
@@ -299,8 +423,22 @@ function layoutOptions(view) {
   };
 }
 
+function graphOptions(focusId) {
+  const L = CFG.layout;
+  return {
+    focus: focusId,
+    orientation: state.orientation,
+    cardW: L.card_width,
+    cardH: L.card_height,
+    gapX: Math.max(34, L.gap_x),
+    gapY: L.gap_y,
+  };
+}
+
 function renderTree(focusId) {
-  const L = layoutTree(IDX, focusId, layoutOptions(state.view));
+  const L = state.view === "graph" && DATA.graph
+    ? layoutGraph(DATA.graph, focusId, graphOptions(focusId))
+    : layoutTree(IDX, focusId, layoutOptions(state.view));
   if (!L) {
     $("#tree-empty").hidden = false;
     return;
@@ -309,14 +447,16 @@ function renderTree(focusId) {
   state.focus = focusId;
   state.layout = L;
 
-  $("#cards").innerHTML = L.cards.map((c) => cardHTML(c, focusId)).join("");
+  $("#cards").innerHTML = L.cards
+    .map((c) => (c.kind === "union" ? unionCardHTML(c, focusId) : cardHTML(c, focusId)))
+    .join("");
   const svg = $("#links");
   svg.setAttribute("width", L.width);
   svg.setAttribute("height", L.height);
   svg.setAttribute("viewBox", `0 0 ${L.width} ${L.height}`);
   svg.style.width = `${L.width}px`;
   svg.style.height = `${L.height}px`;
-  svg.innerHTML = linksSVG(L);
+  svg.innerHTML = L.graph ? graphLinksSVG(L) : linksSVG(L);
 
   for (const b of $$("#view-switch button")) {
     const on = b.dataset.view === state.view;
@@ -335,20 +475,20 @@ function renderTree(focusId) {
 function cardHTML(c, focusId) {
   const p = IDX.people[c.id];
   if (!p) return "";
-  const cw = CFG.layout.card_width;
-  const ch = CFG.layout.card_height;
+  const cw = c.w ?? CFG.layout.card_width;
+  const ch = c.h ?? CFG.layout.card_height;
   const cls = ["card"];
   if (p.hidden) cls.push("living");
   if (c.id === focusId) cls.push("focus");
   if (c.id === state.meId) cls.push("me");
   const yrs = yearsText(p);
-  const place = CFG.layout.show_places && !p.hidden ? p.birth?.place || "" : "";
+  const place = CFG.layout.show_places && !p.hidden ? p.birth?.place || p.current_location || "" : "";
   const more = c.more ? `<span class="more">+${c.more}</span>` : "";
   const stories = !p.hidden && p.stories?.length ? `<span class="stories-count">${p.stories.length}</span>` : "";
   return `<button type="button" class="${cls.join(" ")}" data-card="${esc(c.id)}"
       style="left:${c.x}px;top:${c.y}px;width:${cw}px;height:${ch}px;--tone:${toneVar(p.gender)}"
       aria-label="${esc(displayName(p))}">
-      <span class="avatar">${esc(initials(p))}</span>
+      ${avatarHTML(p)}
       <span class="meta">
         <span class="name">${esc(displayName(p))}</span>
         ${yrs ? `<span class="years">${esc(yrs)}</span>` : ""}
@@ -356,6 +496,34 @@ function cardHTML(c, focusId) {
       </span>
       ${stories}${more}
     </button>`;
+}
+
+function unionCardHTML(c) {
+  const fam = DATA.families?.find((f) => f.id === c.id) || {};
+  const marriage = fam.marriage && fam.marriage.year ? `m. ${fam.marriage.year}` : "";
+  return `<div class="union-card" data-union="${esc(c.id)}" style="left:${c.x}px;top:${c.y}px;width:${c.w}px;height:${c.h}px" title="${esc(fam.ref_name || c.id)}">
+    <span class="union-dot"></span>
+    ${marriage ? `<span class="union-label">${esc(marriage)}</span>` : ""}
+  </div>`;
+}
+
+function graphLinksSVG(L) {
+  let d = "";
+  const f = (n) => Math.round(n * 10) / 10;
+  for (const l of L.links) {
+    const sx = l.sx, sy = l.sy, tx = l.tx, ty = l.ty;
+    if (l.kind === "partner") {
+      d += `M${f(sx)} ${f(sy)}L${f(tx)} ${f(ty)}`;
+    } else if (l.horizontal) {
+      const mx = sx + (tx - sx) * 0.4;
+      d += `M${f(sx)} ${f(sy)}H${f(mx)}V${f(ty)}H${f(tx)}`;
+    } else {
+      // offspring: union down to child
+      const my = sy + (ty - sy) * 0.4;
+      d += `M${f(sx)} ${f(sy)}V${f(my)}H${f(tx)}V${f(ty)}`;
+    }
+  }
+  return `<path d="${d}"></path>`;
 }
 
 const f = (n) => Math.round(n * 10) / 10;
@@ -464,6 +632,9 @@ function markSelectedCards() {
   for (const card of $$(".card")) {
     card.classList.toggle("selected", card.dataset.card === state.selected);
   }
+  for (const node of $$(".union-card")) {
+    node.classList.toggle("selected", node.dataset.union === state.selected);
+  }
 }
 
 // ---------- Panel ----------
@@ -474,6 +645,7 @@ function selectPerson(id, { silent = false } = {}) {
   const p = IDX.people[id];
   if (!p) return;
   const panel = $("#panel");
+  panel.classList.remove("vedic-open");
   panel.innerHTML = personPanelHTML(p);
   panel.hidden = false;
   panel.scrollTop = 0;
@@ -483,8 +655,52 @@ function selectPerson(id, { silent = false } = {}) {
   }
 }
 
+function selectUnion(id) {
+  const fam = IDX.families[id];
+  if (!fam) return;
+  state.selected = id;
+  markSelectedCards();
+  const panel = $("#panel");
+  panel.classList.remove("vedic-open");
+  panel.innerHTML = unionPanelHTML(fam);
+  panel.hidden = false;
+  panel.scrollTop = 0;
+}
+
+function unionPanelHTML(fam) {
+  const partners = [fam.father, fam.mother].filter((id) => id && IDX.people[id]);
+  const children = (fam.children || []).filter((id) => IDX.people[id]);
+  const attrs = fam.attributes || {};
+  const parts = [];
+  parts.push(`<button class="close" type="button" data-action="close" aria-label="Close">×</button>`);
+  parts.push(`<div class="person-head" style="--tone:var(--accent)">
+      <div class="avatar union-avatar">∞</div>
+      <div>
+        <h2 class="person-name">Union ${esc(fam.id)}</h2>
+        <div class="person-sub">${esc(partners.map((id) => displayName(IDX.people[id])).join(" & ") || "Single partner")}</div>
+        ${fam.marriage?.date ? `<div class="person-sub">${esc(fam.marriage.date)}</div>` : ""}
+      </div>
+    </div>`);
+
+  if (partners.length) {
+    parts.push(`<div class="section-title">Partners</div><div class="chips">${partners.map(personChip).join("")}</div>`);
+  }
+  if (children.length) {
+    parts.push(`<div class="section-title">Offsprings</div><div class="chips">${children.map(personChip).join("")}</div>`);
+  }
+  const facts = [];
+  if (attrs.REF_NAME) facts.push(factRow("Sheet reference", esc(attrs.REF_NAME)));
+  if (attrs.REL_START) facts.push(factRow("Relationship start", esc(attrs.REL_START)));
+  if (attrs.REL_END) facts.push(factRow("Relationship end", esc(attrs.REL_END)));
+  if (fam.notes) facts.push(factRow("Notes", esc(fam.notes)));
+  if (facts.length) parts.push(`<div class="section-title">Union record</div><ul class="facts">${facts.join("")}</ul>`);
+  parts.push(`<p class="relation">Union nodes come from the Unions tab. Children are the Offsprings edges attached to this union.</p>`);
+  return parts.join("");
+}
+
 function hidePanel() {
   $("#panel").hidden = true;
+  $("#panel").classList.remove("vedic-open");
   state.selected = null;
   markSelectedCards();
 }
@@ -505,10 +721,12 @@ function personPanelHTML(p) {
   const parts = [];
   const meName = state.meId ? nameOf(state.meId) : null;
   const subtitle = [yearsText(p), p.birth?.place].filter(Boolean).join(" · ");
+  const vedic = vedicFor(p);
+  const auth = googleAuthFor(p);
 
   parts.push(`<button class="close" type="button" data-action="close" aria-label="Close">×</button>`);
   parts.push(`<div class="person-head" style="--tone:${toneVar(p.gender)}">
-      <div class="avatar">${esc(initials(p))}</div>
+      ${avatarHTML(p, "avatar")}
       <div>
         <h2 class="person-name">${esc(displayName(p))}</h2>
         ${p.name.alternates?.length && !p.hidden ? `<div class="person-sub">also: ${esc(p.name.alternates.join(", "))}</div>` : ""}
@@ -525,10 +743,42 @@ function personPanelHTML(p) {
     parts.push(`<p class="relation">This is you.</p>`);
   }
 
+  if (auth) {
+    parts.push(`<div class="google-profile">
+      ${auth.picture ? `<img src="${esc(auth.picture)}" alt="" referrerpolicy="no-referrer">` : ""}
+      <div class="google-profile-text">
+        <strong>${esc(auth.name || "Google account")}</strong>
+        ${auth.email ? `<span>${esc(auth.email)}</span>` : ""}
+        ${auth.sub ? `<span class="muted">Google account ID: ${esc(auth.sub)}</span>` : ""}
+      </div>
+    </div>`);
+  }
+
   const buttons = [`<button class="btn primary" type="button" data-focus="${esc(p.id)}">Center tree here</button>`];
   if (state.meId === p.id) buttons.push(`<button class="btn" type="button" data-action="unme">Clear “me”</button>`);
   else if (!p.hidden) buttons.push(`<button class="btn" type="button" data-action="me" data-id="${esc(p.id)}">${esc(CFG.text.set_me)}</button>`);
+  if (vedic) buttons.push(`<button class="btn vedic-btn" type="button" data-action="vedic" aria-expanded="false" aria-controls="vedic-${esc(p.id)}">Vedic roots</button>`);
   parts.push(`<div class="actions">${buttons.join("")}</div>`);
+
+  if (vedic) {
+    const rows = vedic.fields
+      .map((f) => {
+        const help = vedic.helps?.[f.key];
+        const info = help
+          ? `<button class="info-btn" type="button" data-info-key="${esc(f.key)}" aria-label="About ${esc(f.label)}">i</button>`
+          : "";
+        return `<li><span class="k">${esc(f.label)} ${info}</span><span>${f.html}</span></li>`;
+      })
+      .join("");
+    const helpPayload = JSON.stringify(vedic.helps || {}).replace(/</g, "\\u003c");
+    parts.push(`<section class="vedic-section" id="vedic-${esc(p.id)}" data-vedic="1" hidden>
+      <div class="section-title">Vedic roots <button class="info-btn" type="button" data-info-key="vedic_roots" aria-label="About Vedic roots">i</button></div>
+      <p class="vedic-lead">Gotra and pravara are derived from gotra and recited in Vedic rites.</p>
+      <ul class="facts vedic-facts">${rows}</ul>
+      <div class="vedic-help" data-vedic-help hidden></div>
+      <script type="application/json" data-vedic-helps>${helpPayload}</script>
+    </section>`);
+  }
 
   const stories = (p.stories || []).map((sid) => IDX.notes[sid]).filter(Boolean);
   if (stories.length) {
@@ -822,7 +1072,7 @@ function renderPeople() {
     }
     const yrs = yearsText(p);
     html += `<button class="person-row" type="button" data-focus="${esc(p.id)}" style="--tone:${toneVar(p.gender)}">
-      <span class="avatar">${esc(initials(p))}</span>
+      ${avatarHTML(p)}
       <span class="who"><strong>${esc(displayName(p))}</strong><span>${esc([yrs, p.birth?.place].filter(Boolean).join(" · "))}</span></span>
     </button>`;
   }
@@ -1002,13 +1252,45 @@ function bindEvents() {
 
   $("#cards").addEventListener("click", (e) => {
     if (dragMoved) return;
+    const union = e.target.closest("[data-union]");
+    if (union) return selectUnion(union.dataset.union);
     const card = e.target.closest("[data-card]");
     if (card) selectPerson(card.dataset.card);
   });
 
   $("#panel").addEventListener("click", (e) => {
-    const t = e.target.closest("[data-focus],[data-story],[data-action]");
+    const t = e.target.closest("[data-focus],[data-story],[data-action],[data-info-key]");
     if (!t) return;
+    if (t.dataset.infoKey) {
+      const section = t.closest(".vedic-section");
+      const payload = section?.querySelector("[data-vedic-helps]");
+      const box = section?.querySelector("[data-vedic-help]");
+      let help = null;
+      try {
+        help = payload ? JSON.parse(payload.textContent || "{}")[t.dataset.infoKey] : null;
+      } catch {
+        help = null;
+      }
+      if (!help || !box) return;
+      const open = box.hidden;
+      box.hidden = !open;
+      box.innerHTML = open
+        ? `<strong>${esc(help.title)}</strong><p>${esc(help.text)}</p>${help.source ? `<a href="${esc(help.source)}" target="_blank" rel="noopener noreferrer">Learn more</a>` : ""}`
+        : "";
+      t.classList.toggle("is-open", open);
+      t.setAttribute("aria-expanded", String(open));
+      return;
+    }
+    if (t.dataset.action === "vedic") {
+      const section = $("#panel .vedic-section");
+      if (!section) return;
+      const open = section.hidden;
+      section.hidden = !open;
+      t.setAttribute("aria-expanded", String(open));
+      t.classList.toggle("is-open", open);
+      $("#panel").classList.toggle("vedic-open", open);
+      return;
+    }
     if (t.dataset.action === "close") return hidePanel();
     if (t.dataset.action === "me") {
       setMe(t.dataset.id);
