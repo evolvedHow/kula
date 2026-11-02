@@ -181,6 +181,37 @@ visitor's browser on their linked person's profile. They are never written
 into the published JSON. This is client-side sign-in only: it personalizes the
 experience but does not make the site private.
 
+## Hierarchical ID renumbering (optional)
+
+The default PIDs (P001, I000, etc.) are assigned sequentially as people are
+added to the sheet. For a more meaningful structure, you can renumber them to
+show the generation hierarchy:
+
+```bash
+python3 scripts/renumber_hierarchical.py --dry-run  # Preview changes
+python3 scripts/renumber_hierarchical.py            # Generate renumbered tree
+```
+
+This creates:
+- `docs/data/tree-renumbered.json` — the renumbered tree
+- `private/id-mapping.csv` — old ID → new ID mapping
+
+New IDs follow the pattern:
+- `p.A001`, `p.A002` — Generation 1 (patriarch & matriarch)
+- `p.B001`, `p.B002` — Generation 2 (their children)
+- `p.C001`, `p.C002` — Generation 3 (grandchildren)
+- `u.A001`, `u.B001` — Unions in each generation
+
+To use the renumbered IDs:
+1. Review `tree-renumbered.json` and `id-mapping.csv`
+2. Update your Google Sheet PIDs using the CSV mapping (Find & Replace or
+   VLOOKUP)
+3. Copy `tree-renumbered.json` → `tree.json`
+4. Commit and push
+
+**Note:** This is purely cosmetic. The underlying relationships don't change,
+only the IDs. You can keep using simple sequential IDs if you prefer.
+
 ## Preview locally
 
 ```
