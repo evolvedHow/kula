@@ -1,6 +1,6 @@
 {
  "schema": "kula.site/2.0",
- "generated_at": "2026-11-02T06:42:25+00:00",
+ "generated_at": "2026-11-02T06:54:03+00:00",
  "source": "Google Sheet",
  "home": "I000",
  "counts": {
@@ -53,7 +53,14 @@
     "STATUS": "Deceased",
     "NOTES": "THE PATRIARCH"
    },
-   "ref_name": "I000-Venkiteswara Iyer"
+   "ref_name": "I000-Venkiteswara Iyer",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "I001",
@@ -121,7 +128,14 @@
     "STATUS": "Deceased",
     "NOTES": "died young at 22"
    },
-   "ref_name": "I002-Venkataraman Iyer"
+   "ref_name": "I002-Venkataraman Iyer",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "I003",
@@ -154,7 +168,14 @@
     "STATUS": "Deceased",
     "NOTES": "Mookandi's dad, hotelier"
    },
-   "ref_name": "I003-Sivarama Krishna Iyer"
+   "ref_name": "I003-Sivarama Krishna Iyer",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "I005",
@@ -187,7 +208,14 @@
     "STATUS": "Deceased",
     "NOTES": "father of Venkittu, Sankaran, hotelier"
    },
-   "ref_name": "I005-Gopalakrishna Iyer"
+   "ref_name": "I005-Gopalakrishna Iyer",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "I006",
@@ -325,7 +353,14 @@
     "STATUS": "Deceased",
     "NOTES": ""
    },
-   "ref_name": "P001-Viswanatha Tatha"
+   "ref_name": "P001-Viswanatha Tatha",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "P002",
@@ -2229,7 +2264,15 @@
     "STATUS": "Living",
     "NOTES": ""
    },
-   "ref_name": "P049-Sriram"
+   "ref_name": "P049-Sriram",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "nakshatra": "Rohini",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "P050",
@@ -2327,7 +2370,15 @@
     "STATUS": "Living",
     "NOTES": ""
    },
-   "ref_name": "P051-Varun"
+   "ref_name": "P051-Varun",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "nakshatra": "Rohini",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "P052",
