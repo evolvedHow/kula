@@ -32,13 +32,54 @@ from collections import defaultdict, deque
 from pathlib import Path
 
 
-def compute_generations(people, families):
-    """BFS from people with no parent_family to assign generation levels."""
+def compute_generations(people, families, root_person=None):
+    """BFS DOWN from a root person (or auto-detected roots) to assign generations.
+    
+    Traces down through families (as parents) to their children, so the
+    patriarch/matriarch are generation 0, their children are generation 1, etc.
+    
+    If root_person is given, start there. Otherwise find the oldest person
+    (earliest birth year) with no parent_family.
+    """
     by_id = {p["id"]: p for p in people}
     fam_by_id = {f["id"]: f for f in families}
     
-    # Start from roots (no parent_family)
-    roots = [p["id"] for p in people if not p.get("parent_family")]
+    # Find root(s)
+    if root_person:
+        roots = [root_person] if root_person in by_id else []
+    else:
+        # Auto-detect: people with no parent_family, preferring earliest birth
+        candidates = [p for p in people if not p.get("parent_family")]
+        if not candidates:
+            # No one has parent_family set (disconnected data), use everyone
+            candidates = people
+        
+        # Sort by birth year (earliest first), then by ID
+        def sort_key(p):
+            year = p.get("birth", {}).get("year") or 9999
+            return (year, p["id"])
+        
+        candidates.sort(key=sort_key)
+        
+        # Use the first one as the root, or take the first few if there are
+        # multiple patriarch-level people
+        roots = [candidates[0]["id"]] if candidates else []
+        
+        # Also include their spouse if they have a union with no children yet
+        if roots:
+            root_person = by_id[roots[0]]
+            for fid in root_person.get("families", []):
+                fam = fam_by_id.get(fid)
+                if fam:
+                    spouse = fam.get("mother") if fam.get("father") == roots[0] else fam.get("father")
+                    if spouse and spouse not in roots:
+                        roots.append(spouse)
+    
+    if not roots:
+        print("WARNING: No root person found. Using everyone at generation 0.")
+        return {p["id"]: 0 for p in people}
+    
+    print(f"Starting from root(s): {roots}")
     
     gen = {}
     queue = deque((pid, 0) for pid in roots)
@@ -46,11 +87,10 @@ def compute_generations(people, families):
     while queue:
         pid, level = queue.popleft()
         if pid in gen:
-            gen[pid] = min(gen[pid], level)
-        else:
-            gen[pid] = level
+            continue
+        gen[pid] = level
         
-        # Find their unions and children
+        # Trace DOWN: find families where this person is a parent
         person = by_id.get(pid)
         if not person:
             continue
@@ -60,14 +100,17 @@ def compute_generations(people, families):
             if not fam:
                 continue
             
+            # The spouse is also at the same generation
+            spouse = fam.get("mother") if fam.get("father") == pid else fam.get("father")
+            if spouse and spouse not in gen:
+                queue.append((spouse, level))
+            
             # Children are one generation down
             for child_id in fam.get("children", []):
                 if child_id not in gen:
                     queue.append((child_id, level + 1))
-                else:
-                    gen[child_id] = min(gen[child_id], level + 1)
     
-    # Assign generation 0 to anyone not reached
+    # Anyone not reached gets assigned to generation 0 (disconnected branches)
     for p in people:
         if p["id"] not in gen:
             gen[p["id"]] = 0
@@ -272,6 +315,8 @@ def main(argv=None):
                    help="Output renumbered tree.json")
     ap.add_argument("--mapping", default="private/id-mapping.csv",
                    help="CSV mapping old IDs to new IDs")
+    ap.add_argument("--root", default=None,
+                   help="Root person ID to start generation numbering from (default: auto-detect oldest)")
     ap.add_argument("--dry-run", action="store_true",
                    help="Show what would change without writing anything")
     args = ap.parse_args(argv)
@@ -282,6 +327,15 @@ def main(argv=None):
     
     print(f"Reading {in_path}...")
     data = json.loads(in_path.read_text(encoding="utf-8"))
+    
+    # Allow overriding the root person
+    if args.root:
+        print(f"Using root person: {args.root}")
+        # Temporarily inject the root into the compute_generations call
+        old_compute = globals()['compute_generations']
+        def compute_with_root(people, families):
+            return old_compute(people, families, root_person=args.root)
+        globals()['compute_generations'] = compute_with_root
     
     result, mapping = renumber(data, dry_run=args.dry_run)
     
