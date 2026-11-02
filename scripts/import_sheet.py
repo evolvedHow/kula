@@ -233,8 +233,8 @@ def city_only(value):
     return text
 
 
-PID_RE = re.compile(r"^\s*(P\d+)\b", re.IGNORECASE)
-ANY_PID_RE = re.compile(r"\b(P\d+)\b", re.IGNORECASE)
+PID_RE = re.compile(r"^\s*([PI]\d+)\b", re.IGNORECASE)
+ANY_PID_RE = re.compile(r"\b([PI]\d+)\b", re.IGNORECASE)
 UNION_RE = re.compile(r"^\s*(U\d+)\b", re.IGNORECASE)
 
 
@@ -242,10 +242,12 @@ def pid_prefix(value):
     """Return the PID at the start of a sheet reference.
 
     Relationship cells are written as "<PID>-<KNOWN_NAME>", for example
-    "P049-Sriram". KNOWN_NAME is the human-friendly pseudo key people use
-    while entering data, and the PID prefix keeps it unique when two people
-    share a known name. The PID is therefore the real lookup key; the name
-    part is only there to make the sheet readable.
+    "P049-Sriram" or "I000-Venkiteswara". KNOWN_NAME is the human-friendly
+    pseudo key people use while entering data, and the PID prefix keeps it
+    unique when two people share a known name. The PID is therefore the real
+    lookup key; the name part is only there to make the sheet readable.
+
+    PIDs can start with P (sheet-native) or I (imported from Gramps).
     """
     match = PID_RE.match(value or "")
     return match.group(1).upper() if match else None
@@ -342,6 +344,9 @@ def build(sheets, config, tabs=None):
     offspring_raw = records(sheets.get(tabs["offsprings"], []), ["OID", "UNION_OF", "OFFSPRING", "NOTES"])
     vedic_raw = records(sheets.get(tabs["vedic"], []), ["PERSON", *VEDIC_FIELDS])
     config_raw = records(sheets.get(tabs["config"], []), ["GOTRA"])
+    # Stories/Notes tab is optional. Try "Stories" first, then "Notes".
+    notes_raw = (records(sheets.get("Stories", []), ["NOTE_ID", "TYPE", "TITLE", "IS_STORY", "TAGGED_PEOPLE", "TEXT", "UPDATED"]) or
+                 records(sheets.get("Notes", []), ["NOTE_ID", "TYPE", "TITLE", "IS_STORY", "TAGGED_PEOPLE", "TEXT", "UPDATED"]))
 
     resolve = person_resolver(persons_raw)
     known_by_pid = {
@@ -544,6 +549,47 @@ def build(sheets, config, tabs=None):
             },
         })
 
+    # --- Notes and Stories -----------------------------------------------------
+    notes = []
+    for row in notes_raw:
+        nid = (row.get("NOTE_ID") or "").strip()
+        if not nid:
+            continue
+        is_story_text = (row.get("IS_STORY") or "").strip().upper()
+        is_story = is_story_text in ("TRUE", "YES", "1")
+        text = (row.get("TEXT") or "").strip()
+        if not text:
+            continue
+        paragraphs = [p.strip() for p in text.split("\n\n") if p.strip()]
+        if not paragraphs:
+            continue
+        # Resolve tagged people: semicolon-separated PIDs or PID-KNOWN_NAME refs.
+        tagged_raw = (row.get("TAGGED_PEOPLE") or "").strip()
+        tagged_people = []
+        for part in re.split(r"[;,]", tagged_raw):
+            pid = resolve(part.strip())
+            if pid and pid not in tagged_people:
+                tagged_people.append(pid)
+        note = {
+            "id": nid,
+            "type": (row.get("TYPE") or "").strip() or "Person Note",
+            "title": (row.get("TITLE") or "").strip() or None,
+            "is_story": is_story,
+            "tags": [],
+            "words": len(text.split()),
+            "paragraphs": paragraphs,
+            "people": tagged_people,
+            "places": [],
+            "updated": (row.get("UPDATED") or "").strip() or None,
+        }
+        notes.append(note)
+        # Attach the note to each tagged person.
+        for pid in tagged_people:
+            if pid in person_by_pid:
+                person_by_pid[pid]["notes"].append(nid)
+                if is_story:
+                    person_by_pid[pid]["stories"].append(nid)
+
     home = (config.get("site") or {}).get("default_person")
     if home not in person_by_pid:
         home = people[0]["id"] if people else None
@@ -552,8 +598,8 @@ def build(sheets, config, tabs=None):
         "people": len(people),
         "hidden_living": 0,
         "families": len(families),
-        "stories": 0,
-        "notes": 0,
+        "stories": sum(1 for n in notes if n["is_story"]),
+        "notes": len(notes),
         "places": len({p["birth"]["place"] for p in people
                        if p.get("birth") and p["birth"].get("place")} |
                       {p.get("current_location") for p in people if p.get("current_location")}),
@@ -567,7 +613,7 @@ def build(sheets, config, tabs=None):
         "counts": counts,
         "people": people,
         "families": families,
-        "notes": [],
+        "notes": notes,
         "graph": {
             "schema": "kula.graph/1.0",
             "nodes": nodes,
