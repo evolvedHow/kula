@@ -57,8 +57,8 @@ can be overridden in `source.tabs`.
 
 | Tab | Purpose |
 | --- | --- |
-| `Persons` | `PID`, names, gender, dates, birth place, current location, status, notes |
-| `Vedic` | Per-person gotra, veda, shakha, sutra, nakshatra, purvikam, kula devatha, parvata |
+| `Persons` | `PID`, names, `EMAIL` (for Google sign-in), gender, dates, birth place, current location, status, notes |
+| `Vedic` | Per-person gotra, veda, shakha, sutra, nakshatra, kula devatha, sampradaya (Iyengar), acharya thirumaligai (Iyengar), purvikam, parvata |
 | `$Config` | Gotra defaults for veda, shakha, sutra and nakshatra |
 | `Unions` | `UID`, `PID1`, `PID2`, `REF_NAME`, relationship dates and notes |
 | `Offsprings` | `OID`, `UNION_OF`, `OFFSPRING`, notes |
@@ -113,9 +113,10 @@ opening view.
 ## Vedic roots and pravara
 
 When a person has Vedic data, their profile shows a **Vedic roots** button. It
-opens gotra, pravara, pravara type, veda, shakha, sutra, nakshatra, purvikam,
-kula devatha and parvata where present. Each field has an **i** help button
-that explains the concept.
+opens gotra, pravara, pravara type, veda, shakha, sutra, nakshatra, kula
+devatha, sampradaya (for Iyengars), acharya thirumaligai (for Iyengars),
+purvikam, and parvata where present. Each field has an **i** help button that
+explains the concept.
 
 Pravara is **derived from gotra at runtime**. It is never stored in
 `tree.json`, so a stale or contradictory pravara value cannot exist. The
@@ -169,6 +170,12 @@ auth:
       "you@gmail.com": P001
     auto_me: true
 ```
+
+**Email matching:** The sign-in checks two places (in order):
+
+1. `auth.google.people` in `config.yml` — explicit email → PID mapping
+2. The `EMAIL` column in the Persons tab — put each person's Gmail address
+   there and sign-in links them automatically, no config edit needed
 
 Create an OAuth 2.0 Web client in Google Cloud Console, configure the OAuth
 consent screen, and add the site origin (for example

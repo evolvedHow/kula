@@ -92,6 +92,16 @@
       "title": "Parvata",
       "text": "The family or lineage mountain, where the sheet records one.",
       "source": ""
+    },
+    "sampradaya": {
+      "title": "Sampradaya",
+      "text": "A spiritual lineage or tradition within Vaishnavism. For Sri Vaishnavas (Iyengars), the main sampradayas are Vadakalai and Thenkalai, differing in philosophy, rituals, and sacred marks.",
+      "source": "https://en.wikipedia.org/wiki/Sri_Vaishnavism"
+    },
+    "acharya_thirumaligai": {
+      "title": "Acharya Thirumaligai",
+      "text": "The hereditary spiritual preceptor's lineage (matham or pontiff seat) to which a Sri Vaishnava family belongs. The Acharya provides spiritual guidance, initiates disciples, and performs key religious ceremonies.",
+      "source": "https://en.wikipedia.org/wiki/Acharya"
     }
   },
   "gotras": {

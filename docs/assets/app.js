@@ -238,6 +238,8 @@ const VEDIC_LABELS = {
   sutra: "Sutra",
   purvikam: "Purvikam",
   kula_devatha: "Kula Devatha",
+  sampradaya: "Sampradaya",
+  acharya_thirumaligai: "Acharya Thirumaligai",
   parvata: "Parvata",
   rashi: "Rashi",
   nakshatra: "Nakshatra",
@@ -887,11 +889,24 @@ function decodeJwt(token) {
 function mappedPersonId(google, email) {
   const key = String(email || "").toLowerCase();
   if (!key) return null;
+  
+  // First check config.yml mapping
   const people = Object.fromEntries(
     Object.entries(google?.people || {}).map(([k, v]) => [String(k).toLowerCase(), v]),
   );
-  const pid = people[key];
-  return pid && IDX?.people[pid] && !IDX.people[pid].hidden ? pid : null;
+  let pid = people[key];
+  if (pid && IDX?.people[pid] && !IDX.people[pid].hidden) return pid;
+  
+  // Fall back to EMAIL attribute in sheet data
+  if (IDX?.people) {
+    for (const [id, person] of Object.entries(IDX.people)) {
+      if (person.hidden) continue;
+      const personEmail = String(person.attributes?.EMAIL || "").toLowerCase();
+      if (personEmail && personEmail === key) return id;
+    }
+  }
+  
+  return null;
 }
 
 function initAuth() {

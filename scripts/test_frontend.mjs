@@ -198,6 +198,32 @@ test("the Vedic sheet is attached to a person without storing a derived pravara"
   }
 });
 
+test("the EMAIL attribute is imported and Iyengar fields are supported", () => {
+  // EMAIL field (Persons tab) - at least one person may have it, but the
+  // field should be preserved in attributes when present
+  const withEmail = tree.people.filter((p) => p.attributes?.EMAIL);
+  for (const p of withEmail) {
+    assert.ok(p.attributes.EMAIL.includes("@"), `${p.id} EMAIL should look like an email`);
+  }
+
+  // Iyengar-specific Vedic fields: sampradaya and acharya_thirumaligai
+  // should be carried through into person.vedic when present in the sheet
+  for (const p of tree.people.filter((x) => x.vedic)) {
+    if (p.vedic.sampradaya) {
+      assert.equal(typeof p.vedic.sampradaya, "string", `${p.id} sampradaya should be a string`);
+    }
+    if (p.vedic.acharya_thirumaligai) {
+      assert.equal(typeof p.vedic.acharya_thirumaligai, "string", `${p.id} acharya_thirumaligai should be a string`);
+    }
+  }
+
+  // Concept help must exist for the Iyengar fields so the "i" icons work
+  assert.ok(vedic.concepts.sampradaya?.text, "sampradaya needs concept help text");
+  assert.ok(vedic.concepts.sampradaya?.title, "sampradaya needs a concept title");
+  assert.ok(vedic.concepts.acharya_thirumaligai?.text, "acharya_thirumaligai needs concept help text");
+  assert.ok(vedic.concepts.acharya_thirumaligai?.title, "acharya_thirumaligai needs a concept title");
+});
+
 test("graph layout keeps cards finite, unique and on whole edges", () => {
   for (const orientation of orientations) {
     const L = layoutGraph(tree.graph, focus, {

@@ -3,8 +3,8 @@
 
 The sheet is the source of truth. It has five tabs:
 
-    Persons     PID, KNOWN_NAME, FULL_NAME, REF_NAME, GENDER, DOB, POB, CUR_LOC, STATUS, NOTES
-    Vedic       PERSON, GOTRA, VEDA, SHAKHA, SUTRA, NAKSHATRA, PURVIKAM, KULA_DEVATHA, PARVATA
+    Persons     PID, KNOWN_NAME, FULL_NAME, REF_NAME, EMAIL, GENDER, DOB, POB, CUR_LOC, STATUS, NOTES
+    Vedic       PERSON, GOTRA, VEDA, SHAKHA, SUTRA, NAKSHATRA, KULA_DEVATHA, SAMPRADAYA, ACHARYA_THIRUMALIGAI, PURVIKAM, PARVATA
     $Config     GOTRA, VEDA, SHAKHA, SUTRA, NAKSHATRA
     Unions      UID, PID1, PID2, REF_NAME, REL_START, REL_END, NOTES
     Offsprings  OID, UNION_OF, OFFSPRING, NOTES
@@ -54,7 +54,7 @@ NS = {
     "m": "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
     "r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
 }
-PERSON_CORE = ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "GENDER", "DOB",
+PERSON_CORE = ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "EMAIL", "GENDER", "DOB",
                "POB", "CUR_LOC", "STATUS", "NOTES"]
 VEDIC_FIELDS = {
     "GOTRA": "gotra",
@@ -62,8 +62,10 @@ VEDIC_FIELDS = {
     "SHAKHA": "shakha",
     "SUTRA": "sutra",
     "NAKSHATRA": "nakshatra",
-    "PURVIKAM": "purvikam",
     "KULA_DEVATHA": "kula_devatha",
+    "SAMPRADAYA": "sampradaya",
+    "ACHARYA_THIRUMALIGAI": "acharya_thirumaligai",
+    "PURVIKAM": "purvikam",
     "PARVATA": "parvata",
 }
 MONTHS = {m.lower(): i + 1 for i, m in enumerate(
