@@ -3,7 +3,7 @@
 
 The sheet is the source of truth. It has five tabs:
 
-    Persons     PID, KNOWN_NAME, FULL_NAME, REF_NAME, EMAIL, GENDER, DOB, POB, CUR_LOC, STATUS, NOTES
+    Persons     PID, KNOWN_NAME, FULL_NAME, REF_NAME, EMAIL, GENDER, DOB, POB, CUR_LOC, STATUS, DOD, POD, NOTES
     Vedic       PERSON, GOTRA, VEDA, SHAKHA, SUTRA, NAKSHATRA, KULA_DEVATHA, SAMPRADAYA, ACHARYA_THIRUMALIGAI, PURVIKAM, PARVATA
     $Config     GOTRA, VEDA, SHAKHA, SUTRA, NAKSHATRA
     Unions      UID, PID1, PID2, REF_NAME, REL_START, REL_END, NOTES
@@ -27,6 +27,11 @@ profile panels keep working.
 
 Pravara is deliberately NOT written here. It is derived from gotra at runtime
 by docs/assets/vedic.js, so a stale PRAVARA column can never disagree.
+
+The original hierarchical family sheet (source.authority in docs/config.yml)
+is the authority for birth, death and living status. Its rows are fuzzy-matched
+to the current Persons rows by name, then only non-empty values override the
+relational sheet. Blank cells never erase existing data.
 
 Birth charts (jadagam): when a person's DOB includes a time AND they have a
 POB, a sidereal (Lahiri) chart is computed with Swiss Ephemeris and stored at
@@ -56,6 +61,7 @@ import yaml
 # even without the optional dependencies (pyswisseph / timezonefinder); chart
 # computation is simply skipped with a warning in that case.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import authority  # noqa: E402
 import geocode as geocode_mod  # noqa: E402
 import horoscope  # noqa: E402
 from horoscope import parse_birth  # noqa: E402
@@ -72,7 +78,7 @@ NS = {
     "r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
 }
 PERSON_CORE = ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "EMAIL", "GENDER", "DOB",
-               "POB", "CUR_LOC", "STATUS", "NOTES"]
+               "POB", "CUR_LOC", "STATUS", "DOD", "POD", "NOTES"]
 VEDIC_FIELDS = {
     "GOTRA": "gotra",
     "VEDA": "veda",
@@ -240,6 +246,139 @@ def city_only(value):
     return text
 
 
+def effective_date_year(display, parsed):
+    """Prefer the parsed year; fall back to a year written inside the text."""
+    return parsed.year if parsed else parse_year(display or "")
+
+
+def refresh_birth_death(person):
+    """Rebuild the public birth/death objects from the effective attributes.
+
+    Attributes are the merged values (current sheet + authority overrides).
+    Living people's birth places are reduced to city level here, after the
+    final living/deceased status is known.
+    """
+    attrs = person.get("attributes") or {}
+    living = bool(person.get("living", True))
+    dob, dob_dt, _ = parse_birth(attrs.get("DOB"))
+    pob_raw = (attrs.get("POB") or "").strip()
+    pob = city_only(pob_raw) if living else pob_raw
+    person["birth"] = ({
+        "date": dob or "",
+        "year": effective_date_year(dob, dob_dt),
+        "place": pob,
+    } if (dob or pob) else None)
+
+    dod, dod_dt, _ = parse_birth(attrs.get("DOD"))
+    pod = (attrs.get("POD") or "").strip()
+    person["death"] = ({
+        "date": dod or "",
+        "year": effective_date_year(dod, dod_dt),
+        "place": pod,
+    } if (dod or pod) else None)
+
+
+def validate_person_dates(person, today=None):
+    """Warn about impossible or contradictory dates after the merge."""
+    today = today or dt.date.today()
+    attrs = person.get("attributes") or {}
+    pid = person.get("id") or "?"
+    dob, dob_dt, dob_has_time = parse_birth(attrs.get("DOB"))
+    dod, dod_dt, _ = parse_birth(attrs.get("DOD"))
+    pod = (attrs.get("POD") or "").strip()
+    warnings = []
+    # Google Sheets gives a day+month typed into a date cell the current
+    # year. Flag those so an unknown birth year is not published as 2026.
+    if (dob_dt and not dob_has_time and dob_dt.year == today.year
+            and not (attrs.get("DOB") or "").strip().lower().startswith(str(dob_dt.year))):
+        warnings.append(
+            f"{pid}: DOB '{dob}' has the current year but no time; if the "
+            f"year is unknown (a Sheets default), enter the day and month "
+            f"as text, e.g. '29 June'")
+    if dob_dt and dob_dt.date() > today:
+        warnings.append(f"{pid}: DOB '{dob}' is in the future")
+    if dod_dt and dod_dt.date() > today:
+        warnings.append(f"{pid}: DOD '{dod}' is in the future")
+    if dob_dt and dod_dt:
+        if dod_dt < dob_dt:
+            warnings.append(f"{pid}: DOD '{dod}' is before DOB '{dob}'")
+        elif (dod_dt.date() - dob_dt.date()).days > 120 * 365.25:
+            warnings.append(f"{pid}: age at death from DOB '{dob}' and DOD '{dod}' looks implausible")
+    if person.get("living") and (dod or pod):
+        warnings.append(f"{pid}: STATUS is living but a death date/place is present")
+    return warnings
+
+
+def merge_authority(people, rows, config=None):
+    """Apply the original sheet's non-empty facts over the current people.
+
+    Matching is name-based with date/place/status tie-breakers. Empty authority
+    cells are ignored, so they never erase a value from the Persons tab.
+    """
+    if not rows or not people:
+        return []
+    matches, unmatched = authority.match_records(rows, people, config)
+    warnings = []
+    for record in unmatched:
+        warnings.append(
+            f"Authority row {record['tab']}!{record['row']} "
+            f"{record['name']!r} did not match any person")
+    for match in matches:
+        record, person, pid = match["record"], match["person"], match["pid"]
+        attrs = person.setdefault("attributes", {})
+        name = (person.get("name") or {}).get("display") or pid
+        changes = []
+
+        status = authority.clean_status(record.get("status"))
+        if status:
+            old = attrs.get("STATUS") or ""
+            if old != status:
+                changes.append(f"STATUS {old!r} -> {status!r}")
+            attrs["STATUS"] = status
+            person["living"] = status != "Deceased"
+
+        dob_raw = (record.get("dob") or "").strip()
+        if dob_raw:
+            dob, _, _ = parse_birth(dob_raw)
+            dob = dob or dob_raw
+            old = attrs.get("DOB") or ""
+            if old != dob:
+                changes.append(f"DOB {old!r} -> {dob!r}")
+            attrs["DOB"] = dob
+
+        pob = authority.clean_place(record.get("pob"))
+        if pob:
+            old = attrs.get("POB") or ""
+            if old != pob:
+                changes.append(f"POB {old!r} -> {pob!r}")
+            attrs["POB"] = pob
+
+        dod_raw = (record.get("dod") or "").strip()
+        if dod_raw:
+            dod, _, _ = parse_birth(dod_raw)
+            dod = dod or dod_raw
+            old = attrs.get("DOD") or ""
+            if old != dod:
+                changes.append(f"DOD {old!r} -> {dod!r}")
+            attrs["DOD"] = dod
+
+        pod = authority.clean_place(record.get("pod"))
+        if pod:
+            old = attrs.get("POD") or ""
+            if old != pod:
+                changes.append(f"POD {old!r} -> {pod!r}")
+            attrs["POD"] = pod
+
+        refresh_birth_death(person)
+        if changes:
+            warnings.append(f"Authority override {pid} {name}: " + "; ".join(changes))
+        if match["name_score"] < 0.95:
+            warnings.append(
+                f"Authority fuzzy match {record['name']!r} -> {pid} {name} "
+                f"(name score {match['name_score']:.3f})")
+    return warnings
+
+
 PID_RE = re.compile(r"^\s*([PI]\d+)\b", re.IGNORECASE)
 ANY_PID_RE = re.compile(r"\b([PI]\d+)\b", re.IGNORECASE)
 UNION_RE = re.compile(r"^\s*(U\d+)\b", re.IGNORECASE)
@@ -344,7 +483,7 @@ def union_resolver(families):
     return resolve
 
 
-def build(sheets, config, tabs=None):
+def build(sheets, config, tabs=None, authority_rows=None):
     tabs = {**DEFAULT_TABS, **(tabs or {})}
     persons_raw = records(sheets.get(tabs["persons"], []), PERSON_CORE)
     unions_raw = records(sheets.get(tabs["unions"], []), ["UID", "PID1", "PID2", "REF_NAME", "REL_START", "REL_END", "NOTES"])
@@ -361,7 +500,6 @@ def build(sheets, config, tabs=None):
         for p in persons_raw
     }
     warnings = []
-    birth_meta = {}  # pid -> (naive local birth datetime, has_time)
 
     vedic_by_pid = {}
     for row in vedic_raw:
@@ -469,18 +607,6 @@ def build(sheets, config, tabs=None):
         # parse_birth turns Sheets date-time serials and text dates into a
         # friendly display string, and keeps the datetime for the horoscope.
         dob, dob_dt, dob_has_time = parse_birth(row.get("DOB"))
-        birth_year = dob_dt.year if dob_dt else parse_year(row.get("DOB") or "")
-        if dob_dt and dob_has_time:
-            birth_meta[pid] = (dob_dt, True)
-        # Google Sheets gives a day+month typed into a date cell the current
-        # year. Flag those so an unknown birth year is not published as 2026.
-        if (dob_dt and not dob_has_time and dob_dt.year == dt.date.today().year
-                and not (row.get("DOB") or "").strip().lower().startswith(str(dob_dt.year))):
-            warnings.append(
-                f"{pid}: DOB '{dob}' has the current year but no time; if the "
-                f"year is unknown (a Sheets default), enter the day and month "
-                f"as text, e.g. '29 June'")
-        pob = city_only(row.get("POB")) if living else (row.get("POB") or "").strip()
         cur = city_only(row.get("CUR_LOC")) if living else (row.get("CUR_LOC") or "").strip()
         events = []
         if cur:
@@ -491,6 +617,12 @@ def build(sheets, config, tabs=None):
         attrs = dict(row)
         if dob:
             attrs["DOB"] = dob
+        dod, _, _ = parse_birth(row.get("DOD"))
+        if dod:
+            attrs["DOD"] = dod
+        pod = (row.get("POD") or "").strip()
+        if pod:
+            attrs["POD"] = pod
         person = {
             "id": pid,
             "gender": gender_code(row.get("GENDER")),
@@ -502,7 +634,7 @@ def build(sheets, config, tabs=None):
                 "surname": surname,
                 "alternates": alternates,
             },
-            "birth": ({"date": dob, "year": birth_year, "place": pob} if (dob or pob) else None),
+            "birth": None,
             "death": None,
             "current_location": cur,
             "events": events,
@@ -513,10 +645,20 @@ def build(sheets, config, tabs=None):
             "attributes": attrs,
             "ref_name": make_ref(pid, known) or (row.get("REF_NAME") or "").strip() or pid,
         }
+        refresh_birth_death(person)
         if pid in vedic_by_pid:
             person["vedic"] = vedic_by_pid[pid]
         person_by_pid[pid] = person
         people.append(person)
+
+    # The older hierarchical sheet is the authority for birth, death and
+    # living status. Apply it after the current rows exist but before charts,
+    # so an authoritative DOB/POB also drives the jadagam.
+    authority_rows = authority_rows or []
+    warnings.extend(merge_authority(
+        people, authority_rows, (config.get("source") or {}).get("authority") or {}))
+    for person in people:
+        warnings.extend(validate_person_dates(person))
 
     for fam in families:
         for partner in (fam["father"], fam["mother"]):
@@ -633,12 +775,18 @@ def build(sheets, config, tabs=None):
     places_cfg = config.get("places") or {}
     offline = bool(config.get("_offline"))
     geocache_path = config.get("_geocache") or "private/geocache.json"
-    if charts_enabled and birth_meta:
-        if horoscope.swe is None:
-            warnings.append(
-                "Birth charts requested but pyswisseph is not installed; "
-                "run with .venv/bin/python (see requirements.txt)")
-            charts_enabled = False
+    chart_inputs = []
+    for person in people:
+        dob, birth_dt, has_time = parse_birth(
+            (person.get("attributes") or {}).get("DOB"))
+        pob = (person.get("birth") or {}).get("place") or ""
+        if birth_dt and has_time and pob:
+            chart_inputs.append((person, birth_dt, pob))
+    if charts_enabled and chart_inputs and horoscope.swe is None:
+        warnings.append(
+            "Birth charts requested but pyswisseph is not installed; "
+            "run with .venv/bin/python (see requirements.txt)")
+        charts_enabled = False
     if charts_enabled:
         geocode_warned = set()
 
@@ -647,12 +795,7 @@ def build(sheets, config, tabs=None):
                 geocode_warned.add(msg)
                 warnings.append(msg)
 
-        for person in people:
-            meta = birth_meta.get(person["id"])
-            pob = (person.get("birth") or {}).get("place") or ""
-            if not meta or not pob:
-                continue
-            birth_dt, _ = meta
+        for person, birth_dt, pob in chart_inputs:
             geo = geocode_mod.geocode(
                 pob, config_places=places_cfg, cache_path=geocache_path,
                 offline=offline, warn=geo_warn)
@@ -708,6 +851,8 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("xlsx", nargs="?", help="Local .xlsx export. Omit to download the shared sheet.")
     ap.add_argument("--url", default=None, help="Google Sheet URL or ID (overrides source.sheet_url in config)")
+    ap.add_argument("--authority", default=None,
+                    help="Local .xlsx of the original authority sheet (overrides source.authority.cache)")
     ap.add_argument("--config", default="docs/config.yml")
     ap.add_argument("--out", default="docs/data/tree.json")
     ap.add_argument("--cache", default=None,
@@ -742,7 +887,33 @@ def main(argv=None):
             log(f"Cached workbook at {cache}")
 
     sheets = read_workbook(raw)
-    data, warnings = build(sheets, cfg, tabs)
+
+    authority_cfg = source.get("authority") or {}
+    authority_rows = []
+    if authority_cfg:
+        auth_path = args.authority or authority_cfg.get("path") or ""
+        auth_url = authority_cfg.get("sheet_url") or ""
+        auth_cache = authority_cfg.get("cache") or ""
+        if auth_path:
+            auth_raw = Path(auth_path).read_bytes()
+            log(f"Reading authority sheet {auth_path}")
+        elif auth_url and args.offline and auth_cache and Path(auth_cache).exists():
+            auth_raw = Path(auth_cache).read_bytes()
+            log(f"Reading cached authority sheet {auth_cache}")
+        elif auth_url:
+            log(f"Downloading authority sheet {sheet_id_from_url(auth_url)}")
+            auth_raw = download_workbook(auth_url)
+            if auth_cache:
+                cache = Path(auth_cache)
+                cache.parent.mkdir(parents=True, exist_ok=True)
+                cache.write_bytes(auth_raw)
+                log(f"Cached authority sheet at {cache}")
+        else:
+            raise SystemExit("source.authority needs a sheet_url, path or cache in docs/config.yml")
+        authority_rows = authority.extract_records(read_workbook(auth_raw), authority_cfg)
+        log(f"Authority rows: {len(authority_rows)}")
+
+    data, warnings = build(sheets, cfg, tabs, authority_rows=authority_rows)
 
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)

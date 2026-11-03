@@ -32,12 +32,16 @@ The older Gramps importer remains available as a fallback.
    .venv/bin/python scripts/import_sheet.py private/relatives.xlsx
    ```
 
+   If `source.authority` is configured, the older hierarchical family sheet is
+   downloaded too and merged over the `Persons` tab (see below). Pass
+   `--authority path/to/original.xlsx` to use a local copy instead.
+
 4. Run the front-end and importer tests, then commit and push the changed
    data/config:
 
    ```
    node --test scripts/test_frontend.mjs
-   .venv/bin/python -m unittest scripts.test_import_sheet scripts.test_horoscope
+   .venv/bin/python -m unittest scripts.test_authority scripts.test_import_sheet scripts.test_horoscope
    git add docs scripts README.md requirements.txt
    git commit -m "Update family data"
    git push
@@ -64,7 +68,7 @@ can be overridden in `source.tabs`.
 
 | Tab | Purpose |
 | --- | --- |
-| `Persons` | `PID`, names, `EMAIL` (for Google sign-in), gender, dates, birth place, current location, status, notes |
+| `Persons` | `PID`, names, `EMAIL` (for Google sign-in), gender, `DOB`, `POB`, current location, `STATUS`, `DOD` (date of death), optional `POD` (place of death), notes |
 | `Vedic` | Per-person gotra, veda, shakha, sutra, nakshatra, kula devatha, sampradaya (Iyengar), acharya thirumaligai (Iyengar), purvikam, parvata |
 | `$Config` | Gotra defaults for veda, shakha, sutra and nakshatra |
 | `Unions` | `UID`, `PID1`, `PID2`, `REF_NAME`, relationship dates and notes |
@@ -85,6 +89,29 @@ or union node and on the offspring edge. The site graph has:
 * `union` nodes for every `Unions` row;
 * `partner` edges from a person to their union;
 * `offspring` edges from a union to each child.
+
+### Original sheet authority
+
+The older hierarchical family sheet is still the authority for birth, death
+and living status. Configure it under `source.authority`; the current URL and
+cache path live in `docs/config.yml`. The importer:
+
+1. finds the header row by column name (so a title block, reordered columns or
+   differently worded headers are fine);
+2. fuzzy-matches each authority row to a `Persons` row by full name;
+3. uses birth day/month, birth place and living status only to break ties
+   between similar or duplicate names;
+4. overrides **only** non-empty `DOB`, `POB`, `STATUS`, `DOD` and `POD` values.
+
+A blank authority cell never erases data already in the `Persons` tab. Because
+the merge happens before chart generation, an authoritative `DOB` and `POB`
+also drive the jadagam. Every override is printed by the importer, along with
+unmatched authority rows and impossible dates such as a death before birth.
+Remove the `source.authority` block to import only the relational sheet.
+
+Tab names and header aliases can be changed in the same block, so the importer
+can be reused with another family's workbook. A data-less stub row (a name but
+no dates or status) is ignored.
 
 ### Living people
 

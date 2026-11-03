@@ -32,6 +32,28 @@ source:
     config: "$Config"
     unions: "Unions"
     offsprings: "Offsprings"
+  # The older hierarchical family sheet is the authority for birth, death and
+  # living status. It is matched to the Persons tab by name; authority values
+  # win, but blank authority cells never erase current data. Remove this block
+  # to import only the relational sheet.
+  authority:
+    sheet_url: "https://docs.google.com/spreadsheets/d/10sC17l2apMUhDj02TA4Rpgv4D56t0j4SWCoSK57senM/edit?usp=sharing"
+    cache: "private/original-sheet.xlsx"
+    # Empty scans every tab that has a recognisable name header.
+    tabs: []
+    # Fuzzy name-match threshold (0-1). Date, birth place and status only
+    # break ties between similar names.
+    min_score: 0.86
+    candidate_score: 0.80
+    # Header names in the original sheet. Add aliases here if you reuse the
+    # importer with a differently worded workbook.
+    columns:
+      name: ["Full Name", "Name", "Person"]
+      dob: ["Date of birth", "DOB", "Birth date"]
+      pob: ["Place of birth", "POB", "Birth place"]
+      status: ["Living/Deceased", "Living or deceased", "Status"]
+      dod: ["Date of death", "DOD", "Death date"]
+      pod: ["Place of death", "POD", "Death place"]
 
 theme:
   # Pick a palette from the `presets:` section below (or add your own there)

@@ -58,6 +58,18 @@ class ParseBirthTests(unittest.TestCase):
         _, dt, _ = parse_birth("September 3 1981 9:05 AM")
         self.assertEqual(dt, datetime(1981, 9, 3, 9, 5))
 
+    def test_custom_sheet_month_slash_day_format(self):
+        display, dt, has_time = parse_birth("Jan/1/1895 00:00:")
+        self.assertEqual(dt, datetime(1895, 1, 1, 0, 0))
+        self.assertTrue(has_time)
+        self.assertEqual(display, "1 Jan 1895, 00:00")
+
+    def test_custom_sheet_format_without_time(self):
+        display, dt, has_time = parse_birth("Jan/1/1895")
+        self.assertEqual(dt, datetime(1895, 1, 1))
+        self.assertFalse(has_time)
+        self.assertEqual(display, "1 Jan 1895")
+
     def test_iso(self):
         _, dt, has_time = parse_birth("1950-08-15T14:30")
         self.assertEqual(dt, datetime(1950, 8, 15, 14, 30))

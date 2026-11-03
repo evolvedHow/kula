@@ -1,6 +1,6 @@
 {
  "schema": "kula.site/2.0",
- "generated_at": "2026-11-03T03:06:23+00:00",
+ "generated_at": "2026-11-03T03:34:02+00:00",
  "source": "Google Sheet",
  "home": "I000",
  "counts": {
@@ -10,7 +10,7 @@
   "stories": 1,
   "notes": 48,
   "charts": 0,
-  "places": 33
+  "places": 34
  },
  "people": [
   {
@@ -25,7 +25,7 @@
     "alternates": []
    },
    "birth": {
-    "date": null,
+    "date": "",
     "year": null,
     "place": "Valliyur"
    },
@@ -53,6 +53,7 @@
     "POB": "Valliyur",
     "CUR_LOC": "",
     "STATUS": "Deceased",
+    "DOD": "",
     "NOTES": "THE PATRIARCH"
    },
    "ref_name": "I000-Venkiteswara Iyer",
@@ -96,6 +97,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Deceased",
+    "DOD": "",
     "NOTES": "MATRICH"
    },
    "ref_name": "I001-Rajammal"
@@ -130,6 +132,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Deceased",
+    "DOD": "",
     "NOTES": "died young at 22"
    },
    "ref_name": "I002-Venkataraman Iyer",
@@ -171,6 +174,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Deceased",
+    "DOD": "",
     "NOTES": "Mookandi's dad, hotelier"
    },
    "ref_name": "I003-Sivarama Krishna Iyer",
@@ -212,6 +216,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Deceased",
+    "DOD": "",
     "NOTES": "father of Venkittu, Sankaran, hotelier"
    },
    "ref_name": "I005-Gopalakrishna Iyer",
@@ -253,6 +258,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Deceased",
+    "DOD": "",
     "NOTES": "(mother of Vallikutty & Lakshmi"
    },
    "ref_name": "I006-Annam Ambal Iyer"
@@ -287,6 +293,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Deceased",
+    "DOD": "",
     "NOTES": "(Bombay Ramanathan's mother"
    },
    "ref_name": "I007-Ponnammal Iyer"
@@ -321,6 +328,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Deceased",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "I008-Bhagavathy Ambal Iyer"
@@ -338,8 +346,16 @@
      "Viswanatha Tatha"
     ]
    },
-   "birth": null,
-   "death": null,
+   "birth": {
+    "date": "1 Jan 1895, 00:00",
+    "year": 1895,
+    "place": ""
+   },
+   "death": {
+    "date": "9 May 1953",
+    "year": 1953,
+    "place": ""
+   },
    "current_location": "",
    "events": [],
    "families": [
@@ -357,11 +373,12 @@
     "REF_NAME": "P001-Viswanatha Tatha",
     "EMAIL": "",
     "GENDER": "Male",
-    "DOB": "",
+    "DOB": "1 Jan 1895, 00:00",
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Deceased",
-    "NOTES": ""
+    "DOD": "9 May 1953",
+    "NOTES": "We know 1895 but not the exact date, so defaulting to Jan 1st."
    },
    "ref_name": "P001-Viswanatha Tatha",
    "vedic": {
@@ -406,6 +423,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Deceased",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P002-Valliammal"
@@ -424,7 +442,11 @@
     ]
    },
    "birth": null,
-   "death": null,
+   "death": {
+    "date": "",
+    "year": null,
+    "place": "Calcutta"
+   },
    "current_location": "",
    "events": [],
    "families": [
@@ -446,7 +468,9 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Deceased",
-    "NOTES": ""
+    "DOD": "",
+    "NOTES": "",
+    "POD": "Calcutta"
    },
    "ref_name": "P003-Rajam"
   },
@@ -464,7 +488,11 @@
     ]
    },
    "birth": null,
-   "death": null,
+   "death": {
+    "date": "",
+    "year": null,
+    "place": "Calcutta"
+   },
    "current_location": "",
    "events": [],
    "families": [
@@ -486,7 +514,9 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Deceased",
-    "NOTES": ""
+    "DOD": "",
+    "NOTES": "",
+    "POD": "Calcutta"
    },
    "ref_name": "P004-Jessop Narayanan"
   },
@@ -530,6 +560,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Deceased",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P005-Bhanu"
@@ -572,6 +603,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P006-Santhanam"
@@ -592,7 +624,7 @@
    "birth": {
     "date": "20 Dec 1972",
     "year": 1972,
-    "place": "Kolkata"
+    "place": "Calcutta"
    },
    "death": null,
    "current_location": "",
@@ -611,9 +643,10 @@
     "EMAIL": "",
     "GENDER": "Female",
     "DOB": "20 Dec 1972",
-    "POB": "Kolkata",
+    "POB": "Calcutta",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P007-Pappu"
@@ -654,6 +687,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P008-K S Sankaranarayanan"
@@ -694,6 +728,7 @@
     "POB": "Chennai",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P009-Adi"
@@ -712,7 +747,7 @@
     ]
    },
    "birth": {
-    "date": null,
+    "date": "",
     "year": null,
     "place": "Chennai"
    },
@@ -734,6 +769,7 @@
     "POB": "Chennai",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P010-Viraj"
@@ -754,7 +790,7 @@
    "birth": {
     "date": "21 Dec 1979",
     "year": 1979,
-    "place": "Kolkata"
+    "place": "Calcutta"
    },
    "death": null,
    "current_location": "",
@@ -773,9 +809,10 @@
     "EMAIL": "",
     "GENDER": "Male",
     "DOB": "21 Dec 1979",
-    "POB": "Kolkata",
+    "POB": "Calcutta",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P011-Deepak"
@@ -816,6 +853,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P012-Spandana Arvapalli"
@@ -834,7 +872,7 @@
    "birth": {
     "date": "27 Sep 2013",
     "year": 2013,
-    "place": "Kolkata"
+    "place": "Calcutta"
    },
    "death": null,
    "current_location": "",
@@ -851,9 +889,10 @@
     "EMAIL": "",
     "GENDER": "Female",
     "DOB": "27 Sep 2013",
-    "POB": "Kolkata",
+    "POB": "Calcutta",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P013-Svaksha"
@@ -896,6 +935,7 @@
     "POB": "Perumbavoor",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P014-Vasantha"
@@ -916,7 +956,11 @@
     "year": 1941,
     "place": ""
    },
-   "death": null,
+   "death": {
+    "date": "23 Jul 1998",
+    "year": 1998,
+    "place": "Chennai"
+   },
    "current_location": "",
    "events": [],
    "families": [
@@ -938,7 +982,9 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Deceased",
-    "NOTES": ""
+    "DOD": "23 Jul 1998",
+    "NOTES": "",
+    "POD": "Chennai"
    },
    "ref_name": "P015-K Ram Mohan"
   },
@@ -958,7 +1004,7 @@
    "birth": {
     "date": "9 Dec 1973",
     "year": 1973,
-    "place": "Kolkata"
+    "place": "Calcutta"
    },
    "death": null,
    "current_location": "",
@@ -977,9 +1023,10 @@
     "EMAIL": "",
     "GENDER": "Male",
     "DOB": "9 Dec 1973",
-    "POB": "Kolkata",
+    "POB": "Calcutta",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P016-Karthik"
@@ -1000,7 +1047,7 @@
    "birth": {
     "date": "7 Jan 1976",
     "year": 1976,
-    "place": "Mumbai"
+    "place": "Bombay"
    },
    "death": null,
    "current_location": "",
@@ -1021,9 +1068,10 @@
     "EMAIL": "",
     "GENDER": "Female",
     "DOB": "7 Jan 1976",
-    "POB": "Mumbai",
+    "POB": "Bombay",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P017-Roopa"
@@ -1062,6 +1110,7 @@
     "POB": "New Delhi",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P018-Raksha Karthik Mohan"
@@ -1104,6 +1153,7 @@
     "POB": "Singapore",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P019-Jaidev"
@@ -1124,7 +1174,7 @@
    "birth": {
     "date": "17 Dec 1979",
     "year": 1979,
-    "place": "Bangalúr"
+    "place": "Bangalore"
    },
    "death": null,
    "current_location": "",
@@ -1143,9 +1193,10 @@
     "EMAIL": "",
     "GENDER": "Female",
     "DOB": "17 Dec 1979",
-    "POB": "Bangalúr",
+    "POB": "Bangalore",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P020-Shruti"
@@ -1184,6 +1235,7 @@
     "POB": "Singapore",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P021-Tejas"
@@ -1222,6 +1274,7 @@
     "POB": "Singapore",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P022-Sanjit"
@@ -1242,9 +1295,13 @@
    "birth": {
     "date": "31 Jan 1955",
     "year": 1955,
-    "place": "Kolkata"
+    "place": "Calcutta"
    },
-   "death": null,
+   "death": {
+    "date": "",
+    "year": null,
+    "place": "Chennai"
+   },
    "current_location": "",
    "events": [],
    "families": [
@@ -1262,10 +1319,12 @@
     "EMAIL": "",
     "GENDER": "Male",
     "DOB": "31 Jan 1955",
-    "POB": "Kolkata",
+    "POB": "Calcutta",
     "CUR_LOC": "",
     "STATUS": "Deceased",
-    "NOTES": ""
+    "DOD": "",
+    "NOTES": "",
+    "POD": "Chennai"
    },
    "ref_name": "P023-Kannan"
   },
@@ -1283,7 +1342,11 @@
     ]
    },
    "birth": null,
-   "death": null,
+   "death": {
+    "date": "28 May 1997",
+    "year": 1997,
+    "place": "Calcutta"
+   },
    "current_location": "",
    "events": [],
    "families": [
@@ -1305,7 +1368,9 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Deceased",
-    "NOTES": ""
+    "DOD": "28 May 1997",
+    "NOTES": "",
+    "POD": "Calcutta"
    },
    "ref_name": "P024-Usha"
   },
@@ -1343,6 +1408,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P025-Malathi"
@@ -1387,6 +1453,7 @@
     "POB": "Trichy",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P026-Rajasree"
@@ -1403,8 +1470,8 @@
     "alternates": []
    },
    "birth": {
-    "date": "29 Jun 2026",
-    "year": 2026,
+    "date": "29 June",
+    "year": null,
     "place": "Dindigul"
    },
    "death": null,
@@ -1423,10 +1490,11 @@
     "REF_NAME": "P027-Venkatesh",
     "EMAIL": "",
     "GENDER": "Male",
-    "DOB": "29 Jun 2026",
+    "DOB": "29 June",
     "POB": "Dindigul",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P027-Venkatesh"
@@ -1467,6 +1535,7 @@
     "POB": "Chennai",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P028-Pranita"
@@ -1507,6 +1576,7 @@
     "POB": "Chennai",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P029-Saatvika"
@@ -1547,6 +1617,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P030-Badri"
@@ -1583,6 +1654,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P031-Ranjani"
@@ -1617,6 +1689,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P032-Adhiya Sakhti"
@@ -1637,7 +1710,7 @@
    "birth": {
     "date": "25 Aug 1956",
     "year": 1956,
-    "place": "Kolkata"
+    "place": "Calcutta"
    },
    "death": null,
    "current_location": "",
@@ -1656,9 +1729,10 @@
     "EMAIL": "",
     "GENDER": "Male",
     "DOB": "25 Aug 1956",
-    "POB": "Kolkata",
+    "POB": "Calcutta",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P033-Suresh"
@@ -1679,7 +1753,7 @@
    "birth": {
     "date": "19 Jan 1959",
     "year": 1959,
-    "place": "Bangalúr"
+    "place": "Bangalore"
    },
    "death": null,
    "current_location": "",
@@ -1698,9 +1772,10 @@
     "EMAIL": "",
     "GENDER": "Female",
     "DOB": "19 Jan 1959",
-    "POB": "Bangalúr",
+    "POB": "Bangalore",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P034-Jyothi"
@@ -1738,9 +1813,10 @@
     "EMAIL": "",
     "GENDER": "Male",
     "DOB": "4 Apr 1994",
-    "POB": "Superior Township",
+    "POB": "Superior Township, Michigan",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P035-Rishi"
@@ -1781,6 +1857,7 @@
     "POB": "Taiwan",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P036-Abby Chen"
@@ -1801,9 +1878,13 @@
    "birth": {
     "date": "31 Mar 1933",
     "year": 1933,
-    "place": "Thiruvandapuram"
+    "place": "Trivandrum"
    },
-   "death": null,
+   "death": {
+    "date": "9 Feb 2003",
+    "year": 2003,
+    "place": "Chennai"
+   },
    "current_location": "",
    "events": [],
    "families": [
@@ -1820,10 +1901,12 @@
     "EMAIL": "",
     "GENDER": "Male",
     "DOB": "31 Mar 1933",
-    "POB": "Thiruvandapuram",
+    "POB": "Trivandrum",
     "CUR_LOC": "",
     "STATUS": "Deceased",
-    "NOTES": ""
+    "DOD": "9 Feb 2003",
+    "NOTES": "",
+    "POD": "Chennai"
    },
    "ref_name": "P037-FACT Narayanan"
   },
@@ -1843,7 +1926,7 @@
    "birth": {
     "date": "10 Jan 1940",
     "year": 1940,
-    "place": "Thiruvandapuram"
+    "place": "Trivandrum"
    },
    "death": null,
    "current_location": "",
@@ -1862,9 +1945,10 @@
     "EMAIL": "",
     "GENDER": "Female",
     "DOB": "10 Jan 1940",
-    "POB": "Thiruvandapuram",
+    "POB": "Trivandrum",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P038-Vijaya"
@@ -1903,6 +1987,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P039-Srikumar",
@@ -1947,6 +2032,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P040-Hema"
@@ -1983,6 +2069,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P041-Sneha"
@@ -2021,6 +2108,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P042-Venkatesh"
@@ -2060,9 +2148,10 @@
     "EMAIL": "",
     "GENDER": "Female",
     "DOB": "21 Feb 1971",
-    "POB": "Udyogamandal, Eloor",
+    "POB": "Udyogamandal",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P043-Ajoy",
@@ -2113,6 +2202,7 @@
     "POB": "Jamshedpur",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P044-Vidya"
@@ -2133,7 +2223,7 @@
    "birth": {
     "date": "26 Dec 2014",
     "year": 2014,
-    "place": "Bangalúr"
+    "place": "Bangalore"
    },
    "death": null,
    "current_location": "",
@@ -2150,9 +2240,10 @@
     "EMAIL": "",
     "GENDER": "Male",
     "DOB": "26 Dec 2014",
-    "POB": "Bangalúr",
+    "POB": "Bangalore",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P045-Nikhil"
@@ -2171,9 +2262,9 @@
     ]
    },
    "birth": {
-    "date": null,
+    "date": "",
     "year": null,
-    "place": "Bangalúr"
+    "place": "Bangalore"
    },
    "death": null,
    "current_location": "",
@@ -2190,9 +2281,10 @@
     "EMAIL": "",
     "GENDER": "Male",
     "DOB": "",
-    "POB": "Bangalúr",
+    "POB": "Bangalore",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P046-Nishanth"
@@ -2213,7 +2305,7 @@
    "birth": {
     "date": "19 Apr 1936",
     "year": 1936,
-    "place": "Paramakudi"
+    "place": "Paramakkudi"
    },
    "death": null,
    "current_location": "",
@@ -2232,9 +2324,10 @@
     "EMAIL": "",
     "GENDER": "Male",
     "DOB": "19 Apr 1936",
-    "POB": "Paramakudi",
+    "POB": "Paramakkudi",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P047-Kesavan",
@@ -2263,9 +2356,13 @@
    "birth": {
     "date": "30 Jun 1940",
     "year": 1940,
-    "place": "Chidambaram Nataraja Temple"
+    "place": "Chidambaram"
    },
-   "death": null,
+   "death": {
+    "date": "11 Aug 1994",
+    "year": 1994,
+    "place": "Coimbatore"
+   },
    "current_location": "",
    "events": [],
    "families": [
@@ -2282,10 +2379,12 @@
     "EMAIL": "",
     "GENDER": "Female",
     "DOB": "30 Jun 1940",
-    "POB": "Chidambaram Nataraja Temple",
+    "POB": "Chidambaram",
     "CUR_LOC": "",
     "STATUS": "Deceased",
-    "NOTES": ""
+    "DOD": "11 Aug 1994",
+    "NOTES": "",
+    "POD": "Coimbatore"
    },
    "ref_name": "P048-Lakshmi"
   },
@@ -2336,6 +2435,7 @@
     "POB": "Ranchi",
     "CUR_LOC": "Marietta",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P049-Sriram",
@@ -2393,6 +2493,7 @@
     "POB": "Mumbai",
     "CUR_LOC": "Marietta",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P050-Chetna Bhargava"
@@ -2444,6 +2545,7 @@
     "POB": "Charlotte",
     "CUR_LOC": "Manhattan",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P051-Varun",
@@ -2470,8 +2572,8 @@
     ]
    },
    "birth": {
-    "date": "14 Oct 2026",
-    "year": 2026,
+    "date": "14 Oct",
+    "year": null,
     "place": ""
    },
    "death": null,
@@ -2501,10 +2603,11 @@
     "REF_NAME": "P052-Priyal",
     "EMAIL": "",
     "GENDER": "Female",
-    "DOB": "14 Oct 2026",
+    "DOB": "14 Oct",
     "POB": "",
     "CUR_LOC": "Manhattan",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P052-Priyal"
@@ -2556,6 +2659,7 @@
     "POB": "Kennesaw",
     "CUR_LOC": "Manhattan",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P053-Devika"
@@ -2607,6 +2711,7 @@
     "POB": "Ranchi",
     "CUR_LOC": "Chennai",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P054-Lata"
@@ -2625,7 +2730,7 @@
    "birth": {
     "date": "12 Feb 1967",
     "year": 1967,
-    "place": "Mysuru"
+    "place": "Mysore"
    },
    "death": null,
    "current_location": "Chennai",
@@ -2653,9 +2758,10 @@
     "EMAIL": "",
     "GENDER": "Male",
     "DOB": "12 Feb 1967",
-    "POB": "Mysuru",
+    "POB": "Mysore",
     "CUR_LOC": "Chennai",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P055-Narasimhan Ravikiran"
@@ -2709,6 +2815,7 @@
     "POB": "Ranchi",
     "CUR_LOC": "Houston",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P056-Kala"
@@ -2757,9 +2864,10 @@
     "EMAIL": "",
     "GENDER": "Female",
     "DOB": "26 Aug 2004",
-    "POB": "Davis",
+    "POB": "Davis, CA",
     "CUR_LOC": "Houston",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P057-Dyuti"
@@ -2806,9 +2914,10 @@
     "EMAIL": "",
     "GENDER": "Male",
     "DOB": "8 Nov 2007",
-    "POB": "Houston",
+    "POB": "Houston, TX",
     "CUR_LOC": "Houston",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P058-Vidyut"
@@ -2831,7 +2940,11 @@
     "year": 1938,
     "place": "Perumbavoor"
    },
-   "death": null,
+   "death": {
+    "date": "26 Jan 1985",
+    "year": 1985,
+    "place": "CMC Vellore"
+   },
    "current_location": "",
    "events": [],
    "families": [
@@ -2851,7 +2964,9 @@
     "POB": "Perumbavoor",
     "CUR_LOC": "",
     "STATUS": "Deceased",
-    "NOTES": ""
+    "DOD": "26 Jan 1985",
+    "NOTES": "",
+    "POD": "CMC Vellore"
    },
    "ref_name": "P059-Venkittu"
   },
@@ -2871,7 +2986,7 @@
    "birth": {
     "date": "23 Dec 1943",
     "year": 1943,
-    "place": "Thiruvandapuram"
+    "place": "Trivandrum"
    },
    "death": null,
    "current_location": "",
@@ -2890,9 +3005,10 @@
     "EMAIL": "",
     "GENDER": "Female",
     "DOB": "23 Dec 1943",
-    "POB": "Thiruvandapuram",
+    "POB": "Trivandrum",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P060-Sudha"
@@ -2913,7 +3029,7 @@
    "birth": {
     "date": "1 Feb 1972",
     "year": 1972,
-    "place": "Mumbai"
+    "place": "Bombay"
    },
    "death": null,
    "current_location": "",
@@ -2932,9 +3048,10 @@
     "EMAIL": "",
     "GENDER": "Female",
     "DOB": "1 Feb 1972",
-    "POB": "Mumbai",
+    "POB": "Bombay",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P061-Indu"
@@ -2977,6 +3094,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P062-Arvind"
@@ -3017,6 +3135,7 @@
     "POB": "Ottawa",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P063-Agustya"
@@ -3037,7 +3156,7 @@
    "birth": {
     "date": "22 Jan 1975",
     "year": 1975,
-    "place": "Mumbai"
+    "place": "Bombay"
    },
    "death": null,
    "current_location": "",
@@ -3056,9 +3175,10 @@
     "EMAIL": "",
     "GENDER": "Male",
     "DOB": "22 Jan 1975",
-    "POB": "Mumbai",
+    "POB": "Bombay",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P064-Vicky",
@@ -3109,6 +3229,7 @@
     "POB": "Chennai",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P065-Sandhya"
@@ -3147,6 +3268,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P066-Annam"
@@ -3165,7 +3287,11 @@
     ]
    },
    "birth": null,
-   "death": null,
+   "death": {
+    "date": "",
+    "year": null,
+    "place": "Chennai"
+   },
    "current_location": "",
    "events": [],
    "families": [
@@ -3185,7 +3311,9 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Deceased",
-    "NOTES": ""
+    "DOD": "",
+    "NOTES": "",
+    "POD": "Chennai"
    },
    "ref_name": "P067-Baba"
   },
@@ -3223,6 +3351,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P068-Sandhya"
@@ -3261,6 +3390,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P069-Ashok"
@@ -3299,6 +3429,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P070-Ananya"
@@ -3335,6 +3466,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P071-Prasad"
@@ -3369,6 +3501,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P072-Nitara"
@@ -3405,6 +3538,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P073-Sathvika"
@@ -3441,6 +3575,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P074-Miachael"
@@ -3463,7 +3598,11 @@
     "year": 1944,
     "place": "Perumbavoor"
    },
-   "death": null,
+   "death": {
+    "date": "27 Nov 2007",
+    "year": 2007,
+    "place": "Chennai"
+   },
    "current_location": "",
    "events": [],
    "families": [
@@ -3483,7 +3622,9 @@
     "POB": "Perumbavoor",
     "CUR_LOC": "",
     "STATUS": "Deceased",
-    "NOTES": ""
+    "DOD": "27 Nov 2007",
+    "NOTES": "",
+    "POD": "Chennai"
    },
    "ref_name": "P075-Kunju"
   },
@@ -3505,7 +3646,11 @@
     "year": 1937,
     "place": "Kakinada"
    },
-   "death": null,
+   "death": {
+    "date": "19 Jun 2024",
+    "year": 2024,
+    "place": "Bangalore"
+   },
    "current_location": "",
    "events": [],
    "families": [
@@ -3525,7 +3670,9 @@
     "POB": "Kakinada",
     "CUR_LOC": "",
     "STATUS": "Deceased",
-    "NOTES": ""
+    "DOD": "19 Jun 2024",
+    "NOTES": "",
+    "POD": "Bangalore"
    },
    "ref_name": "P076-ONGC Mani"
   },
@@ -3545,7 +3692,7 @@
    "birth": {
     "date": "17 Feb 1968",
     "year": 1968,
-    "place": "Kolkata"
+    "place": "Calcutta"
    },
    "death": null,
    "current_location": "",
@@ -3566,9 +3713,10 @@
     "EMAIL": "",
     "GENDER": "Male",
     "DOB": "17 Feb 1968",
-    "POB": "Kolkata",
+    "POB": "Calcutta",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P077-Dilip"
@@ -3611,6 +3759,7 @@
     "POB": "Chennai",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P078-Vidya Rao"
@@ -3651,6 +3800,7 @@
     "POB": "Chennai",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P079-Uttara"
@@ -3690,9 +3840,10 @@
     "EMAIL": "",
     "GENDER": "Female",
     "DOB": "15 Aug 1971",
-    "POB": "Udyogamandal, Eloor",
+    "POB": "Udyogamandal",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P080-Bharathi"
@@ -3733,6 +3884,7 @@
     "POB": "Ranchi",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P081-Ravi Manik"
@@ -3768,9 +3920,10 @@
     "EMAIL": "",
     "GENDER": "Female",
     "DOB": "15 Jun 2003",
-    "POB": "Newport Beach",
+    "POB": "Newport Beach, CA",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P082-Anoushka Mani"
@@ -3806,9 +3959,10 @@
     "EMAIL": "",
     "GENDER": "Male",
     "DOB": "11 Jan 2006",
-    "POB": "Newport Beach",
+    "POB": "Newport Beach, CA",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P083-Aryaman Mani"
@@ -3827,8 +3981,8 @@
     ]
    },
    "birth": {
-    "date": "10 Aug 2026",
-    "year": 2026,
+    "date": "10 August",
+    "year": null,
     "place": "Perumbavoor"
    },
    "death": null,
@@ -3847,10 +4001,11 @@
     "REF_NAME": "P084-Gayathri",
     "EMAIL": "",
     "GENDER": "Female",
-    "DOB": "10 Aug 2026",
+    "DOB": "10 August",
     "POB": "Perumbavoor",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P084-Gayathri"
@@ -3867,11 +4022,15 @@
     "alternates": []
    },
    "birth": {
-    "date": "25 Sep 2026",
-    "year": 2026,
-    "place": "Narsipatnam"
+    "date": "25 Sep",
+    "year": null,
+    "place": "Narsipatnam, AP"
    },
-   "death": null,
+   "death": {
+    "date": "1 Aug 2020",
+    "year": 2020,
+    "place": "Palakkad"
+   },
    "current_location": "",
    "events": [],
    "families": [
@@ -3890,11 +4049,13 @@
     "REF_NAME": "P085-S V Ramachandran",
     "EMAIL": "",
     "GENDER": "Male",
-    "DOB": "25 Sep 2026",
-    "POB": "Narsipatnam",
+    "DOB": "25 Sep",
+    "POB": "Narsipatnam, AP",
     "CUR_LOC": "",
     "STATUS": "Deceased",
-    "NOTES": ""
+    "DOD": "1 Aug 2020",
+    "NOTES": "",
+    "POD": "Palakkad"
    },
    "ref_name": "P085-S V Ramachandran"
   },
@@ -3938,6 +4099,7 @@
     "POB": "Calicut",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P086-Deepa"
@@ -3954,8 +4116,8 @@
     "alternates": []
    },
    "birth": {
-    "date": "15 Aug 2026",
-    "year": 2026,
+    "date": "15 Aug",
+    "year": null,
     "place": "Ponnur"
    },
    "death": null,
@@ -3977,10 +4139,11 @@
     "REF_NAME": "P087-K Venkateswara Rao",
     "EMAIL": "",
     "GENDER": "Male",
-    "DOB": "15 Aug 2026",
-    "POB": "Ponnur",
+    "DOB": "15 Aug",
+    "POB": "Ponnur, AP",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P087-K Venkateswara Rao"
@@ -4025,6 +4188,7 @@
     "POB": "Palakkad",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P088-Vijay"
@@ -4041,8 +4205,8 @@
     "alternates": []
    },
    "birth": {
-    "date": "10 Nov 2026",
-    "year": 2026,
+    "date": "10 Nov",
+    "year": null,
     "place": "Ponnur"
    },
    "death": null,
@@ -4064,10 +4228,11 @@
     "REF_NAME": "P089-Priya",
     "EMAIL": "",
     "GENDER": "Female",
-    "DOB": "10 Nov 2026",
-    "POB": "Ponnur",
+    "DOB": "10 Nov",
+    "POB": "Ponnur, AP",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P089-Priya"
@@ -4086,8 +4251,8 @@
     ]
    },
    "birth": {
-    "date": "16 Oct 2026",
-    "year": 2026,
+    "date": "16 Oct",
+    "year": null,
     "place": "Coimbatore"
    },
    "death": null,
@@ -4106,10 +4271,11 @@
     "REF_NAME": "P090-Anahita",
     "EMAIL": "",
     "GENDER": "Female",
-    "DOB": "16 Oct 2026",
+    "DOB": "16 Oct",
     "POB": "Coimbatore",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P090-Anahita"
@@ -4132,7 +4298,11 @@
     "year": 1931,
     "place": "Perumbavoor"
    },
-   "death": null,
+   "death": {
+    "date": "10 Apr 2018",
+    "year": 2018,
+    "place": "Chennai"
+   },
    "current_location": "",
    "events": [],
    "families": [
@@ -4152,7 +4322,9 @@
     "POB": "Perumbavoor",
     "CUR_LOC": "",
     "STATUS": "Deceased",
-    "NOTES": ""
+    "DOD": "10 Apr 2018",
+    "NOTES": "",
+    "POD": "Chennai"
    },
    "ref_name": "P091-Rajamani"
   },
@@ -4174,7 +4346,11 @@
     "year": 1939,
     "place": ""
    },
-   "death": null,
+   "death": {
+    "date": "18 Feb 2020",
+    "year": 2020,
+    "place": "Chennai"
+   },
    "current_location": "",
    "events": [],
    "families": [
@@ -4194,7 +4370,9 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Deceased",
-    "NOTES": ""
+    "DOD": "18 Feb 2020",
+    "NOTES": "",
+    "POD": "Chennai"
    },
    "ref_name": "P092-Saradha"
   },
@@ -4236,6 +4414,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P093-Shreedhar",
@@ -4286,6 +4465,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P094-Sumitra"
@@ -4308,7 +4488,11 @@
     "year": 1985,
     "place": ""
    },
-   "death": null,
+   "death": {
+    "date": "17 May 2006",
+    "year": 2006,
+    "place": "Chennai"
+   },
    "current_location": "",
    "events": [],
    "families": [],
@@ -4326,7 +4510,9 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Deceased",
-    "NOTES": ""
+    "DOD": "17 May 2006",
+    "NOTES": "",
+    "POD": "Chennai"
    },
    "ref_name": "P095-Shraddha"
   },
@@ -4368,6 +4554,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P096-Shreya"
@@ -4410,6 +4597,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P097-Sharath Kumar"
@@ -4452,6 +4640,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P098-Shreekant",
@@ -4502,6 +4691,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P099-Bhash"
@@ -4542,6 +4732,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P100-Kurran",
@@ -4590,6 +4781,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P101-Rajat",
@@ -4640,6 +4832,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P102-Srinivas",
@@ -4690,6 +4883,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P103-Navina"
@@ -4732,6 +4926,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P104-Namrata"
@@ -4754,7 +4949,11 @@
     "year": 1990,
     "place": ""
    },
-   "death": null,
+   "death": {
+    "date": "5 Jun 2025",
+    "year": 2025,
+    "place": "New Delhi"
+   },
    "current_location": "",
    "events": [],
    "families": [
@@ -4774,7 +4973,9 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Deceased",
-    "NOTES": ""
+    "DOD": "5 Jun 2025",
+    "NOTES": "",
+    "POD": "New Delhi"
    },
    "ref_name": "P105-Hindol"
   },
@@ -4812,6 +5013,7 @@
     "POB": "New Delhi",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P106-Aadya"
@@ -4854,6 +5056,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P107-Nikita"
@@ -4896,6 +5099,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P108-Divya"
@@ -4938,6 +5142,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P109-Rajaram"
@@ -4978,6 +5183,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P110-Raksha"
@@ -5018,6 +5224,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Living",
+    "DOD": "",
     "NOTES": ""
    },
    "ref_name": "P111-Dhruv"
@@ -5054,6 +5261,7 @@
     "POB": "",
     "CUR_LOC": "",
     "STATUS": "Deceased",
+    "DOD": "",
     "NOTES": "Appa's deceased sibling.  She died of a dog bite at a very young age"
    },
    "ref_name": "P119-Bhagavthy"
@@ -6930,6 +7138,7 @@
      "POB": "Valliyur",
      "CUR_LOC": "",
      "STATUS": "Deceased",
+     "DOD": "",
      "NOTES": "THE PATRIARCH"
     }
    },
@@ -6949,6 +7158,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Deceased",
+     "DOD": "",
      "NOTES": "MATRICH"
     }
    },
@@ -6968,6 +7178,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Deceased",
+     "DOD": "",
      "NOTES": "died young at 22"
     }
    },
@@ -6987,6 +7198,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Deceased",
+     "DOD": "",
      "NOTES": "Mookandi's dad, hotelier"
     }
    },
@@ -7006,6 +7218,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Deceased",
+     "DOD": "",
      "NOTES": "father of Venkittu, Sankaran, hotelier"
     }
    },
@@ -7025,6 +7238,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Deceased",
+     "DOD": "",
      "NOTES": "(mother of Vallikutty & Lakshmi"
     }
    },
@@ -7044,6 +7258,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Deceased",
+     "DOD": "",
      "NOTES": "(Bombay Ramanathan's mother"
     }
    },
@@ -7063,6 +7278,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Deceased",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7078,11 +7294,12 @@
      "REF_NAME": "P001-Viswanatha Tatha",
      "EMAIL": "",
      "GENDER": "Male",
-     "DOB": "",
+     "DOB": "1 Jan 1895, 00:00",
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Deceased",
-     "NOTES": ""
+     "DOD": "9 May 1953",
+     "NOTES": "We know 1895 but not the exact date, so defaulting to Jan 1st."
     }
    },
    {
@@ -7101,6 +7318,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Deceased",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7120,7 +7338,9 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Deceased",
-     "NOTES": ""
+     "DOD": "",
+     "NOTES": "",
+     "POD": "Calcutta"
     }
    },
    {
@@ -7139,7 +7359,9 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Deceased",
-     "NOTES": ""
+     "DOD": "",
+     "NOTES": "",
+     "POD": "Calcutta"
     }
    },
    {
@@ -7158,6 +7380,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Deceased",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7177,6 +7400,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7193,9 +7417,10 @@
      "EMAIL": "",
      "GENDER": "Female",
      "DOB": "20 Dec 1972",
-     "POB": "Kolkata",
+     "POB": "Calcutta",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7215,6 +7440,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7234,6 +7460,7 @@
      "POB": "Chennai",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7253,6 +7480,7 @@
      "POB": "Chennai",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7269,9 +7497,10 @@
      "EMAIL": "",
      "GENDER": "Male",
      "DOB": "21 Dec 1979",
-     "POB": "Kolkata",
+     "POB": "Calcutta",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7291,6 +7520,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7307,9 +7537,10 @@
      "EMAIL": "",
      "GENDER": "Female",
      "DOB": "27 Sep 2013",
-     "POB": "Kolkata",
+     "POB": "Calcutta",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7329,6 +7560,7 @@
      "POB": "Perumbavoor",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7348,7 +7580,9 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Deceased",
-     "NOTES": ""
+     "DOD": "23 Jul 1998",
+     "NOTES": "",
+     "POD": "Chennai"
     }
    },
    {
@@ -7364,9 +7598,10 @@
      "EMAIL": "",
      "GENDER": "Male",
      "DOB": "9 Dec 1973",
-     "POB": "Kolkata",
+     "POB": "Calcutta",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7383,9 +7618,10 @@
      "EMAIL": "",
      "GENDER": "Female",
      "DOB": "7 Jan 1976",
-     "POB": "Mumbai",
+     "POB": "Bombay",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7405,6 +7641,7 @@
      "POB": "New Delhi",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7424,6 +7661,7 @@
      "POB": "Singapore",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7440,9 +7678,10 @@
      "EMAIL": "",
      "GENDER": "Female",
      "DOB": "17 Dec 1979",
-     "POB": "Bangalúr",
+     "POB": "Bangalore",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7462,6 +7701,7 @@
      "POB": "Singapore",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7481,6 +7721,7 @@
      "POB": "Singapore",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7497,10 +7738,12 @@
      "EMAIL": "",
      "GENDER": "Male",
      "DOB": "31 Jan 1955",
-     "POB": "Kolkata",
+     "POB": "Calcutta",
      "CUR_LOC": "",
      "STATUS": "Deceased",
-     "NOTES": ""
+     "DOD": "",
+     "NOTES": "",
+     "POD": "Chennai"
     }
    },
    {
@@ -7519,7 +7762,9 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Deceased",
-     "NOTES": ""
+     "DOD": "28 May 1997",
+     "NOTES": "",
+     "POD": "Calcutta"
     }
    },
    {
@@ -7538,6 +7783,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7557,6 +7803,7 @@
      "POB": "Trichy",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7572,10 +7819,11 @@
      "REF_NAME": "P027-Venkatesh",
      "EMAIL": "",
      "GENDER": "Male",
-     "DOB": "29 Jun 2026",
+     "DOB": "29 June",
      "POB": "Dindigul",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7595,6 +7843,7 @@
      "POB": "Chennai",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7614,6 +7863,7 @@
      "POB": "Chennai",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7633,6 +7883,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7652,6 +7903,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7671,6 +7923,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7687,9 +7940,10 @@
      "EMAIL": "",
      "GENDER": "Male",
      "DOB": "25 Aug 1956",
-     "POB": "Kolkata",
+     "POB": "Calcutta",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7706,9 +7960,10 @@
      "EMAIL": "",
      "GENDER": "Female",
      "DOB": "19 Jan 1959",
-     "POB": "Bangalúr",
+     "POB": "Bangalore",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7725,9 +7980,10 @@
      "EMAIL": "",
      "GENDER": "Male",
      "DOB": "4 Apr 1994",
-     "POB": "Superior Township",
+     "POB": "Superior Township, Michigan",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7747,6 +8003,7 @@
      "POB": "Taiwan",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7763,10 +8020,12 @@
      "EMAIL": "",
      "GENDER": "Male",
      "DOB": "31 Mar 1933",
-     "POB": "Thiruvandapuram",
+     "POB": "Trivandrum",
      "CUR_LOC": "",
      "STATUS": "Deceased",
-     "NOTES": ""
+     "DOD": "9 Feb 2003",
+     "NOTES": "",
+     "POD": "Chennai"
     }
    },
    {
@@ -7782,9 +8041,10 @@
      "EMAIL": "",
      "GENDER": "Female",
      "DOB": "10 Jan 1940",
-     "POB": "Thiruvandapuram",
+     "POB": "Trivandrum",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7804,6 +8064,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7823,6 +8084,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7842,6 +8104,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7861,6 +8124,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7877,9 +8141,10 @@
      "EMAIL": "",
      "GENDER": "Female",
      "DOB": "21 Feb 1971",
-     "POB": "Udyogamandal, Eloor",
+     "POB": "Udyogamandal",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7899,6 +8164,7 @@
      "POB": "Jamshedpur",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7915,9 +8181,10 @@
      "EMAIL": "",
      "GENDER": "Male",
      "DOB": "26 Dec 2014",
-     "POB": "Bangalúr",
+     "POB": "Bangalore",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7934,9 +8201,10 @@
      "EMAIL": "",
      "GENDER": "Male",
      "DOB": "",
-     "POB": "Bangalúr",
+     "POB": "Bangalore",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7953,9 +8221,10 @@
      "EMAIL": "",
      "GENDER": "Male",
      "DOB": "19 Apr 1936",
-     "POB": "Paramakudi",
+     "POB": "Paramakkudi",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -7972,10 +8241,12 @@
      "EMAIL": "",
      "GENDER": "Female",
      "DOB": "30 Jun 1940",
-     "POB": "Chidambaram Nataraja Temple",
+     "POB": "Chidambaram",
      "CUR_LOC": "",
      "STATUS": "Deceased",
-     "NOTES": ""
+     "DOD": "11 Aug 1994",
+     "NOTES": "",
+     "POD": "Coimbatore"
     }
    },
    {
@@ -7994,6 +8265,7 @@
      "POB": "Ranchi",
      "CUR_LOC": "Marietta",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8013,6 +8285,7 @@
      "POB": "Mumbai",
      "CUR_LOC": "Marietta",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8032,6 +8305,7 @@
      "POB": "Charlotte",
      "CUR_LOC": "Manhattan",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8047,10 +8321,11 @@
      "REF_NAME": "P052-Priyal",
      "EMAIL": "",
      "GENDER": "Female",
-     "DOB": "14 Oct 2026",
+     "DOB": "14 Oct",
      "POB": "",
      "CUR_LOC": "Manhattan",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8070,6 +8345,7 @@
      "POB": "Kennesaw",
      "CUR_LOC": "Manhattan",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8089,6 +8365,7 @@
      "POB": "Ranchi",
      "CUR_LOC": "Chennai",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8105,9 +8382,10 @@
      "EMAIL": "",
      "GENDER": "Male",
      "DOB": "12 Feb 1967",
-     "POB": "Mysuru",
+     "POB": "Mysore",
      "CUR_LOC": "Chennai",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8127,6 +8405,7 @@
      "POB": "Ranchi",
      "CUR_LOC": "Houston",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8143,9 +8422,10 @@
      "EMAIL": "",
      "GENDER": "Female",
      "DOB": "26 Aug 2004",
-     "POB": "Davis",
+     "POB": "Davis, CA",
      "CUR_LOC": "Houston",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8162,9 +8442,10 @@
      "EMAIL": "",
      "GENDER": "Male",
      "DOB": "8 Nov 2007",
-     "POB": "Houston",
+     "POB": "Houston, TX",
      "CUR_LOC": "Houston",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8184,7 +8465,9 @@
      "POB": "Perumbavoor",
      "CUR_LOC": "",
      "STATUS": "Deceased",
-     "NOTES": ""
+     "DOD": "26 Jan 1985",
+     "NOTES": "",
+     "POD": "CMC Vellore"
     }
    },
    {
@@ -8200,9 +8483,10 @@
      "EMAIL": "",
      "GENDER": "Female",
      "DOB": "23 Dec 1943",
-     "POB": "Thiruvandapuram",
+     "POB": "Trivandrum",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8219,9 +8503,10 @@
      "EMAIL": "",
      "GENDER": "Female",
      "DOB": "1 Feb 1972",
-     "POB": "Mumbai",
+     "POB": "Bombay",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8241,6 +8526,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8260,6 +8546,7 @@
      "POB": "Ottawa",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8276,9 +8563,10 @@
      "EMAIL": "",
      "GENDER": "Male",
      "DOB": "22 Jan 1975",
-     "POB": "Mumbai",
+     "POB": "Bombay",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8298,6 +8586,7 @@
      "POB": "Chennai",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8317,6 +8606,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8336,7 +8626,9 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Deceased",
-     "NOTES": ""
+     "DOD": "",
+     "NOTES": "",
+     "POD": "Chennai"
     }
    },
    {
@@ -8355,6 +8647,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8374,6 +8667,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8393,6 +8687,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8412,6 +8707,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8431,6 +8727,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8450,6 +8747,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8469,6 +8767,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8488,7 +8787,9 @@
      "POB": "Perumbavoor",
      "CUR_LOC": "",
      "STATUS": "Deceased",
-     "NOTES": ""
+     "DOD": "27 Nov 2007",
+     "NOTES": "",
+     "POD": "Chennai"
     }
    },
    {
@@ -8507,7 +8808,9 @@
      "POB": "Kakinada",
      "CUR_LOC": "",
      "STATUS": "Deceased",
-     "NOTES": ""
+     "DOD": "19 Jun 2024",
+     "NOTES": "",
+     "POD": "Bangalore"
     }
    },
    {
@@ -8523,9 +8826,10 @@
      "EMAIL": "",
      "GENDER": "Male",
      "DOB": "17 Feb 1968",
-     "POB": "Kolkata",
+     "POB": "Calcutta",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8545,6 +8849,7 @@
      "POB": "Chennai",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8564,6 +8869,7 @@
      "POB": "Chennai",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8580,9 +8886,10 @@
      "EMAIL": "",
      "GENDER": "Female",
      "DOB": "15 Aug 1971",
-     "POB": "Udyogamandal, Eloor",
+     "POB": "Udyogamandal",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8602,6 +8909,7 @@
      "POB": "Ranchi",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8618,9 +8926,10 @@
      "EMAIL": "",
      "GENDER": "Female",
      "DOB": "15 Jun 2003",
-     "POB": "Newport Beach",
+     "POB": "Newport Beach, CA",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8637,9 +8946,10 @@
      "EMAIL": "",
      "GENDER": "Male",
      "DOB": "11 Jan 2006",
-     "POB": "Newport Beach",
+     "POB": "Newport Beach, CA",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8655,10 +8965,11 @@
      "REF_NAME": "P084-Gayathri",
      "EMAIL": "",
      "GENDER": "Female",
-     "DOB": "10 Aug 2026",
+     "DOB": "10 August",
      "POB": "Perumbavoor",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8674,11 +8985,13 @@
      "REF_NAME": "P085-S V Ramachandran",
      "EMAIL": "",
      "GENDER": "Male",
-     "DOB": "25 Sep 2026",
-     "POB": "Narsipatnam",
+     "DOB": "25 Sep",
+     "POB": "Narsipatnam, AP",
      "CUR_LOC": "",
      "STATUS": "Deceased",
-     "NOTES": ""
+     "DOD": "1 Aug 2020",
+     "NOTES": "",
+     "POD": "Palakkad"
     }
    },
    {
@@ -8697,6 +9010,7 @@
      "POB": "Calicut",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8712,10 +9026,11 @@
      "REF_NAME": "P087-K Venkateswara Rao",
      "EMAIL": "",
      "GENDER": "Male",
-     "DOB": "15 Aug 2026",
-     "POB": "Ponnur",
+     "DOB": "15 Aug",
+     "POB": "Ponnur, AP",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8735,6 +9050,7 @@
      "POB": "Palakkad",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8750,10 +9066,11 @@
      "REF_NAME": "P089-Priya",
      "EMAIL": "",
      "GENDER": "Female",
-     "DOB": "10 Nov 2026",
-     "POB": "Ponnur",
+     "DOB": "10 Nov",
+     "POB": "Ponnur, AP",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8769,10 +9086,11 @@
      "REF_NAME": "P090-Anahita",
      "EMAIL": "",
      "GENDER": "Female",
-     "DOB": "16 Oct 2026",
+     "DOB": "16 Oct",
      "POB": "Coimbatore",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8792,7 +9110,9 @@
      "POB": "Perumbavoor",
      "CUR_LOC": "",
      "STATUS": "Deceased",
-     "NOTES": ""
+     "DOD": "10 Apr 2018",
+     "NOTES": "",
+     "POD": "Chennai"
     }
    },
    {
@@ -8811,7 +9131,9 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Deceased",
-     "NOTES": ""
+     "DOD": "18 Feb 2020",
+     "NOTES": "",
+     "POD": "Chennai"
     }
    },
    {
@@ -8830,6 +9152,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8849,6 +9172,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8868,7 +9192,9 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Deceased",
-     "NOTES": ""
+     "DOD": "17 May 2006",
+     "NOTES": "",
+     "POD": "Chennai"
     }
    },
    {
@@ -8887,6 +9213,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8906,6 +9233,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8925,6 +9253,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8944,6 +9273,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8963,6 +9293,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -8982,6 +9313,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -9001,6 +9333,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -9020,6 +9353,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -9039,6 +9373,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -9058,7 +9393,9 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Deceased",
-     "NOTES": ""
+     "DOD": "5 Jun 2025",
+     "NOTES": "",
+     "POD": "New Delhi"
     }
    },
    {
@@ -9077,6 +9414,7 @@
      "POB": "New Delhi",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -9096,6 +9434,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -9115,6 +9454,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -9134,6 +9474,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -9153,6 +9494,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -9172,6 +9514,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Living",
+     "DOD": "",
      "NOTES": ""
     }
    },
@@ -9191,6 +9534,7 @@
      "POB": "",
      "CUR_LOC": "",
      "STATUS": "Deceased",
+     "DOD": "",
      "NOTES": "Appa's deceased sibling.  She died of a dog bite at a very young age"
     }
    },

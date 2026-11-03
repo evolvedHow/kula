@@ -82,6 +82,7 @@ def parse_birth(value):
       * "15/08/1950 14:30", "15-08-1950 2:30 pm"
       * "15 Aug 1950 14:30", "August 15, 1950 2:30 PM"
       * ISO "1950-08-15 14:30"
+      * the sheet's custom text format "Jan/1/1895 00:00:"
       * date-only variants of the above (has_time=False)
 
     A serial with no fractional part, or a text date with no time component,
@@ -140,6 +141,27 @@ def parse_birth(value):
         try:
             dt = datetime(year, month, day,
                           int(m.group(4) or 0), int(m.group(5) or 0))
+        except ValueError:
+            return text, None, False
+        display = dt.strftime("%-d %b %Y") + (dt.strftime(", %H:%M") if has_time else "")
+        return display, dt, has_time
+
+    # The original family sheet's custom text format, e.g.
+    # "Jan/1/1895 00:00:" (month/day/year, optional trailing colon/seconds).
+    m = re.match(
+        r"^([A-Za-z]{3,9})/(\d{1,2})/(\d{4})"
+        r"(?:[,\s]+(\d{1,2}):(\d{2})(?::\d{2})?)?\s*:?$",
+        text, re.IGNORECASE)
+    if m:
+        month = MONTHS.get(m.group(1).lower())
+        day, year = int(m.group(2)), int(m.group(3))
+        if not month:
+            return text, None, False
+        has_time = m.group(4) is not None
+        hour = int(m.group(4) or 0)
+        minute = int(m.group(5) or 0)
+        try:
+            dt = datetime(year, month, day, hour, minute)
         except ValueError:
             return text, None, False
         display = dt.strftime("%-d %b %Y") + (dt.strftime(", %H:%M") if has_time else "")

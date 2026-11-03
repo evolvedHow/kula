@@ -51,6 +51,35 @@ def sheet_data():
     }
 
 
+def authority_sheet_data():
+    return {
+        "Persons": table(
+            ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "EMAIL", "GENDER", "DOB",
+             "POB", "CUR_LOC", "STATUS", "DOD", "POD", "NOTES"],
+            [
+                ["P001", "Sam", "Sam Iyer", "P001-Sam", "", "Male", "29 Jun 2026",
+                 "Mumbai, Maharashtra, India", "", "Living", "", "", ""],
+                ["P002", "Ravi", "Ravi Iyer", "P002-Ravi", "", "Male", "1 Jan 1950",
+                 "Chennai", "", "Deceased", "19488.0", "", ""],
+                ["P003", "Meena", "Meena Iyer", "P003-Meena", "", "Female", "", "",
+                 "", "Living", "", "", ""],
+            ],
+        ),
+    }
+
+
+def authority_rows():
+    return [
+        {"tab": "Family", "row": 4, "name": "Sam Iyer", "dob": "29 June",
+         "pob": "Bombay (?)", "status": "Deceased", "dod": "17 May 2006",
+         "pod": "Chennai"},
+        {"tab": "Family", "row": 5, "name": "Ravi Iyer", "dob": "", "pob": "",
+         "status": "", "dod": "", "pod": "Coimbatore"},
+        {"tab": "Family", "row": 6, "name": "Meena Iyer", "dob": "", "pob": "?",
+         "status": "", "dod": "", "pod": ""},
+    ]
+
+
 class PidPrefixTests(unittest.TestCase):
     def test_pid_prefix_is_the_first_four_character_key(self):
         self.assertEqual(pid_prefix("P049-Sriram"), "P049")
@@ -139,6 +168,57 @@ class BuildTests(unittest.TestCase):
 
     def test_no_resolution_warnings_for_the_synthetic_sheet(self):
         self.assertEqual(self.warnings, [])
+
+
+class AuthorityMergeTests(unittest.TestCase):
+    def setUp(self):
+        self.data, self.warnings = build(
+            authority_sheet_data(),
+            {"site": {"default_person": "P001"}, "vedic": {"charts": False}},
+            authority_rows=authority_rows(),
+        )
+        self.people = {p["id"]: p for p in self.data["people"]}
+
+    def test_authority_partial_date_replaces_an_erroneous_sheets_year(self):
+        birth = self.people["P001"]["birth"]
+        self.assertEqual(birth["date"], "29 June")
+        self.assertIsNone(birth["year"])
+        self.assertEqual(self.people["P001"]["attributes"]["DOB"], "29 June")
+
+    def test_authority_place_status_dod_and_pod_are_applied(self):
+        person = self.people["P001"]
+        self.assertFalse(person["living"])
+        self.assertEqual(person["attributes"]["STATUS"], "Deceased")
+        self.assertEqual(person["birth"]["place"], "Bombay")
+        self.assertEqual(person["death"]["date"], "17 May 2006")
+        self.assertEqual(person["death"]["year"], 2006)
+        self.assertEqual(person["death"]["place"], "Chennai")
+
+    def test_current_dod_serial_is_shown_as_a_date(self):
+        person = self.people["P002"]
+        self.assertEqual(person["death"]["date"], "9 May 1953")
+        self.assertEqual(person["death"]["year"], 1953)
+
+    def test_blank_authority_cells_never_erase_current_data(self):
+        person = self.people["P002"]
+        self.assertEqual(person["birth"]["date"], "1 Jan 1950")
+        self.assertEqual(person["birth"]["place"], "Chennai")
+        # Only the non-empty POD overrides the current row here.
+        self.assertEqual(person["death"]["place"], "Coimbatore")
+
+    def test_blank_and_placeholder_values_do_not_create_data(self):
+        person = self.people["P003"]
+        self.assertIsNone(person["birth"])
+        self.assertIsNone(person["death"])
+        self.assertEqual(person["attributes"]["POB"], "")
+
+    def test_override_report_names_the_person_and_changed_fields(self):
+        report = "\n".join(self.warnings)
+        self.assertIn("Authority override P001 Sam Iyer", report)
+        self.assertIn("DOB '29 Jun 2026' -> '29 June'", report)
+        self.assertIn("STATUS 'Living' -> 'Deceased'", report)
+        self.assertIn("Authority override P002 Ravi Iyer", report)
+        self.assertNotIn("did not match", report)
 
 
 if __name__ == "__main__":

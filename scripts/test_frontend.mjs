@@ -188,6 +188,21 @@ test("living people publish locations at city level only", () => {
   }
 });
 
+test("partial birth and death records stay safe to render", () => {
+  for (const p of tree.people) {
+    for (const key of ["birth", "death"]) {
+      const record = p[key];
+      if (!record) continue;
+      assert.ok(record.date || record.place,
+        `${p.id} has an empty ${key} object`);
+      assert.ok(record.year == null || Number.isInteger(record.year),
+        `${p.id} has a non-integer ${key} year`);
+      if (record.date) assert.equal(typeof record.date, "string", `${p.id} ${key} date`);
+      if (record.place) assert.equal(typeof record.place, "string", `${p.id} ${key} place`);
+    }
+  }
+});
+
 test("the Vedic sheet is attached to a person without storing a derived pravara", () => {
   const vedicPeople = tree.people.filter((p) => p.vedic);
   assert.ok(vedicPeople.length >= 1, "at least one person should have Vedic data");
