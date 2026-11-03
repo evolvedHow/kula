@@ -88,6 +88,25 @@ narratives:
   story_tags:
     N0047: [I0000]
 
+# ---------------------------------------------------------------------
+#  Vedic data and birth charts (jadagam)
+# ---------------------------------------------------------------------
+vedic:
+  # When true, a sidereal birth chart is computed at import time for every
+  # person whose DOB includes a time AND who has a POB. The Jadagam button
+  # appears on their profile. Requires the optional venv dependencies:
+  #   python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+  # then run the importer with .venv/bin/python.
+  charts: true
+
+# Hand-verified geocodes for birth places. These always win over the cached
+# Nominatim lookups in private/geocache.json. Use them to fix a place that
+# resolves to the wrong town, or to pin down an unambiguous timezone.
+# places:
+#   Valliyur: { lat: 8.3833, lon: 77.6667, tz: "Asia/Kolkata" }
+#   Marietta: { lat: 33.9526, lon: -84.5499, tz: "America/New_York" }
+places: {}
+
 privacy:
   # Applied by scripts/build_site.py before data is written. Privacy is only
   # real if it happens at build time: the published JSON contains only what

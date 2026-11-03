@@ -100,6 +100,20 @@
     <footer class="footer" id="footer"></footer>
   </div>
 
+  <!-- Kept outside #app so the stage's overflow cannot clip it when printing. -->
+  <div class="chart-modal" id="chart-modal" hidden>
+    <div class="chart-dialog" role="dialog" aria-modal="true" aria-labelledby="chart-title" tabindex="-1">
+      <div class="chart-head">
+        <h2 id="chart-title">Jadagam</h2>
+        <div class="chart-actions">
+          <button class="btn" type="button" data-chart="print">Print</button>
+          <button class="close" type="button" data-chart="close" aria-label="Close">×</button>
+        </div>
+      </div>
+      <div class="chart-body" id="chart-body"></div>
+    </div>
+  </div>
+
   <script src="vendor/js-yaml.min.js"></script>
   <script type="module" src="assets/app.js"></script>
 </body>

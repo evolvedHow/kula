@@ -2,6 +2,7 @@ import { layoutTree } from "./layout.js";
 import { layoutGraph } from "./graph.js";
 import { relationship, sentenceFor } from "./relate.js";
 import { pravaraFor } from "./vedic.js";
+import { renderJadagam } from "./chart.js";
 
 const DEFAULTS = {
   site: { title: "Family Tree", subtitle: "", intro: "", footer: "", default_person: "home", repo: "" },
@@ -243,6 +244,7 @@ const VEDIC_LABELS = {
   parvata: "Parvata",
   rashi: "Rashi",
   nakshatra: "Nakshatra",
+  pada: "Pada",
   birth_time: "Birth time",
   birth_place: "Vedic birth place",
   chart_url: "Birth chart",
@@ -257,7 +259,9 @@ function vedicFor(person) {
   const concepts = VEDIC.concepts || {};
   const fields = [];
   const helps = {};
-  const seen = new Set(["gotra", "pravara"]);
+  // "chart" holds the computed jadagam payload; it renders via the Jadagam
+  // button, not as a text field.
+  const seen = new Set(["gotra", "pravara", "chart"]);
 
   const addHelp = (key, extraText = "", source = "") => {
     const concept = concepts[key];
@@ -322,6 +326,39 @@ function vedicFor(person) {
 
   if (!fields.length) return null;
   return { fields, helps, gotra, pravara };
+}
+
+// ---------- Jadagam (birth chart) modal ----------
+
+let chartReturnFocus = null;
+
+function openJadagam(pid) {
+  const p = IDX?.people[pid];
+  const chart = p?.vedic?.chart;
+  const modal = $("#chart-modal");
+  const body = $("#chart-body");
+  if (!p || !chart || !modal || !body) return;
+  const birthText = [p.birth?.date, p.birth?.place].filter(Boolean).join(" · ");
+  const html = renderJadagam(chart, {
+    name: p.name?.display || pid,
+    birthText,
+    disclaimer: VEDIC?.disclaimer || "",
+  });
+  if (!html) return;
+  $("#chart-title").textContent = `Jadagam — ${p.name?.display || pid}`;
+  body.innerHTML = html;
+  chartReturnFocus = document.activeElement;
+  modal.hidden = false;
+  document.body.classList.add("chart-open");
+  $(".chart-dialog", modal)?.focus();
+}
+
+function closeJadagam() {
+  const modal = $("#chart-modal");
+  if (modal) modal.hidden = true;
+  document.body.classList.remove("chart-open");
+  chartReturnFocus?.focus?.();
+  chartReturnFocus = null;
 }
 
 function googleAuthFor(person) {
@@ -760,6 +797,7 @@ function personPanelHTML(p) {
   if (state.meId === p.id) buttons.push(`<button class="btn" type="button" data-action="unme">Clear “me”</button>`);
   else if (!p.hidden) buttons.push(`<button class="btn" type="button" data-action="me" data-id="${esc(p.id)}">${esc(CFG.text.set_me)}</button>`);
   if (vedic) buttons.push(`<button class="btn vedic-btn" type="button" data-action="vedic" aria-expanded="false" aria-controls="vedic-${esc(p.id)}">Vedic roots</button>`);
+  if (p.vedic?.chart) buttons.push(`<button class="btn jadagam-btn" type="button" data-action="jadagam" data-id="${esc(p.id)}">Jadagam</button>`);
   parts.push(`<div class="actions">${buttons.join("")}</div>`);
 
   if (vedic) {
@@ -1306,6 +1344,9 @@ function bindEvents() {
       $("#panel").classList.toggle("vedic-open", open);
       return;
     }
+    if (t.dataset.action === "jadagam") {
+      return openJadagam(t.dataset.id);
+    }
     if (t.dataset.action === "close") return hidePanel();
     if (t.dataset.action === "me") {
       setMe(t.dataset.id);
@@ -1338,6 +1379,19 @@ function bindEvents() {
   $("#me-chip").addEventListener("click", () => {
     if (state.meId) go("tree", state.meId, { v: state.view, o: state.orientation });
   });
+
+  const chartModal = $("#chart-modal");
+  if (chartModal) {
+    chartModal.addEventListener("click", (e) => {
+      const action = e.target.closest("[data-chart]")?.dataset.chart;
+      if (action === "close") return closeJadagam();
+      if (action === "print") return window.print();
+      if (e.target === chartModal) closeJadagam();  // backdrop click
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !chartModal.hidden) closeJadagam();
+    });
+  }
 
   $("#auth").addEventListener("click", (e) => {
     const toggle = e.target.closest('[data-auth="toggle"]');

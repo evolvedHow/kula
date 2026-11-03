@@ -27,6 +27,15 @@ profile panels keep working.
 
 Pravara is deliberately NOT written here. It is derived from gotra at runtime
 by docs/assets/vedic.js, so a stale PRAVARA column can never disagree.
+
+Birth charts (jadagam): when a person's DOB includes a time AND they have a
+POB, a sidereal (Lahiri) chart is computed with Swiss Ephemeris and stored at
+person.vedic.chart. The engine also supplies the Moon's rashi / nakshatra /
+pada. Enter DOB as a real date-time cell in Google Sheets (recommended) or as
+text like "15 Aug 1950 14:30". Charts need the optional dependencies:
+
+    python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+    .venv/bin/python scripts/import_sheet.py
 """
 
 import argparse
@@ -42,6 +51,14 @@ import zipfile
 from pathlib import Path
 
 import yaml
+
+# Horoscope (jadagam) support lives in sibling modules. They import cleanly
+# even without the optional dependencies (pyswisseph / timezonefinder); chart
+# computation is simply skipped with a warning in that case.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import geocode as geocode_mod  # noqa: E402
+import horoscope  # noqa: E402
+from horoscope import parse_birth  # noqa: E402
 
 DEFAULT_TABS = {
     "persons": "Persons",
@@ -180,18 +197,6 @@ def records(table, required):
 def parse_year(value):
     m = re.search(r"\b(1[5-9]\d\d|20\d\d)\b", value or "")
     return int(m.group(1)) if m else None
-
-
-def parse_date(value):
-    """Keep the sheet's friendly date text and extract a year when possible."""
-    text = (value or "").strip()
-    if not text:
-        return None, None
-    year = parse_year(text)
-    if year:
-        return text, year
-    # "29 June" has no year, but keep it readable.
-    return text, None
 
 
 def parse_dmy(value):
@@ -356,6 +361,7 @@ def build(sheets, config, tabs=None):
         for p in persons_raw
     }
     warnings = []
+    birth_meta = {}  # pid -> (naive local birth datetime, has_time)
 
     vedic_by_pid = {}
     for row in vedic_raw:
@@ -460,13 +466,31 @@ def build(sheets, config, tabs=None):
         given, surname = split_name(display)
         alternates = [known] if known and known != display else []
         living = (row.get("STATUS") or "").strip().lower() != "deceased"
-        dob, birth_year = parse_date(row.get("DOB"))
+        # parse_birth turns Sheets date-time serials and text dates into a
+        # friendly display string, and keeps the datetime for the horoscope.
+        dob, dob_dt, dob_has_time = parse_birth(row.get("DOB"))
+        birth_year = dob_dt.year if dob_dt else parse_year(row.get("DOB") or "")
+        if dob_dt and dob_has_time:
+            birth_meta[pid] = (dob_dt, True)
+        # Google Sheets gives a day+month typed into a date cell the current
+        # year. Flag those so an unknown birth year is not published as 2026.
+        if (dob_dt and not dob_has_time and dob_dt.year == dt.date.today().year
+                and not (row.get("DOB") or "").strip().lower().startswith(str(dob_dt.year))):
+            warnings.append(
+                f"{pid}: DOB '{dob}' has the current year but no time; if the "
+                f"year is unknown (a Sheets default), enter the day and month "
+                f"as text, e.g. '29 June'")
         pob = city_only(row.get("POB")) if living else (row.get("POB") or "").strip()
         cur = city_only(row.get("CUR_LOC")) if living else (row.get("CUR_LOC") or "").strip()
         events = []
         if cur:
             events.append({"type": "Current location", "role": "", "date": None,
                            "year": None, "place": cur, "description": ""})
+        # Keep the original sheet columns for reference, but show Sheets
+        # date-time serials (e.g. "16827.0") as friendly dates.
+        attrs = dict(row)
+        if dob:
+            attrs["DOB"] = dob
         person = {
             "id": pid,
             "gender": gender_code(row.get("GENDER")),
@@ -486,7 +510,7 @@ def build(sheets, config, tabs=None):
             "parent_family": parent_family.get(pid),
             "notes": [],
             "stories": [],
-            "attributes": dict(row),
+            "attributes": attrs,
             "ref_name": make_ref(pid, known) or (row.get("REF_NAME") or "").strip() or pid,
         }
         if pid in vedic_by_pid:
@@ -599,6 +623,52 @@ def build(sheets, config, tabs=None):
                 if is_story:
                     person_by_pid[pid]["stories"].append(nid)
 
+    # --- Birth charts (jadagam) --------------------------------------------
+    # Only when DOB has a date AND time AND the person has a POB. The engine
+    # (Swiss Ephemeris, Lahiri ayanamsa) supplies the lagna, graha positions
+    # and the Moon's rashi/nakshatra/pada; these engine values win over the
+    # sheet (except NAKSHATRA, which may carry family spellings).
+    vedic_cfg = (config.get("vedic") or {})
+    charts_enabled = vedic_cfg.get("charts", True)
+    places_cfg = config.get("places") or {}
+    offline = bool(config.get("_offline"))
+    geocache_path = config.get("_geocache") or "private/geocache.json"
+    if charts_enabled and birth_meta:
+        if horoscope.swe is None:
+            warnings.append(
+                "Birth charts requested but pyswisseph is not installed; "
+                "run with .venv/bin/python (see requirements.txt)")
+            charts_enabled = False
+    if charts_enabled:
+        geocode_warned = set()
+
+        def geo_warn(msg):
+            if msg not in geocode_warned:
+                geocode_warned.add(msg)
+                warnings.append(msg)
+
+        for person in people:
+            meta = birth_meta.get(person["id"])
+            pob = (person.get("birth") or {}).get("place") or ""
+            if not meta or not pob:
+                continue
+            birth_dt, _ = meta
+            geo = geocode_mod.geocode(
+                pob, config_places=places_cfg, cache_path=geocache_path,
+                offline=offline, warn=geo_warn)
+            if not geo:
+                continue
+            chart = horoscope.compute_chart(
+                birth_dt, geo["lat"], geo["lon"], geo.get("tz") or "Asia/Kolkata")
+            if not chart:
+                continue
+            vedic = person.setdefault("vedic", {})
+            vedic["chart"] = chart
+            vedic["rashi"] = chart["moon"]["rashi"]
+            vedic["pada"] = chart["moon"]["pada"]
+            if not (vedic.get("nakshatra") or "").strip():
+                vedic["nakshatra"] = chart["moon"]["nakshatra"]
+
     home = (config.get("site") or {}).get("default_person")
     if home not in person_by_pid:
         home = people[0]["id"] if people else None
@@ -609,6 +679,7 @@ def build(sheets, config, tabs=None):
         "families": len(families),
         "stories": sum(1 for n in notes if n["is_story"]),
         "notes": len(notes),
+        "charts": sum(1 for p in people if (p.get("vedic") or {}).get("chart")),
         "places": len({p["birth"]["place"] for p in people
                        if p.get("birth") and p["birth"].get("place")} |
                       {p.get("current_location") for p in people if p.get("current_location")}),
@@ -641,10 +712,14 @@ def main(argv=None):
     ap.add_argument("--out", default="docs/data/tree.json")
     ap.add_argument("--cache", default=None,
                     help="Where to keep a downloaded workbook for offline rebuilds (overrides source.cache)")
+    ap.add_argument("--offline", action="store_true",
+                    help="Do not hit the network for geocoding; use only the cache and config places")
     args = ap.parse_args(argv)
 
     cfg = yaml.safe_load(Path(args.config).read_text(encoding="utf-8")) if Path(args.config).exists() else {}
     cfg = cfg or {}
+    cfg["_offline"] = args.offline
+    cfg["_geocache"] = str(Path(args.config).resolve().parent.parent / "private" / "geocache.json")
     source = cfg.get("source") or {}
     tabs = source.get("tabs") or {}
     url = args.url or source.get("sheet_url") or ""
@@ -678,6 +753,7 @@ def main(argv=None):
     log(f"  unions: {data['counts']['families']}")
     log(f"  graph: {len(data['graph']['nodes'])} nodes, {len(data['graph']['edges'])} edges")
     log(f"  vedic: {sum(1 for p in data['people'] if p.get('vedic'))} people")
+    log(f"  charts: {data['counts']['charts']} birth charts")
     for warning in warnings:
         log(f"  WARNING: {warning}")
     return 0

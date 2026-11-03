@@ -1,6 +1,6 @@
 {
  "schema": "kula.site/2.0",
- "generated_at": "2026-11-02T17:26:37+00:00",
+ "generated_at": "2026-11-03T03:06:23+00:00",
  "source": "Google Sheet",
  "home": "I000",
  "counts": {
@@ -9,6 +9,7 @@
   "families": 42,
   "stories": 1,
   "notes": 48,
+  "charts": 0,
   "places": 33
  },
  "people": [
@@ -1402,8 +1403,8 @@
     "alternates": []
    },
    "birth": {
-    "date": "29 June",
-    "year": null,
+    "date": "29 Jun 2026",
+    "year": 2026,
     "place": "Dindigul"
    },
    "death": null,
@@ -1422,7 +1423,7 @@
     "REF_NAME": "P027-Venkatesh",
     "EMAIL": "",
     "GENDER": "Male",
-    "DOB": "29 June",
+    "DOB": "29 Jun 2026",
     "POB": "Dindigul",
     "CUR_LOC": "",
     "STATUS": "Living",
@@ -1904,7 +1905,15 @@
     "STATUS": "Living",
     "NOTES": ""
    },
-   "ref_name": "P039-Srikumar"
+   "ref_name": "P039-Srikumar",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "nakshatra": "Rohini",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "P040",
@@ -2056,7 +2065,15 @@
     "STATUS": "Living",
     "NOTES": ""
    },
-   "ref_name": "P043-Ajoy"
+   "ref_name": "P043-Ajoy",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "nakshatra": "Rohini",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "P044",
@@ -2453,8 +2470,8 @@
     ]
    },
    "birth": {
-    "date": "14 Oct",
-    "year": null,
+    "date": "14 Oct 2026",
+    "year": 2026,
     "place": ""
    },
    "death": null,
@@ -2484,7 +2501,7 @@
     "REF_NAME": "P052-Priyal",
     "EMAIL": "",
     "GENDER": "Female",
-    "DOB": "14 Oct",
+    "DOB": "14 Oct 2026",
     "POB": "",
     "CUR_LOC": "Manhattan",
     "STATUS": "Living",
@@ -3044,7 +3061,15 @@
     "STATUS": "Living",
     "NOTES": ""
    },
-   "ref_name": "P064-Vicky"
+   "ref_name": "P064-Vicky",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "nakshatra": "Rohini",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "P065",
@@ -3802,8 +3827,8 @@
     ]
    },
    "birth": {
-    "date": "10 August",
-    "year": null,
+    "date": "10 Aug 2026",
+    "year": 2026,
     "place": "Perumbavoor"
    },
    "death": null,
@@ -3822,7 +3847,7 @@
     "REF_NAME": "P084-Gayathri",
     "EMAIL": "",
     "GENDER": "Female",
-    "DOB": "10 August",
+    "DOB": "10 Aug 2026",
     "POB": "Perumbavoor",
     "CUR_LOC": "",
     "STATUS": "Living",
@@ -3842,8 +3867,8 @@
     "alternates": []
    },
    "birth": {
-    "date": "25 Sep",
-    "year": null,
+    "date": "25 Sep 2026",
+    "year": 2026,
     "place": "Narsipatnam"
    },
    "death": null,
@@ -3865,7 +3890,7 @@
     "REF_NAME": "P085-S V Ramachandran",
     "EMAIL": "",
     "GENDER": "Male",
-    "DOB": "25 Sep",
+    "DOB": "25 Sep 2026",
     "POB": "Narsipatnam",
     "CUR_LOC": "",
     "STATUS": "Deceased",
@@ -3929,8 +3954,8 @@
     "alternates": []
    },
    "birth": {
-    "date": "15 Aug",
-    "year": null,
+    "date": "15 Aug 2026",
+    "year": 2026,
     "place": "Ponnur"
    },
    "death": null,
@@ -3952,7 +3977,7 @@
     "REF_NAME": "P087-K Venkateswara Rao",
     "EMAIL": "",
     "GENDER": "Male",
-    "DOB": "15 Aug",
+    "DOB": "15 Aug 2026",
     "POB": "Ponnur",
     "CUR_LOC": "",
     "STATUS": "Living",
@@ -4016,8 +4041,8 @@
     "alternates": []
    },
    "birth": {
-    "date": "10 Nov",
-    "year": null,
+    "date": "10 Nov 2026",
+    "year": 2026,
     "place": "Ponnur"
    },
    "death": null,
@@ -4039,7 +4064,7 @@
     "REF_NAME": "P089-Priya",
     "EMAIL": "",
     "GENDER": "Female",
-    "DOB": "10 Nov",
+    "DOB": "10 Nov 2026",
     "POB": "Ponnur",
     "CUR_LOC": "",
     "STATUS": "Living",
@@ -4061,8 +4086,8 @@
     ]
    },
    "birth": {
-    "date": "16 Oct",
-    "year": null,
+    "date": "16 Oct 2026",
+    "year": 2026,
     "place": "Coimbatore"
    },
    "death": null,
@@ -4081,7 +4106,7 @@
     "REF_NAME": "P090-Anahita",
     "EMAIL": "",
     "GENDER": "Female",
-    "DOB": "16 Oct",
+    "DOB": "16 Oct 2026",
     "POB": "Coimbatore",
     "CUR_LOC": "",
     "STATUS": "Living",
@@ -4213,7 +4238,15 @@
     "STATUS": "Living",
     "NOTES": ""
    },
-   "ref_name": "P093-Shreedhar"
+   "ref_name": "P093-Shreedhar",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "nakshatra": "Rohini",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "P094",
@@ -4421,7 +4454,15 @@
     "STATUS": "Living",
     "NOTES": ""
    },
-   "ref_name": "P098-Shreekant"
+   "ref_name": "P098-Shreekant",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "nakshatra": "Rohini",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "P099",
@@ -4503,7 +4544,15 @@
     "STATUS": "Living",
     "NOTES": ""
    },
-   "ref_name": "P100-Kurran"
+   "ref_name": "P100-Kurran",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "nakshatra": "Rohini",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "P101",
@@ -4543,7 +4592,15 @@
     "STATUS": "Living",
     "NOTES": ""
    },
-   "ref_name": "P101-Rajat"
+   "ref_name": "P101-Rajat",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "nakshatra": "Rohini",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "P102",
@@ -4585,7 +4642,15 @@
     "STATUS": "Living",
     "NOTES": ""
    },
-   "ref_name": "P102-Srinivas"
+   "ref_name": "P102-Srinivas",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "nakshatra": "Rohini",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "P103",
@@ -7507,7 +7572,7 @@
      "REF_NAME": "P027-Venkatesh",
      "EMAIL": "",
      "GENDER": "Male",
-     "DOB": "29 June",
+     "DOB": "29 Jun 2026",
      "POB": "Dindigul",
      "CUR_LOC": "",
      "STATUS": "Living",
@@ -7982,7 +8047,7 @@
      "REF_NAME": "P052-Priyal",
      "EMAIL": "",
      "GENDER": "Female",
-     "DOB": "14 Oct",
+     "DOB": "14 Oct 2026",
      "POB": "",
      "CUR_LOC": "Manhattan",
      "STATUS": "Living",
@@ -8590,7 +8655,7 @@
      "REF_NAME": "P084-Gayathri",
      "EMAIL": "",
      "GENDER": "Female",
-     "DOB": "10 August",
+     "DOB": "10 Aug 2026",
      "POB": "Perumbavoor",
      "CUR_LOC": "",
      "STATUS": "Living",
@@ -8609,7 +8674,7 @@
      "REF_NAME": "P085-S V Ramachandran",
      "EMAIL": "",
      "GENDER": "Male",
-     "DOB": "25 Sep",
+     "DOB": "25 Sep 2026",
      "POB": "Narsipatnam",
      "CUR_LOC": "",
      "STATUS": "Deceased",
@@ -8647,7 +8712,7 @@
      "REF_NAME": "P087-K Venkateswara Rao",
      "EMAIL": "",
      "GENDER": "Male",
-     "DOB": "15 Aug",
+     "DOB": "15 Aug 2026",
      "POB": "Ponnur",
      "CUR_LOC": "",
      "STATUS": "Living",
@@ -8685,7 +8750,7 @@
      "REF_NAME": "P089-Priya",
      "EMAIL": "",
      "GENDER": "Female",
-     "DOB": "10 Nov",
+     "DOB": "10 Nov 2026",
      "POB": "Ponnur",
      "CUR_LOC": "",
      "STATUS": "Living",
@@ -8704,7 +8769,7 @@
      "REF_NAME": "P090-Anahita",
      "EMAIL": "",
      "GENDER": "Female",
-     "DOB": "16 Oct",
+     "DOB": "16 Oct 2026",
      "POB": "Coimbatore",
      "CUR_LOC": "",
      "STATUS": "Living",

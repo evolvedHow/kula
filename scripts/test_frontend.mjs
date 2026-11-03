@@ -25,6 +25,8 @@ const { layoutTree } = await loadModule("assets/layout.js");
 const { layoutGraph } = await loadModule("assets/graph.js");
 const { relationship, sentenceFor } = await loadModule("assets/relate.js");
 const { normalizeGotra, pravaraFor } = await loadModule("assets/vedic.js");
+const { RASI_BOXES, GRAHA_ORDER, degText, renderSouthIndianChart, renderChartReport, renderJadagam } =
+  await loadModule("assets/chart.js");
 
 const vedic = JSON.parse(read("data/vedic.json"));
 
@@ -325,7 +327,110 @@ test("every gotra in vedic.json has a well-formed pravara and concept help", () 
     assert.ok(["Tryarsheya", "Pancharsheya", "Dvarsheya"].includes(entry.type), `${key} has an unknown pravara type`);
     assert.ok(vedic.concepts[entry.type.toLowerCase()], `${key} type should have concept help`);
   }
-  for (const key of ["gotra", "pravara", "rashi", "nakshatra"]) {
+  for (const key of ["gotra", "pravara", "rashi", "nakshatra", "pada", "lagna", "jadagam"]) {
     assert.ok(vedic.concepts[key]?.text, `concept ${key} needs help text`);
+  }
+});
+
+// ---------- Jadagam (birth chart) ----------
+
+const SAMPLE_CHART = {
+  engine: "swisseph-lahiri/test",
+  lagna: "Vrishabha",
+  lagna_deg: 3.25,
+  moon: { rashi: "Tula", nakshatra: "Swati", pada: 4 },
+  planets: {
+    Su: { name: "Sun", rasi: "Dhanus", deg: 16.52, nakshatra: "Purva Ashadha", pada: 1, retro: false },
+    Mo: { name: "Moon", rasi: "Tula", deg: 19.47, nakshatra: "Swati", pada: 4, retro: false },
+    Ma: { name: "Mars", rasi: "Kumbha", deg: 4.11, nakshatra: "Dhanishta", pada: 4, retro: false },
+    Me: { name: "Mercury", rasi: "Dhanus", deg: 8.04, nakshatra: "Mula", pada: 3, retro: false },
+    Ju: { name: "Jupiter", rasi: "Mesha", deg: 1.4, nakshatra: "Ashwini", pada: 1, retro: false },
+    Ve: { name: "Venus", rasi: "Vrischika", deg: 7.71, nakshatra: "Anuradha", pada: 2, retro: false },
+    Sa: { name: "Saturn", rasi: "Mesha", deg: 16.54, nakshatra: "Bharani", pada: 1, retro: true },
+    Ra: { name: "Rahu", rasi: "Kataka", deg: 11.19, nakshatra: "Pushya", pada: 3, retro: true },
+    Ke: { name: "Ketu", rasi: "Makara", deg: 11.19, nakshatra: "Shravana", pada: 1, retro: true },
+  },
+  rasis: {
+    Mesha: ["Ju", "Sa"], Vrishabha: ["La"], Dhanus: ["Su", "Me"], Tula: ["Mo"],
+    Kumbha: ["Ma"], Vrischika: ["Ve"], Kataka: ["Ra"], Makara: ["Ke"],
+  },
+};
+
+test("the South Indian chart fixes the twelve rasis to their traditional boxes", () => {
+  assert.equal(RASI_BOXES.length, 12);
+  const at = (row, col) => RASI_BOXES.find((b) => b.row === row && b.col === col)?.sign;
+  assert.equal(at(0, 1), "Mesha");      // top row, second box
+  assert.equal(at(0, 0), "Meena");      // top-left corner
+  assert.equal(at(0, 3), "Mithuna");    // top-right corner
+  assert.equal(at(3, 3), "Kanya");      // bottom-right corner
+  assert.equal(at(3, 0), "Dhanus");     // bottom-left corner
+  assert.equal(at(3, 2), "Tula");
+  assert.equal(at(2, 0), "Makara");
+  const signs = new Set(RASI_BOXES.map((b) => b.sign));
+  assert.equal(signs.size, 12);
+});
+
+test("the chart renderer places grahas in their rasis and marks the lagna", () => {
+  const html = renderSouthIndianChart(SAMPLE_CHART, { name: "Test Person", birthText: "1 Jan 2000, 12:00 · Chennai" });
+  // Every rasi box appears exactly once with its grid position.
+  for (const { sign, row, col } of RASI_BOXES) {
+    assert.ok(html.includes(`data-sign="${sign}"`), `${sign} box missing`);
+    assert.ok(html.includes(`grid-row:${row + 1}`), `row ${row + 1} missing`);
+    assert.ok(html.includes(`grid-column:${col + 1}`), `col ${col + 1} missing`);
+  }
+  // Sun and Mercury are in Dhanus.
+  const box = html.match(/<div class="rasi-box[^"]*"[^>]*data-sign="Dhanus"[\s\S]*?<\/div>/);
+  assert.ok(box, "Dhanus box not found");
+  assert.ok(box[0].includes("graha-Su"), "Sun should be in Dhanus");
+  assert.ok(box[0].includes("graha-Me"), "Mercury should be in Dhanus");
+  // Lagna box carries the La chip and the lagna class.
+  assert.ok(html.includes('rasi-box lagna'), "lagna box should have the lagna class");
+  assert.ok(html.includes(">La<"), "lagna box should contain the La chip");
+  // Center panel shows name and lagna.
+  assert.ok(html.includes("Test Person"));
+  assert.ok(html.includes("Lagna: Vrishabha"));
+  // Retrograde graha is marked.
+  assert.ok(html.includes('class="retro"'), "retrograde marker missing");
+});
+
+test("the report lists lagna plus all nine grahas in traditional order", () => {
+  const html = renderChartReport(SAMPLE_CHART, { disclaimer: "Test disclaimer." });
+  assert.ok(html.includes("Moon rashi"), "summary missing moon rashi");
+  assert.ok(html.includes("Swati"), "summary missing janma nakshatra");
+  assert.ok(html.includes("pada 4"), "summary missing pada");
+  const bodyRows = [...html.matchAll(/<th scope="row">([^<]+)<\/th>/g)].map((m) => m[1]);
+  assert.deepEqual(bodyRows, ["Lagna", ...GRAHA_ORDER.map((c) => SAMPLE_CHART.planets[c].name)]);
+  assert.ok(html.includes("Retrograde"), "retrograde column should show for Saturn");
+  assert.ok(html.includes("Test disclaimer."));
+  assert.ok(html.includes("Lahiri"));
+});
+
+test("degText renders degrees as deg°min′ and renderJadagam combines grid + report", () => {
+  assert.equal(degText(16.52), "16°31′");
+  assert.equal(degText(0), "0°00′");
+  const html = renderJadagam(SAMPLE_CHART, { name: "X" });
+  assert.ok(html.includes('class="jadagam"'));
+  assert.ok(html.includes("si-chart"));
+  assert.ok(html.includes("chart-report"));
+  assert.equal(renderJadagam(null), "");
+});
+
+test("chart payloads in tree.json are well formed when present", () => {
+  const withCharts = tree.people.filter((p) => p.vedic?.chart);
+  for (const p of withCharts) {
+    const chart = p.vedic.chart;
+    assert.ok(chart.lagna, `${p.id} chart needs a lagna`);
+    assert.ok(chart.moon?.rashi && chart.moon?.nakshatra, `${p.id} chart needs moon rashi/nakshatra`);
+    assert.ok(chart.moon.pada >= 1 && chart.moon.pada <= 4, `${p.id} moon pada out of range`);
+    assert.equal(Object.keys(chart.planets).length, 9, `${p.id} chart needs nine grahas`);
+    const ra = chart.planets.Ra, ke = chart.planets.Ke;
+    const rasis = RASI_BOXES.map((b) => b.sign);
+    assert.equal(
+      (rasis.indexOf(ke.rasi) - rasis.indexOf(ra.rasi) + 12) % 12, 6,
+      `${p.id}: Ketu must be opposite Rahu`,
+    );
+    // Engine-derived vedic fields mirror the chart.
+    assert.equal(p.vedic.rashi, chart.moon.rashi, `${p.id} rashi should come from the engine`);
+    assert.equal(p.vedic.pada, chart.moon.pada, `${p.id} pada should come from the engine`);
   }
 });

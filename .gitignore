@@ -2,3 +2,4 @@ private/
 *:Zone.Identifier
 __pycache__/
 *.pyc
+.venv/

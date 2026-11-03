@@ -102,6 +102,21 @@
       "title": "Acharya Thirumaligai",
       "text": "The hereditary spiritual preceptor's lineage (matham or pontiff seat) to which a Sri Vaishnava family belongs. The Acharya provides spiritual guidance, initiates disciples, and performs key religious ceremonies.",
       "source": "https://en.wikipedia.org/wiki/Acharya"
+    },
+    "pada": {
+      "title": "Pada",
+      "text": "A quarter of a nakshatra. Each of the 27 nakshatras spans 13°20' of the zodiac and is divided into four padas of 3°20' each. The pada of the birth Moon refines the nakshatra reading and is used in naming syllables.",
+      "source": "https://en.wikipedia.org/wiki/Nakshatra#List_of_nakshatras"
+    },
+    "lagna": {
+      "title": "Lagna",
+      "text": "The ascendant: the rasi rising on the eastern horizon at the moment and place of birth. It anchors the South Indian chart and changes roughly every two hours, which is why an accurate birth time matters.",
+      "source": "https://en.wikipedia.org/wiki/Ascendant"
+    },
+    "jadagam": {
+      "title": "Jadagam",
+      "text": "The Vedic birth chart (janma kundali). In the South Indian style the twelve rasis are fixed in a square grid and the grahas are placed in the rasis they occupied at birth; the lagna box carries the ascendant mark. Positions are sidereal (Lahiri ayanamsa), computed with Swiss Ephemeris.",
+      "source": "https://en.wikipedia.org/wiki/Hindu_astrology"
     }
   },
   "gotras": {

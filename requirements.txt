@@ -1,1 +1,8 @@
+# Core importer dependency (reads docs/config.yml)
 PyYAML>=6.0
+# Birth charts (jadagam) — optional but recommended.
+# pyswisseph: Swiss Ephemeris bindings (sidereal/Lahiri planetary positions).
+# timezonefinder: offline lat/lon -> IANA timezone lookup for birthplaces.
+# Without these the importer still works; charts are skipped with a warning.
+pyswisseph>=2.10
+timezonefinder>=6.2

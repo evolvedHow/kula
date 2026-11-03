@@ -9,29 +9,36 @@ The older Gramps importer remains available as a fallback.
 ## Updating the tree
 
 1. Make sure the sheet is shared as **Anyone with the link can view**.
-2. Rebuild the public data (requires Python 3 and PyYAML):
+2. Set up the importer environment once (a virtualenv keeps the optional
+   horoscope dependencies isolated):
 
    ```
-   pip install -r requirements.txt
-   python3 scripts/import_sheet.py
+   python3 -m venv .venv
+   .venv/bin/pip install -r requirements.txt
+   ```
+
+3. Rebuild the public data:
+
+   ```
+   .venv/bin/python scripts/import_sheet.py
    ```
 
    The importer downloads the workbook, caches it in
    `private/relatives-sheet.xlsx`, and writes `docs/data/tree.json`. It reads
-   the `Persons`, `Vedic`, `$Config`, `Unions` and `Offsprings` tabs directly.
-   A local `.xlsx` can be used instead:
+   the `Persons`, `Vedic`, `$Config`, `Unions`, `Offsprings` and `Stories` tabs
+   directly. A local `.xlsx` can be used instead:
 
    ```
-   python3 scripts/import_sheet.py private/relatives.xlsx
+   .venv/bin/python scripts/import_sheet.py private/relatives.xlsx
    ```
 
-3. Run the front-end and importer tests, then commit and push the changed
+4. Run the front-end and importer tests, then commit and push the changed
    data/config:
 
    ```
    node --test scripts/test_frontend.mjs
-   python3 -m unittest scripts/test_import_sheet.py
-   git add docs scripts README.md
+   .venv/bin/python -m unittest scripts.test_import_sheet scripts.test_horoscope
+   git add docs scripts README.md requirements.txt
    git commit -m "Update family data"
    git push
    ```
@@ -146,6 +153,77 @@ Built-in mappings:
 Add aliases (for example `sreevatsa` or `kasyapa`) in the same file. Unknown
 gotras show no invented pravara. The help text and source links also live in
 `docs/data/vedic.json` under `concepts`.
+
+## Birth charts (jadagam)
+
+When a person's birth details are complete, their profile also shows a
+**Jadagam** button. It opens a South Indian square chart plus a positions
+report, with a **Print** button for a clean paper copy.
+
+A chart is computed only when **all three** are present:
+
+- a **DOB with a time**
+- a **POB** (birth place)
+- the `vedic.charts` setting enabled in `docs/config.yml` (on by default)
+
+Otherwise there is no button — date-only births simply show their date.
+
+### Entering birth details
+
+The safest format is a **real Google Sheets date-time cell**:
+
+1. Select the DOB column → **Format → Number → Date time**
+2. Enter values like `15/08/1950 14:30` (dd/mm/yyyy, 24-hour, **local time at
+   the birthplace**)
+
+Text dates also work as a fallback: `15 Aug 1950 14:30`, `August 15, 1950
+2:30 PM`, or ISO `1950-08-15T14:30`. A time of exactly `00:00` means "no time
+given", so no chart is produced. Dates before 1927 must be entered as text
+(Sheets serial numbers for those are only four digits and are ambiguous with
+plain years).
+
+Place names are geocoded automatically from the `POB` column. To pin a place
+that resolves to the wrong town, or to force a timezone, add an override:
+
+```yaml
+places:
+  Valliyur: { lat: 8.3833, lon: 77.6667, tz: "Asia/Kolkata" }
+  Marietta: { lat: 33.9526, lon: -84.5499, tz: "America/New_York" }
+```
+
+Overrides always win over the `private/geocache.json` cache, which stores
+earlier Nominatim lookups (one request per second). The timezone falls back to
+offline lookup from the coordinates, then to `Asia/Kolkata`.
+
+### How it is computed
+
+Charts are computed **at import time** — the site stays fully static with no
+backend. The engine is Swiss Ephemeris (`pyswisseph`) using the **Lahiri
+ayanamsa** (sidereal), with the nine grahas (Sun through Ketu, Rahu as the mean
+node) and the lagna from the birth moment. It also supplies the Moon's rashi,
+nakshatra and pada, so the sheet no longer needs `RASHI` or `PADA` columns.
+The computed payload is stored at `person.vedic.chart`; `counts.charts` in
+`tree.json` reports how many were built.
+
+### Privacy note
+
+A birth chart needs a **birth time and place**, and for living people that
+information becomes part of the published `docs/data/tree.json`. If that is a
+concern, leave their DOB time blank and no chart is generated. Locations are
+already reduced to city level for living people.
+
+### Troubleshooting
+
+- **Charts are 0 after import:** DOB cells likely have dates but no times.
+- **A DOB shows the current year with no time:** Google Sheets assigns the
+  current year when you type only a day and month into a date cell. If the
+  year is unknown, enter it as text instead (for example `29 June`); the
+  importer warns about these.
+- **"pyswisseph is not installed" warning:** run the importer with the
+  project virtualenv (`.venv/bin/python scripts/import_sheet.py`), not the
+  system `python3`.
+- **A place cannot be geocoded:** add it under `places:` in
+  `docs/config.yml`. Use `--offline` to avoid network lookups entirely.
 
 ## Configuration
 
