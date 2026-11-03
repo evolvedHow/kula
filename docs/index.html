@@ -11,7 +11,7 @@
 </head>
 <body>
   <div id="app" class="app" data-view="loading">
-    <header class="topbar">
+    <header class="topbar" id="topbar">
       <a class="brand" href="#/tree" aria-label="Home">
         <img class="brand-logo" src="assets/kula.jpg" width="44" height="44" alt="Kula logo">
         <span class="brand-text">
@@ -19,17 +19,22 @@
           <span class="brand-subtitle" id="site-subtitle"></span>
         </span>
       </a>
-      <nav class="tabs" id="tabs" aria-label="Sections">
-        <a href="#/tree" data-tab="tree" id="tab-tree">Tree</a>
-        <a href="#/people" data-tab="people" id="tab-people">Everyone</a>
-        <a href="#/stories" data-tab="stories" id="tab-stories" hidden>Stories</a>
-      </nav>
-      <div class="search" role="search">
-        <input id="search" type="search" autocomplete="off" placeholder="Find a family member…" aria-label="Search people">
-        <ul id="search-results" class="search-results" role="listbox" hidden></ul>
+      <button class="topbar-toggle" id="topbar-toggle" type="button" aria-expanded="false" aria-controls="topbar-tray" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topbar-tray" id="topbar-tray">
+        <nav class="tabs" id="tabs" aria-label="Sections">
+          <a href="#/tree" data-tab="tree" id="tab-tree">Tree</a>
+          <a href="#/people" data-tab="people" id="tab-people">Everyone</a>
+          <a href="#/stories" data-tab="stories" id="tab-stories" hidden>Stories</a>
+        </nav>
+        <div class="search" role="search">
+          <input id="search" type="search" autocomplete="off" placeholder="Find a family member…" aria-label="Search people">
+          <ul id="search-results" class="search-results" role="listbox" hidden></ul>
+        </div>
+        <button class="me-chip" id="me-chip" type="button" hidden></button>
+        <div class="auth" id="auth" hidden></div>
       </div>
-      <button class="me-chip" id="me-chip" type="button" hidden></button>
-      <div class="auth" id="auth" hidden></div>
     </header>
 
     <main class="main">
@@ -41,6 +46,7 @@
               <button type="button" data-view="ancestors" role="tab">Ancestors</button>
               <button type="button" data-view="descendants" role="tab">Descendants</button>
               <button type="button" data-view="graph" role="tab">Relatives</button>
+              <button type="button" data-view="wheel" role="tab">Wheel</button>
             </div>
             <div class="segmented" id="orientation-switch" role="tablist" aria-label="Tree orientation">
               <button type="button" data-orientation="vertical" role="tab">Vertical</button>
@@ -58,6 +64,7 @@
             <div class="canvas" id="canvas">
               <svg class="links" id="links" aria-hidden="true"></svg>
               <div class="cards" id="cards"></div>
+              <div class="wheel-stage" id="wheel-stage" hidden></div>
             </div>
           </div>
           <div class="empty" id="tree-empty" hidden>
@@ -115,6 +122,7 @@
   </div>
 
   <script src="vendor/js-yaml.min.js"></script>
+  <script src="vendor/d3-hierarchy.min.js"></script>
   <script type="module" src="assets/app.js"></script>
 </body>
 </html>

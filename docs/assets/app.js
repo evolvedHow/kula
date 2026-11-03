@@ -1,5 +1,6 @@
 import { layoutTree } from "./layout.js";
 import { layoutGraph } from "./graph.js";
+import { layoutWheel, renderWheelSVG } from "./wheel.js";
 import { relationship, sentenceFor } from "./relate.js";
 import { pravaraFor } from "./vedic.js";
 import { renderJadagam } from "./chart.js";
@@ -22,7 +23,7 @@ const DEFAULTS = {
     stories_tab: "Stories", set_me: "This is me", view_hourglass: "Both",
     view_ancestors: "Ancestors", view_descendants: "Descendants",
     view_graph: "Relatives",
-    view_vertical: "Vertical", view_horizontal: "Horizontal", tagged_people: "Tagged relatives",
+    view_vertical: "Vertical", view_horizontal: "Horizontal", view_wheel: "Wheel", tagged_people: "Tagged relatives",
     read_story: "Read story", back: "Back",
   },
   presets: {},
@@ -94,8 +95,12 @@ async function boot() {
       state.authMe = true;
     }
   }
-  state.view = CFG.layout.default_view || "hourglass";
-  if (state.view === "graph" && !DATA.graph) state.view = "hourglass";
+  const narrow = window.innerWidth <= 640;
+  // On mobile the wheel is a much more usable default; hierarchy views remain
+  // available via the view switch and are still the default on desktop.
+  state.view = narrow ? "wheel" : (CFG.layout.default_view || "hourglass");
+  if (state.view === "graph" && !DATA.graph) state.view = narrow ? "wheel" : "hourglass";
+  if (state.view === "wheel" && !window.d3) state.view = "hourglass";
   state.orientation = CFG.layout.orientation === "horizontal" ? "horizontal" : "vertical";
 
   applyTheme();
@@ -154,6 +159,10 @@ function applyText() {
   if (views[3]) {
     views[3].textContent = text.view_graph || "Relatives";
     views[3].hidden = !DATA.graph;
+  }
+  if (views[4]) {
+    views[4].textContent = text.view_wheel || "Wheel";
+    views[4].hidden = !window.d3;
   }
   const orientations = $$("#orientation-switch button");
   orientations[0].textContent = text.view_vertical;
@@ -428,9 +437,11 @@ function route() {
   } else {
     showView("tree");
     const focus = arg && IDX.people[arg] ? arg : defaultFocus();
-    const view = ["hourglass", "ancestors", "descendants", "graph"].includes(params.v) ? params.v : state.view;
+    const view = ["hourglass", "ancestors", "descendants", "graph", "wheel"].includes(params.v) ? params.v : state.view;
     const orientation = ["vertical", "horizontal"].includes(params.o) ? params.o : state.orientation;
-    const safeView = view === "graph" && !DATA.graph ? "hourglass" : view;
+    let safeView = view;
+    if (safeView === "graph" && !DATA.graph) safeView = "wheel";
+    if (safeView === "wheel" && !window.d3) safeView = "hourglass";
     const changed = focus !== state.focus || safeView !== state.view || orientation !== state.orientation;
     state.view = safeView;
     state.orientation = orientation;
@@ -475,6 +486,43 @@ function graphOptions(focusId) {
 }
 
 function renderTree(focusId) {
+  const isWheel = state.view === "wheel";
+  const wheelStage = $("#wheel-stage");
+  $("#cards").hidden = isWheel;
+  $("#links").hidden = isWheel;
+  wheelStage.hidden = !isWheel;
+
+  if (isWheel) {
+    const L = layoutWheel(IDX, focusId, { rings: 3 });
+    if (!L) {
+      $("#tree-empty").hidden = false;
+      return;
+    }
+    $("#tree-empty").hidden = true;
+    state.focus = focusId;
+    state.layout = L;
+    wheelStage.style.setProperty("--wheel-w", `${L.width}px`);
+    wheelStage.style.setProperty("--wheel-h", `${L.height}px`);
+    wheelStage.innerHTML = "";
+    const svg = renderWheelSVG(L, {
+      onSelect: (id) => {
+        if (id && id !== focusId) go("tree", id, { v: "wheel" });
+        else if (id) selectPerson(id);
+      },
+    });
+    wheelStage.appendChild(svg);
+
+    for (const b of $$("#view-switch button")) {
+      const on = b.dataset.view === state.view;
+      b.setAttribute("aria-selected", on);
+      b.setAttribute("aria-checked", on);
+    }
+    document.body.dataset.treeview = "wheel";
+    centerOn(L);
+    refreshMeChip();
+    return;
+  }
+
   const L = state.view === "graph" && DATA.graph
     ? layoutGraph(DATA.graph, focusId, graphOptions(focusId))
     : layoutTree(IDX, focusId, layoutOptions(state.view));
@@ -507,6 +555,7 @@ function renderTree(focusId) {
     b.setAttribute("aria-selected", on);
     b.setAttribute("aria-checked", on);
   }
+  document.body.dataset.treeview = state.view;
   centerOn(L);
   refreshMeChip();
 }
@@ -633,11 +682,23 @@ function centerOn(L) {
   const vw = vp.clientWidth;
   const vh = vp.clientHeight;
   if (!vw || !vh) return;
-  const cw = CFG.layout.card_width;
-  const ch = CFG.layout.card_height;
   const narrow = vw < 640;
   const panelOpen = !$("#panel").hidden && !narrow;
   const usableW = vw - (panelOpen ? 400 : 0);
+
+  if (state.view === "wheel") {
+    const diameter = L.radius * 2;
+    const pad = narrow ? 8 : 28;
+    const fitK = Math.min((usableW - pad * 2) / diameter, (vh - pad * 2) / diameter);
+    state.k = clamp(fitK, 0.55, 1.25);
+    state.x = usableW / 2 + (panelOpen ? 0 : 0);
+    state.y = vh / 2;
+    applyTransform();
+    return;
+  }
+
+  const cw = CFG.layout.card_width;
+  const ch = CFG.layout.card_height;
   const pad = 24;
   const fitK = Math.min((usableW - pad * 2) / (L.width + cw), (vh - pad * 2) / (L.height + ch));
   const k = clamp(fitK, 0.4, 1.0);
@@ -1378,6 +1439,26 @@ function bindEvents() {
 
   $("#me-chip").addEventListener("click", () => {
     if (state.meId) go("tree", state.meId, { v: state.view, o: state.orientation });
+  });
+
+  const topbar = $("#topbar");
+  const topbarToggle = $("#topbar-toggle");
+  topbarToggle.addEventListener("click", () => {
+    const expanded = topbar.classList.toggle("expanded");
+    topbarToggle.setAttribute("aria-expanded", String(expanded));
+  });
+  // Close the mobile tray when a navigation or search choice is made.
+  $("#topbar-tray").addEventListener("click", (e) => {
+    if (e.target.closest(".tabs a, .me-chip, .auth-chip, #search")) {
+      topbar.classList.remove("expanded");
+      topbarToggle.setAttribute("aria-expanded", "false");
+    }
+  });
+  document.addEventListener("click", (e) => {
+    if (!topbar.classList.contains("expanded")) return;
+    if (e.target.closest("#topbar")) return;
+    topbar.classList.remove("expanded");
+    topbarToggle.setAttribute("aria-expanded", "false");
   });
 
   const chartModal = $("#chart-modal");

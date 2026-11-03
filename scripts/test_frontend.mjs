@@ -9,6 +9,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
+import vm from "node:vm";
 import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -23,6 +24,12 @@ async function loadModule(relativePath) {
 
 const { layoutTree } = await loadModule("assets/layout.js");
 const { layoutGraph } = await loadModule("assets/graph.js");
+const d3Source = read("vendor/d3-hierarchy.min.js");
+const d3Mod = { exports: {} };
+vm.runInNewContext(d3Source, { module: d3Mod, exports: d3Mod.exports, globalThis, self: globalThis, define: undefined });
+globalThis.window = globalThis;
+globalThis.d3 = d3Mod.exports;
+const { layoutWheel } = await loadModule("assets/wheel.js");
 const { relationship, sentenceFor } = await loadModule("assets/relate.js");
 const { normalizeGotra, pravaraFor } = await loadModule("assets/vedic.js");
 const { RASI_BOXES, GRAHA_ORDER, degText, renderSouthIndianChart, renderChartReport, renderJadagam } =
@@ -277,6 +284,21 @@ test("graph layout focuses the connected family branch", () => {
   assert.ok(branch.cards.some((c) => c.id === focus), "focus must be in the branch");
   assert.ok(branch.links.every((l) => branch.cards.some((c) => c.id === l.from) &&
     branch.cards.some((c) => c.id === l.to)), "branch edges must stay inside the branch");
+});
+
+// ---------- Wheel layout ----------
+
+test("wheel layout produces a 3-ring ancestor fan with the focus at the centre", () => {
+  const L = layoutWheel(index, focus, { rings: 3, width: 400, height: 400 });
+  assert.ok(L, "wheel layout should be produced");
+  assert.equal(L.sectors.length, 15, "3 rings should produce 1 + 2 + 4 + 8 = 15 sectors");
+  const focusSector = L.sectors.find((s) => s.depth === 0);
+  assert.ok(focusSector, "focus sector should exist");
+  assert.equal(focusSector.id, focus, "focus sector should match the requested focus");
+  for (const s of L.sectors) {
+    assert.ok(Number.isFinite(s.labelX) && Number.isFinite(s.labelY), `${s.name} label position should be finite`);
+    assert.ok(typeof s.d === "string" && s.d.startsWith("M"), `${s.name} should have an SVG path`);
+  }
 });
 
 // ---------- Vedic gotra / pravara ----------

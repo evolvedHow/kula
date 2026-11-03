@@ -133,16 +133,34 @@ until the sheet importer is used again.
 
 ## Relatives view
 
-The tree toolbar has four views: **Both**, **Ancestors**, **Descendants** and
-**Relatives**. Relatives is a two-kind graph layout: people are cards, unions
-are small round nodes, and the connector lines are the partner and offspring
-edges from the sheet. It opens on the connected branch around the current
-focus, so unrelated branches do not make one enormous row. Click a union node
-to see its partners, offsprings, relationship date and original sheet fields.
+The tree toolbar has five views: **Both**, **Ancestors**, **Descendants**,
+**Relatives** and **Wheel**. Relatives is a two-kind graph layout: people are
+cards, unions are small round nodes, and the connector lines are the partner
+and offspring edges from the sheet. It opens on the connected branch around the
+current focus, so unrelated branches do not make one enormous row. Click a
+union node to see its partners, offsprings, relationship date and original
+sheet fields.
 
 `layout.orientation` switches vertical (generations top-to-bottom) and
 horizontal (left-to-right). `layout.default_view: graph` makes Relatives the
 opening view.
+
+## Wheel view
+
+**Wheel** is a 3-ring ancestor pedigree wheel (fan chart) built with
+d3-hierarchy. The focus person sits at the centre; parents, grandparents and
+great-grandparents radiate outward in rings. Tap any sector to re-centre the
+wheel on that person. Missing ancestors appear as dim "Unknown" placeholders
+so the wheel keeps its shape. On narrow screens the wheel is the default view,
+while desktops continue to open with the configured `layout.default_view`.
+The hierarchy views remain available and are unchanged.
+
+## Mobile layout
+
+On narrow screens the top bar collapses to a compact header: the brand and a
+menu button stay visible, while the section tabs, search, "me" chip and Google
+sign-in tuck into a dropdown tray. Tap the menu button to open the tray and
+make a selection; tap outside or choose an item to close it again.
 
 ## Vedic roots and pravara
 
