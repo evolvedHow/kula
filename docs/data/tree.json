@@ -1,6 +1,6 @@
 {
  "schema": "kula.site/2.0",
- "generated_at": "2026-11-04T01:49:37+00:00",
+ "generated_at": "2026-11-04T02:35:30+00:00",
  "source": "Google Sheet",
  "home": "A001",
  "counts": {
@@ -9,7 +9,7 @@
   "families": 42,
   "stories": 1,
   "notes": 48,
-  "charts": 1,
+  "charts": 3,
   "places": 35
  },
  "people": [
@@ -2081,7 +2081,7 @@
     ]
    },
    "birth": {
-    "date": "9 Mar 1971",
+    "date": "9 Mar 1971, 02:50",
     "year": 1971,
     "place": "Ranchi"
    },
@@ -2110,7 +2110,7 @@
     "REF_NAME": "D014-Kala",
     "EMAIL": "",
     "GENDER": "Female",
-    "DOB": "9 Mar 1971",
+    "DOB": "9 Mar 1971, 02:50",
     "POB": "Ranchi",
     "CUR_LOC": "Houston",
     "STATUS": "Living",
@@ -2120,7 +2120,120 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D014-Kala"
+   "ref_name": "D014-Kala",
+   "vedic": {
+    "chart": {
+     "engine": "swisseph-lahiri/2.10.03",
+     "lagna": "Dhanus",
+     "lagna_deg": 26.12,
+     "moon": {
+      "rashi": "Kataka",
+      "nakshatra": "Ashlesha",
+      "pada": 1
+     },
+     "planets": {
+      "Su": {
+       "name": "Sun",
+       "rasi": "Kumbha",
+       "deg": 24.2,
+       "nakshatra": "Purva Bhadrapada",
+       "pada": 2,
+       "retro": false
+      },
+      "Mo": {
+       "name": "Moon",
+       "rasi": "Kataka",
+       "deg": 19.28,
+       "nakshatra": "Ashlesha",
+       "pada": 1,
+       "retro": false
+      },
+      "Ma": {
+       "name": "Mars",
+       "rasi": "Dhanus",
+       "deg": 4.39,
+       "nakshatra": "Mula",
+       "pada": 2,
+       "retro": false
+      },
+      "Me": {
+       "name": "Mercury",
+       "rasi": "Kumbha",
+       "deg": 26.13,
+       "nakshatra": "Purva Bhadrapada",
+       "pada": 2,
+       "retro": false
+      },
+      "Ju": {
+       "name": "Jupiter",
+       "rasi": "Vrischika",
+       "deg": 12.67,
+       "nakshatra": "Anuradha",
+       "pada": 3,
+       "retro": false
+      },
+      "Ve": {
+       "name": "Venus",
+       "rasi": "Makara",
+       "deg": 12.12,
+       "nakshatra": "Shravana",
+       "pada": 1,
+       "retro": false
+      },
+      "Sa": {
+       "name": "Saturn",
+       "rasi": "Mesha",
+       "deg": 24.5,
+       "nakshatra": "Bharani",
+       "pada": 4,
+       "retro": false
+      },
+      "Ra": {
+       "name": "Rahu",
+       "rasi": "Makara",
+       "deg": 28.96,
+       "nakshatra": "Dhanishta",
+       "pada": 2,
+       "retro": true
+      },
+      "Ke": {
+       "name": "Ketu",
+       "rasi": "Kataka",
+       "deg": 28.96,
+       "nakshatra": "Ashlesha",
+       "pada": 4,
+       "retro": true
+      }
+     },
+     "rasis": {
+      "Kumbha": [
+       "Su",
+       "Me"
+      ],
+      "Kataka": [
+       "Mo",
+       "Ke"
+      ],
+      "Dhanus": [
+       "La",
+       "Ma"
+      ],
+      "Vrischika": [
+       "Ju"
+      ],
+      "Makara": [
+       "Ve",
+       "Ra"
+      ],
+      "Mesha": [
+       "Sa"
+      ]
+     }
+    },
+    "rashi": "Kataka",
+    "pada": 1,
+    "nakshatra": "Ashlesha"
+   }
   },
   {
    "id": "D015",
@@ -2137,7 +2250,7 @@
     ]
    },
    "birth": {
-    "date": "9 Mar 1971",
+    "date": "9 Mar 1971, 02:20",
     "year": 1971,
     "place": "Ranchi"
    },
@@ -2166,7 +2279,7 @@
     "REF_NAME": "D015-Lata",
     "EMAIL": "",
     "GENDER": "Female",
-    "DOB": "9 Mar 1971",
+    "DOB": "9 Mar 1971, 02:20",
     "POB": "Ranchi",
     "CUR_LOC": "Chennai",
     "STATUS": "Living",
@@ -2176,7 +2289,120 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D015-Lata"
+   "ref_name": "D015-Lata",
+   "vedic": {
+    "chart": {
+     "engine": "swisseph-lahiri/2.10.03",
+     "lagna": "Dhanus",
+     "lagna_deg": 18.7,
+     "moon": {
+      "rashi": "Kataka",
+      "nakshatra": "Ashlesha",
+      "pada": 1
+     },
+     "planets": {
+      "Su": {
+       "name": "Sun",
+       "rasi": "Kumbha",
+       "deg": 24.18,
+       "nakshatra": "Purva Bhadrapada",
+       "pada": 2,
+       "retro": false
+      },
+      "Mo": {
+       "name": "Moon",
+       "rasi": "Kataka",
+       "deg": 19.03,
+       "nakshatra": "Ashlesha",
+       "pada": 1,
+       "retro": false
+      },
+      "Ma": {
+       "name": "Mars",
+       "rasi": "Dhanus",
+       "deg": 4.38,
+       "nakshatra": "Mula",
+       "pada": 2,
+       "retro": false
+      },
+      "Me": {
+       "name": "Mercury",
+       "rasi": "Kumbha",
+       "deg": 26.09,
+       "nakshatra": "Purva Bhadrapada",
+       "pada": 2,
+       "retro": false
+      },
+      "Ju": {
+       "name": "Jupiter",
+       "rasi": "Vrischika",
+       "deg": 12.67,
+       "nakshatra": "Anuradha",
+       "pada": 3,
+       "retro": false
+      },
+      "Ve": {
+       "name": "Venus",
+       "rasi": "Makara",
+       "deg": 12.1,
+       "nakshatra": "Shravana",
+       "pada": 1,
+       "retro": false
+      },
+      "Sa": {
+       "name": "Saturn",
+       "rasi": "Mesha",
+       "deg": 24.5,
+       "nakshatra": "Bharani",
+       "pada": 4,
+       "retro": false
+      },
+      "Ra": {
+       "name": "Rahu",
+       "rasi": "Makara",
+       "deg": 28.96,
+       "nakshatra": "Dhanishta",
+       "pada": 2,
+       "retro": true
+      },
+      "Ke": {
+       "name": "Ketu",
+       "rasi": "Kataka",
+       "deg": 28.96,
+       "nakshatra": "Ashlesha",
+       "pada": 4,
+       "retro": true
+      }
+     },
+     "rasis": {
+      "Kumbha": [
+       "Su",
+       "Me"
+      ],
+      "Kataka": [
+       "Mo",
+       "Ke"
+      ],
+      "Dhanus": [
+       "La",
+       "Ma"
+      ],
+      "Vrischika": [
+       "Ju"
+      ],
+      "Makara": [
+       "Ve",
+       "Ra"
+      ],
+      "Mesha": [
+       "Sa"
+      ]
+     }
+    },
+    "rashi": "Kataka",
+    "pada": 1,
+    "nakshatra": "Ashlesha"
+   }
   },
   {
    "id": "D016",
@@ -8509,7 +8735,7 @@
      "REF_NAME": "D014-Kala",
      "EMAIL": "",
      "GENDER": "Female",
-     "DOB": "9 Mar 1971",
+     "DOB": "9 Mar 1971, 02:50",
      "POB": "Ranchi",
      "CUR_LOC": "Houston",
      "STATUS": "Living",
@@ -8532,7 +8758,7 @@
      "REF_NAME": "D015-Lata",
      "EMAIL": "",
      "GENDER": "Female",
-     "DOB": "9 Mar 1971",
+     "DOB": "9 Mar 1971, 02:20",
      "POB": "Ranchi",
      "CUR_LOC": "Chennai",
      "STATUS": "Living",

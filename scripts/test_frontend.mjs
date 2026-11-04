@@ -211,11 +211,13 @@ test("partial birth and death records stay safe to render", () => {
 });
 
 test("the Vedic sheet is attached to a person without storing a derived pravara", () => {
-  const vedicPeople = tree.people.filter((p) => p.vedic);
-  assert.ok(vedicPeople.length >= 1, "at least one person should have Vedic data");
+  const vedicPeople = tree.people.filter((p) => p.vedic?.gotra);
+  assert.ok(vedicPeople.length >= 1, "at least one person should have Vedic sheet data");
+  for (const p of tree.people.filter((p) => p.vedic)) {
+    assert.equal(p.vedic.pravara, undefined, `${p.id} must not store a pravara; it is derived`);
+  }
   for (const p of vedicPeople) {
     assert.ok(p.vedic.gotra, `${p.id} Vedic data needs a gotra`);
-    assert.equal(p.vedic.pravara, undefined, `${p.id} must not store a pravara; it is derived`);
     const pravara = pravaraFor(p.vedic.gotra, vedic);
     assert.ok(pravara, `${p.vedic.gotra} should resolve to a pravara`);
     assert.ok(pravara.rishis.length >= 2);

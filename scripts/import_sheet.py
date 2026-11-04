@@ -338,12 +338,17 @@ def merge_authority(people, rows, config=None):
 
         dob_raw = (record.get("dob") or "").strip()
         if dob_raw:
-            dob, _, _ = parse_birth(dob_raw)
+            dob, dob_dt, dob_has_time = parse_birth(dob_raw)
             dob = dob or dob_raw
-            old = attrs.get("DOB") or ""
-            if old != dob:
-                changes.append(f"DOB {old!r} -> {dob!r}")
-            attrs["DOB"] = dob
+            old_dob = attrs.get("DOB") or ""
+            _, old_dt, old_has_time = parse_birth(old_dob)
+            # Keep a more detailed current value (with time) when the authority
+            # only supplies the same calendar date.
+            skip_dob = (old_has_time and not dob_has_time and old_dt and dob_dt
+                        and old_dt.date() == dob_dt.date())
+            if not skip_dob and old_dob != dob:
+                changes.append(f"DOB {old_dob!r} -> {dob!r}")
+                attrs["DOB"] = dob
 
         pob = authority.clean_place(record.get("pob"))
         if pob:
@@ -354,12 +359,15 @@ def merge_authority(people, rows, config=None):
 
         dod_raw = (record.get("dod") or "").strip()
         if dod_raw:
-            dod, _, _ = parse_birth(dod_raw)
+            dod, dod_dt, dod_has_time = parse_birth(dod_raw)
             dod = dod or dod_raw
-            old = attrs.get("DOD") or ""
-            if old != dod:
-                changes.append(f"DOD {old!r} -> {dod!r}")
-            attrs["DOD"] = dod
+            old_dod = attrs.get("DOD") or ""
+            _, old_dt, old_has_time = parse_birth(old_dod)
+            skip_dod = (old_has_time and not dod_has_time and old_dt and dod_dt
+                        and old_dt.date() == dod_dt.date())
+            if not skip_dod and old_dod != dod:
+                changes.append(f"DOD {old_dod!r} -> {dod!r}")
+                attrs["DOD"] = dod
 
         pod = authority.clean_place(record.get("pod"))
         if pod:
