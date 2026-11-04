@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Vedic birth chart (jadagam) computation via Swiss Ephemeris.
+"""Vedic birth chart (jatagam) computation via Swiss Ephemeris.
 
 Given a birth datetime (local to the birthplace) plus latitude/longitude and a
 timezone, this module computes the sidereal (Lahiri ayanamsa) positions of the
@@ -21,7 +21,7 @@ chart renderer in docs/assets/chart.js:
     }
 
 Only computed when the sheet supplies a birth date AND time AND place; the
-importer skips chart generation otherwise (the UI then hides the Jadagam
+importer skips chart generation otherwise (the UI then hides the Jatagam
 button).
 
 This module needs the project virtualenv:  .venv/bin/python scripts/import_sheet.py

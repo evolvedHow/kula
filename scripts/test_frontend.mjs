@@ -32,7 +32,7 @@ globalThis.d3 = d3Mod.exports;
 const { layoutWheel } = await loadModule("assets/wheel.js");
 const { relationship, sentenceFor } = await loadModule("assets/relate.js");
 const { normalizeGotra, pravaraFor } = await loadModule("assets/vedic.js");
-const { RASI_BOXES, GRAHA_ORDER, degText, renderSouthIndianChart, renderChartReport, renderJadagam } =
+const { RASI_BOXES, GRAHA_ORDER, degText, renderSouthIndianChart, renderChartReport, renderJatagam } =
   await loadModule("assets/chart.js");
 
 const vedic = JSON.parse(read("data/vedic.json"));
@@ -123,6 +123,31 @@ const sampleFamilies = {
 };
 const sampleIndex = { people: samplePeople, families: sampleFamilies };
 
+// A separate branch for collateral kin: two siblings each have a child
+// (first cousins); the cousin then has a child and a grandchild.
+const cousinPeople = {
+  G0: { id: "G0", gender: "M" },
+  G1: { id: "G1", gender: "F" },
+  P1: { id: "P1", gender: "M", parent_family: "R0" },
+  P2: { id: "P2", gender: "F", parent_family: "R0" },
+  Q1: { id: "Q1", gender: "F" },
+  Q2: { id: "Q2", gender: "M" },
+  ME: { id: "ME", gender: "M", parent_family: "R1" },
+  COUSIN: { id: "COUSIN", gender: "F", parent_family: "R2" },
+  S: { id: "S", gender: "M" },
+  T: { id: "T", gender: "M" },
+  CHILD: { id: "CHILD", gender: "F", parent_family: "R3" },
+  GRAND: { id: "GRAND", gender: "M", parent_family: "R4" },
+};
+const cousinFamilies = {
+  R0: { id: "R0", father: "G0", mother: "G1", children: ["P1", "P2"] },
+  R1: { id: "R1", father: "P1", mother: "Q1", children: ["ME"] },
+  R2: { id: "R2", father: "Q2", mother: "P2", children: ["COUSIN"] },
+  R3: { id: "R3", father: "S", mother: "COUSIN", children: ["CHILD"] },
+  R4: { id: "R4", father: "T", mother: "CHILD", children: ["GRAND"] },
+};
+const cousinIndex = { people: cousinPeople, families: cousinFamilies };
+
 test("ancestors are labelled by their distance, not as 'self'", () => {
   assert.equal(relationship(sampleIndex, "C", "A").label, "father");
   assert.equal(relationship(sampleIndex, "E", "A").label, "grandfather");
@@ -138,6 +163,16 @@ test("descendants, siblings and spouses keep their labels", () => {
   assert.equal(relationship(sampleIndex, "A", "A").label, "you");
   assert.equal(sentenceFor(relationship(sampleIndex, "C", "A"), "Parent", "Child"),
     "Parent is Child's father");
+});
+
+test("a cousin's child is a niece or nephew, not a removed cousin", () => {
+  assert.equal(relationship(cousinIndex, "ME", "COUSIN").label, "1st cousin");
+  assert.equal(relationship(cousinIndex, "ME", "CHILD").label, "niece");
+  assert.equal(relationship(cousinIndex, "CHILD", "ME").label, "uncle");
+  assert.equal(relationship(cousinIndex, "ME", "GRAND").label, "grand-nephew");
+  assert.equal(relationship(cousinIndex, "GRAND", "ME").label, "great-uncle");
+  assert.equal(sentenceFor(relationship(cousinIndex, "ME", "CHILD"), "Child", "Me"),
+    "Child is Me's niece");
 });
 
 test("the sheet graph only references people and unions that exist", () => {
@@ -282,10 +317,30 @@ test("graph layout focuses the connected family branch", () => {
   const full = layoutGraph(tree.graph, focus, { all: true, orientation: "vertical" });
   const branch = layoutGraph(tree.graph, focus, { orientation: "vertical" });
   assert.equal(full.cards.length, tree.graph.nodes.length);
-  assert.ok(branch.cards.length < full.cards.length, "branch view should be smaller than the whole sheet");
+  assert.ok(branch.cards.length <= full.cards.length, "branch view cannot exceed the whole sheet");
   assert.ok(branch.cards.some((c) => c.id === focus), "focus must be in the branch");
   assert.ok(branch.links.every((l) => branch.cards.some((c) => c.id === l.from) &&
     branch.cards.some((c) => c.id === l.to)), "branch edges must stay inside the branch");
+
+  // A disconnected person must be left out of the branch even when the real
+  // family happens to be one fully connected tree.
+  const synthetic = {
+    nodes: [
+      { id: "P1", type: "person" },
+      { id: "U1", type: "union" },
+      { id: "P2", type: "person" },
+      { id: "X1", type: "person" },
+    ],
+    edges: [
+      { id: "E1", type: "partner", from: "P1", to: "U1" },
+      { id: "E2", type: "offspring", from: "U1", to: "P2" },
+    ],
+  };
+  const syntheticFull = layoutGraph(synthetic, "P1", { all: true, orientation: "vertical" });
+  const syntheticBranch = layoutGraph(synthetic, "P1", { orientation: "vertical" });
+  assert.equal(syntheticFull.cards.length, 4);
+  assert.equal(syntheticBranch.cards.length, 3);
+  assert.ok(!syntheticBranch.cards.some((c) => c.id === "X1"), "unrelated person should be trimmed");
 });
 
 // ---------- Wheel layout ----------
@@ -293,6 +348,7 @@ test("graph layout focuses the connected family branch", () => {
 test("wheel layout produces a 3-ring ancestor fan with the focus at the centre", () => {
   const L = layoutWheel(index, focus, { rings: 3, width: 400, height: 400 });
   assert.ok(L, "wheel layout should be produced");
+  assert.equal(L.rings, 3);
   assert.equal(L.sectors.length, 15, "3 rings should produce 1 + 2 + 4 + 8 = 15 sectors");
   const focusSector = L.sectors.find((s) => s.depth === 0);
   assert.ok(focusSector, "focus sector should exist");
@@ -301,6 +357,35 @@ test("wheel layout produces a 3-ring ancestor fan with the focus at the centre",
     assert.ok(Number.isFinite(s.labelX) && Number.isFinite(s.labelY), `${s.name} label position should be finite`);
     assert.ok(typeof s.d === "string" && s.d.startsWith("M"), `${s.name} should have an SVG path`);
   }
+});
+
+test("the wheel honours an explicit deep ring count", () => {
+  const L = layoutWheel(index, focus, { rings: 8 });
+  assert.equal(L.rings, 8);
+  assert.equal(L.sectors.length, 2 ** 9 - 1, "8 rings = 1 + 2 + ... + 256 = 511 sectors");
+  for (const s of L.sectors) {
+    assert.ok(!s.unknown || s.label === "none", "placeholders never carry labels");
+    if (s.depth >= 7) assert.equal(s.label, "none", "thin outer wedges get no label");
+  }
+});
+
+test("the wheel sizes itself to the known ancestry when no ring count is given", () => {
+  // The fixture focus is the patriarch: no recorded ancestors, so the fan
+  // falls back to its 4-ring floor instead of drawing 9 empty rings.
+  const L = layoutWheel(index, focus, { cap: 7 });
+  assert.equal(L.rings, 4);
+  assert.equal(L.sectors.length, 2 ** 5 - 1);
+});
+
+test("auto rings grow with the family's known depth", () => {
+  const deep = tree.people.find((p) => p.generation === "F" && !p.hidden);
+  assert.ok(deep, "fixture should include a generation-F person");
+  const L = layoutWheel(index, deep.id, { cap: 7 });
+  assert.ok(L.rings >= 5 && L.rings <= 7, `expected 5-7 rings, got ${L.rings}`);
+  assert.equal(L.sectors.length, 2 ** (L.rings + 1) - 1);
+  const parents = L.sectors.filter((s) => s.depth === 1 && !s.unknown);
+  assert.ok(parents.length && parents.every((s) => s.label === "full"),
+    "inner rings should carry full name + years labels");
 });
 
 // ---------- Vedic gotra / pravara ----------
@@ -366,12 +451,12 @@ test("every gotra in vedic.json has a well-formed pravara and concept help", () 
     assert.ok(["Tryarsheya", "Pancharsheya", "Dvarsheya"].includes(entry.type), `${key} has an unknown pravara type`);
     assert.ok(vedic.concepts[entry.type.toLowerCase()], `${key} type should have concept help`);
   }
-  for (const key of ["gotra", "pravara", "rashi", "nakshatra", "pada", "lagna", "jadagam"]) {
+  for (const key of ["gotra", "pravara", "rashi", "nakshatra", "pada", "lagna", "jatagam"]) {
     assert.ok(vedic.concepts[key]?.text, `concept ${key} needs help text`);
   }
 });
 
-// ---------- Jadagam (birth chart) ----------
+// ---------- Jatagam (birth chart) ----------
 
 const SAMPLE_CHART = {
   engine: "swisseph-lahiri/test",
@@ -444,14 +529,14 @@ test("the report lists lagna plus all nine grahas in traditional order", () => {
   assert.ok(html.includes("Lahiri"));
 });
 
-test("degText renders degrees as deg°min′ and renderJadagam combines grid + report", () => {
+test("degText renders degrees as deg°min′ and renderJatagam combines grid + report", () => {
   assert.equal(degText(16.52), "16°31′");
   assert.equal(degText(0), "0°00′");
-  const html = renderJadagam(SAMPLE_CHART, { name: "X" });
-  assert.ok(html.includes('class="jadagam"'));
+  const html = renderJatagam(SAMPLE_CHART, { name: "X" });
+  assert.ok(html.includes('class="jatagam"'));
   assert.ok(html.includes("si-chart"));
   assert.ok(html.includes("chart-report"));
-  assert.equal(renderJadagam(null), "");
+  assert.equal(renderJatagam(null), "");
 });
 
 test("chart payloads in tree.json are well formed when present", () => {

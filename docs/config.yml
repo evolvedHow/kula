@@ -11,9 +11,9 @@ site:
   subtitle: "Family tree and stories"
   intro: "Trace how we are connected, read the stories behind the names."
   footer: "Built from our family relatives sheet"
-  # Who the tree opens on: a sheet PID such as I000 (patriarch), or "home"
+  # Who the tree opens on: a sheet PID such as A001 (patriarch), or "home"
   # for the importer's fallback (the first visible person).
-  default_person: I000
+  default_person: A001
   # GitHub repo (owner/name) that receives "suggest a correction" issues.
   # Leave empty to hide the links.
   repo: "evolvedHow/kula"
@@ -83,6 +83,10 @@ layout:
   gap_x: 26
   gap_y: 92
   corner_radius: 16
+  # Wheel (fan chart): maximum ancestor rings. The fan sizes itself to the
+  # family's known depth up to this cap; visitors can switch 4-9 generations
+  # with the number buttons shown in the wheel view.
+  wheel_generations: 7
   # angular = right-angled connectors · curved = bezier connectors
   connector_style: angular
   show_years: true
@@ -111,11 +115,11 @@ narratives:
     N0047: [I0000]
 
 # ---------------------------------------------------------------------
-#  Vedic data and birth charts (jadagam)
+#  Vedic data and birth charts (jatagam)
 # ---------------------------------------------------------------------
 vedic:
   # When true, a sidereal birth chart is computed at import time for every
-  # person whose DOB includes a time AND who has a POB. The Jadagam button
+  # person whose DOB includes a time AND who has a POB. The Jatagam button
   # appears on their profile. Requires the optional venv dependencies:
   #   python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
   # then run the importer with .venv/bin/python.
@@ -185,7 +189,7 @@ auth:
     # to that person, the person card inherits the Gmail avatar, and the panel
     # shows how they are related. Nothing is written to the public JSON.
     people: {
-      "vish.ganapathy@gmail.com": P049
+      "vish.ganapathy@gmail.com": D012
     }
       # "you@gmail.com": P049
     # Set to false to sign in without changing the visitor's "This is me".

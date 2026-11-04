@@ -38,6 +38,13 @@ function pick(gender, male, female, neutral) {
   return neutral;
 }
 
+// Descendants of a first cousin: child = niece/nephew, grandchild =
+// grand-niece/nephew, and each further generation adds another "great-".
+function cousinDescendant(down, gender) {
+  const stem = down === 3 ? "" : greats(down - 4) + "grand-";
+  return stem + pick(gender, "nephew", "niece", "nephew or niece");
+}
+
 function describeRelation(up, down, gender) {
   if (up === 0 && down === 0) return "self";
   if (down === 0) {
@@ -96,6 +103,16 @@ export function relationship(idx, meId, otherId) {
   }
   if (da === 1) {
     return { label: greats(db - 2) + pick(gender, "nephew", "niece", "nephew or niece"), kind: "nephew-niece" };
+  }
+  // This family uses everyday kin terms rather than the formal "removed"
+  // wording for cousins' children and parents' cousins. A cousin's child is
+  // a niece/nephew; a grandchild of a cousin is a grand-niece/nephew. In the
+  // other direction, a parent's cousin is an aunt/uncle.
+  if (da === 2 && db >= 3) {
+    return { label: cousinDescendant(db, gender), kind: "nephew-niece" };
+  }
+  if (db === 2 && da >= 3) {
+    return { label: greats(da - 3) + pick(gender, "uncle", "aunt", "aunt or uncle"), kind: "aunt-uncle" };
   }
   const degree = Math.min(da, db) - 1;
   const removed = Math.abs(da - db);

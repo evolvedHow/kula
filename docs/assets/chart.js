@@ -1,5 +1,5 @@
-// South Indian birth chart (jadagam) renderer. Pure functions so they can be
-// tested in Node; the browser wires them to the Jadagam button in app.js.
+// South Indian birth chart (jatagam) renderer. Pure functions so they can be
+// tested in Node; the browser wires them to the Jatagam button in app.js.
 //
 // South Indian convention: the twelve rasis are FIXED to boxes (Mesha is
 // always the second box of the top row, running clockwise), grahas are placed
@@ -62,7 +62,7 @@ export function renderSouthIndianChart(chart, opts = {}) {
 
   const center = `
     <div class="chart-center" style="grid-row:2 / span 2;grid-column:2 / span 2">
-      <strong>${esc(opts.name || "Jadagam")}</strong>
+      <strong>${esc(opts.name || "Jatagam")}</strong>
       ${opts.birthText ? `<span>${esc(opts.birthText)}</span>` : ""}
       <span>Lagna: ${esc(chart.lagna)}</span>
     </div>`;
@@ -104,9 +104,9 @@ export function renderChartReport(chart, opts = {}) {
 }
 
 /** Full modal body: chart + report together. */
-export function renderJadagam(chart, opts = {}) {
+export function renderJatagam(chart, opts = {}) {
   const grid = renderSouthIndianChart(chart, opts);
   const report = renderChartReport(chart, opts);
   if (!grid && !report) return "";
-  return `<div class="jadagam">${grid}${report}</div>`;
+  return `<div class="jatagam">${grid}${report}</div>`;
 }

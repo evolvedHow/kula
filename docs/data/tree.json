@@ -1,12 +1,12 @@
 {
  "schema": "kula.site/2.0",
- "generated_at": "2026-11-04T02:59:50+00:00",
+ "generated_at": "2026-11-04T12:55:48+00:00",
  "source": "Google Sheet",
  "home": "A001",
  "counts": {
   "people": 120,
   "hidden_living": 0,
-  "families": 42,
+  "families": 43,
   "stories": 1,
   "notes": 48,
   "charts": 4,
@@ -34,7 +34,7 @@
    "current_location": "",
    "events": [],
    "families": [
-    "U042"
+    "U043"
    ],
    "parent_family": null,
    "notes": [],
@@ -82,7 +82,7 @@
    "current_location": "",
    "events": [],
    "families": [
-    "U042"
+    "U043"
    ],
    "parent_family": null,
    "notes": [],
@@ -105,7 +105,13 @@
     "GEN": "A"
    },
    "ref_name": "A002-Rajammal",
-   "vedic": {}
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "B001",
@@ -136,7 +142,7 @@
    "families": [
     "U001"
    ],
-   "parent_family": "U042",
+   "parent_family": "U043",
    "notes": [],
    "stories": [],
    "attributes": {
@@ -205,7 +211,13 @@
     "GEN": "B"
    },
    "ref_name": "B002-Valliammal",
-   "vedic": {}
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "B003",
@@ -224,7 +236,7 @@
    "current_location": "",
    "events": [],
    "families": [],
-   "parent_family": "U042",
+   "parent_family": "U043",
    "notes": [],
    "stories": [],
    "attributes": {
@@ -270,7 +282,7 @@
    "current_location": "",
    "events": [],
    "families": [],
-   "parent_family": "U042",
+   "parent_family": "U043",
    "notes": [],
    "stories": [],
    "attributes": {
@@ -316,7 +328,7 @@
    "current_location": "",
    "events": [],
    "families": [],
-   "parent_family": "U042",
+   "parent_family": "U043",
    "notes": [],
    "stories": [],
    "attributes": {
@@ -362,7 +374,7 @@
    "current_location": "",
    "events": [],
    "families": [],
-   "parent_family": "U042",
+   "parent_family": "U043",
    "notes": [],
    "stories": [],
    "attributes": {
@@ -408,7 +420,7 @@
    "current_location": "",
    "events": [],
    "families": [],
-   "parent_family": "U042",
+   "parent_family": "U043",
    "notes": [],
    "stories": [],
    "attributes": {
@@ -454,7 +466,7 @@
    "current_location": "",
    "events": [],
    "families": [],
-   "parent_family": "U042",
+   "parent_family": "U043",
    "notes": [],
    "stories": [],
    "attributes": {
@@ -591,7 +603,13 @@
     "GEN": "C"
    },
    "ref_name": "C002-Saradha",
-   "vedic": {}
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "C003",
@@ -697,7 +715,13 @@
     "GEN": "C"
    },
    "ref_name": "C004-Vijaya",
-   "vedic": {}
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "C005",
@@ -750,7 +774,6 @@
     "veda": "Yajur",
     "shakha": "Krishna /Taittiriya",
     "sutra": "Apastamba",
-    "nakshatra": "Uttara Bhadrapada (Uthirattathi)",
     "kula_devatha": "Shasta"
    }
   },
@@ -804,7 +827,13 @@
     "GEN": "C"
    },
    "ref_name": "C006-Lakshmi",
-   "vedic": {}
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "C007",
@@ -910,7 +939,13 @@
     "GEN": "C"
    },
    "ref_name": "C008-Sudha",
-   "vedic": {}
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "C009",
@@ -1427,7 +1462,6 @@
     "veda": "Yajur",
     "shakha": "Krishna /Taittiriya",
     "sutra": "Apastamba",
-    "nakshatra": "Rohini",
     "kula_devatha": "Shasta"
    }
   },
@@ -1477,7 +1511,13 @@
     "GEN": "D"
    },
    "ref_name": "D002-Sumitra",
-   "vedic": {}
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "D003",
@@ -1530,7 +1570,6 @@
     "veda": "Yajur",
     "shakha": "Krishna /Taittiriya",
     "sutra": "Apastamba",
-    "nakshatra": "Rohini",
     "kula_devatha": "Shasta"
    }
   },
@@ -1580,7 +1619,13 @@
     "GEN": "D"
    },
    "ref_name": "D004-Bhash",
-   "vedic": {}
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "D005",
@@ -1633,7 +1678,6 @@
     "veda": "Yajur",
     "shakha": "Krishna /Taittiriya",
     "sutra": "Apastamba",
-    "nakshatra": "Rohini",
     "kula_devatha": "Shasta"
    }
   },
@@ -1683,7 +1727,13 @@
     "GEN": "D"
    },
    "ref_name": "D006-Navina",
-   "vedic": {}
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "D007",
@@ -1838,7 +1888,6 @@
     "veda": "Yajur",
     "shakha": "Krishna /Taittiriya",
     "sutra": "Apastamba",
-    "nakshatra": "Rohini",
     "kula_devatha": "Shasta"
    }
   },
@@ -1889,7 +1938,6 @@
     "veda": "Yajur",
     "shakha": "Krishna /Taittiriya",
     "sutra": "Apastamba",
-    "nakshatra": "Rohini",
     "kula_devatha": "Shasta"
    }
   },
@@ -1933,7 +1981,13 @@
     "GEN": "D"
    },
    "ref_name": "D011-Hema",
-   "vedic": {}
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "D012",
@@ -1995,7 +2049,6 @@
     "veda": "Yajur",
     "shakha": "Krishna /Taittiriya",
     "sutra": "Apastamba",
-    "nakshatra": "Uttara Bhadrapada (Uthirattathi)",
     "kula_devatha": "Shasta",
     "chart": {
      "engine": "swisseph-lahiri/2.10.03",
@@ -2106,7 +2159,8 @@
      }
     },
     "rashi": "Vrishabha",
-    "pada": 3
+    "pada": 3,
+    "nakshatra": "Rohini"
    }
   },
   {
@@ -2162,7 +2216,13 @@
     "GEN": "D"
    },
    "ref_name": "D013-Chetna Bhargava",
-   "vedic": {}
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "D014",
@@ -2224,7 +2284,6 @@
     "veda": "Yajur",
     "shakha": "Krishna /Taittiriya",
     "sutra": "Apastamba",
-    "nakshatra": "Uttara Bhadrapada (Uthirattathi)",
     "kula_devatha": "Shasta",
     "chart": {
      "engine": "swisseph-lahiri/2.10.03",
@@ -2335,7 +2394,8 @@
      }
     },
     "rashi": "Kataka",
-    "pada": 1
+    "pada": 1,
+    "nakshatra": "Ashlesha"
    }
   },
   {
@@ -2398,7 +2458,6 @@
     "veda": "Yajur",
     "shakha": "Krishna /Taittiriya",
     "sutra": "Apastamba",
-    "nakshatra": "Uttara Bhadrapada (Uthirattathi)",
     "kula_devatha": "Shasta",
     "chart": {
      "engine": "swisseph-lahiri/2.10.03",
@@ -2509,7 +2568,8 @@
      }
     },
     "rashi": "Kataka",
-    "pada": 1
+    "pada": 1,
+    "nakshatra": "Ashlesha"
    }
   },
   {
@@ -2832,7 +2892,6 @@
     "veda": "Yajur",
     "shakha": "Krishna /Taittiriya",
     "sutra": "Apastamba",
-    "nakshatra": "Rohini",
     "kula_devatha": "Shasta"
    }
   },
@@ -2880,7 +2939,13 @@
     "GEN": "D"
    },
    "ref_name": "D020-Sandhya Iyer",
-   "vedic": {}
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "D021",
@@ -3878,7 +3943,6 @@
     "veda": "Yajur",
     "shakha": "Krishna /Taittiriya",
     "sutra": "Apastamba",
-    "nakshatra": "Rohini",
     "kula_devatha": "Shasta"
    }
   },
@@ -3933,7 +3997,6 @@
     "veda": "Yajur",
     "shakha": "Krishna /Taittiriya",
     "sutra": "Apastamba",
-    "nakshatra": "Rohini",
     "kula_devatha": "Shasta"
    }
   },
@@ -4034,7 +4097,6 @@
     "veda": "Yajur",
     "shakha": "Krishna /Taittiriya",
     "sutra": "Apastamba",
-    "nakshatra": "Rohini",
     "kula_devatha": "Shasta"
    }
   },
@@ -4087,7 +4149,6 @@
     "veda": "Yajur",
     "shakha": "Krishna /Taittiriya",
     "sutra": "Apastamba",
-    "nakshatra": "Rohini",
     "kula_devatha": "Shasta"
    }
   },
@@ -4142,7 +4203,6 @@
     "veda": "Yajur",
     "shakha": "Krishna /Taittiriya",
     "sutra": "Apastamba",
-    "nakshatra": "Rohini",
     "kula_devatha": "Shasta"
    }
   },
@@ -4247,7 +4307,6 @@
     "veda": "Yajur",
     "shakha": "Krishna /Taittiriya",
     "sutra": "Apastamba",
-    "nakshatra": "Rohini",
     "kula_devatha": "Shasta"
    }
   },
@@ -4392,7 +4451,6 @@
     "veda": "Yajur",
     "shakha": "Krishna /Taittiriya",
     "sutra": "Apastamba",
-    "nakshatra": "Rohini",
     "kula_devatha": "Shasta"
    }
   },
@@ -4445,7 +4503,6 @@
     "veda": "Yajur",
     "shakha": "Krishna /Taittiriya",
     "sutra": "Apastamba",
-    "nakshatra": "Rohini",
     "kula_devatha": "Shasta"
    }
   },
@@ -4494,7 +4551,6 @@
     "veda": "Yajur",
     "shakha": "Krishna /Taittiriya",
     "sutra": "Apastamba",
-    "nakshatra": "Rohini",
     "kula_devatha": "Shasta"
    }
   },
@@ -4602,7 +4658,6 @@
     "veda": "Yajur",
     "shakha": "Krishna /Taittiriya",
     "sutra": "Apastamba",
-    "nakshatra": "Rohini",
     "kula_devatha": "Shasta"
    }
   },
@@ -4661,7 +4716,13 @@
     "GEN": "E"
    },
    "ref_name": "E016-Priyal",
-   "vedic": {}
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "E017",
@@ -4721,7 +4782,6 @@
     "veda": "Yajur",
     "shakha": "Krishna /Taittiriya",
     "sutra": "Apastamba",
-    "nakshatra": "Uttara Bhadrapada (Uthirattathi)",
     "kula_devatha": "Shasta"
    }
   },
@@ -5773,7 +5833,9 @@
    "death": null,
    "current_location": "",
    "events": [],
-   "families": [],
+   "families": [
+    "U042"
+   ],
    "parent_family": "U013",
    "notes": [],
    "stories": [],
@@ -5817,7 +5879,9 @@
    "death": null,
    "current_location": "",
    "events": [],
-   "families": [],
+   "families": [
+    "U042"
+   ],
    "parent_family": null,
    "notes": [],
    "stories": [],
@@ -7414,8 +7478,8 @@
   },
   {
    "id": "U041",
-   "father": "D014",
-   "mother": null,
+   "father": null,
+   "mother": "D014",
    "children": [],
    "relation": "Unknown",
    "marriage": null,
@@ -7434,6 +7498,27 @@
   },
   {
    "id": "U042",
+   "father": "E040",
+   "mother": "E041",
+   "children": [],
+   "relation": "Unknown",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "E040-Rishi & E041-Abby Chen",
+   "attributes": {
+    "UID": "U042",
+    "PID1": "E040",
+    "PID2": "E041",
+    "REF_NAME": "E040-Rishi & E041-Abby Chen",
+    "REL_START": "",
+    "REL_END": "",
+    "NOTES": "",
+    "PID1_REF": "E040-Rishi",
+    "PID2_REF": "E041-Abby Chen"
+   }
+  },
+  {
+   "id": "U043",
    "father": "A001",
    "mother": "A002",
    "children": [
@@ -7450,7 +7535,7 @@
    "notes": "",
    "ref_name": "A001-Venkiteswara Iyer & A002-Rajammal",
    "attributes": {
-    "UID": "U042",
+    "UID": "U043",
     "PID1": "A001",
     "PID2": "A002",
     "REF_NAME": "A001-Venkiteswara Iyer & A002-Rajammal",
@@ -11619,9 +11704,26 @@
     "id": "U042",
     "type": "union",
     "union_id": "U042",
-    "ref_name": "A001-Venkiteswara Iyer & A002-Rajammal",
+    "ref_name": "E040-Rishi & E041-Abby Chen",
     "attributes": {
      "UID": "U042",
+     "PID1": "E040",
+     "PID2": "E041",
+     "REF_NAME": "E040-Rishi & E041-Abby Chen",
+     "REL_START": "",
+     "REL_END": "",
+     "NOTES": "",
+     "PID1_REF": "E040-Rishi",
+     "PID2_REF": "E041-Abby Chen"
+    }
+   },
+   {
+    "id": "U043",
+    "type": "union",
+    "union_id": "U043",
+    "ref_name": "A001-Venkiteswara Iyer & A002-Rajammal",
+    "attributes": {
+     "UID": "U043",
      "PID1": "A001",
      "PID2": "A002",
      "REF_NAME": "A001-Venkiteswara Iyer & A002-Rajammal",
@@ -12445,9 +12547,9 @@
     }
    },
    {
-    "id": "U042-A001",
+    "id": "U042-E040",
     "type": "partner",
-    "from": "A001",
+    "from": "E040",
     "to": "U042",
     "attributes": {
      "role": "partner",
@@ -12455,19 +12557,39 @@
     }
    },
    {
-    "id": "U042-A002",
+    "id": "U042-E041",
     "type": "partner",
-    "from": "A002",
+    "from": "E041",
     "to": "U042",
     "attributes": {
      "role": "partner",
      "union": "U042"
+    }
+   },
+   {
+    "id": "U043-A001",
+    "type": "partner",
+    "from": "A001",
+    "to": "U043",
+    "attributes": {
+     "role": "partner",
+     "union": "U043"
+    }
+   },
+   {
+    "id": "U043-A002",
+    "type": "partner",
+    "from": "A002",
+    "to": "U043",
+    "attributes": {
+     "role": "partner",
+     "union": "U043"
     }
    },
    {
     "id": "O001",
     "type": "offspring",
-    "from": "U042",
+    "from": "U043",
     "to": "B001",
     "attributes": {
      "OID": "O001",
@@ -12479,7 +12601,7 @@
    {
     "id": "O002",
     "type": "offspring",
-    "from": "U042",
+    "from": "U043",
     "to": "B003",
     "attributes": {
      "OID": "O002",
@@ -12491,7 +12613,7 @@
    {
     "id": "O003",
     "type": "offspring",
-    "from": "U042",
+    "from": "U043",
     "to": "B004",
     "attributes": {
      "OID": "O003",
@@ -12503,7 +12625,7 @@
    {
     "id": "O004",
     "type": "offspring",
-    "from": "U042",
+    "from": "U043",
     "to": "B005",
     "attributes": {
      "OID": "O004",
@@ -12515,7 +12637,7 @@
    {
     "id": "O005",
     "type": "offspring",
-    "from": "U042",
+    "from": "U043",
     "to": "B006",
     "attributes": {
      "OID": "O005",
@@ -12527,7 +12649,7 @@
    {
     "id": "O006",
     "type": "offspring",
-    "from": "U042",
+    "from": "U043",
     "to": "B007",
     "attributes": {
      "OID": "O006",
@@ -12539,7 +12661,7 @@
    {
     "id": "O007",
     "type": "offspring",
-    "from": "U042",
+    "from": "U043",
     "to": "B008",
     "attributes": {
      "OID": "O007",

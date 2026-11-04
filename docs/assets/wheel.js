@@ -1,14 +1,16 @@
-// 3-ring ancestor pedigree wheel / fan chart.
+// Ancestor fan chart (pedigree wheel) with a configurable number of rings.
 //
 // Uses d3-hierarchy (loaded as a global script) to partition a full binary
 // ancestor tree into equal-angle sectors. Each generation occupies one ring:
 //   ring 0 = focus person (centre)
 //   ring 1 = parents
 //   ring 2 = grandparents
-//   ring 3 = great-grandparents
+//   ...  up to 10 rings of ancestors.
 //
-// Missing ancestors are rendered as dim "Unknown" placeholders so the wheel
-// stays balanced and the classic fan-chart shape is preserved.
+// Missing ancestors are rendered as dim placeholders so the fan stays
+// balanced and the classic fan-chart shape is preserved. Deep rings are
+// mostly placeholders, so their labels are dropped; pan and zoom do the
+// reading.
 
 const d3 = typeof window !== "undefined" ? window.d3 : null;
 
@@ -73,12 +75,56 @@ function ancestorTree(index, focusId, rings) {
   return build(focusId, 0, []);
 }
 
+// Deepest ancestor generation actually present in the data, so the fan can
+// size itself to the family instead of drawing rings of empty placeholders.
+function knownAncestorDepth(index, focusId, cap) {
+  let depth = 0;
+  let frontier = [focusId];
+  const seen = new Set(frontier);
+  while (frontier.length && depth < cap) {
+    const next = [];
+    for (const id of frontier) {
+      const fam = index.people[id]?.parent_family
+        ? index.families[index.people[id].parent_family]
+        : null;
+      for (const pid of [fam?.father, fam?.mother]) {
+        if (pid && index.people[pid] && !seen.has(pid)) {
+          seen.add(pid);
+          next.push(pid);
+        }
+      }
+    }
+    if (!next.length) break;
+    depth += 1;
+    frontier = next;
+  }
+  return depth;
+}
+
+// Label tiers by how much arc a wedge has: full = name + years, name =
+// name only, initials when the wedge is thin, none for slivers and missing
+// ancestors.
+function labelTier(isUnknown, isCenter, arc) {
+  if (isUnknown) return "none";
+  if (isCenter || arc >= 104) return "full";
+  if (arc >= 64) return "name";
+  if (arc >= 26) return "initials";
+  return "none";
+}
+
 export function layoutWheel(index, focusId, options = {}) {
   if (!d3 || !index.people[focusId]) return null;
 
-  const rings = Math.max(1, Math.min(5, options.rings ?? 3));
-  const width = options.width ?? 640;
-  const height = options.height ?? 640;
+  // `cap` bounds the automatic ring count; `rings` forces an exact count.
+  // Auto = deepest known ancestor + one placeholder ring, at least 4.
+  const cap = Math.max(3, Math.min(10, options.cap ?? 7));
+  const rings = options.rings
+    ? Math.max(2, Math.min(10, options.rings))
+    : Math.max(4, Math.min(cap, knownAncestorDepth(index, focusId, cap) + 1));
+
+  const size = 2 * (96 + rings * 46) + 24;
+  const width = options.width ?? size;
+  const height = options.height ?? size;
   const margin = options.margin ?? 14;
 
   const radius = Math.min(width, height) / 2 - margin;
@@ -108,14 +154,14 @@ export function layoutWheel(index, focusId, options = {}) {
     const midAngle = (d.x0 + d.x1) / 2;
     const innerR = isCenter ? 0 : innerRadius + (d.depth - 1) * ringWidth;
     const outerR = isCenter ? innerRadius : innerRadius + d.depth * ringWidth;
-    // Text anchor point: pull labels slightly toward the outer edge so they
-    // sit comfortably inside the sector.
-    const labelR = isCenter ? innerRadius * 0.62 : innerRadius + (d.depth - 0.45) * ringWidth;
-    const labelX = Math.cos(midAngle - Math.PI / 2) * labelR;
-    const labelY = Math.sin(midAngle - Math.PI / 2) * labelR;
-    // For ring 1+ we rotate text to follow the arc; keep it upright when possible.
+    // Labels sit mid-ring and run along the spoke. The chord available to a
+    // label is roughly span * mid-ring radius.
+    const midR = isCenter ? innerRadius * 0.62 : innerRadius + (d.depth - 0.5) * ringWidth;
+    const labelX = Math.cos(midAngle - Math.PI / 2) * midR;
+    const labelY = Math.sin(midAngle - Math.PI / 2) * midR;
+    const arc = span * midR;
+    // Radial labels: keep text upright by flipping on the left half.
     let rotate = 0;
-    let textAnchor = "middle";
     if (!isCenter) {
       let angle = (midAngle * 180) / Math.PI;
       if (angle > 90 && angle < 270) {
@@ -143,8 +189,11 @@ export function layoutWheel(index, focusId, options = {}) {
       labelX,
       labelY,
       rotate,
-      textAnchor,
+      textAnchor: "middle",
       span,
+      arc,
+      label: labelTier(isUnknown, isCenter, arc),
+      rim: !isUnknown && !isCenter && arc >= 8,
       tone: genderTone(p),
       name: isUnknown ? "Unknown" : displayName(p),
       initials: isUnknown ? "?" : initials(p),
@@ -158,6 +207,7 @@ export function layoutWheel(index, focusId, options = {}) {
     radius,
     innerRadius,
     ringWidth,
+    rings,
     focus: { x: width / 2, y: height / 2 },
     sectors,
   };
@@ -189,8 +239,8 @@ export function renderWheelSVG(layout, { onSelect } = {}) {
     path.setAttribute("stroke-width", s.depth === 0 ? "2" : "1.5");
     g.appendChild(path);
 
-    // Tone accent on the outer rim for non-focus sectors.
-    if (!s.unknown && s.depth > 0) {
+    // Tone accent on the outer rim for non-focus sectors wide enough to see.
+    if (s.rim) {
       const rim = document.createElementNS(ns, "path");
       rim.setAttribute("d", s.d);
       rim.setAttribute("fill", "none");
@@ -200,32 +250,40 @@ export function renderWheelSVG(layout, { onSelect } = {}) {
       g.appendChild(rim);
     }
 
-    const text = document.createElementNS(ns, "text");
-    text.setAttribute("x", s.labelX);
-    text.setAttribute("y", s.labelY);
-    text.setAttribute("text-anchor", s.textAnchor);
-    text.setAttribute("dominant-baseline", "middle");
-    text.setAttribute("transform", s.depth > 0 ? `rotate(${s.rotate}, ${s.labelX}, ${s.labelY})` : "");
+    if (s.label !== "none") {
+      const text = document.createElementNS(ns, "text");
+      text.setAttribute("x", s.labelX);
+      text.setAttribute("y", s.labelY);
+      text.setAttribute("text-anchor", s.textAnchor);
+      text.setAttribute("dominant-baseline", "middle");
+      text.setAttribute("transform", s.depth > 0 ? `rotate(${s.rotate}, ${s.labelX}, ${s.labelY})` : "");
 
-    // Hide long names on very thin sectors; keep initials. In the centre,
-    // prefer initials when the full name would overflow the small circle.
-    const showFull = s.span > 0.12 && !(s.center && s.name.length > 14);
-    const tspanName = document.createElementNS(ns, "tspan");
-    tspanName.textContent = showFull ? s.name : s.initials;
-    tspanName.setAttribute("x", s.labelX);
-    tspanName.setAttribute("dy", s.years ? "-0.55em" : "0");
-    text.appendChild(tspanName);
+      // In the centre, prefer initials when the full name would overflow the
+      // small circle. Everywhere, trim very long names so thin wedges do not
+      // spill across their neighbours.
+      const short = s.label === "initials" || (s.center && s.name.length > 14);
+      const labelName = short ? s.initials
+        : s.name.length > 26 ? `${s.name.slice(0, 25)}…`
+        : s.name;
+      const showYears = s.years && s.label === "full";
+      const tspanName = document.createElementNS(ns, "tspan");
+      tspanName.textContent = labelName;
+      tspanName.setAttribute("x", s.labelX);
+      tspanName.setAttribute("dy", showYears ? "-0.55em" : "0");
+      text.appendChild(tspanName);
 
-    if (s.years && (showFull || s.depth === 0)) {
-      const tspanYears = document.createElementNS(ns, "tspan");
-      tspanYears.textContent = s.years;
-      tspanYears.setAttribute("x", s.labelX);
-      tspanYears.setAttribute("dy", "1.15em");
-      tspanYears.setAttribute("class", "wheel-years");
-      text.appendChild(tspanYears);
+      if (showYears) {
+        const tspanYears = document.createElementNS(ns, "tspan");
+        tspanYears.textContent = s.years;
+        tspanYears.setAttribute("x", s.labelX);
+        tspanYears.setAttribute("dy", "1.15em");
+        tspanYears.setAttribute("class", "wheel-years");
+        text.appendChild(tspanYears);
+      }
+
+      g.appendChild(text);
     }
 
-    g.appendChild(text);
     group.appendChild(g);
 
     if (!s.unknown && onSelect) {

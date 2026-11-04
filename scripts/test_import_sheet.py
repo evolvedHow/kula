@@ -13,7 +13,15 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from import_sheet import build, make_ref, person_resolver, pid_prefix, union_resolver  # noqa: E402
+from import_sheet import (  # noqa: E402
+    build,
+    inherit_vedic,
+    make_ref,
+    person_resolver,
+    pid_prefix,
+    union_resolver,
+    validate_person_dates,
+)
 
 
 def table(header, rows):
@@ -168,6 +176,87 @@ class BuildTests(unittest.TestCase):
 
     def test_no_resolution_warnings_for_the_synthetic_sheet(self):
         self.assertEqual(self.warnings, [])
+
+    def test_a_single_female_partner_is_recorded_as_the_mother(self):
+        sheets = {
+            "Persons": table(
+                ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "GENDER", "DOB",
+                 "POB", "CUR_LOC", "STATUS", "NOTES"],
+                [["P010", "Kala", "Kala Iyer", "P010-Kala", "Female", "", "", "", "Living", ""]],
+            ),
+            "Unions": table(
+                ["UID", "PID1", "PID2", "REF_NAME", "REL_START", "REL_END", "NOTES"],
+                [["U010", "P010-Kala", "", "P010-Kala", "", "", ""]],
+            ),
+            "Offsprings": table(["OID", "UNION_OF", "OFFSPRING", "NOTES"], []),
+            "Vedic": table(["PERSON"], []),
+            "$Config": table(["GOTRA"], []),
+        }
+        data, _ = build(sheets, {"site": {"default_person": "P010"},
+                                 "vedic": {"charts": False}})
+        family = data["families"][0]
+        self.assertIsNone(family["father"])
+        self.assertEqual(family["mother"], "P010")
+
+
+class VedicInheritanceTests(unittest.TestCase):
+    def people(self):
+        return [
+            {"id": "H", "gender": "M", "parent_family": None,
+             "vedic": {"gotra": "Harita", "veda": "Yajur", "nakshatra": "Rohini"}},
+            {"id": "W", "gender": "F", "parent_family": None,
+             "vedic": {"gotra": "Bharadwaja", "nakshatra": "Ashlesha"}},
+            {"id": "C", "gender": "M", "parent_family": "U1", "vedic": {}},
+        ]
+
+    def run_inherit(self, people):
+        by_id = {p["id"]: p for p in people}
+        families = {"U1": {"id": "U1", "father": "H", "mother": "W", "children": ["C"]}}
+        inherit_vedic(people, by_id, families)
+        return by_id
+
+    def test_wife_takes_her_husbands_lineage_but_keeps_her_own_nakshatra(self):
+        people = self.run_inherit(self.people())
+        self.assertEqual(people["W"]["vedic"]["gotra"], "Harita")
+        self.assertEqual(people["W"]["vedic"]["veda"], "Yajur")
+        self.assertEqual(people["W"]["vedic"]["nakshatra"], "Ashlesha")
+
+    def test_child_inherits_lineage_but_not_nakshatra(self):
+        people = self.run_inherit(self.people())
+        self.assertEqual(people["C"]["vedic"]["gotra"], "Harita")
+        self.assertEqual(people["C"]["vedic"]["veda"], "Yajur")
+        self.assertNotIn("nakshatra", people["C"]["vedic"])
+
+    def test_a_wife_keeps_her_own_lineage_when_the_husband_has_none(self):
+        people = [
+            {"id": "H", "gender": "M", "parent_family": None, "vedic": {}},
+            {"id": "W", "gender": "F", "parent_family": None,
+             "vedic": {"gotra": "Bharadwaja", "nakshatra": "Ashlesha"}},
+        ]
+        people = self.run_inherit(people)
+        self.assertEqual(people["W"]["vedic"]["gotra"], "Bharadwaja")
+        self.assertEqual(people["W"]["vedic"]["nakshatra"], "Ashlesha")
+
+
+class DateValidationTests(unittest.TestCase):
+    def person(self, dob, dod, status="Deceased", yrs=""):
+        return {
+            "id": "P100",
+            "living": status == "Living",
+            "attributes": {"DOB": dob, "DOD": dod, "STATUS": status, "YRS": yrs, "POD": ""},
+        }
+
+    def test_identical_birth_and_death_dates_are_flagged(self):
+        warnings = validate_person_dates(self.person("28 May 1997", "28 May 1997", yrs="29"))
+        self.assertTrue(any("same day" in w for w in warnings))
+
+    def test_stale_yrs_for_a_deceased_person_is_flagged(self):
+        warnings = validate_person_dates(self.person("10 Aug 1985", "17 May 2006", yrs="41"))
+        self.assertTrue(any("does not match" in w for w in warnings))
+
+    def test_matching_yrs_is_not_flagged(self):
+        warnings = validate_person_dates(self.person("10 Aug 1985", "17 May 2006", yrs="20"))
+        self.assertFalse(any("does not match" in w for w in warnings))
 
 
 class AuthorityMergeTests(unittest.TestCase):

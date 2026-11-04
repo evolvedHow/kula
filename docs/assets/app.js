@@ -3,7 +3,7 @@ import { layoutGraph } from "./graph.js";
 import { layoutWheel, renderWheelSVG } from "./wheel.js";
 import { relationship, sentenceFor } from "./relate.js";
 import { pravaraFor } from "./vedic.js";
-import { renderJadagam } from "./chart.js";
+import { renderJatagam } from "./chart.js";
 
 const DEFAULTS = {
   site: { title: "Family Tree", subtitle: "", intro: "", footer: "", default_person: "home", repo: "" },
@@ -11,6 +11,7 @@ const DEFAULTS = {
   fonts: { heading: "Roboto", body: "Roboto", load_from_google: false },
   layout: {
     default_view: "hourglass", orientation: "vertical", generations_up: 4, generations_down: 4,
+    wheel_generations: 7,
     card_width: 188, card_height: 84, gap_x: 26, gap_y: 92, corner_radius: 16,
     connector_style: "angular", show_years: true, show_places: true, show_child_counts: true,
   },
@@ -56,6 +57,7 @@ let VEDIC = { gotras: {} };
 const state = {
   focus: null, view: "hourglass", orientation: "vertical", selected: null, layout: null,
   k: 1, x: 0, y: 0, meId: null, auth: null, authError: null, authMe: false,
+  wheelRings: null,
 };
 let googleReady = false;
 
@@ -301,7 +303,7 @@ function vedicFor(person) {
   const concepts = VEDIC.concepts || {};
   const fields = [];
   const helps = {};
-  // "chart" holds the computed jadagam payload; it renders via the Jadagam
+  // "chart" holds the computed jatagam payload; it renders via the Jatagam
   // button, not as a text field.
   const seen = new Set(["gotra", "pravara", "chart"]);
 
@@ -370,24 +372,24 @@ function vedicFor(person) {
   return { fields, helps, gotra, pravara };
 }
 
-// ---------- Jadagam (birth chart) modal ----------
+// ---------- Jatagam (birth chart) modal ----------
 
 let chartReturnFocus = null;
 
-function openJadagam(pid) {
+function openJatagam(pid) {
   const p = IDX?.people[pid];
   const chart = p?.vedic?.chart;
   const modal = $("#chart-modal");
   const body = $("#chart-body");
   if (!p || !chart || !modal || !body) return;
   const birthText = [p.birth?.date, p.birth?.place].filter(Boolean).join(" · ");
-  const html = renderJadagam(chart, {
+  const html = renderJatagam(chart, {
     name: p.name?.display || pid,
     birthText,
     disclaimer: VEDIC?.disclaimer || "",
   });
   if (!html) return;
-  $("#chart-title").textContent = `Jadagam — ${p.name?.display || pid}`;
+  $("#chart-title").textContent = `Jatagam — ${p.name?.display || pid}`;
   body.innerHTML = html;
   chartReturnFocus = document.activeElement;
   modal.hidden = false;
@@ -395,7 +397,7 @@ function openJadagam(pid) {
   $(".chart-dialog", modal)?.focus();
 }
 
-function closeJadagam() {
+function closeJatagam() {
   const modal = $("#chart-modal");
   if (modal) modal.hidden = true;
   document.body.classList.remove("chart-open");
@@ -475,14 +477,18 @@ function route() {
     let safeView = view;
     if (safeView === "graph" && !DATA.graph) safeView = "wheel";
     if (safeView === "wheel" && !window.d3) safeView = "hourglass";
-    const changed = focus !== state.focus || safeView !== state.view || orientation !== state.orientation;
+    const ringsParam = parseInt(params.r, 10);
+    const wheelRings = ringsParam >= 4 && ringsParam <= 10 ? ringsParam : state.wheelRings;
+    const changed = focus !== state.focus || safeView !== state.view
+      || orientation !== state.orientation || wheelRings !== state.wheelRings;
     state.view = safeView;
     state.orientation = orientation;
+    state.wheelRings = wheelRings;
     if (changed || !state.layout) {
       renderTree(focus);
       if (focus !== state.selected) {
         state.selected = null;
-        if (window.innerWidth > 640) selectPerson(focus, { silent: true });
+        if (window.innerWidth > 640) selectPerson(focus);
         else hidePanel();
       }
     }
@@ -526,7 +532,10 @@ function renderTree(focusId) {
   wheelStage.hidden = !isWheel;
 
   if (isWheel) {
-    const L = layoutWheel(IDX, focusId, { rings: 3 });
+    const L = layoutWheel(IDX, focusId, {
+      rings: state.wheelRings || undefined,
+      cap: CFG.layout.wheel_generations ?? 7,
+    });
     if (!L) {
       $("#tree-empty").hidden = false;
       return;
@@ -547,6 +556,11 @@ function renderTree(focusId) {
 
     for (const b of $$("#view-switch button")) {
       const on = b.dataset.view === state.view;
+      b.setAttribute("aria-selected", on);
+      b.setAttribute("aria-checked", on);
+    }
+    for (const b of $$("#wheel-rings button")) {
+      const on = Number(b.dataset.rings) === L.rings;
       b.setAttribute("aria-selected", on);
       b.setAttribute("aria-checked", on);
     }
@@ -725,8 +739,8 @@ function centerOn(L) {
     const diameter = L.radius * 2;
     const pad = narrow ? 8 : 28;
     const fitK = Math.min((usableW - pad * 2) / diameter, (vh - pad * 2) / diameter);
-    state.k = clamp(fitK, 0.55, 1.25);
-    state.x = usableW / 2 + (panelOpen ? 0 : 0);
+    state.k = clamp(fitK, 0.15, 1.25);
+    state.x = usableW / 2;
     state.y = vh / 2;
     applyTransform();
     return;
@@ -770,11 +784,14 @@ function markSelectedCards() {
   for (const node of $$(".union-card")) {
     node.classList.toggle("selected", node.dataset.union === state.selected);
   }
+  for (const sector of $$(".wheel-sector")) {
+    sector.classList.toggle("selected", Boolean(state.selected) && sector.dataset.id === state.selected);
+  }
 }
 
 // ---------- Panel ----------
 
-function selectPerson(id, { silent = false } = {}) {
+function selectPerson(id) {
   state.selected = id;
   markSelectedCards();
   const p = IDX.people[id];
@@ -784,10 +801,8 @@ function selectPerson(id, { silent = false } = {}) {
   panel.innerHTML = personPanelHTML(p);
   panel.hidden = false;
   panel.scrollTop = 0;
-  if (!silent) {
-    const narrow = window.innerWidth <= 640;
-    if (!narrow && state.layout) centerOn(state.layout);
-  }
+  // The chart is deliberately NOT re-centred here: opening or closing the
+  // details panel must leave the visitor's pan and zoom exactly as they were.
 }
 
 function selectUnion(id) {
@@ -893,7 +908,7 @@ function personPanelHTML(p) {
   if (state.meId === p.id) buttons.push(`<button class="btn" type="button" data-action="unme">Clear “me”</button>`);
   else if (!p.hidden) buttons.push(`<button class="btn" type="button" data-action="me" data-id="${esc(p.id)}">${esc(CFG.text.set_me)}</button>`);
   if (vedic) buttons.push(`<button class="btn vedic-btn" type="button" data-action="vedic" aria-expanded="false" aria-controls="vedic-${esc(p.id)}">Vedic roots</button>`);
-  if (p.vedic?.chart) buttons.push(`<button class="btn jadagam-btn" type="button" data-action="jadagam" data-id="${esc(p.id)}">Jadagam</button>`);
+  if (p.vedic?.chart) buttons.push(`<button class="btn jatagam-btn" type="button" data-action="jatagam" data-id="${esc(p.id)}">Jatagam</button>`);
   parts.push(`<div class="actions">${buttons.join("")}</div>`);
 
   if (vedic) {
@@ -1023,14 +1038,14 @@ function decodeJwt(token) {
 function mappedPersonId(google, email) {
   const key = String(email || "").toLowerCase();
   if (!key) return null;
-  
+
   // First check config.yml mapping
   const people = Object.fromEntries(
     Object.entries(google?.people || {}).map(([k, v]) => [String(k).toLowerCase(), v]),
   );
   let pid = people[key];
   if (pid && IDX?.people[pid] && !IDX.people[pid].hidden) return pid;
-  
+
   // Fall back to EMAIL attribute in sheet data
   if (IDX?.people) {
     for (const [id, person] of Object.entries(IDX.people)) {
@@ -1039,7 +1054,7 @@ function mappedPersonId(google, email) {
       if (personEmail && personEmail === key) return id;
     }
   }
-  
+
   return null;
 }
 
@@ -1399,6 +1414,15 @@ function bindEvents() {
     go("tree", state.focus, { v: state.view, o: b.dataset.orientation });
   });
 
+  $("#wheel-rings").addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-rings]");
+    if (!b) return;
+    const rings = Number(b.dataset.rings);
+    // Ignore clicks on the ring count that is already in effect.
+    if (rings === (state.wheelRings ?? state.layout?.rings)) return;
+    go("tree", state.focus, { v: "wheel", o: state.orientation, r: rings });
+  });
+
   $("#cards").addEventListener("click", (e) => {
     if (dragMoved) return;
     const union = e.target.closest("[data-union]");
@@ -1446,8 +1470,8 @@ function bindEvents() {
       $("#panel").classList.toggle("vedic-open", open);
       return;
     }
-    if (t.dataset.action === "jadagam") {
-      return openJadagam(t.dataset.id);
+    if (t.dataset.action === "jatagam") {
+      return openJatagam(t.dataset.id);
     }
     if (t.dataset.action === "close") return hidePanel();
     if (t.dataset.action === "me") {
@@ -1506,12 +1530,12 @@ function bindEvents() {
   if (chartModal) {
     chartModal.addEventListener("click", (e) => {
       const action = e.target.closest("[data-chart]")?.dataset.chart;
-      if (action === "close") return closeJadagam();
+      if (action === "close") return closeJatagam();
       if (action === "print") return window.print();
-      if (e.target === chartModal) closeJadagam();  // backdrop click
+      if (e.target === chartModal) closeJatagam();  // backdrop click
     });
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !chartModal.hidden) closeJadagam();
+      if (e.key === "Escape" && !chartModal.hidden) closeJatagam();
     });
   }
 

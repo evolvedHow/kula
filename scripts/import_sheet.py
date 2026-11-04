@@ -32,7 +32,7 @@ is the authority for birth, death and living status. Its rows are fuzzy-matched
 to the current Persons rows by name, then only non-empty values override the
 relational sheet. Blank cells never erase existing data.
 
-Birth charts (jadagam): when a person's DOB includes a time AND they have a
+Birth charts (jatagam): when a person's DOB includes a time AND they have a
 POB, a sidereal (Lahiri) chart is computed with Swiss Ephemeris and stored at
 person.vedic.chart. The engine also supplies the Moon's rashi / nakshatra /
 pada. Enter DOB as a real date-time cell in Google Sheets (recommended) or as
@@ -56,7 +56,7 @@ from pathlib import Path
 
 import yaml
 
-# Horoscope (jadagam) support lives in sibling modules. They import cleanly
+# Horoscope (jatagam) support lives in sibling modules. They import cleanly
 # even without the optional dependencies (pyswisseph / timezonefinder); chart
 # computation is simply skipped with a warning in that case.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -301,8 +301,23 @@ def validate_person_dates(person, today=None):
     if dob_dt and dod_dt:
         if dod_dt < dob_dt:
             warnings.append(f"{pid}: DOD '{dod}' is before DOB '{dob}'")
+        elif dob_dt.date() == dod_dt.date():
+            warnings.append(
+                f"{pid}: DOB '{dob}' and DOD '{dod}' are the same day; check "
+                "whether the death date was typed into the DOB cell")
         elif (dod_dt.date() - dob_dt.date()).days > 120 * 365.25:
             warnings.append(f"{pid}: age at death from DOB '{dob}' and DOD '{dod}' looks implausible")
+    # The sheet's YRS column is the age at death for deceased people. A large
+    # disagreement with the dates usually means a stale YRS or a wrong date.
+    if not person.get("living", True) and dob_dt and dod_dt:
+        stated = (attrs.get("YRS") or "").strip()
+        if stated.isdigit():
+            age = dod_dt.year - dob_dt.year - (
+                (dod_dt.month, dod_dt.day) < (dob_dt.month, dob_dt.day))
+            if abs(int(stated) - age) > 1:
+                warnings.append(
+                    f"{pid}: YRS {stated} does not match DOB '{dob}' and DOD "
+                    f"'{dod}' (age {age}); check YRS or the birth date")
     if person.get("living") and (dod or pod):
         warnings.append(f"{pid}: STATUS is living but a death date/place is present")
     return warnings
@@ -490,11 +505,32 @@ def union_resolver(families):
     return resolve
 
 
-VEDIC_INHERIT_FIELDS = list(VEDIC_FIELDS.values())
+# Nakshatra is personal: it depends on the exact time and place of birth and
+# is computed from the birth chart. It must never be inherited from a parent
+# or a spouse. Everything else in the Vedic tab is part of the lineage.
+VEDIC_PERSONAL_FIELDS = {"nakshatra"}
+VEDIC_INHERIT_FIELDS = [
+    field for field in VEDIC_FIELDS.values() if field not in VEDIC_PERSONAL_FIELDS
+]
+
+
+def _clean(value):
+    return value.strip() if isinstance(value, str) else value
 
 
 def inherit_vedic(people, person_by_pid, family_by_uid):
-    """Fill in missing Vedic fields by walking up the paternal line."""
+    """Fill missing Vedic lineage fields, then apply marriage.
+
+    A child inherits the lineage fields (gotra, veda, shakha, sutra, kula
+    devatha, sampradaya, acharya thirumaligai, purvikam, parvata) from the
+    father, walking up the paternal line as needed. Nakshatra is deliberately
+    excluded: it is fixed by the person's own birth date, time and place.
+
+    After that, a married woman takes her husband's lineage fields. Her own
+    nakshatra is left untouched. Values the husband does not have are not
+    erased, so a woman whose husband's lineage is unknown keeps whatever she
+    already has.
+    """
     def father_of(pid):
         person = person_by_pid.get(pid)
         if not person:
@@ -512,7 +548,7 @@ def inherit_vedic(people, person_by_pid, family_by_uid):
         if not person:
             return None
         vedic = person.get("vedic") or {}
-        value = vedic.get(field)
+        value = _clean(vedic.get(field))
         if value:
             return value
         father_id = father_of(pid)
@@ -523,10 +559,26 @@ def inherit_vedic(people, person_by_pid, family_by_uid):
             continue
         vedic = person.setdefault("vedic", {})
         for field in VEDIC_INHERIT_FIELDS:
-            if not (vedic.get(field) or "").strip():
+            if not _clean(vedic.get(field)):
                 inherited = paternal_value(person["id"], field)
                 if inherited:
                     vedic[field] = inherited
+
+    # A woman marries into her husband's lineage. Nakshatra stays with her,
+    # because it is a property of her birth, not of the marriage.
+    for fam in family_by_uid.values():
+        husband = person_by_pid.get(fam.get("father") or "")
+        wife = person_by_pid.get(fam.get("mother") or "")
+        if not husband or not wife:
+            continue
+        if husband.get("gender") != "M" or wife.get("gender") != "F":
+            continue
+        husband_vedic = husband.get("vedic") or {}
+        wife_vedic = wife.setdefault("vedic", {})
+        for field in VEDIC_INHERIT_FIELDS:
+            value = _clean(husband_vedic.get(field))
+            if value and _clean(wife_vedic.get(field)) != value:
+                wife_vedic[field] = value
 
 
 def build(sheets, config, tabs=None, authority_rows=None):
@@ -604,8 +656,17 @@ def build(sheets, config, tabs=None, authority_rows=None):
                 father, mother = p2, p1
             elif g1 == g2:
                 father, mother = p1, p2
+                if g1 == "F":
+                    warnings.append(
+                        f"Union {uid}: both partners are recorded as female; using PID1 "
+                        "as father and PID2 as mother because the data model has two "
+                        "parent slots. Check GENDER if this is a data-entry error.")
+        elif p1 and not p2:
+            g1 = next((gender_code(p.get("GENDER")) for p in persons_raw if p["PID"] == p1), "O")
+            father, mother = (None, p1) if g1 == "F" else (p1, None)
         elif p2 and not p1:
-            father, mother = p2, None
+            g2 = next((gender_code(p.get("GENDER")) for p in persons_raw if p["PID"] == p2), "O")
+            father, mother = (None, p2) if g2 == "F" else (p2, None)
         fam = {
             "id": uid,
             "father": father,
@@ -706,16 +767,16 @@ def build(sheets, config, tabs=None, authority_rows=None):
 
     # The older hierarchical sheet is the authority for birth, death and
     # living status. Apply it after the current rows exist but before charts,
-    # so an authoritative DOB/POB also drives the jadagam.
+    # so an authoritative DOB/POB also drives the jatagam.
     authority_rows = authority_rows or []
     warnings.extend(merge_authority(
         people, authority_rows, (config.get("source") or {}).get("authority") or {}))
     for person in people:
         warnings.extend(validate_person_dates(person))
 
-    # Propagate Vedic fields down the paternal line. A child inherits gotra,
-    # veda, shakha, sutra, nakshatra, kula devatha, etc. from his or her
-    # father when the child does not have an explicit value of its own.
+    # Propagate Vedic lineage fields down the paternal line, then let a
+    # married woman take her husband's lineage. Nakshatra is excluded because
+    # it is determined by the person's own birth date, time and place.
     inherit_vedic(people, person_by_pid, family_by_uid)
 
     for fam in families:
@@ -823,7 +884,7 @@ def build(sheets, config, tabs=None, authority_rows=None):
                 if is_story:
                     person_by_pid[pid]["stories"].append(nid)
 
-    # --- Birth charts (jadagam) --------------------------------------------
+    # --- Birth charts (jatagam) --------------------------------------------
     # Only when DOB has a date AND time AND the person has a POB. The engine
     # (Swiss Ephemeris, Lahiri ayanamsa) supplies the lagna, graha positions
     # and the Moon's rashi/nakshatra/pada; these engine values win over the

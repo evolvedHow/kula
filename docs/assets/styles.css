@@ -585,6 +585,10 @@ a { color: inherit; }
 .wheel-sector:focus path:first-child {
   filter: drop-shadow(0 0 4px color-mix(in srgb, var(--accent) 60%, transparent));
 }
+.wheel-sector.selected path:first-child {
+  stroke-width: 3;
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--accent) 55%, transparent));
+}
 
 .wheel-sector text {
   font-size: 11px;
@@ -1305,6 +1309,11 @@ body[data-treeview="wheel"] #orientation-switch {
   display: none;
 }
 
+/* The generation picker only makes sense for the fan chart. */
+body:not([data-treeview="wheel"]) #wheel-rings {
+  display: none;
+}
+
 @keyframes sheet-in {
   from { transform: translateY(40px); opacity: 0; }
   to { transform: none; opacity: 1; }
@@ -1314,7 +1323,7 @@ body[data-treeview="wheel"] #orientation-switch {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
 
-/* ---------- Jadagam (South Indian birth chart) ---------- */
+/* ---------- Jatagam (South Indian birth chart) ---------- */
 
 body.chart-open { overflow: hidden; }
 
@@ -1466,7 +1475,7 @@ body.chart-open { overflow: hidden; }
 
 .chart-disclaimer, .chart-engine { color: var(--muted); font-size: 0.75rem; margin: 0; }
 
-/* Print: only the jadagam dialog, clean on white. Scoped to chart-open so a
+/* Print: only the jatagam dialog, clean on white. Scoped to chart-open so a
    normal page print is unaffected. */
 @media print {
   body.chart-open { overflow: visible; }

@@ -76,7 +76,7 @@ can be overridden in `source.tabs`.
 | Tab | Purpose |
 | --- | --- |
 | `Persons` | `PID`, names, `EMAIL` (for Google sign-in), gender, `DOB`, `POB`, current location, `STATUS`, `DOD` (date of death), optional `POD` (place of death), notes, `GEN` (generation: A, B, C, …) |
-| `Vedic` | Per-person gotra, veda, shakha, sutra, nakshatra, kula devatha, sampradaya (Iyengar), acharya thirumaligai (Iyengar), purvikam, parvata. Missing fields are inherited down the paternal line |
+| `Vedic` | Per-person gotra, veda, shakha, sutra, nakshatra, kula devatha, sampradaya (Iyengar), acharya thirumaligai (Iyengar), purvikam, parvata. Lineage fields are inherited down the paternal line; after marriage a woman takes her husband's lineage but keeps her own nakshatra |
 | `$Config` | Gotra defaults for veda, shakha, sutra and nakshatra |
 | `Unions` | `UID`, `PID1`, `PID2`, `REF_NAME`, relationship dates and notes |
 | `Offsprings` | `OID`, `UNION_OF`, `OFFSPRING`, notes |
@@ -112,7 +112,7 @@ cache path live in `docs/config.yml`. The importer:
 
 A blank authority cell never erases data already in the `Persons` tab. Because
 the merge happens before chart generation, an authoritative `DOB` and `POB`
-also drive the jadagam. Every override is printed by the importer, along with
+also drive the jatagam. Every override is printed by the importer, along with
 unmatched authority rows and impossible dates such as a death before birth.
 Remove the `source.authority` block to import only the relational sheet.
 
@@ -150,17 +150,44 @@ sheet fields.
 
 `layout.orientation` switches vertical (generations top-to-bottom) and
 horizontal (left-to-right). `layout.default_view: graph` makes Relatives the
-opening view.
+opening view. Panning and zooming are yours: opening a card's details and
+closing the panel again never moves or re-fits the chart — it stays exactly
+where you left it.
+
+### Relationship terms
+
+Relationship labels are computed from the `parent_family`, `families` and
+`children` links in `tree.json` — never from the `GEN` column, row order or
+the readable half of a reference. The labels use the family's everyday terms:
+
+* direct line: father/mother, grandfather/grandmother, son/daughter,
+  grandson/granddaughter, with `great-` added per generation;
+* spouse, brother/sister, aunt/uncle, nephew/niece;
+* a **cousin's child** is a **niece/nephew**, not a "first cousin once
+  removed"; a cousin's grandchild is a grand-niece/nephew, and so on;
+* in the other direction, a **parent's cousin** is an **aunt/uncle**.
+
+More distant collateral links (for example second cousins or a cousin three
+generations away) fall back to the standard `Nth cousin M times removed`
+wording. Only blood links and the direct spouse link are labelled; in-laws,
+step and adoptive links are not inferred, so those profiles show no family
+link unless the two people are also blood relatives.
 
 ## Wheel view
 
-**Wheel** is a 3-ring ancestor pedigree wheel (fan chart) built with
-d3-hierarchy. The focus person sits at the centre; parents, grandparents and
-great-grandparents radiate outward in rings. Tap any sector to re-centre the
-wheel on that person. Missing ancestors appear as dim "Unknown" placeholders
-so the wheel keeps its shape. On narrow screens the wheel is the default view,
-while desktops continue to open with the configured `layout.default_view`.
-The hierarchy views remain available and are unchanged.
+**Wheel** is an ancestor fan chart (pedigree wheel) built with d3-hierarchy.
+The focus person sits at the centre; parents, grandparents and further
+ancestors radiate outward one ring per generation. The fan sizes itself to
+the family's known depth — up to `layout.wheel_generations` (default 7,
+maximum 9) — plus one placeholder ring, and the number buttons in the toolbar
+let the visitor switch between 4 and 9 generations explicitly. Names are
+written radially along each wedge; thin outer wedges fall back to initials
+and then to no label, so pan and zoom do the reading at the rim. Tap any
+sector to re-centre the fan on that person. Missing ancestors appear as dim
+placeholders so the fan keeps its shape. On narrow screens the wheel is the
+default view, while desktops continue to open with the configured
+`layout.default_view`. The hierarchy views remain available and are
+unchanged.
 
 ## Mobile layout
 
@@ -177,11 +204,21 @@ devatha, sampradaya (for Iyengars), acharya thirumaligai (for Iyengars),
 purvikam, and parvata where present. Each field has an **i** help button that
 explains the concept.
 
-Vedic fields are **inherited down the paternal line**: if a child’s Vedic tab
-is empty, the importer copies gotra, veda, shakha, sutra, nakshatra, kula
+Vedic **lineage fields** are inherited down the paternal line: if a child’s
+Vedic tab is empty, the importer copies gotra, veda, shakha, sutra, kula
 devatha, sampradaya, acharya thirumaligai, purvikam and parvata from the
 father (and, if needed, from the grandfather) so the patrilineal lineage stays
 consistent without re-entering every field for each generation.
+
+Two rules keep the lineage and the birth data separate:
+
+* **Marriage.** Once a woman is recorded in a `Unions` row with a husband,
+  she inherits his lineage fields. Her own nakshatra is not replaced. If the
+  husband has no recorded lineage, her existing values are left in place
+  rather than being erased.
+* **Nakshatra is personal.** It follows the place, date and time of birth and
+  is computed from the jatagam. It is never inherited from a parent or a
+  spouse, so family spellings are not copied down the line.
 
 Pravara is **derived from gotra at runtime**. It is never stored in
 `tree.json`, so a stale or contradictory pravara value cannot exist. The
@@ -212,10 +249,10 @@ Add aliases (for example `sreevatsa` or `kasyapa`) in the same file. Unknown
 gotras show no invented pravara. The help text and source links also live in
 `docs/data/vedic.json` under `concepts`.
 
-## Birth charts (jadagam)
+## Birth charts (jatagam)
 
 When a person's birth details are complete, their profile also shows a
-**Jadagam** button. It opens a South Indian square chart plus a positions
+**Jatagam** button. It opens a South Indian square chart plus a positions
 report, with a **Print** button for a clean paper copy.
 
 A chart is computed only when **all three** are present:

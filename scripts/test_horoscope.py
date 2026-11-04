@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tests for the jadagam (birth chart) engine.
+"""Tests for the jatagam (birth chart) engine.
 
 Run with the project virtualenv so pyswisseph is available:
     .venv/bin/python -m unittest scripts.test_horoscope -v
