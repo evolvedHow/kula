@@ -109,6 +109,7 @@ async function boot() {
   initAuth();
   window.addEventListener("hashchange", route);
   route();
+  renderGenerationsRail();
   $("#loading").hidden = true;
   document.querySelector(".app").dataset.view = "ready";
 }
@@ -122,7 +123,39 @@ function buildIndex(data) {
   for (const n of data.notes) notes[n.id] = n;
   const stories = data.notes.filter((n) => n.is_story);
   stories.sort((a, b) => (b.updated || "").localeCompare(a.updated || "") || (a.id < b.id ? -1 : 1));
-  return { people, families, notes, stories };
+  const generations = data.generations || [];
+  return { people, families, notes, stories, generations };
+}
+
+function renderGenerationsRail() {
+  const rail = $("#gen-rail");
+  if (!rail || !IDX.generations.length) {
+    if (rail) rail.hidden = true;
+    return;
+  }
+  rail.hidden = false;
+  const activeGen = IDX.people[state.focus]?.generation || "";
+  rail.innerHTML = IDX.generations
+    .map((gen) => `<button type="button" data-gen="${esc(gen)}" class="${gen === activeGen ? "active" : ""}" aria-label="Jump to generation ${esc(gen)}">${esc(gen)}</button>`)
+    .join("");
+}
+
+function focusGeneration(gen) {
+  const candidates = DATA.people.filter((p) => !p.hidden && p.generation === gen);
+  if (!candidates.length) return;
+  // Prefer someone related to the current focus, otherwise the first visible person.
+  let pick = candidates.find((p) => p.id === state.focus);
+  if (!pick && state.focus) {
+    const current = IDX.people[state.focus];
+    if (current?.generation === gen) {
+      pick = current;
+    }
+  }
+  if (!pick) {
+    const home = defaultFocus();
+    pick = candidates.find((p) => p.id === home) || candidates[0];
+  }
+  go("tree", pick.id, { v: state.view, o: state.orientation });
 }
 
 function applyTheme() {
@@ -520,6 +553,7 @@ function renderTree(focusId) {
     document.body.dataset.treeview = "wheel";
     centerOn(L);
     refreshMeChip();
+    renderGenerationsRail();
     return;
   }
 
@@ -558,6 +592,7 @@ function renderTree(focusId) {
   document.body.dataset.treeview = state.view;
   centerOn(L);
   refreshMeChip();
+  renderGenerationsRail();
 }
 
 function cardHTML(c, focusId) {
@@ -1370,6 +1405,12 @@ function bindEvents() {
     if (union) return selectUnion(union.dataset.union);
     const card = e.target.closest("[data-card]");
     if (card) selectPerson(card.dataset.card);
+  });
+
+  $("#gen-rail").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-gen]");
+    if (!b) return;
+    focusGeneration(b.dataset.gen);
   });
 
   $("#panel").addEventListener("click", (e) => {

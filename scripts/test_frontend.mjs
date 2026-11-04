@@ -461,9 +461,11 @@ test("chart payloads in tree.json are well formed when present", () => {
     assert.ok(chart.moon.pada >= 1 && chart.moon.pada <= 4, `${p.id} moon pada out of range`);
     assert.equal(Object.keys(chart.planets).length, 9, `${p.id} chart needs nine grahas`);
     const ra = chart.planets.Ra, ke = chart.planets.Ke;
-    const rasis = RASI_BOXES.map((b) => b.sign);
+    // Zodiacal order for the opposition check, not the South-Indian grid order.
+    const zodiac = ["Mesha", "Vrishabha", "Mithuna", "Kataka", "Simha", "Kanya",
+                    "Tula", "Vrischika", "Dhanus", "Makara", "Kumbha", "Meena"];
     assert.equal(
-      (rasis.indexOf(ke.rasi) - rasis.indexOf(ra.rasi) + 12) % 12, 6,
+      (zodiac.indexOf(ke.rasi) - zodiac.indexOf(ra.rasi) + 12) % 12, 6,
       `${p.id}: Ketu must be opposite Rahu`,
     );
     // Engine-derived vedic fields mirror the chart.

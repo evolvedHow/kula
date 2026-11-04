@@ -17,10 +17,11 @@ The older Gramps importer remains available as a fallback.
    .venv/bin/pip install -r requirements.txt
    ```
 
-3. Rebuild the public data:
+3. Rebuild the public data (the sheet URL is now required on the command
+   line):
 
    ```
-   .venv/bin/python scripts/import_sheet.py
+   .venv/bin/python scripts/import_sheet.py --url "YOUR_GOOGLE_SHEET_URL"
    ```
 
    The importer downloads the workbook, caches it in
@@ -29,7 +30,7 @@ The older Gramps importer remains available as a fallback.
    directly. A local `.xlsx` can be used instead:
 
    ```
-   .venv/bin/python scripts/import_sheet.py private/relatives.xlsx
+   .venv/bin/python scripts/import_sheet.py --url "YOUR_GOOGLE_SHEET_URL" private/relatives.xlsx
    ```
 
    If `source.authority` is configured, the older hierarchical family sheet is
@@ -68,7 +69,7 @@ can be overridden in `source.tabs`.
 
 | Tab | Purpose |
 | --- | --- |
-| `Persons` | `PID`, names, `EMAIL` (for Google sign-in), gender, `DOB`, `POB`, current location, `STATUS`, `DOD` (date of death), optional `POD` (place of death), notes |
+| `Persons` | `PID`, names, `EMAIL` (for Google sign-in), gender, `DOB`, `POB`, current location, `STATUS`, `DOD` (date of death), optional `POD` (place of death), notes, `GEN` (generation: A, B, C, …) |
 | `Vedic` | Per-person gotra, veda, shakha, sutra, nakshatra, kula devatha, sampradaya (Iyengar), acharya thirumaligai (Iyengar), purvikam, parvata |
 | `$Config` | Gotra defaults for veda, shakha, sutra and nakshatra |
 | `Unions` | `UID`, `PID1`, `PID2`, `REF_NAME`, relationship dates and notes |

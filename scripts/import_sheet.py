@@ -3,16 +3,15 @@
 
 The sheet is the source of truth. It has five tabs:
 
-    Persons     PID, KNOWN_NAME, FULL_NAME, REF_NAME, EMAIL, GENDER, DOB, POB, CUR_LOC, STATUS, DOD, POD, NOTES
+    Persons     PID, KNOWN_NAME, FULL_NAME, REF_NAME, EMAIL, GENDER, DOB, POB, CUR_LOC, STATUS, DOD, POD, NOTES, GEN
     Vedic       PERSON, GOTRA, VEDA, SHAKHA, SUTRA, NAKSHATRA, KULA_DEVATHA, SAMPRADAYA, ACHARYA_THIRUMALIGAI, PURVIKAM, PARVATA
     $Config     GOTRA, VEDA, SHAKHA, SUTRA, NAKSHATRA
     Unions      UID, PID1, PID2, REF_NAME, REL_START, REL_END, NOTES
     Offsprings  OID, UNION_OF, OFFSPRING, NOTES
 
 Usage:
-    python3 scripts/import_sheet.py
-    python3 scripts/import_sheet.py private/relatives.xlsx
     python3 scripts/import_sheet.py --url "https://docs.google.com/spreadsheets/d/.../edit"
+    python3 scripts/import_sheet.py --url "..." private/relatives.xlsx
 
 The tab values PID1/PID2/UNION_OF/OFFSPRING are readable keys of the form
 "<PID>-<KNOWN_NAME>", for example "P049-Sriram". KNOWN_NAME is the pseudo key
@@ -40,7 +39,7 @@ pada. Enter DOB as a real date-time cell in Google Sheets (recommended) or as
 text like "15 Aug 1950 14:30". Charts need the optional dependencies:
 
     python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-    .venv/bin/python scripts/import_sheet.py
+    .venv/bin/python scripts/import_sheet.py --url "YOUR_SHEET_URL"
 """
 
 import argparse
@@ -78,7 +77,7 @@ NS = {
     "r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
 }
 PERSON_CORE = ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "EMAIL", "GENDER", "DOB",
-               "POB", "CUR_LOC", "STATUS", "DOD", "POD", "NOTES"]
+               "POB", "CUR_LOC", "STATUS", "DOD", "POD", "NOTES", "GEN"]
 VEDIC_FIELDS = {
     "GOTRA": "gotra",
     "VEDA": "veda",
@@ -518,10 +517,15 @@ def build(sheets, config, tabs=None, authority_rows=None):
     # Families first so people can list their unions and parent family.
     families = []
     family_by_uid = {}
+    seen_uids = set()
     for row in unions_raw:
         uid = (row.get("UID") or "").strip()
         if not uid:
             continue
+        if uid in seen_uids:
+            warnings.append(f"Duplicate union UID {uid!r}, skipping duplicate row")
+            continue
+        seen_uids.add(uid)
         p1 = resolve(row.get("PID1"))
         p2 = resolve(row.get("PID2"))
         if not p1 and not p2:
@@ -623,11 +627,13 @@ def build(sheets, config, tabs=None, authority_rows=None):
         pod = (row.get("POD") or "").strip()
         if pod:
             attrs["POD"] = pod
+        generation = (row.get("GEN") or "").strip().upper()
         person = {
             "id": pid,
             "gender": gender_code(row.get("GENDER")),
             "living": living,
             "hidden": False,
+            "generation": generation,
             "name": {
                 "display": display,
                 "given": given,
@@ -828,6 +834,9 @@ def build(sheets, config, tabs=None, authority_rows=None):
                       {p.get("current_location") for p in people if p.get("current_location")}),
     }
 
+    generations = sorted({p.get("generation") for p in people if p.get("generation")},
+                         key=lambda g: (len(g), g))
+
     data = {
         "schema": "kula.site/2.0",
         "generated_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
@@ -837,6 +846,7 @@ def build(sheets, config, tabs=None, authority_rows=None):
         "people": people,
         "families": families,
         "notes": notes,
+        "generations": generations,
         "graph": {
             "schema": "kula.graph/1.0",
             "nodes": nodes,
@@ -850,7 +860,7 @@ def build(sheets, config, tabs=None, authority_rows=None):
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("xlsx", nargs="?", help="Local .xlsx export. Omit to download the shared sheet.")
-    ap.add_argument("--url", default=None, help="Google Sheet URL or ID (overrides source.sheet_url in config)")
+    ap.add_argument("--url", required=True, help="Google Sheet URL or ID to import")
     ap.add_argument("--authority", default=None,
                     help="Local .xlsx of the original authority sheet (overrides source.authority.cache)")
     ap.add_argument("--config", default="docs/config.yml")
@@ -867,12 +877,8 @@ def main(argv=None):
     cfg["_geocache"] = str(Path(args.config).resolve().parent.parent / "private" / "geocache.json")
     source = cfg.get("source") or {}
     tabs = source.get("tabs") or {}
-    url = args.url or source.get("sheet_url") or ""
+    url = args.url
     cache_path = args.cache or source.get("cache") or ""
-
-    if not args.xlsx and not url:
-        raise SystemExit("No sheet source. Set source.sheet_url in docs/config.yml, pass --url, "
-                         "or pass a local .xlsx file.")
 
     if args.xlsx:
         raw = Path(args.xlsx).read_bytes()

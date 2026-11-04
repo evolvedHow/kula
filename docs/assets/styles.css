@@ -456,6 +456,51 @@ a { color: inherit; }
   display: flex;
 }
 
+.gen-rail {
+  position: relative;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.35rem;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  border-right: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  overflow: auto;
+}
+
+.gen-rail[hidden] { display: none; }
+
+.gen-rail button {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s var(--ease);
+}
+
+.gen-rail button:hover,
+.gen-rail button:focus-visible {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--accent);
+  transform: scale(1.08);
+}
+
+.gen-rail button.active {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--accent);
+}
+
 .viewport {
   position: relative;
   flex: 1;
@@ -1233,7 +1278,6 @@ details summary { cursor: pointer; font-weight: 600; font-size: 0.9rem; }
   }
 
   .panel.vedic-open { width: 100%; }
-  .stage-wrap { flex-direction: column; }
 
   body[data-treeview="wheel"] .tree-toolbar .toolbar-group {
     justify-content: center;
@@ -1245,6 +1289,16 @@ details summary { cursor: pointer; font-weight: 600; font-size: 0.9rem; }
 
   .wheel-sector text { font-size: 13px; }
   .wheel-sector .wheel-years { font-size: 10px; }
+
+  .gen-rail {
+    gap: 0.35rem;
+    padding: 0.35rem 0.25rem;
+  }
+  .gen-rail button {
+    width: 1.9rem;
+    height: 1.9rem;
+    font-size: 0.78rem;
+  }
 }
 
 body[data-treeview="wheel"] #orientation-switch {

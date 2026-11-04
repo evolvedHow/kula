@@ -21,7 +21,7 @@ site:
 # Where the public data comes from. The Google Sheet is the source of truth.
 # Share it as "Anyone with the link can view", then run scripts/import_sheet.py.
 source:
-  sheet_url: "https://docs.google.com/spreadsheets/d/1qlGP7U0z3hRp9aeq_S4KUj5p9bfbHZjdZS6tuMkucjc/edit?usp=sharing"
+  sheet_url: "https://docs.google.com/spreadsheets/d/1ay96j0dTHfk3qEyKid1wgBO0HJxIqd-B-ByMuYt3VTc/edit?usp=sharing"
   # Optional local cache written by the importer (git-ignored).
   cache: "private/relatives-sheet.xlsx"
   # Tab names in the workbook. Change these if you reuse the app with a
