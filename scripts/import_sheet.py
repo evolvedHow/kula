@@ -490,6 +490,45 @@ def union_resolver(families):
     return resolve
 
 
+VEDIC_INHERIT_FIELDS = list(VEDIC_FIELDS.values())
+
+
+def inherit_vedic(people, person_by_pid, family_by_uid):
+    """Fill in missing Vedic fields by walking up the paternal line."""
+    def father_of(pid):
+        person = person_by_pid.get(pid)
+        if not person:
+            return None
+        fam = family_by_uid.get(person.get("parent_family") or "")
+        return fam.get("father") if fam else None
+
+    def paternal_value(pid, field, visited=None):
+        if visited is None:
+            visited = set()
+        if pid in visited:
+            return None
+        visited.add(pid)
+        person = person_by_pid.get(pid)
+        if not person:
+            return None
+        vedic = person.get("vedic") or {}
+        value = vedic.get(field)
+        if value:
+            return value
+        father_id = father_of(pid)
+        return paternal_value(father_id, field, visited) if father_id else None
+
+    for person in people:
+        if person.get("hidden"):
+            continue
+        vedic = person.setdefault("vedic", {})
+        for field in VEDIC_INHERIT_FIELDS:
+            if not (vedic.get(field) or "").strip():
+                inherited = paternal_value(person["id"], field)
+                if inherited:
+                    vedic[field] = inherited
+
+
 def build(sheets, config, tabs=None, authority_rows=None):
     tabs = {**DEFAULT_TABS, **(tabs or {})}
     persons_raw = records(sheets.get(tabs["persons"], []), PERSON_CORE)
@@ -673,6 +712,11 @@ def build(sheets, config, tabs=None, authority_rows=None):
         people, authority_rows, (config.get("source") or {}).get("authority") or {}))
     for person in people:
         warnings.extend(validate_person_dates(person))
+
+    # Propagate Vedic fields down the paternal line. A child inherits gotra,
+    # veda, shakha, sutra, nakshatra, kula devatha, etc. from his or her
+    # father when the child does not have an explicit value of its own.
+    inherit_vedic(people, person_by_pid, family_by_uid)
 
     for fam in families:
         for partner in (fam["father"], fam["mother"]):
@@ -877,6 +921,8 @@ def main(argv=None):
                     help="Where to keep a downloaded workbook for offline rebuilds (overrides source.cache)")
     ap.add_argument("--offline", action="store_true",
                     help="Do not hit the network for geocoding; use only the cache and config places")
+    ap.add_argument("--override", action="store_true",
+                    help="Use the relational sheet as the sole source of truth: skip the authority merge")
     args = ap.parse_args(argv)
 
     cfg = yaml.safe_load(Path(args.config).read_text(encoding="utf-8")) if Path(args.config).exists() else {}
@@ -904,7 +950,9 @@ def main(argv=None):
 
     authority_cfg = source.get("authority") or {}
     authority_rows = []
-    if authority_cfg:
+    if args.override and authority_cfg:
+        log("Skipping authority merge because --override was requested")
+    elif authority_cfg:
         auth_path = args.authority or authority_cfg.get("path") or ""
         auth_url = authority_cfg.get("sheet_url") or ""
         auth_cache = authority_cfg.get("cache") or ""

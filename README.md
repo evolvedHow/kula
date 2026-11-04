@@ -33,6 +33,12 @@ The older Gramps importer remains available as a fallback.
    .venv/bin/python scripts/import_sheet.py --url "YOUR_GOOGLE_SHEET_URL" private/relatives.xlsx
    ```
 
+   To ignore the older authority sheet and use only the relational sheet:
+
+   ```
+   .venv/bin/python scripts/import_sheet.py --url "YOUR_GOOGLE_SHEET_URL" --override
+   ```
+
    If `source.authority` is configured, the older hierarchical family sheet is
    downloaded too and merged over the `Persons` tab (see below). Pass
    `--authority path/to/original.xlsx` to use a local copy instead.
@@ -70,7 +76,7 @@ can be overridden in `source.tabs`.
 | Tab | Purpose |
 | --- | --- |
 | `Persons` | `PID`, names, `EMAIL` (for Google sign-in), gender, `DOB`, `POB`, current location, `STATUS`, `DOD` (date of death), optional `POD` (place of death), notes, `GEN` (generation: A, B, C, …) |
-| `Vedic` | Per-person gotra, veda, shakha, sutra, nakshatra, kula devatha, sampradaya (Iyengar), acharya thirumaligai (Iyengar), purvikam, parvata |
+| `Vedic` | Per-person gotra, veda, shakha, sutra, nakshatra, kula devatha, sampradaya (Iyengar), acharya thirumaligai (Iyengar), purvikam, parvata. Missing fields are inherited down the paternal line |
 | `$Config` | Gotra defaults for veda, shakha, sutra and nakshatra |
 | `Unions` | `UID`, `PID1`, `PID2`, `REF_NAME`, relationship dates and notes |
 | `Offsprings` | `OID`, `UNION_OF`, `OFFSPRING`, notes |
@@ -171,6 +177,12 @@ devatha, sampradaya (for Iyengars), acharya thirumaligai (for Iyengars),
 purvikam, and parvata where present. Each field has an **i** help button that
 explains the concept.
 
+Vedic fields are **inherited down the paternal line**: if a child’s Vedic tab
+is empty, the importer copies gotra, veda, shakha, sutra, nakshatra, kula
+devatha, sampradaya, acharya thirumaligai, purvikam and parvata from the
+father (and, if needed, from the grandfather) so the patrilineal lineage stays
+consistent without re-entering every field for each generation.
+
 Pravara is **derived from gotra at runtime**. It is never stored in
 `tree.json`, so a stale or contradictory pravara value cannot exist. The
 canonical map is `docs/data/vedic.json`:
@@ -247,7 +259,9 @@ Charts are computed **at import time** — the site stays fully static with no
 backend. The engine is Swiss Ephemeris (`pyswisseph`) using the **Lahiri
 ayanamsa** (sidereal), with the nine grahas (Sun through Ketu, Rahu as the mean
 node) and the lagna from the birth moment. It also supplies the Moon's rashi,
-nakshatra and pada, so the sheet no longer needs `RASHI` or `PADA` columns.
+nakshatra and pada, so the sheet no longer needs `RASHI`, `PADA` or `NAKSHATRA`
+columns (nakshatra is derived, and can also be inherited paternally for people
+without a chart).
 The computed payload is stored at `person.vedic.chart`; `counts.charts` in
 `tree.json` reports how many were built.
 

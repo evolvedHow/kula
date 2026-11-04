@@ -1,6 +1,6 @@
 {
  "schema": "kula.site/2.0",
- "generated_at": "2026-11-04T02:35:30+00:00",
+ "generated_at": "2026-11-04T02:59:50+00:00",
  "source": "Google Sheet",
  "home": "A001",
  "counts": {
@@ -9,7 +9,7 @@
   "families": 42,
   "stories": 1,
   "notes": 48,
-  "charts": 3,
+  "charts": 4,
   "places": 35
  },
  "people": [
@@ -104,7 +104,8 @@
     "NOTES": "MATRICH",
     "GEN": "A"
    },
-   "ref_name": "A002-Rajammal"
+   "ref_name": "A002-Rajammal",
+   "vedic": {}
   },
   {
    "id": "B001",
@@ -203,7 +204,8 @@
     "NOTES": "",
     "GEN": "B"
    },
-   "ref_name": "B002-Valliammal"
+   "ref_name": "B002-Valliammal",
+   "vedic": {}
   },
   {
    "id": "B003",
@@ -242,7 +244,14 @@
     "NOTES": "(mother of Vallikutty & Lakshmi",
     "GEN": "B"
    },
-   "ref_name": "B003-Annam Ambal Iyer"
+   "ref_name": "B003-Annam Ambal Iyer",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "B004",
@@ -281,7 +290,14 @@
     "NOTES": "",
     "GEN": "B"
    },
-   "ref_name": "B004-Bhagavathy Ambal Iyer"
+   "ref_name": "B004-Bhagavathy Ambal Iyer",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "B005",
@@ -366,7 +382,14 @@
     "NOTES": "(Bombay Ramanathan's mother",
     "GEN": "B"
    },
-   "ref_name": "B006-Ponnammal Iyer"
+   "ref_name": "B006-Ponnammal Iyer",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "B007",
@@ -509,7 +532,14 @@
     "NOTES": "",
     "GEN": "C"
    },
-   "ref_name": "C001-Rajamani"
+   "ref_name": "C001-Rajamani",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "C002",
@@ -560,7 +590,8 @@
     "NOTES": "",
     "GEN": "C"
    },
-   "ref_name": "C002-Saradha"
+   "ref_name": "C002-Saradha",
+   "vedic": {}
   },
   {
    "id": "C003",
@@ -611,7 +642,14 @@
     "NOTES": "",
     "GEN": "C"
    },
-   "ref_name": "C003-FACT Narayanan"
+   "ref_name": "C003-FACT Narayanan",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "C004",
@@ -658,7 +696,8 @@
     "NOTES": "",
     "GEN": "C"
    },
-   "ref_name": "C004-Vijaya"
+   "ref_name": "C004-Vijaya",
+   "vedic": {}
   },
   {
    "id": "C005",
@@ -764,7 +803,8 @@
     "NOTES": "",
     "GEN": "C"
    },
-   "ref_name": "C006-Lakshmi"
+   "ref_name": "C006-Lakshmi",
+   "vedic": {}
   },
   {
    "id": "C007",
@@ -815,7 +855,14 @@
     "NOTES": "",
     "GEN": "C"
    },
-   "ref_name": "C007-Venkittu"
+   "ref_name": "C007-Venkittu",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "C008",
@@ -862,7 +909,8 @@
     "NOTES": "",
     "GEN": "C"
    },
-   "ref_name": "C008-Sudha"
+   "ref_name": "C008-Sudha",
+   "vedic": {}
   },
   {
    "id": "C009",
@@ -913,7 +961,14 @@
     "NOTES": "",
     "GEN": "C"
    },
-   "ref_name": "C009-Kunju"
+   "ref_name": "C009-Kunju",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "C010",
@@ -964,7 +1019,8 @@
     "NOTES": "",
     "GEN": "C"
    },
-   "ref_name": "C010-ONGC Mani"
+   "ref_name": "C010-ONGC Mani",
+   "vedic": {}
   },
   {
    "id": "C011",
@@ -1011,7 +1067,14 @@
     "NOTES": "",
     "GEN": "C"
    },
-   "ref_name": "C011-Gayathri"
+   "ref_name": "C011-Gayathri",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "C012",
@@ -1062,7 +1125,8 @@
     "NOTES": "",
     "GEN": "C"
    },
-   "ref_name": "C012-SVR"
+   "ref_name": "C012-SVR",
+   "vedic": {}
   },
   {
    "id": "C013",
@@ -1105,7 +1169,14 @@
     "NOTES": "",
     "GEN": "C"
    },
-   "ref_name": "C013-Annam"
+   "ref_name": "C013-Annam",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "C014",
@@ -1152,7 +1223,8 @@
     "NOTES": "",
     "GEN": "C"
    },
-   "ref_name": "C014-Baba"
+   "ref_name": "C014-Baba",
+   "vedic": {}
   },
   {
    "id": "C015",
@@ -1193,7 +1265,14 @@
     "NOTES": "Appa's deceased sibling.  She died of a dog bite at a very young age",
     "GEN": "C"
    },
-   "ref_name": "C015-Bhagavthy"
+   "ref_name": "C015-Bhagavthy",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "C016",
@@ -1240,7 +1319,14 @@
     "NOTES": "",
     "GEN": "C"
    },
-   "ref_name": "C016-Rajam"
+   "ref_name": "C016-Rajam",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "C017",
@@ -1287,7 +1373,8 @@
     "NOTES": "",
     "GEN": "C"
    },
-   "ref_name": "C017-Jessop Narayanan"
+   "ref_name": "C017-Jessop Narayanan",
+   "vedic": {}
   },
   {
    "id": "D001",
@@ -1389,7 +1476,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D002-Sumitra"
+   "ref_name": "D002-Sumitra",
+   "vedic": {}
   },
   {
    "id": "D003",
@@ -1491,7 +1579,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D004-Bhash"
+   "ref_name": "D004-Bhash",
+   "vedic": {}
   },
   {
    "id": "D005",
@@ -1593,7 +1682,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D006-Navina"
+   "ref_name": "D006-Navina",
+   "vedic": {}
   },
   {
    "id": "D007",
@@ -1640,7 +1730,14 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D007-Divya"
+   "ref_name": "D007-Divya",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "D008",
@@ -1687,7 +1784,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D008-Rajaram"
+   "ref_name": "D008-Rajaram",
+   "vedic": {}
   },
   {
    "id": "D009",
@@ -1834,7 +1932,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D011-Hema"
+   "ref_name": "D011-Hema",
+   "vedic": {}
   },
   {
    "id": "D012",
@@ -1851,7 +1950,7 @@
     ]
    },
    "birth": {
-    "date": "15 Jul 1966, 11:47",
+    "date": "15 Jul 1966, 06:51",
     "year": 1966,
     "place": "Ranchi"
    },
@@ -1880,7 +1979,7 @@
     "REF_NAME": "D012-Sriram",
     "EMAIL": "vish.ganapathy@gmail.com",
     "GENDER": "Male",
-    "DOB": "15 Jul 1966, 11:47",
+    "DOB": "15 Jul 1966, 06:51",
     "POB": "Ranchi",
     "CUR_LOC": "Marietta",
     "STATUS": "Living",
@@ -1896,22 +1995,22 @@
     "veda": "Yajur",
     "shakha": "Krishna /Taittiriya",
     "sutra": "Apastamba",
-    "nakshatra": "Rohini",
+    "nakshatra": "Uttara Bhadrapada (Uthirattathi)",
     "kula_devatha": "Shasta",
     "chart": {
      "engine": "swisseph-lahiri/2.10.03",
-     "lagna": "Kanya",
-     "lagna_deg": 26.94,
+     "lagna": "Kataka",
+     "lagna_deg": 19.71,
      "moon": {
       "rashi": "Vrishabha",
       "nakshatra": "Rohini",
-      "pada": 4
+      "pada": 3
      },
      "planets": {
       "Su": {
        "name": "Sun",
        "rasi": "Mithuna",
-       "deg": 28.93,
+       "deg": 28.74,
        "nakshatra": "Punarvasu",
        "pada": 3,
        "retro": false
@@ -1919,15 +2018,15 @@
       "Mo": {
        "name": "Moon",
        "rasi": "Vrishabha",
-       "deg": 20.2,
+       "deg": 17.42,
        "nakshatra": "Rohini",
-       "pada": 4,
+       "pada": 3,
        "retro": false
       },
       "Ma": {
        "name": "Mars",
        "rasi": "Mithuna",
-       "deg": 9.4,
+       "deg": 9.26,
        "nakshatra": "Ardra",
        "pada": 1,
        "retro": false
@@ -1943,7 +2042,7 @@
       "Ju": {
        "name": "Jupiter",
        "rasi": "Mithuna",
-       "deg": 21.89,
+       "deg": 21.84,
        "nakshatra": "Punarvasu",
        "pada": 1,
        "retro": false
@@ -1951,7 +2050,7 @@
       "Ve": {
        "name": "Venus",
        "rasi": "Vrishabha",
-       "deg": 28.89,
+       "deg": 28.64,
        "nakshatra": "Mrigashira",
        "pada": 2,
        "retro": false
@@ -1967,7 +2066,7 @@
       "Ra": {
        "name": "Rahu",
        "rasi": "Mesha",
-       "deg": 28.92,
+       "deg": 28.93,
        "nakshatra": "Krittika",
        "pada": 1,
        "retro": true
@@ -1975,7 +2074,7 @@
       "Ke": {
        "name": "Ketu",
        "rasi": "Tula",
-       "deg": 28.92,
+       "deg": 28.93,
        "nakshatra": "Vishakha",
        "pada": 3,
        "retro": true
@@ -1992,6 +2091,7 @@
        "Ve"
       ],
       "Kataka": [
+       "La",
        "Me"
       ],
       "Meena": [
@@ -2002,14 +2102,11 @@
       ],
       "Tula": [
        "Ke"
-      ],
-      "Kanya": [
-       "La"
       ]
      }
     },
     "rashi": "Vrishabha",
-    "pada": 4
+    "pada": 3
    }
   },
   {
@@ -2064,7 +2161,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D013-Chetna Bhargava"
+   "ref_name": "D013-Chetna Bhargava",
+   "vedic": {}
   },
   {
    "id": "D014",
@@ -2081,7 +2179,7 @@
     ]
    },
    "birth": {
-    "date": "9 Mar 1971, 02:50",
+    "date": "9 Mar 1971, 02:00",
     "year": 1971,
     "place": "Ranchi"
    },
@@ -2110,7 +2208,7 @@
     "REF_NAME": "D014-Kala",
     "EMAIL": "",
     "GENDER": "Female",
-    "DOB": "9 Mar 1971, 02:50",
+    "DOB": "9 Mar 1971, 02:00",
     "POB": "Ranchi",
     "CUR_LOC": "Houston",
     "STATUS": "Living",
@@ -2122,10 +2220,16 @@
    },
    "ref_name": "D014-Kala",
    "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "nakshatra": "Uttara Bhadrapada (Uthirattathi)",
+    "kula_devatha": "Shasta",
     "chart": {
      "engine": "swisseph-lahiri/2.10.03",
      "lagna": "Dhanus",
-     "lagna_deg": 26.12,
+     "lagna_deg": 13.91,
      "moon": {
       "rashi": "Kataka",
       "nakshatra": "Ashlesha",
@@ -2135,7 +2239,7 @@
       "Su": {
        "name": "Sun",
        "rasi": "Kumbha",
-       "deg": 24.2,
+       "deg": 24.17,
        "nakshatra": "Purva Bhadrapada",
        "pada": 2,
        "retro": false
@@ -2143,7 +2247,7 @@
       "Mo": {
        "name": "Moon",
        "rasi": "Kataka",
-       "deg": 19.28,
+       "deg": 18.87,
        "nakshatra": "Ashlesha",
        "pada": 1,
        "retro": false
@@ -2151,7 +2255,7 @@
       "Ma": {
        "name": "Mars",
        "rasi": "Dhanus",
-       "deg": 4.39,
+       "deg": 4.37,
        "nakshatra": "Mula",
        "pada": 2,
        "retro": false
@@ -2159,7 +2263,7 @@
       "Me": {
        "name": "Mercury",
        "rasi": "Kumbha",
-       "deg": 26.13,
+       "deg": 26.07,
        "nakshatra": "Purva Bhadrapada",
        "pada": 2,
        "retro": false
@@ -2175,7 +2279,7 @@
       "Ve": {
        "name": "Venus",
        "rasi": "Makara",
-       "deg": 12.12,
+       "deg": 12.08,
        "nakshatra": "Shravana",
        "pada": 1,
        "retro": false
@@ -2231,8 +2335,7 @@
      }
     },
     "rashi": "Kataka",
-    "pada": 1,
-    "nakshatra": "Ashlesha"
+    "pada": 1
    }
   },
   {
@@ -2250,7 +2353,7 @@
     ]
    },
    "birth": {
-    "date": "9 Mar 1971, 02:20",
+    "date": "9 Mar 1971, 02:30",
     "year": 1971,
     "place": "Ranchi"
    },
@@ -2279,7 +2382,7 @@
     "REF_NAME": "D015-Lata",
     "EMAIL": "",
     "GENDER": "Female",
-    "DOB": "9 Mar 1971, 02:20",
+    "DOB": "9 Mar 1971, 02:30",
     "POB": "Ranchi",
     "CUR_LOC": "Chennai",
     "STATUS": "Living",
@@ -2291,10 +2394,16 @@
    },
    "ref_name": "D015-Lata",
    "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "nakshatra": "Uttara Bhadrapada (Uthirattathi)",
+    "kula_devatha": "Shasta",
     "chart": {
      "engine": "swisseph-lahiri/2.10.03",
      "lagna": "Dhanus",
-     "lagna_deg": 18.7,
+     "lagna_deg": 21.14,
      "moon": {
       "rashi": "Kataka",
       "nakshatra": "Ashlesha",
@@ -2304,7 +2413,7 @@
       "Su": {
        "name": "Sun",
        "rasi": "Kumbha",
-       "deg": 24.18,
+       "deg": 24.19,
        "nakshatra": "Purva Bhadrapada",
        "pada": 2,
        "retro": false
@@ -2312,7 +2421,7 @@
       "Mo": {
        "name": "Moon",
        "rasi": "Kataka",
-       "deg": 19.03,
+       "deg": 19.11,
        "nakshatra": "Ashlesha",
        "pada": 1,
        "retro": false
@@ -2320,7 +2429,7 @@
       "Ma": {
        "name": "Mars",
        "rasi": "Dhanus",
-       "deg": 4.38,
+       "deg": 4.39,
        "nakshatra": "Mula",
        "pada": 2,
        "retro": false
@@ -2328,7 +2437,7 @@
       "Me": {
        "name": "Mercury",
        "rasi": "Kumbha",
-       "deg": 26.09,
+       "deg": 26.11,
        "nakshatra": "Purva Bhadrapada",
        "pada": 2,
        "retro": false
@@ -2400,8 +2509,7 @@
      }
     },
     "rashi": "Kataka",
-    "pada": 1,
-    "nakshatra": "Ashlesha"
+    "pada": 1
    }
   },
   {
@@ -2417,7 +2525,7 @@
     "alternates": []
    },
    "birth": {
-    "date": "12 Feb 1967",
+    "date": "12 Feb 1967, 22:45",
     "year": 1967,
     "place": "Mysore"
    },
@@ -2446,7 +2554,7 @@
     "REF_NAME": "D016-Narasimhan Ravikiran",
     "EMAIL": "",
     "GENDER": "Male",
-    "DOB": "12 Feb 1967",
+    "DOB": "12 Feb 1967, 22:45",
     "POB": "Mysore",
     "CUR_LOC": "Chennai",
     "STATUS": "Living",
@@ -2456,7 +2564,120 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D016-Narasimhan Ravikiran"
+   "ref_name": "D016-Narasimhan Ravikiran",
+   "vedic": {
+    "chart": {
+     "engine": "swisseph-lahiri/2.10.03",
+     "lagna": "Tula",
+     "lagna_deg": 3.72,
+     "moon": {
+      "rashi": "Meena",
+      "nakshatra": "Uttara Bhadrapada",
+      "pada": 1
+     },
+     "planets": {
+      "Su": {
+       "name": "Sun",
+       "rasi": "Makara",
+       "deg": 29.91,
+       "nakshatra": "Dhanishta",
+       "pada": 2,
+       "retro": false
+      },
+      "Mo": {
+       "name": "Moon",
+       "rasi": "Meena",
+       "deg": 6.1,
+       "nakshatra": "Uttara Bhadrapada",
+       "pada": 1,
+       "retro": false
+      },
+      "Ma": {
+       "name": "Mars",
+       "rasi": "Tula",
+       "deg": 6.66,
+       "nakshatra": "Chitra",
+       "pada": 4,
+       "retro": false
+      },
+      "Me": {
+       "name": "Mercury",
+       "rasi": "Kumbha",
+       "deg": 17.22,
+       "nakshatra": "Shatabhisha",
+       "pada": 4,
+       "retro": false
+      },
+      "Ju": {
+       "name": "Jupiter",
+       "rasi": "Kataka",
+       "deg": 3.12,
+       "nakshatra": "Punarvasu",
+       "pada": 4,
+       "retro": true
+      },
+      "Ve": {
+       "name": "Venus",
+       "rasi": "Kumbha",
+       "deg": 22.71,
+       "nakshatra": "Purva Bhadrapada",
+       "pada": 1,
+       "retro": false
+      },
+      "Sa": {
+       "name": "Saturn",
+       "rasi": "Meena",
+       "deg": 4.38,
+       "nakshatra": "Uttara Bhadrapada",
+       "pada": 1,
+       "retro": false
+      },
+      "Ra": {
+       "name": "Rahu",
+       "rasi": "Mesha",
+       "deg": 17.66,
+       "nakshatra": "Bharani",
+       "pada": 2,
+       "retro": true
+      },
+      "Ke": {
+       "name": "Ketu",
+       "rasi": "Tula",
+       "deg": 17.66,
+       "nakshatra": "Swati",
+       "pada": 4,
+       "retro": true
+      }
+     },
+     "rasis": {
+      "Makara": [
+       "Su"
+      ],
+      "Meena": [
+       "Mo",
+       "Sa"
+      ],
+      "Tula": [
+       "La",
+       "Ma",
+       "Ke"
+      ],
+      "Kumbha": [
+       "Me",
+       "Ve"
+      ],
+      "Kataka": [
+       "Ju"
+      ],
+      "Mesha": [
+       "Ra"
+      ]
+     }
+    },
+    "rashi": "Meena",
+    "pada": 1,
+    "nakshatra": "Uttara Bhadrapada"
+   }
   },
   {
    "id": "D017",
@@ -2503,7 +2724,14 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D017-Indu"
+   "ref_name": "D017-Indu",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "D018",
@@ -2550,7 +2778,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D018-Arvind"
+   "ref_name": "D018-Arvind",
+   "vedic": {}
   },
   {
    "id": "D019",
@@ -2650,7 +2879,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D020-Sandhya Iyer"
+   "ref_name": "D020-Sandhya Iyer",
+   "vedic": {}
   },
   {
    "id": "D021",
@@ -2697,7 +2927,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D021-Dilip"
+   "ref_name": "D021-Dilip",
+   "vedic": {}
   },
   {
    "id": "D022",
@@ -2742,7 +2973,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D022-Vidya Rao"
+   "ref_name": "D022-Vidya Rao",
+   "vedic": {}
   },
   {
    "id": "D023",
@@ -2789,7 +3021,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D023-Bharathi"
+   "ref_name": "D023-Bharathi",
+   "vedic": {}
   },
   {
    "id": "D024",
@@ -2834,7 +3067,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D024-Ravi Manik"
+   "ref_name": "D024-Ravi Manik",
+   "vedic": {}
   },
   {
    "id": "D025",
@@ -2881,7 +3115,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D025-Deepa"
+   "ref_name": "D025-Deepa",
+   "vedic": {}
   },
   {
    "id": "D026",
@@ -2926,7 +3161,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D026-K Venkateswara Rao"
+   "ref_name": "D026-K Venkateswara Rao",
+   "vedic": {}
   },
   {
    "id": "D027",
@@ -2973,7 +3209,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D027-Vijay"
+   "ref_name": "D027-Vijay",
+   "vedic": {}
   },
   {
    "id": "D028",
@@ -3018,7 +3255,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D028-Priya"
+   "ref_name": "D028-Priya",
+   "vedic": {}
   },
   {
    "id": "D029",
@@ -3063,7 +3301,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D029-Vidya Ramachandran"
+   "ref_name": "D029-Vidya Ramachandran",
+   "vedic": {}
   },
   {
    "id": "D030",
@@ -3104,7 +3343,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D030-Sandhya Ashok"
+   "ref_name": "D030-Sandhya Ashok",
+   "vedic": {}
   },
   {
    "id": "D031",
@@ -3147,7 +3387,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D031-Ashok"
+   "ref_name": "D031-Ashok",
+   "vedic": {}
   },
   {
    "id": "D032",
@@ -3194,7 +3435,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D032-Bhanu"
+   "ref_name": "D032-Bhanu",
+   "vedic": {}
   },
   {
    "id": "D033",
@@ -3241,7 +3483,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D033-Santhanam"
+   "ref_name": "D033-Santhanam",
+   "vedic": {}
   },
   {
    "id": "D034",
@@ -3288,7 +3531,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D034-Vasantha"
+   "ref_name": "D034-Vasantha",
+   "vedic": {}
   },
   {
    "id": "D035",
@@ -3337,7 +3581,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D035-K Ram Mohan"
+   "ref_name": "D035-K Ram Mohan",
+   "vedic": {}
   },
   {
    "id": "D036",
@@ -3385,7 +3630,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D036-Kannan"
+   "ref_name": "D036-Kannan",
+   "vedic": {}
   },
   {
    "id": "D037",
@@ -3436,7 +3682,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D037-Usha"
+   "ref_name": "D037-Usha",
+   "vedic": {}
   },
   {
    "id": "D038",
@@ -3479,7 +3726,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D038-Malathi"
+   "ref_name": "D038-Malathi",
+   "vedic": {}
   },
   {
    "id": "D039",
@@ -3526,7 +3774,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D039-Suresh"
+   "ref_name": "D039-Suresh",
+   "vedic": {}
   },
   {
    "id": "D040",
@@ -3573,7 +3822,8 @@
     "NOTES": "",
     "GEN": "D"
    },
-   "ref_name": "D040-Jyothi"
+   "ref_name": "D040-Jyothi",
+   "vedic": {}
   },
   {
    "id": "E001",
@@ -3622,7 +3872,15 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E001-Shraddha"
+   "ref_name": "E001-Shraddha",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "nakshatra": "Rohini",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "E002",
@@ -3669,7 +3927,15 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E002-Shreya"
+   "ref_name": "E002-Shreya",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "nakshatra": "Rohini",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "E003",
@@ -3716,7 +3982,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E003-Sharath Kumar"
+   "ref_name": "E003-Sharath Kumar",
+   "vedic": {}
   },
   {
    "id": "E004",
@@ -3869,7 +4136,15 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E006-Namrata"
+   "ref_name": "E006-Namrata",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "nakshatra": "Rohini",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "E007",
@@ -3920,7 +4195,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E007-Hindol"
+   "ref_name": "E007-Hindol",
+   "vedic": {}
   },
   {
    "id": "E008",
@@ -3965,7 +4241,15 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E008-Nikita"
+   "ref_name": "E008-Nikita",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "nakshatra": "Rohini",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "E009",
@@ -4010,7 +4294,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E009-Raksha"
+   "ref_name": "E009-Raksha",
+   "vedic": {}
   },
   {
    "id": "E010",
@@ -4055,7 +4340,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E010-Dhruv"
+   "ref_name": "E010-Dhruv",
+   "vedic": {}
   },
   {
    "id": "E011",
@@ -4100,7 +4386,15 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E011-Nikhil"
+   "ref_name": "E011-Nikhil",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "nakshatra": "Rohini",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "E012",
@@ -4145,7 +4439,15 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E012-Nishanth"
+   "ref_name": "E012-Nishanth",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "nakshatra": "Rohini",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "E013",
@@ -4186,7 +4488,15 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E013-Sneha"
+   "ref_name": "E013-Sneha",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "nakshatra": "Rohini",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "E014",
@@ -4229,7 +4539,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E014-Venkatesh-Hema"
+   "ref_name": "E014-Venkatesh-Hema",
+   "vedic": {}
   },
   {
    "id": "E015",
@@ -4349,7 +4660,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E016-Priyal"
+   "ref_name": "E016-Priyal",
+   "vedic": {}
   },
   {
    "id": "E017",
@@ -4403,7 +4715,15 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E017-Devika"
+   "ref_name": "E017-Devika",
+   "vedic": {
+    "gotra": "Harita",
+    "veda": "Yajur",
+    "shakha": "Krishna /Taittiriya",
+    "sutra": "Apastamba",
+    "nakshatra": "Uttara Bhadrapada (Uthirattathi)",
+    "kula_devatha": "Shasta"
+   }
   },
   {
    "id": "E018",
@@ -4457,7 +4777,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E018-Dyuti"
+   "ref_name": "E018-Dyuti",
+   "vedic": {}
   },
   {
    "id": "E019",
@@ -4511,7 +4832,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E019-Vidyut"
+   "ref_name": "E019-Vidyut",
+   "vedic": {}
   },
   {
    "id": "E020",
@@ -4556,7 +4878,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E020-Agustya"
+   "ref_name": "E020-Agustya",
+   "vedic": {}
   },
   {
    "id": "E021",
@@ -4601,7 +4924,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E021-Uttara"
+   "ref_name": "E021-Uttara",
+   "vedic": {}
   },
   {
    "id": "E022",
@@ -4644,7 +4968,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E022-Anoushka Mani"
+   "ref_name": "E022-Anoushka Mani",
+   "vedic": {}
   },
   {
    "id": "E023",
@@ -4687,7 +5012,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E023-Aryaman Mani"
+   "ref_name": "E023-Aryaman Mani",
+   "vedic": {}
   },
   {
    "id": "E024",
@@ -4732,7 +5058,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E024-Anahita"
+   "ref_name": "E024-Anahita",
+   "vedic": {}
   },
   {
    "id": "E025",
@@ -4775,7 +5102,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E025-Ananya"
+   "ref_name": "E025-Ananya",
+   "vedic": {}
   },
   {
    "id": "E026",
@@ -4816,7 +5144,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E026-Prasad"
+   "ref_name": "E026-Prasad",
+   "vedic": {}
   },
   {
    "id": "E027",
@@ -4857,7 +5186,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E027-Sathvika"
+   "ref_name": "E027-Sathvika",
+   "vedic": {}
   },
   {
    "id": "E028",
@@ -4904,7 +5234,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E028-Pappu"
+   "ref_name": "E028-Pappu",
+   "vedic": {}
   },
   {
    "id": "E029",
@@ -4949,7 +5280,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E029-K S Sankaranarayanan"
+   "ref_name": "E029-K S Sankaranarayanan",
+   "vedic": {}
   },
   {
    "id": "E030",
@@ -4996,7 +5328,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E030-Deepak"
+   "ref_name": "E030-Deepak",
+   "vedic": {}
   },
   {
    "id": "E031",
@@ -5041,7 +5374,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E031-Spandana Arvapalli"
+   "ref_name": "E031-Spandana Arvapalli",
+   "vedic": {}
   },
   {
    "id": "E032",
@@ -5088,7 +5422,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E032-Karthik"
+   "ref_name": "E032-Karthik",
+   "vedic": {}
   },
   {
    "id": "E033",
@@ -5135,7 +5470,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E033-Roopa"
+   "ref_name": "E033-Roopa",
+   "vedic": {}
   },
   {
    "id": "E034",
@@ -5182,7 +5518,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E034-Jaidev"
+   "ref_name": "E034-Jaidev",
+   "vedic": {}
   },
   {
    "id": "E035",
@@ -5229,7 +5566,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E035-Shruti"
+   "ref_name": "E035-Shruti",
+   "vedic": {}
   },
   {
    "id": "E036",
@@ -5272,7 +5610,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E036-Badri"
+   "ref_name": "E036-Badri",
+   "vedic": {}
   },
   {
    "id": "E037",
@@ -5313,7 +5652,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E037-Ranjani"
+   "ref_name": "E037-Ranjani",
+   "vedic": {}
   },
   {
    "id": "E038",
@@ -5360,7 +5700,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E038-Venkatesh-Rajashree"
+   "ref_name": "E038-Venkatesh-Rajashree",
+   "vedic": {}
   },
   {
    "id": "E039",
@@ -5407,7 +5748,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E039-Rajasree"
+   "ref_name": "E039-Rajasree",
+   "vedic": {}
   },
   {
    "id": "E040",
@@ -5452,7 +5794,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E040-Rishi"
+   "ref_name": "E040-Rishi",
+   "vedic": {}
   },
   {
    "id": "E041",
@@ -5495,7 +5838,8 @@
     "NOTES": "",
     "GEN": "E"
    },
-   "ref_name": "E041-Abby Chen"
+   "ref_name": "E041-Abby Chen",
+   "vedic": {}
   },
   {
    "id": "F001",
@@ -5538,7 +5882,8 @@
     "NOTES": "",
     "GEN": "F"
    },
-   "ref_name": "F001-Aadya"
+   "ref_name": "F001-Aadya",
+   "vedic": {}
   },
   {
    "id": "F002",
@@ -5577,7 +5922,8 @@
     "NOTES": "",
     "GEN": "F"
    },
-   "ref_name": "F002-Miachael"
+   "ref_name": "F002-Miachael",
+   "vedic": {}
   },
   {
    "id": "F003",
@@ -5616,7 +5962,8 @@
     "NOTES": "",
     "GEN": "F"
    },
-   "ref_name": "F003-Nitara"
+   "ref_name": "F003-Nitara",
+   "vedic": {}
   },
   {
    "id": "F004",
@@ -5661,7 +6008,8 @@
     "NOTES": "",
     "GEN": "F"
    },
-   "ref_name": "F004-Adi"
+   "ref_name": "F004-Adi",
+   "vedic": {}
   },
   {
    "id": "F005",
@@ -5706,7 +6054,8 @@
     "NOTES": "",
     "GEN": "F"
    },
-   "ref_name": "F005-Viraj"
+   "ref_name": "F005-Viraj",
+   "vedic": {}
   },
   {
    "id": "F006",
@@ -5749,7 +6098,8 @@
     "NOTES": "",
     "GEN": "F"
    },
-   "ref_name": "F006-Svaksha"
+   "ref_name": "F006-Svaksha",
+   "vedic": {}
   },
   {
    "id": "F007",
@@ -5792,7 +6142,8 @@
     "NOTES": "",
     "GEN": "F"
    },
-   "ref_name": "F007-Raksha Karthik Mohan"
+   "ref_name": "F007-Raksha Karthik Mohan",
+   "vedic": {}
   },
   {
    "id": "F008",
@@ -5835,7 +6186,8 @@
     "NOTES": "",
     "GEN": "F"
    },
-   "ref_name": "F008-Tejas"
+   "ref_name": "F008-Tejas",
+   "vedic": {}
   },
   {
    "id": "F009",
@@ -5878,7 +6230,8 @@
     "NOTES": "",
     "GEN": "F"
    },
-   "ref_name": "F009-Sanjit Jaidev"
+   "ref_name": "F009-Sanjit Jaidev",
+   "vedic": {}
   },
   {
    "id": "F010",
@@ -5917,7 +6270,8 @@
     "NOTES": "",
     "GEN": "F"
    },
-   "ref_name": "F010-Adhiya Sakhti"
+   "ref_name": "F010-Adhiya Sakhti",
+   "vedic": {}
   },
   {
    "id": "F011",
@@ -5962,7 +6316,8 @@
     "NOTES": "",
     "GEN": "F"
    },
-   "ref_name": "F011-Pranita"
+   "ref_name": "F011-Pranita",
+   "vedic": {}
   },
   {
    "id": "F012",
@@ -6007,7 +6362,8 @@
     "NOTES": "",
     "GEN": "F"
    },
-   "ref_name": "F012-Saatvika"
+   "ref_name": "F012-Saatvika",
+   "vedic": {}
   }
  ],
  "families": [
@@ -8689,7 +9045,7 @@
      "REF_NAME": "D012-Sriram",
      "EMAIL": "vish.ganapathy@gmail.com",
      "GENDER": "Male",
-     "DOB": "15 Jul 1966, 11:47",
+     "DOB": "15 Jul 1966, 06:51",
      "POB": "Ranchi",
      "CUR_LOC": "Marietta",
      "STATUS": "Living",
@@ -8735,7 +9091,7 @@
      "REF_NAME": "D014-Kala",
      "EMAIL": "",
      "GENDER": "Female",
-     "DOB": "9 Mar 1971, 02:50",
+     "DOB": "9 Mar 1971, 02:00",
      "POB": "Ranchi",
      "CUR_LOC": "Houston",
      "STATUS": "Living",
@@ -8758,7 +9114,7 @@
      "REF_NAME": "D015-Lata",
      "EMAIL": "",
      "GENDER": "Female",
-     "DOB": "9 Mar 1971, 02:20",
+     "DOB": "9 Mar 1971, 02:30",
      "POB": "Ranchi",
      "CUR_LOC": "Chennai",
      "STATUS": "Living",
@@ -8781,7 +9137,7 @@
      "REF_NAME": "D016-Narasimhan Ravikiran",
      "EMAIL": "",
      "GENDER": "Male",
-     "DOB": "12 Feb 1967",
+     "DOB": "12 Feb 1967, 22:45",
      "POB": "Mysore",
      "CUR_LOC": "Chennai",
      "STATUS": "Living",
