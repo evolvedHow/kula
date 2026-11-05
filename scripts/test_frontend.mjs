@@ -29,7 +29,7 @@ const d3Mod = { exports: {} };
 vm.runInNewContext(d3Source, { module: d3Mod, exports: d3Mod.exports, globalThis, self: globalThis, define: undefined });
 globalThis.window = globalThis;
 globalThis.d3 = d3Mod.exports;
-const { layoutWheel } = await loadModule("assets/wheel.js");
+const { layoutWheel, layoutDescendantFan } = await loadModule("assets/wheel.js");
 const { relationship, sentenceFor } = await loadModule("assets/relate.js");
 const { normalizeGotra, pravaraFor } = await loadModule("assets/vedic.js");
 const { RASI_BOXES, GRAHA_ORDER, degText, renderSouthIndianChart, renderChartReport, renderJatagam } =
@@ -386,6 +386,63 @@ test("auto rings grow with the family's known depth", () => {
   const parents = L.sectors.filter((s) => s.depth === 1 && !s.unknown);
   assert.ok(parents.length && parents.every((s) => s.label === "full"),
     "inner rings should carry full name + years labels");
+});
+
+// ---------- Descendant fan ----------
+
+function descendantStats(startId) {
+  let depth = 0;
+  let frontier = [startId];
+  const seen = new Set(frontier);
+  const kids = (id) => {
+    const out = [];
+    for (const fid of people[id]?.families || []) {
+      for (const c of families[fid]?.children || []) {
+        if (people[c] && !out.includes(c)) out.push(c);
+      }
+    }
+    return out;
+  };
+  while (frontier.length) {
+    const next = [];
+    for (const id of frontier) {
+      for (const c of kids(id)) {
+        if (!seen.has(c)) { seen.add(c); next.push(c); }
+      }
+    }
+    if (!next.length) break;
+    depth += 1;
+    frontier = next;
+  }
+  return { depth, count: seen.size };
+}
+
+test("the descendant fan shows the focus and all its descendants, with no placeholders", () => {
+  const { depth, count } = descendantStats(focus);
+  const L = layoutDescendantFan(index, focus, { cap: 7 });
+  assert.equal(L.mode, "down");
+  assert.equal(L.rings, Math.min(7, Math.max(1, depth)));
+  assert.equal(L.sectors.length, count, "fan should contain the focus plus every descendant");
+  assert.ok(L.sectors.every((s) => !s.unknown && s.person), "descendant fans have no placeholders");
+  assert.equal(L.sectors.filter((s) => s.depth === 0).length, 1, "exactly one centre sector");
+});
+
+test("descendant fan orders siblings by birth year around the fan", () => {
+  const L = layoutDescendantFan(index, focus, { cap: 7 });
+  const siblings = L.sectors.filter((s) => s.depth === 1)
+    .sort((a, b) => a.startAngle - b.startAngle);
+  const years = siblings.map((s) => s.person.birth?.year ?? 9999);
+  assert.deepEqual(years, [...years].sort((a, b) => a - b), "children should read eldest-first clockwise");
+});
+
+test("a descendant fan trims to the generations that actually exist", () => {
+  const L = layoutDescendantFan(index, focus, { rings: 9 });
+  const { depth } = descendantStats(focus);
+  assert.ok(L.rings <= Math.max(1, depth), "requesting 9 rings cannot exceed the data depth");
+  const leaf = tree.people.find((p) => !(p.families || []).some((f) => families[f]?.children?.length));
+  const lone = layoutDescendantFan(index, leaf.id, {});
+  assert.equal(lone.rings, 1);
+  assert.equal(lone.sectors.length, 1, "a childless person is a lone centre circle");
 });
 
 // ---------- Vedic gotra / pravara ----------

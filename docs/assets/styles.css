@@ -1309,8 +1309,9 @@ body[data-treeview="wheel"] #orientation-switch {
   display: none;
 }
 
-/* The generation picker only makes sense for the fan chart. */
-body:not([data-treeview="wheel"]) #wheel-rings {
+/* The generation picker and direction toggle only make sense for the fan chart. */
+body:not([data-treeview="wheel"]) #wheel-rings,
+body:not([data-treeview="wheel"]) #wheel-mode {
   display: none;
 }
 

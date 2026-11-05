@@ -1,16 +1,16 @@
-// Ancestor fan chart (pedigree wheel) with a configurable number of rings.
+// Fan charts (pedigree wheels) with a configurable number of rings.
 //
-// Uses d3-hierarchy (loaded as a global script) to partition a full binary
-// ancestor tree into equal-angle sectors. Each generation occupies one ring:
-//   ring 0 = focus person (centre)
-//   ring 1 = parents
-//   ring 2 = grandparents
-//   ...  up to 10 rings of ancestors.
+// Two directions:
+//   up   = ancestor fan: focus at the centre, parents, grandparents, ...
+//          radiate outward one ring per generation. Missing ancestors are
+//          dim placeholders so the fan stays balanced.
+//   down = descendant fan: focus at the centre, children, grandchildren, ...
+//          radiate outward. Every sector is a real person; there are no
+//          placeholders. Siblings are ordered by birth year.
 //
-// Missing ancestors are rendered as dim placeholders so the fan stays
-// balanced and the classic fan-chart shape is preserved. Deep rings are
-// mostly placeholders, so their labels are dropped; pan and zoom do the
-// reading.
+// Uses d3-hierarchy (loaded as a global script) to partition the tree into
+// equal-angle sectors. Deep rings have very thin wedges, so their labels are
+// dropped; pan and zoom do the reading.
 
 const d3 = typeof window !== "undefined" ? window.d3 : null;
 
@@ -75,8 +75,47 @@ function ancestorTree(index, focusId, rings) {
   return build(focusId, 0, []);
 }
 
-// Deepest ancestor generation actually present in the data, so the fan can
-// size itself to the family instead of drawing rings of empty placeholders.
+// A person's children across every union they are part of, deduplicated and
+// ordered by birth year (unknown years last, then by name) so siblings read
+// eldest-first around the fan.
+function childIdsOf(index, id) {
+  const person = index.people[id];
+  if (!person) return [];
+  const kids = [];
+  for (const fid of person.families || []) {
+    const fam = index.families[fid];
+    for (const c of fam?.children || []) {
+      if (index.people[c] && !kids.includes(c)) kids.push(c);
+    }
+  }
+  kids.sort((a, b) =>
+    (index.people[a].birth?.year ?? 9999) - (index.people[b].birth?.year ?? 9999)
+    || displayName(index.people[a]).localeCompare(displayName(index.people[b])));
+  return kids;
+}
+
+// Build a descendant tree of `rings` generations. Each person appears once:
+// when cousins marry, their children descend via two paths; `placed` keeps
+// the first occurrence so the fan holds the focus plus every descendant
+// exactly once. `trail` additionally guards against a data cycle.
+function descendantTree(index, focusId, rings) {
+  const placed = new Set([focusId]);
+  const build = (id, depth, trail) => {
+    const node = { id, person: index.people[id], depth, children: [] };
+    if (depth >= rings) return node;
+    const seen = new Set(trail).add(id);
+    for (const c of childIdsOf(index, id)) {
+      if (seen.has(c) || placed.has(c)) continue;
+      placed.add(c);
+      node.children.push(build(c, depth + 1, seen));
+    }
+    return node;
+  };
+  return build(focusId, 0, new Set());
+}
+
+// Deepest ancestor generation actually present in the data, so the ancestor
+// fan can size itself to the family instead of drawing rings of placeholders.
 function knownAncestorDepth(index, focusId, cap) {
   let depth = 0;
   let frontier = [focusId];
@@ -101,6 +140,28 @@ function knownAncestorDepth(index, focusId, cap) {
   return depth;
 }
 
+// Deepest descendant generation actually present in the data.
+function knownDescendantDepth(index, focusId, cap) {
+  let depth = 0;
+  let frontier = [focusId];
+  const seen = new Set(frontier);
+  while (frontier.length && depth < cap) {
+    const next = [];
+    for (const id of frontier) {
+      for (const cid of childIdsOf(index, id)) {
+        if (!seen.has(cid)) {
+          seen.add(cid);
+          next.push(cid);
+        }
+      }
+    }
+    if (!next.length) break;
+    depth += 1;
+    frontier = next;
+  }
+  return depth;
+}
+
 // Label tiers by how much arc a wedge has: full = name + years, name =
 // name only, initials when the wedge is thin, none for slivers and missing
 // ancestors.
@@ -112,30 +173,19 @@ function labelTier(isUnknown, isCenter, arc) {
   return "none";
 }
 
-export function layoutWheel(index, focusId, options = {}) {
-  if (!d3 || !index.people[focusId]) return null;
-
-  // `cap` bounds the automatic ring count; `rings` forces an exact count.
-  // Auto = deepest known ancestor + one placeholder ring, at least 4.
-  const cap = Math.max(3, Math.min(10, options.cap ?? 7));
-  const rings = options.rings
-    ? Math.max(2, Math.min(10, options.rings))
-    : Math.max(4, Math.min(cap, knownAncestorDepth(index, focusId, cap) + 1));
-
-  const size = 2 * (96 + rings * 46) + 24;
-  const width = options.width ?? size;
-  const height = options.height ?? size;
-  const margin = options.margin ?? 14;
-
+// Partition a hierarchy into the fan and map each node to a sector.
+// `leafWeighted` gives every leaf an equal angle (descendant fans); otherwise
+// every node counts equally (the full binary ancestor fan).
+function sectorsFromRoot(rootData, rings, width, height, margin, leafWeighted) {
   const radius = Math.min(width, height) / 2 - margin;
   const innerRadius = radius * 0.22;
   const ringWidth = (radius - innerRadius) / rings;
 
-  const rootData = ancestorTree(index, focusId, rings);
-  const root = d3
-    .hierarchy(rootData)
-    .sum(() => 1)
-    .sort((a, b) => {
+  let root = d3.hierarchy(rootData);
+  if (leafWeighted) {
+    root.sum((d) => (d.children && d.children.length ? 0 : 1));
+  } else {
+    root.sum(() => 1).sort((a, b) => {
       for (let i = 0; i < Math.max(a.data.path.length, b.data.path.length); i += 1) {
         const av = a.data.path[i] ?? 0;
         const bv = b.data.path[i] ?? 0;
@@ -143,10 +193,12 @@ export function layoutWheel(index, focusId, options = {}) {
       }
       return 0;
     });
-
+  }
   d3.partition().size([2 * Math.PI, rings + 1])(root);
 
-  const sectors = root.descendants().map((d) => {
+  // Spread into a plain array: descendants() may return a cross-realm array
+  // when d3 is loaded in a VM context (as the Node tests do).
+  const sectors = [...root.descendants()].map((d) => {
     const p = d.data.person;
     const isUnknown = !p;
     const isCenter = d.depth === 0;
@@ -201,15 +253,63 @@ export function layoutWheel(index, focusId, options = {}) {
     };
   });
 
+  return { sectors, radius, innerRadius, ringWidth };
+}
+
+// Ancestor fan: focus at the centre, one ring per ancestor generation.
+// `cap` bounds the automatic ring count; `rings` forces an exact count.
+// Auto = deepest known ancestor + one placeholder ring, at least 4.
+export function layoutWheel(index, focusId, options = {}) {
+  if (!d3 || !index.people[focusId]) return null;
+
+  const cap = Math.max(3, Math.min(10, options.cap ?? 7));
+  const rings = options.rings
+    ? Math.max(2, Math.min(10, options.rings))
+    : Math.max(4, Math.min(cap, knownAncestorDepth(index, focusId, cap) + 1));
+
+  const size = 2 * (96 + rings * 46) + 24;
+  const width = options.width ?? size;
+  const height = options.height ?? size;
+  const margin = options.margin ?? 14;
+
+  const part = sectorsFromRoot(ancestorTree(index, focusId, rings), rings, width, height, margin, false);
+
   return {
+    mode: "up",
     width,
     height,
-    radius,
-    innerRadius,
-    ringWidth,
     rings,
+    ...part,
     focus: { x: width / 2, y: height / 2 },
-    sectors,
+  };
+}
+
+// Descendant fan: focus at the centre, one ring per descendant generation.
+// Every sector is a real person (no placeholders), so the ring count never
+// exceeds the family's known descendant depth.
+export function layoutDescendantFan(index, focusId, options = {}) {
+  if (!d3 || !index.people[focusId]) return null;
+
+  const cap = Math.max(3, Math.min(10, options.cap ?? 7));
+  const available = knownDescendantDepth(index, focusId, cap);
+  const rings = Math.max(1, options.rings
+    ? Math.min(Math.max(2, Math.min(10, options.rings)), Math.max(1, available))
+    : Math.min(cap, Math.max(1, available)));
+
+  const size = 2 * (96 + rings * 46) + 24;
+  const width = options.width ?? size;
+  const height = options.height ?? size;
+  const margin = options.margin ?? 14;
+
+  const part = sectorsFromRoot(descendantTree(index, focusId, rings), rings, width, height, margin, true);
+
+  return {
+    mode: "down",
+    width,
+    height,
+    rings,
+    ...part,
+    focus: { x: width / 2, y: height / 2 },
   };
 }
 

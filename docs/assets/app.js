@@ -1,6 +1,6 @@
 import { layoutTree } from "./layout.js";
 import { layoutGraph } from "./graph.js";
-import { layoutWheel, renderWheelSVG } from "./wheel.js";
+import { layoutWheel, layoutDescendantFan, renderWheelSVG } from "./wheel.js";
 import { relationship, sentenceFor } from "./relate.js";
 import { pravaraFor } from "./vedic.js";
 import { renderJatagam } from "./chart.js";
@@ -57,7 +57,7 @@ let VEDIC = { gotras: {} };
 const state = {
   focus: null, view: "hourglass", orientation: "vertical", selected: null, layout: null,
   k: 1, x: 0, y: 0, meId: null, auth: null, authError: null, authMe: false,
-  wheelRings: null,
+  wheelRings: null, wheelMode: null,
 };
 let googleReady = false;
 
@@ -202,6 +202,11 @@ function applyText() {
   const orientations = $$("#orientation-switch button");
   orientations[0].textContent = text.view_vertical;
   orientations[1].textContent = text.view_horizontal;
+  const wheelModes = $$("#wheel-mode button");
+  if (wheelModes.length === 2) {
+    wheelModes[0].textContent = text.view_ancestors;
+    wheelModes[1].textContent = text.view_descendants;
+  }
   const visible = DATA.people.filter((p) => !p.hidden).length;
   const counts = DATA.counts || {};
   $("#footer").innerHTML = `<span>${esc(site.footer || "")}</span>
@@ -479,11 +484,14 @@ function route() {
     if (safeView === "wheel" && !window.d3) safeView = "hourglass";
     const ringsParam = parseInt(params.r, 10);
     const wheelRings = ringsParam >= 4 && ringsParam <= 10 ? ringsParam : state.wheelRings;
+    const wheelMode = ["up", "down"].includes(params.m) ? params.m : state.wheelMode;
     const changed = focus !== state.focus || safeView !== state.view
-      || orientation !== state.orientation || wheelRings !== state.wheelRings;
+      || orientation !== state.orientation || wheelRings !== state.wheelRings
+      || wheelMode !== state.wheelMode;
     state.view = safeView;
     state.orientation = orientation;
     state.wheelRings = wheelRings;
+    state.wheelMode = wheelMode;
     if (changed || !state.layout) {
       renderTree(focus);
       if (focus !== state.selected) {
@@ -532,10 +540,23 @@ function renderTree(focusId) {
   wheelStage.hidden = !isWheel;
 
   if (isWheel) {
-    const L = layoutWheel(IDX, focusId, {
+    // Auto direction: ancestors when the focus has known ancestors, otherwise
+    // descendants (a founder like the patriarch has a full fan downward).
+    let mode = state.wheelMode;
+    if (!mode) {
+      const p = IDX.people[focusId];
+      const pf = p?.parent_family ? IDX.families[p.parent_family] : null;
+      const hasParents = Boolean(pf?.father || pf?.mother);
+      const hasKids = (p?.families || []).some((fid) => IDX.families[fid]?.children?.length);
+      mode = hasParents || !hasKids ? "up" : "down";
+    }
+    const wheelOpts = {
       rings: state.wheelRings || undefined,
       cap: CFG.layout.wheel_generations ?? 7,
-    });
+    };
+    const L = mode === "down"
+      ? layoutDescendantFan(IDX, focusId, wheelOpts)
+      : layoutWheel(IDX, focusId, wheelOpts);
     if (!L) {
       $("#tree-empty").hidden = false;
       return;
@@ -561,6 +582,11 @@ function renderTree(focusId) {
     }
     for (const b of $$("#wheel-rings button")) {
       const on = Number(b.dataset.rings) === L.rings;
+      b.setAttribute("aria-selected", on);
+      b.setAttribute("aria-checked", on);
+    }
+    for (const b of $$("#wheel-mode button")) {
+      const on = b.dataset.mode === mode;
       b.setAttribute("aria-selected", on);
       b.setAttribute("aria-checked", on);
     }
@@ -1421,6 +1447,14 @@ function bindEvents() {
     // Ignore clicks on the ring count that is already in effect.
     if (rings === (state.wheelRings ?? state.layout?.rings)) return;
     go("tree", state.focus, { v: "wheel", o: state.orientation, r: rings });
+  });
+
+  $("#wheel-mode").addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-mode]");
+    if (!b) return;
+    // Ignore clicks on the direction that is already in effect.
+    if (b.dataset.mode === (state.wheelMode ?? state.layout?.mode)) return;
+    go("tree", state.focus, { v: "wheel", o: state.orientation, m: b.dataset.mode });
   });
 
   $("#cards").addEventListener("click", (e) => {
