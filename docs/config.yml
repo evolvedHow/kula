@@ -83,10 +83,6 @@ layout:
   gap_x: 26
   gap_y: 92
   corner_radius: 16
-  # Wheel (fan chart): maximum ancestor rings. The fan sizes itself to the
-  # family's known depth up to this cap; visitors can switch 4-9 generations
-  # with the number buttons shown in the wheel view.
-  wheel_generations: 7
   # angular = right-angled connectors · curved = bezier connectors
   connector_style: angular
   show_years: true
@@ -165,6 +161,7 @@ text:
   view_ancestors: "Ancestors"
   view_descendants: "Descendants"
   view_graph: "Relatives"
+  view_list: "List"
   view_vertical: "Vertical"
   view_horizontal: "Horizontal"
   tagged_people: "Tagged relatives"

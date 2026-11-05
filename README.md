@@ -141,7 +141,7 @@ until the sheet importer is used again.
 ## Relatives view
 
 The tree toolbar has five views: **Both**, **Ancestors**, **Descendants**,
-**Relatives** and **Wheel**. Relatives is a two-kind graph layout: people are
+**Relatives** and **List**. Relatives is a two-kind graph layout: people are
 cards, unions are small round nodes, and the connector lines are the partner
 and offspring edges from the sheet. It opens on the connected branch around the
 current focus, so unrelated branches do not make one enormous row. Click a
@@ -173,21 +173,29 @@ wording. Only blood links and the direct spouse link are labelled; in-laws,
 step and adoptive links are not inferred, so those profiles show no family
 link unless the two people are also blood relatives.
 
-## Wheel view
+## List view
 
-**Wheel** is an ancestor fan chart (pedigree wheel) built with d3-hierarchy.
-The focus person sits at the centre; parents, grandparents and further
-ancestors radiate outward one ring per generation. The fan sizes itself to
-the family's known depth — up to `layout.wheel_generations` (default 7,
-maximum 9) — plus one placeholder ring, and the number buttons in the toolbar
-let the visitor switch between 4 and 9 generations explicitly. Names are
-written radially along each wedge; thin outer wedges fall back to initials
-and then to no label, so pan and zoom do the reading at the rim. Tap any
-sector to re-centre the fan on that person. Missing ancestors appear as dim
-placeholders so the fan keeps its shape. On narrow screens the wheel is the
-default view, while desktops continue to open with the configured
-`layout.default_view`. The hierarchy views remain available and are
-unchanged.
+**List** is a fully expanded, indented outline of the family. It always walks
+up from the focused person to their oldest known ancestor and then runs
+downward, so opening a grandchild still shows the whole family from its
+founder. Couples who are both oldest ancestors are treated as one root, not
+two duplicate trees.
+
+Each person is a pill showing an ID, a ♂/♀ gender icon, the full name (never
+truncated) and their years when known. A person's union appears as a separate
+dashed ⚭ pill at the same indent level, and that union's offspring move one
+indent level deeper. Multiple unions get one row each, and children are ordered
+eldest-first. A person reached through two lines (for example cousins who
+marry) is listed once.
+
+The vertical indent guides and row markers use two colours: the theme accent
+for direct descendants, and a warm amber (`--union-line`) for spouses and union
+rows. Clicking any person pill opens their card in the details panel without
+re-rooting the list. The outline is always fully expanded; the page scrolls
+vertically and horizontally, so deep generations and long names stay readable.
+On narrow screens List is the default view, while desktops continue to open
+with the configured `layout.default_view`. The hierarchy views remain
+available and are unchanged.
 
 ## Mobile layout
 

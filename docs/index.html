@@ -46,23 +46,11 @@
               <button type="button" data-view="ancestors" role="tab">Ancestors</button>
               <button type="button" data-view="descendants" role="tab">Descendants</button>
               <button type="button" data-view="graph" role="tab">Relatives</button>
-              <button type="button" data-view="wheel" role="tab">Wheel</button>
+              <button type="button" data-view="list" role="tab">List</button>
             </div>
             <div class="segmented" id="orientation-switch" role="tablist" aria-label="Tree orientation">
               <button type="button" data-orientation="vertical" role="tab">Vertical</button>
               <button type="button" data-orientation="horizontal" role="tab">Horizontal</button>
-            </div>
-            <div class="segmented" id="wheel-mode" role="tablist" aria-label="Fan direction">
-              <button type="button" data-mode="up" role="tab">Ancestors</button>
-              <button type="button" data-mode="down" role="tab">Descendants</button>
-            </div>
-            <div class="segmented" id="wheel-rings" role="tablist" aria-label="Fan generations">
-              <button type="button" data-rings="4" role="tab">4</button>
-              <button type="button" data-rings="5" role="tab">5</button>
-              <button type="button" data-rings="6" role="tab">6</button>
-              <button type="button" data-rings="7" role="tab">7</button>
-              <button type="button" data-rings="8" role="tab">8</button>
-              <button type="button" data-rings="9" role="tab">9</button>
             </div>
           </div>
           <div class="zoom">
@@ -77,9 +65,9 @@
             <div class="canvas" id="canvas">
               <svg class="links" id="links" aria-hidden="true"></svg>
               <div class="cards" id="cards"></div>
-              <div class="wheel-stage" id="wheel-stage" hidden></div>
             </div>
           </div>
+          <div class="list-stage" id="list-stage" hidden></div>
           <div class="empty" id="tree-empty" hidden>
             <p>No one to show yet. Check <code>docs/data/tree.json</code>.</p>
           </div>
@@ -135,7 +123,6 @@
   </div>
 
   <script src="vendor/js-yaml.min.js"></script>
-  <script src="vendor/d3-hierarchy.min.js"></script>
   <script type="module" src="assets/app.js"></script>
 </body>
 </html>

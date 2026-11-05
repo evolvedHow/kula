@@ -16,6 +16,9 @@
   --female: #8e4e63;
   --other: #6e6259;
   --highlight: #a5d6a7;
+  /* Second accent for the List view: marriage/union rows, distinct from the
+     direct-descent guide which follows --accent. */
+  --union-line: #a5711c;
   --font-heading: Roboto, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-body: Roboto, system-ui, -apple-system, "Segoe UI", sans-serif;
   --card-radius: 16px;
@@ -27,6 +30,7 @@
 
 [data-mode="dark"] {
   color-scheme: dark;
+  --union-line: #e0b45c;
   --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 2px 6px 2px rgb(0 0 0 / 0.3);
   --shadow-raised: 0 1px 3px rgb(0 0 0 / 0.5), 0 6px 16px 2px rgb(0 0 0 / 0.35);
 }
@@ -554,66 +558,225 @@ a { color: inherit; }
 
 .cards { position: absolute; left: 0; top: 0; }
 
-.wheel-stage {
-  position: absolute;
+/* ---------- Indented list view ---------- */
+
+.list-stage {
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 1.1rem clamp(0.75rem, 3vw, 2.5rem) 3rem;
+  background:
+    linear-gradient(to bottom, color-mix(in srgb, var(--surface) 30%, transparent), transparent 140px);
+}
+
+.list-stage[hidden] { display: none; }
+
+.outline-inner {
+  width: max-content;
+  min-width: 100%;
+}
+
+.outline-head {
+  position: sticky;
   left: 0;
-  top: 0;
-  width: var(--wheel-w, 640px);
-  height: var(--wheel-h, 640px);
-  transform: translate(-50%, -50%);
+  width: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.9rem;
+  padding-bottom: 0.8rem;
+  margin-bottom: 0.35rem;
+  border-bottom: 1px dashed color-mix(in srgb, var(--line) 70%, transparent);
+}
+
+.outline-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.66rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.outline-root {
+  font-family: var(--font-heading);
+  font-size: 1.02rem;
+  font-weight: 600;
+}
+
+.outline-count {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.outline-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding-top: 0.7rem;
+}
+
+.outline-divider {
+  height: 1px;
+  margin: 0.8rem 0 0.55rem;
+  background: color-mix(in srgb, var(--line) 60%, transparent);
+}
+
+.outline-row {
+  --indent: 1.55rem;
+  --row-tone: var(--accent);
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
-  overflow: visible;
+  min-height: 2rem;
+  padding-left: calc(var(--depth) * var(--indent));
 }
 
-.wheel-stage[hidden] { display: none; }
+.outline-row.is-union { --row-tone: var(--union-line); }
+.outline-row.is-root { --row-tone: var(--accent); }
 
-.wheel-chart {
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-.wheel-sector {
-  cursor: pointer;
-  transition: opacity 0.2s, filter 0.2s;
-}
-
-.wheel-sector:hover { filter: brightness(1.05); }
-.wheel-sector:focus { outline: none; }
-.wheel-sector:focus path:first-child {
-  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--accent) 60%, transparent));
-}
-.wheel-sector.selected path:first-child {
-  stroke-width: 3;
-  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--accent) 55%, transparent));
-}
-
-.wheel-sector text {
-  font-size: 11px;
-  fill: var(--text);
-  font-weight: 500;
+.outline-guides {
+  position: absolute;
+  left: 0;
+  top: -0.18rem;
+  bottom: -0.18rem;
+  width: calc(var(--depth) * var(--indent));
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent 0,
+    transparent calc(var(--indent) - 1px),
+    color-mix(in srgb, var(--row-tone) 34%, transparent) calc(var(--indent) - 1px),
+    color-mix(in srgb, var(--row-tone) 34%, transparent) var(--indent)
+  );
   pointer-events: none;
 }
 
-.wheel-sector .wheel-years {
-  font-size: 9px;
-  fill: var(--muted);
+.outline-row.is-union .outline-guides {
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent 0,
+    transparent calc(var(--indent) - 1px),
+    color-mix(in srgb, var(--union-line) 32%, transparent) calc(var(--indent) - 1px),
+    color-mix(in srgb, var(--union-line) 32%, transparent) var(--indent)
+  );
 }
 
-.wheel-sector.unknown text {
-  fill: var(--muted);
+.outline-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  max-width: none;
+  padding: 0.32rem 0.9rem 0.32rem 0.55rem;
+  border: 1px solid color-mix(in srgb, var(--row-tone) 38%, var(--line));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 93%, var(--row-tone) 7%);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.92rem;
+  line-height: 1.35;
+  text-align: left;
+  white-space: nowrap;
+  transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease), border-color 0.18s;
+}
+
+.outline-pill:hover {
+  transform: translateY(-1px);
+  border-color: var(--row-tone);
+  box-shadow: var(--shadow);
+}
+
+.outline-pill:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--row-tone) 70%, transparent);
+  outline-offset: 2px;
+}
+
+.outline-row.selected .outline-pill {
+  border-color: var(--row-tone);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--row-tone) 30%, transparent), var(--shadow);
+}
+
+.outline-pill.union {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--union-line) 55%, var(--line));
+  background: color-mix(in srgb, var(--surface) 95%, var(--union-line) 5%);
+}
+
+.outline-pill.union.is-unknown {
+  cursor: default;
+  color: var(--muted);
+}
+
+.outline-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  flex: none;
+  border-radius: 50%;
+  background: var(--row-tone);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--row-tone) 16%, transparent);
+}
+
+.outline-gender {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: none;
+  border-radius: 50%;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.outline-gender.male {
+  color: var(--male);
+  background: color-mix(in srgb, var(--male) 14%, transparent);
+}
+
+.outline-gender.female {
+  color: var(--female);
+  background: color-mix(in srgb, var(--female) 14%, transparent);
+}
+
+.outline-gender.other {
+  color: var(--other);
+  background: color-mix(in srgb, var(--other) 14%, transparent);
+}
+
+.outline-union-icon {
+  color: var(--union-line);
+  font-size: 1rem;
+  line-height: 1;
+  flex: none;
+}
+
+.outline-id {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.outline-name {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.outline-name.is-unknown {
+  color: var(--muted);
   font-style: italic;
 }
 
-.wheel-sector.unknown path {
-  stroke-dasharray: 3 3;
+.outline-years {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
 }
 
-.wheel-sector[data-id=""] {
-  pointer-events: none;
-}
+.outline-row.is-living .outline-name { font-style: italic; }
 
 .card {
   position: absolute;
@@ -1265,7 +1428,7 @@ details summary { cursor: pointer; font-weight: 600; font-size: 0.9rem; }
   .auth-menu { right: -0.2rem; }
   .tree-toolbar { flex-wrap: wrap; }
   .segmented button { padding: 0.35rem 0.6rem; font-size: 0.8rem; }
-  .segmented button[data-view="wheel"] { padding-inline: 0.5rem; }
+  .segmented button[data-view="list"] { padding-inline: 0.5rem; }
   .card { gap: 0.45rem; padding: 0.45rem 0.5rem; }
   .card .avatar { width: 2.4rem; height: 2.4rem; font-size: 0.9rem; }
   .card .name { font-size: 0.86rem; }
@@ -1283,16 +1446,18 @@ details summary { cursor: pointer; font-weight: 600; font-size: 0.9rem; }
 
   .panel.vedic-open { width: 100%; }
 
-  body[data-treeview="wheel"] .tree-toolbar .toolbar-group {
+  body[data-treeview="list"] .tree-toolbar .toolbar-group {
     justify-content: center;
     width: 100%;
   }
-  body[data-treeview="wheel"] #orientation-switch {
-    display: none;
-  }
 
-  .wheel-sector text { font-size: 13px; }
-  .wheel-sector .wheel-years { font-size: 10px; }
+  .list-stage { padding: 0.75rem 0.6rem 2rem; }
+  .outline-row { --indent: 1.2rem; }
+  .outline-pill {
+    gap: 0.45rem;
+    padding: 0.3rem 0.7rem 0.3rem 0.5rem;
+    font-size: 0.84rem;
+  }
 
   .gen-rail {
     gap: 0.35rem;
@@ -1305,13 +1470,9 @@ details summary { cursor: pointer; font-weight: 600; font-size: 0.9rem; }
   }
 }
 
-body[data-treeview="wheel"] #orientation-switch {
-  display: none;
-}
-
-/* The generation picker and direction toggle only make sense for the fan chart. */
-body:not([data-treeview="wheel"]) #wheel-rings,
-body:not([data-treeview="wheel"]) #wheel-mode {
+/* The list is a scrolling outline, so orientation and zoom do not apply. */
+body[data-treeview="list"] #orientation-switch,
+body[data-treeview="list"] .zoom {
   display: none;
 }
 
