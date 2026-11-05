@@ -57,7 +57,10 @@ gitignored).
 - Sheet date strings are messy (`"Jan-1/1895 0:0"`, Excel serials, bare years);
   use `sources.parse_date_time`, not `horoscope.parse_birth`.
 - Trust CI more than local green runs: CI installs latest `pyswisseph`, local
-  `.venv` is pinned older — numeric boundary bugs show up only there.
+  `.venv` is pinned older — numeric boundary bugs show up only there. The bot
+  therefore rebuilds the feed with slightly different numerics and commits
+  them ("Rebuild panchang feed …"); `git pull --rebase` before pushing again
+  after engine changes.
 - Committer identity is the auto-configured `root <root@gunnytop.localdomain>`
   (matches all existing history); user has authorized commit+push on `main`.
 
