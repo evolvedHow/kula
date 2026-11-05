@@ -19,6 +19,8 @@
   /* Second accent for the List view: marriage/union rows, distinct from the
      direct-descent guide which follows --accent. */
   --union-line: #a5711c;
+  /* Jatakam marker: a cool violet so it never reads as a union. */
+  --jatakam: #6b4fbf;
   --font-heading: Roboto, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-body: Roboto, system-ui, -apple-system, "Segoe UI", sans-serif;
   --card-radius: 16px;
@@ -31,6 +33,7 @@
 [data-mode="dark"] {
   color-scheme: dark;
   --union-line: #e0b45c;
+  --jatakam: #b8a2ff;
   --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 2px 6px 2px rgb(0 0 0 / 0.3);
   --shadow-raised: 0 1px 3px rgb(0 0 0 / 0.5), 0 6px 16px 2px rgb(0 0 0 / 0.35);
 }
@@ -580,7 +583,8 @@ a { color: inherit; }
 .outline-head {
   position: sticky;
   left: 0;
-  width: fit-content;
+  width: max-content;
+  min-width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -608,6 +612,103 @@ a { color: inherit; }
   color: var(--muted);
   font-size: 0.76rem;
   font-variant-numeric: tabular-nums;
+}
+
+.outline-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-left: auto;
+}
+
+.outline-action {
+  border: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.22rem 0.62rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s, color 0.18s;
+}
+
+.outline-action:hover,
+.outline-action:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+}
+
+.outline-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
+.outline-legend-label:not(:last-child) { margin-right: 0.35rem; }
+
+.outline-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  flex: none;
+  border-radius: 50%;
+  font-size: 0.74rem;
+  line-height: 1;
+}
+
+.outline-mark.vedic {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+.outline-mark.jatakam {
+  color: var(--jatakam);
+  background: color-mix(in srgb, var(--jatakam) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--jatakam) 30%, transparent);
+}
+
+.outline-toggle,
+.outline-toggle-spacer {
+  width: 1.45rem;
+  min-width: 1.45rem;
+  height: 1.45rem;
+  flex: none;
+}
+
+.outline-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.1rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+
+.outline-toggle:hover,
+.outline-toggle:focus-visible {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.outline-toggle[aria-expanded="false"] { color: var(--accent); }
+
+.outline-row.gen-flash .outline-pill {
+  animation: outline-flash 1.8s var(--ease);
 }
 
 .outline-list {
@@ -1458,6 +1559,19 @@ details summary { cursor: pointer; font-weight: 600; font-size: 0.9rem; }
     padding: 0.3rem 0.7rem 0.3rem 0.5rem;
     font-size: 0.84rem;
   }
+  .outline-toggle,
+  .outline-toggle-spacer {
+    width: 1.2rem;
+    min-width: 1.2rem;
+    height: 1.2rem;
+  }
+  .outline-actions {
+    width: 100%;
+    margin-left: 0;
+  }
+  .outline-action { font-size: 0.7rem; }
+  .outline-legend { font-size: 0.68rem; }
+  .outline-mark { width: 1.05rem; height: 1.05rem; font-size: 0.68rem; }
 
   .gen-rail {
     gap: 0.35rem;
@@ -1479,6 +1593,13 @@ body[data-treeview="list"] .zoom {
 @keyframes sheet-in {
   from { transform: translateY(40px); opacity: 0; }
   to { transform: none; opacity: 1; }
+}
+
+@keyframes outline-flash {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent); }
+  20% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 0%, transparent); }
+  40% { box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 35%, transparent); }
+  100% { box-shadow: 0 0 0 0 transparent; }
 }
 
 @media (prefers-reduced-motion: reduce) {

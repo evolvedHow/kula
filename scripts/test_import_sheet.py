@@ -177,6 +177,60 @@ class BuildTests(unittest.TestCase):
     def test_no_resolution_warnings_for_the_synthetic_sheet(self):
         self.assertEqual(self.warnings, [])
 
+    def test_generation_falls_back_to_the_generation_column(self):
+        sheets = {
+            "Persons": table(
+                ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "GENDER", "DOB",
+                 "POB", "CUR_LOC", "STATUS", "NOTES", "GEN", "GENERATION"],
+                [
+                    ["P020", "Gen", "Gen Person", "P020-Gen", "Male", "",
+                     "", "", "Living", "", "", "d"],
+                    ["P021", "Blank", "Blank Gen", "P021-Blank", "Female", "",
+                     "", "", "Living", "", "B", ""],
+                ],
+            ),
+            "Unions": table(["UID", "PID1", "PID2", "REF_NAME", "REL_START", "REL_END", "NOTES"], []),
+            "Offsprings": table(["OID", "UNION_OF", "OFFSPRING", "NOTES"], []),
+            "Vedic": table(["PERSON"], []),
+            "$Config": table(["GOTRA"], []),
+        }
+        data, _ = build(sheets, {"site": {"default_person": "P020"},
+                                 "vedic": {"charts": False}})
+        people = {p["id"]: p for p in data["people"]}
+        self.assertEqual(people["P020"]["generation"], "D",
+                         "GENERATION is used when GEN is blank")
+        self.assertEqual(people["P021"]["generation"], "B",
+                         "GEN still wins when both columns are filled")
+
+    def test_a_self_union_is_treated_as_a_single_partner(self):
+        sheets = {
+            "Persons": table(
+                ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "GENDER", "DOB",
+                 "POB", "CUR_LOC", "STATUS", "NOTES"],
+                [["P030", "Solo", "Solo Person", "P030-Solo", "Male", "",
+                  "", "", "Living", ""]],
+            ),
+            "Unions": table(
+                ["UID", "PID1", "PID2", "REF_NAME", "REL_START", "REL_END", "NOTES"],
+                [["U030", "P030-Solo", "P030-Solo", "P030-Solo", "", "", ""]],
+            ),
+            "Offsprings": table(["OID", "UNION_OF", "OFFSPRING", "NOTES"], []),
+            "Vedic": table(["PERSON"], []),
+            "$Config": table(["GOTRA"], []),
+        }
+        data, warnings = build(sheets, {"site": {"default_person": "P030"},
+                                        "vedic": {"charts": False}})
+        family = data["families"][0]
+        self.assertEqual(family["father"], "P030")
+        self.assertIsNone(family["mother"], "the duplicate partner slot is cleared")
+        self.assertEqual(family["attributes"]["PID2"], "P030",
+                         "the raw sheet value is still recorded")
+        edge_ids = [e["id"] for e in data["graph"]["edges"]]
+        self.assertEqual(len(edge_ids), len(set(edge_ids)),
+                         "a self-union must not emit duplicate partner edges")
+        self.assertTrue(any("both partner slots" in w for w in warnings),
+                        "the typo should be reported as a warning")
+
     def test_a_single_female_partner_is_recorded_as_the_mother(self):
         sheets = {
             "Persons": table(

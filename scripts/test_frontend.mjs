@@ -393,8 +393,10 @@ test("every descendant appears exactly once, including cousins who marry", () =>
   const L = layoutOutline(index, focus);
   const ids = L.rows.filter((r) => r.kind === "person").map((r) => r.personId);
   assert.equal(new Set(ids).size, ids.length, "a person may not have two rows");
-  for (const id of ["E011", "E012"]) {
-    assert.ok(ids.includes(id), `${id} should still appear under one of its two lines`);
+  // D018 and D032 are cousins who marry; both keep a row in their own parental
+  // line while also being each other's partner.
+  for (const id of ["D018", "D032"]) {
+    assert.ok(ids.includes(id), `${id} should still appear under their own line`);
   }
 });
 
@@ -435,6 +437,94 @@ test("a person with no parents or children is a single root row", () => {
 
 test("layoutOutline rejects an unknown focus", () => {
   assert.equal(layoutOutline(index, "NOPE"), null);
+});
+
+test("collapsing a person keeps their row and hides their unions and descendants", () => {
+  const full = layoutOutline(index, focus);
+  const branch = full.rows.find((r) => r.kind === "person" && r.hasDetails && r.depth === 1);
+  assert.ok(branch, "fixture should include a branch with children below the root");
+
+  const L = layoutOutline(index, focus, { collapsed: [branch.personId] });
+  const row = L.rows.find((r) => r.kind === "person" && r.personId === branch.personId);
+  assert.ok(row, "the collapsed person keeps their own handle row");
+  assert.equal(row.collapsed, true);
+  assert.equal(row.hasDetails, true);
+
+  assert.ok(!L.rows.some((r) => r.kind === "union" && r.ownerId === branch.personId),
+    "a collapsed person's union rows are hidden");
+  const fullDescendants = new Set(full.rows
+    .filter((r) => r.kind === "person" && r.ancestors.includes(branch.personId))
+    .map((r) => r.personId));
+  assert.ok(fullDescendants.size, "fixture branch should have descendants");
+  for (const id of fullDescendants) {
+    assert.ok(!L.rows.some((r) => r.kind === "person" && r.personId === id),
+      `${id} should be hidden below the collapsed branch`);
+  }
+});
+
+test("the whole-family totals survive collapsing while visible people shrink", () => {
+  const full = layoutOutline(index, focus);
+  const branch = full.rows.find((r) => r.kind === "person" && r.hasDetails && r.depth === 1);
+  const L = layoutOutline(index, focus, { collapsed: [branch.personId] });
+
+  assert.equal(L.people, full.people, "the header still counts the whole family");
+  assert.equal(L.generations, full.generations, "the header still counts every generation");
+  assert.ok(L.visiblePeople < full.visiblePeople, "collapsing should reduce the visible rows");
+  assert.deepEqual(L.collapsed, [branch.personId]);
+});
+
+test("collapsing the root leaves a single expandable row", () => {
+  const full = layoutOutline(index, focus);
+  const root = full.rows[0];
+  const L = layoutOutline(index, focus, { collapsed: [root.personId] });
+  assert.equal(L.rows.length, 1);
+  assert.equal(L.rows[0].personId, root.personId);
+  assert.equal(L.visiblePeople, 1);
+  assert.equal(L.people, full.people);
+});
+
+test("list rows carry generation and ancestor metadata for navigation", () => {
+  const L = layoutOutline(index, focus);
+  for (const row of L.rows) {
+    assert.equal(typeof row.generation, "string");
+    assert.ok(Array.isArray(row.ancestors));
+    assert.equal(typeof row.key, "string");
+  }
+  const deep = L.rows.find((r) => r.kind === "person" && r.ancestors.length >= 1);
+  assert.ok(deep, "fixture should include a nested person");
+  assert.ok(deep.ancestors.every((id) => index.people[id]), "ancestors are real people");
+  assert.equal(deep.ancestors[0], "A001", "the ancestor chain starts at the root");
+  // The last ancestor is the person's direct parent line.
+  assert.ok(deep.generation === "" || /^[A-Z]$/.test(deep.generation), "generation is a single letter");
+});
+
+test("the list renders disclosure toggles, expand/collapse actions and a legend", () => {
+  const html = outlineHTML(layoutOutline(index, focus));
+  assert.ok(html.includes("data-toggle-person="), "each branch needs a disclosure toggle");
+  assert.ok(html.includes('aria-expanded="true"'), "expanded branches announce their state");
+  assert.ok(html.includes('data-list-action="expand"'), "an Expand all button should be rendered");
+  assert.ok(html.includes('data-list-action="collapse"'), "a Collapse all button should be rendered");
+  assert.ok(html.includes("outline-legend"), "the marker legend should be rendered");
+
+  const branch = layoutOutline(index, focus).rows.find((r) => r.kind === "person" && r.hasDetails);
+  const collapsedHtml = outlineHTML(layoutOutline(index, focus, { collapsed: [branch.personId] }));
+  assert.ok(collapsedHtml.includes('aria-expanded="false"'), "collapsed branches announce their state");
+});
+
+test("people with Vedic roots and Jatakam charts get marker icons", () => {
+  const L = layoutOutline(index, focus);
+  const vedicPerson = L.rows.find((r) => r.kind === "person" && r.person?.vedic?.gotra);
+  const chartPerson = L.rows.find((r) => r.kind === "person" && r.person?.vedic?.chart);
+  assert.ok(vedicPerson, "fixture should include someone with Vedic roots");
+  assert.ok(chartPerson, "fixture should include someone with a Jatakam chart");
+
+  const html = outlineHTML(L);
+  assert.ok(html.includes("outline-mark vedic"), "Vedic roots use the Om marker");
+  assert.ok(html.includes("ॐ"), "the Om glyph should be rendered");
+  assert.ok(html.includes("outline-mark jatakam"), "Jatakam uses the planet marker");
+  assert.ok(html.includes("☉"), "the planet glyph should be rendered");
+  assert.ok(html.includes("Jatakam available"), "Jatakam markers carry a descriptive title");
+  assert.ok(!html.includes("Jadagam"), "the spelling is Jatagam/Jatakam, not Jadagam");
 });
 
 // ---------- Vedic gotra / pravara ----------

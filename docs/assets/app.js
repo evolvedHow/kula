@@ -56,6 +56,8 @@ let VEDIC = { gotras: {} };
 const state = {
   focus: null, view: "hourglass", orientation: "vertical", selected: null, layout: null,
   k: 1, x: 0, y: 0, meId: null, auth: null, authError: null, authMe: false,
+  // List view: collapsed person ids and the generation last jumped to.
+  collapsed: new Set(), listGen: null,
 };
 let googleReady = false;
 
@@ -129,19 +131,24 @@ function buildIndex(data) {
 
 function renderGenerationsRail() {
   const rail = $("#gen-rail");
-  if (!rail || !IDX.generations.length) {
-    if (rail) rail.hidden = true;
-    return;
-  }
-  // The list always starts at the oldest ancestor, so generation jumps do not
-  // change what it shows.
-  if (state.view === "list") {
+  if (!rail) return;
+  // The list only offers generations that actually appear beneath the current
+  // root, so a disconnected branch's letter cannot become a dead button.
+  const gens = state.view === "list" && IDX
+    ? [...new Set((layoutOutline(IDX, state.focus, {})?.rows || [])
+      .map((row) => row.generation).filter(Boolean))].sort()
+    : IDX?.generations || [];
+  if (!gens.length) {
     rail.hidden = true;
     return;
   }
   rail.hidden = false;
-  const activeGen = IDX.people[state.focus]?.generation || "";
-  rail.innerHTML = IDX.generations
+  // In the tree the active generation follows the focus. In the list the
+  // visitor can jump to any generation without re-rooting, so remember the
+  // generation they last chose.
+  const activeGen = (state.view === "list" && state.listGen)
+    || IDX.people[state.focus]?.generation || "";
+  rail.innerHTML = gens
     .map((gen) => `<button type="button" data-gen="${esc(gen)}" class="${gen === activeGen ? "active" : ""}" aria-label="Jump to generation ${esc(gen)}">${esc(gen)}</button>`)
     .join("");
 }
@@ -162,6 +169,28 @@ function focusGeneration(gen) {
     pick = candidates.find((p) => p.id === home) || candidates[0];
   }
   go("tree", pick.id, { v: state.view, o: state.orientation });
+}
+
+// In the list the whole family is already shown, so a generation button expands
+// any collapsed ancestors above that generation and scrolls to the first row.
+function jumpToGeneration(gen) {
+  if (state.view !== "list") return focusGeneration(gen);
+  state.listGen = gen;
+  const full = layoutOutline(IDX, state.focus, {});
+  const target = full?.rows.find((row) => row.generation === gen);
+  if (!target) {
+    renderGenerationsRail();
+    return;
+  }
+  for (const id of target.ancestors || []) state.collapsed.delete(id);
+  renderListStage(state.focus, { preserveScroll: true });
+  const row = document.querySelector(`#list-stage .outline-row[data-row-key="${target.key}"]`);
+  if (row) {
+    row.scrollIntoView({ block: "center" });
+    row.classList.add("gen-flash");
+    setTimeout(() => row.classList.remove("gen-flash"), 1800);
+  }
+  renderGenerationsRail();
 }
 
 function applyTheme() {
@@ -483,6 +512,11 @@ function route() {
       || orientation !== state.orientation;
     state.view = safeView;
     state.orientation = orientation;
+    if (focus !== state.focus) {
+      // A new focus re-roots the list; start that view fully expanded.
+      state.collapsed.clear();
+      state.listGen = null;
+    }
     if (changed || !state.layout) {
       renderTree(focus);
       if (focus !== state.selected) {
@@ -523,6 +557,31 @@ function graphOptions(focusId) {
   };
 }
 
+function renderListStage(focusId, { preserveScroll = false } = {}) {
+  const stage = $("#list-stage");
+  const top = stage.scrollTop;
+  const left = stage.scrollLeft;
+  const L = layoutOutline(IDX, focusId, { collapsed: state.collapsed });
+  if (!L || !L.rows.length) {
+    stage.innerHTML = "";
+    $("#tree-empty").hidden = false;
+    return null;
+  }
+  $("#tree-empty").hidden = true;
+  state.focus = focusId;
+  state.layout = L;
+  stage.innerHTML = outlineHTML(L);
+  if (preserveScroll) {
+    stage.scrollTop = top;
+    stage.scrollLeft = left;
+  } else {
+    stage.scrollTop = 0;
+    stage.scrollLeft = 0;
+  }
+  markSelectedCards();
+  return L;
+}
+
 function renderTree(focusId) {
   const isList = state.view === "list";
   const listStage = $("#list-stage");
@@ -530,18 +589,7 @@ function renderTree(focusId) {
   listStage.hidden = !isList;
 
   if (isList) {
-    const L = layoutOutline(IDX, focusId);
-    if (!L || !L.rows.length) {
-      listStage.innerHTML = "";
-      $("#tree-empty").hidden = false;
-      return;
-    }
-    $("#tree-empty").hidden = true;
-    state.focus = focusId;
-    state.layout = L;
-    listStage.innerHTML = outlineHTML(L);
-    listStage.scrollTop = 0;
-    listStage.scrollLeft = 0;
+    if (!renderListStage(focusId)) return;
 
     for (const b of $$("#view-switch button")) {
       const on = b.dataset.view === state.view;
@@ -1390,6 +1438,37 @@ function bindEvents() {
   });
 
   $("#list-stage").addEventListener("click", (e) => {
+    const action = e.target.closest("[data-list-action]");
+    if (action) {
+      if (action.dataset.listAction === "expand") {
+        state.collapsed.clear();
+      } else {
+        const full = layoutOutline(IDX, state.focus, {});
+        if (full) {
+          state.collapsed = new Set(full.rows
+            .filter((row) => row.kind === "person" && row.hasDetails)
+            .map((row) => row.personId));
+        }
+      }
+      state.listGen = null;
+      renderListStage(state.focus, { preserveScroll: true });
+      renderGenerationsRail();
+      return;
+    }
+
+    const toggle = e.target.closest("[data-toggle-person]");
+    if (toggle) {
+      const id = toggle.dataset.togglePerson;
+      if (!id) return;
+      if (state.collapsed.has(id)) state.collapsed.delete(id);
+      else state.collapsed.add(id);
+      state.listGen = null;
+      renderListStage(state.focus, { preserveScroll: true });
+      document.querySelector(`#list-stage [data-toggle-person="${id}"]`)?.focus({ preventScroll: true });
+      renderGenerationsRail();
+      return;
+    }
+
     const pill = e.target.closest(".outline-pill[data-person]");
     if (!pill) return;
     const id = pill.dataset.person;
@@ -1407,7 +1486,7 @@ function bindEvents() {
   $("#gen-rail").addEventListener("click", (e) => {
     const b = e.target.closest("[data-gen]");
     if (!b) return;
-    focusGeneration(b.dataset.gen);
+    jumpToGeneration(b.dataset.gen);
   });
 
   $("#panel").addEventListener("click", (e) => {

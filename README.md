@@ -185,17 +185,38 @@ Each person is a pill showing an ID, a ♂/♀ gender icon, the full name (never
 truncated) and their years when known. A person's union appears as a separate
 dashed ⚭ pill at the same indent level, and that union's offspring move one
 indent level deeper. Multiple unions get one row each, and children are ordered
-eldest-first. A person reached through two lines (for example cousins who
-marry) is listed once.
+eldest-first. A person reached through two descendant lines (for example
+cousins who marry) keeps a single pill in their own line, and can also appear
+as the spouse in their partner's union row.
 
 The vertical indent guides and row markers use two colours: the theme accent
 for direct descendants, and a warm amber (`--union-line`) for spouses and union
 rows. Clicking any person pill opens their card in the details panel without
-re-rooting the list. The outline is always fully expanded; the page scrolls
-vertically and horizontally, so deep generations and long names stay readable.
-On narrow screens List is the default view, while desktops continue to open
-with the configured `layout.default_view`. The hierarchy views remain
-available and are unchanged.
+re-rooting the list.
+
+Each branch has a small disclosure arrow. Collapsing a person keeps their own
+pill as the handle and hides that person's union rows and every descendant
+below them, so a large family can be folded down to the lines you are reading.
+The header carries **Expand all** and **Collapse all** buttons, and the
+whole-family total stays visible (`X of Y people`) while branches are folded.
+Collapsing preserves the current scroll position.
+
+The generation rail stays visible beside the List. Unlike the tree, a
+generation button does not re-root the list: it expands any collapsed ancestors
+above that generation, scrolls the first row into view and briefly highlights
+it. The rail only offers generations that actually appear beneath the current
+root.
+
+Pills also carry two small markers, explained by a legend in the header:
+
+* **ॐ** — Vedic roots are recorded for this person (gotra or another lineage
+  field).
+* **☉** — a Jatagam birth chart is available for this person.
+
+The page scrolls vertically and horizontally, so deep generations and long
+names stay readable. On narrow screens List is the default view, while desktops
+continue to open with the configured `layout.default_view`. The hierarchy views
+remain available and are unchanged.
 
 ## Mobile layout
 

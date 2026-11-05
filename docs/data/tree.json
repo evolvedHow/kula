@@ -1,6 +1,6 @@
 {
  "schema": "kula.site/2.0",
- "generated_at": "2026-11-05T13:30:13+00:00",
+ "generated_at": "2026-11-05T13:48:02+00:00",
  "source": "Google Sheet",
  "home": "A001",
  "counts": {
@@ -6734,7 +6734,7 @@
    "gender": "M",
    "living": true,
    "hidden": false,
-   "generation": "",
+   "generation": "D",
    "name": {
     "display": "Ramnath Rajagopal",
     "given": "Ramnath",
@@ -6779,7 +6779,7 @@
    "gender": "F",
    "living": true,
    "hidden": false,
-   "generation": "",
+   "generation": "D",
    "name": {
     "display": "Vidya Ramnath",
     "given": "Vidya",
@@ -6826,7 +6826,7 @@
    "gender": "F",
    "living": true,
    "hidden": false,
-   "generation": "",
+   "generation": "E",
    "name": {
     "display": "Sumukhi Ramnath",
     "given": "Sumukhi",
@@ -6871,7 +6871,7 @@
    "gender": "M",
    "living": true,
    "hidden": false,
-   "generation": "",
+   "generation": "E",
    "name": {
     "display": "Abhinav Ramnath",
     "given": "Abhinav",
@@ -6916,7 +6916,7 @@
    "gender": "F",
    "living": true,
    "hidden": false,
-   "generation": "",
+   "generation": "E",
    "name": {
     "display": "Manasi Ramnath",
     "given": "Manasi",
@@ -6961,7 +6961,7 @@
    "gender": "F",
    "living": false,
    "hidden": false,
-   "generation": "",
+   "generation": "Z",
    "name": {
     "display": "Saradha Mahadevan ( Kunju)",
     "given": "Saradha Mahadevan (",
@@ -7014,7 +7014,7 @@
    "gender": "M",
    "living": false,
    "hidden": false,
-   "generation": "",
+   "generation": "Z",
    "name": {
     "display": "Mahadevan",
     "given": "Mahadevan",
@@ -7065,7 +7065,7 @@
    "gender": "M",
    "living": true,
    "hidden": false,
-   "generation": "",
+   "generation": "Z",
    "name": {
     "display": "Prakash  Mahadevan",
     "given": "Prakash",
@@ -7112,7 +7112,7 @@
    "gender": "F",
    "living": true,
    "hidden": false,
-   "generation": "",
+   "generation": "Z",
    "name": {
     "display": "Priya Prakash",
     "given": "Priya",
@@ -7159,7 +7159,7 @@
    "gender": "F",
    "living": true,
    "hidden": false,
-   "generation": "",
+   "generation": "Z",
    "name": {
     "display": "Vibha Prakash",
     "given": "Vibha",
@@ -7204,7 +7204,7 @@
    "gender": "F",
    "living": true,
    "hidden": false,
-   "generation": "",
+   "generation": "C",
    "name": {
     "display": "Annapurani Sundar ( Baby)",
     "given": "Annapurani Sundar (",
@@ -7252,7 +7252,7 @@
    "gender": "M",
    "living": false,
    "hidden": false,
-   "generation": "",
+   "generation": "C",
    "name": {
     "display": "M Sundar",
     "given": "M",
@@ -7304,7 +7304,7 @@
    "gender": "M",
    "living": true,
    "hidden": false,
-   "generation": "",
+   "generation": "D",
    "name": {
     "display": "Rajesh Sundar",
     "given": "Rajesh",
@@ -7349,7 +7349,7 @@
    "gender": "M",
    "living": true,
    "hidden": false,
-   "generation": "",
+   "generation": "D",
    "name": {
     "display": "Suresh Sundar",
     "given": "Suresh",
@@ -7394,7 +7394,7 @@
    "gender": "F",
    "living": false,
    "hidden": false,
-   "generation": "",
+   "generation": "Z",
    "name": {
     "display": "Rajalakshmi Krishnamurthy ( Rajam)",
     "given": "Rajalakshmi Krishnamurthy (",
@@ -7445,7 +7445,7 @@
    "gender": "M",
    "living": false,
    "hidden": false,
-   "generation": "",
+   "generation": "Z",
    "name": {
     "display": "V. Krishnamurthy",
     "given": "V.",
@@ -7496,7 +7496,7 @@
    "gender": "M",
    "living": true,
    "hidden": false,
-   "generation": "",
+   "generation": "Z",
    "name": {
     "display": "Venkataraman ( Ramesh )",
     "given": "Venkataraman ( Ramesh",
@@ -7543,7 +7543,7 @@
    "gender": "F",
    "living": true,
    "hidden": false,
-   "generation": "",
+   "generation": "Z",
    "name": {
     "display": "Uma Venkataraman",
     "given": "Uma",
@@ -7590,7 +7590,7 @@
    "gender": "F",
    "living": true,
    "hidden": false,
-   "generation": "",
+   "generation": "Z",
    "name": {
     "display": "Deekshita Shiva Ramalingam",
     "given": "Deekshita Shiva",
@@ -7635,7 +7635,7 @@
    "gender": "M",
    "living": true,
    "hidden": false,
-   "generation": "",
+   "generation": "Z",
    "name": {
     "display": "Shiva Ramalingam",
     "given": "Shiva",
@@ -7680,7 +7680,7 @@
    "gender": "F",
    "living": false,
    "hidden": false,
-   "generation": "",
+   "generation": "Z",
    "name": {
     "display": "Supraja Venkatraman",
     "given": "Supraja",
@@ -7729,7 +7729,7 @@
    "gender": "M",
    "living": true,
    "hidden": false,
-   "generation": "",
+   "generation": "Z",
    "name": {
     "display": "Renganathan (Rengan)",
     "given": "Renganathan",
@@ -7776,7 +7776,7 @@
    "gender": "F",
    "living": true,
    "hidden": false,
-   "generation": "",
+   "generation": "Z",
    "name": {
     "display": "Aruna",
     "given": "Aruna",
@@ -7823,7 +7823,7 @@
    "gender": "F",
    "living": false,
    "hidden": false,
-   "generation": "",
+   "generation": "B",
    "name": {
     "display": "Valli ambal Iyer",
     "given": "Valli ambal",
@@ -7882,7 +7882,7 @@
    "gender": "M",
    "living": false,
    "hidden": false,
-   "generation": "",
+   "generation": "B",
    "name": {
     "display": "L.Mill Krishna Iyer",
     "given": "L.Mill Krishna",
@@ -7929,7 +7929,7 @@
    "gender": "M",
    "living": false,
    "hidden": false,
-   "generation": "",
+   "generation": "C",
    "name": {
     "display": "C.K.Lakshmanan",
     "given": "C.K.Lakshmanan",
@@ -7980,7 +7980,7 @@
    "gender": "F",
    "living": true,
    "hidden": false,
-   "generation": "",
+   "generation": "C",
    "name": {
     "display": "Parvati (ChellammaManni)",
     "given": "Parvati",
@@ -8031,7 +8031,7 @@
    "gender": "M",
    "living": true,
    "hidden": false,
-   "generation": "",
+   "generation": "D",
    "name": {
     "display": "Naresh Lakshmanan",
     "given": "Naresh",
@@ -8078,7 +8078,7 @@
    "gender": "F",
    "living": true,
    "hidden": false,
-   "generation": "",
+   "generation": "D",
    "name": {
     "display": "Lakshmi Naresh",
     "given": "Lakshmi",
@@ -8125,7 +8125,7 @@
    "gender": "M",
    "living": true,
    "hidden": false,
-   "generation": "",
+   "generation": "E",
    "name": {
     "display": "Siddarth Naresh",
     "given": "Siddarth",
@@ -8170,7 +8170,7 @@
    "gender": "F",
    "living": true,
    "hidden": false,
-   "generation": "",
+   "generation": "E",
    "name": {
     "display": "Niveditha Naresh",
     "given": "Niveditha",
@@ -9554,7 +9554,7 @@
   {
    "id": "U052",
    "father": "Z025",
-   "mother": "Z025",
+   "mother": null,
    "children": [],
    "relation": "Married",
    "marriage": {
@@ -10390,7 +10390,8 @@
   "C",
   "D",
   "E",
-  "F"
+  "F",
+  "Z"
  ],
  "graph": {
   "schema": "kula.graph/1.0",
@@ -15960,16 +15961,6 @@
     "attributes": {
      "role": "partner",
      "union": "U051"
-    }
-   },
-   {
-    "id": "U052-Z025",
-    "type": "partner",
-    "from": "Z025",
-    "to": "U052",
-    "attributes": {
-     "role": "partner",
-     "union": "U052"
     }
    },
    {

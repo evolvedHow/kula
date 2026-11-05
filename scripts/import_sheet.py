@@ -647,6 +647,15 @@ def build(sheets, config, tabs=None, authority_rows=None):
             attrs["PID1_REF"] = row.get("PID1", "")
         if p2:
             attrs["PID2_REF"] = row.get("PID2", "")
+        # A self-union (the same PID in both partner slots) is a sheet typo. Keep
+        # the raw values in the attributes, but treat it as a single partner so
+        # the graph does not emit two identical partner edges and the List view
+        # does not show someone married to themselves.
+        if p1 and p1 == p2:
+            warnings.append(
+                f"Union {uid}: both partner slots are {p1}; treating it as a "
+                "single-partner union. Check PID1/PID2 in the sheet.")
+            p2 = ""
         date, year = parse_dmy(row.get("REL_START"))
         father, mother = p1, p2
         if p2 and p1:
@@ -735,7 +744,7 @@ def build(sheets, config, tabs=None, authority_rows=None):
         pod = (row.get("POD") or "").strip()
         if pod:
             attrs["POD"] = pod
-        generation = (row.get("GEN") or "").strip().upper()
+        generation = ((row.get("GEN") or row.get("GENERATION") or "").strip().upper())
         person = {
             "id": pid,
             "gender": gender_code(row.get("GENDER")),
