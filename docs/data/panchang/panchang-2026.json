@@ -1,6 +1,6 @@
 {
   "schema": "kula-panchang/v1",
-  "generated_at": "2026-11-05T15:12:08.518300+00:00",
+  "generated_at": "2026-11-05T15:15:17.498062+00:00",
   "years": [
     2026
   ],
@@ -265,7 +265,7 @@
         "system": "solar",
         "adhika": false,
         "label": "Dhanu (Margazhi)",
-        "start": "1943-12-16T04:37:39.971300+06:30",
+        "start": "1943-12-16T04:37:39.971219+06:30",
         "end": "1944-01-14T15:18:55.200468+06:30"
       },
       "nakshatra": {
@@ -1007,7 +1007,7 @@
         "system": "solar",
         "adhika": false,
         "label": "Makara (Thai)",
-        "start": "1967-01-14T11:55:35.125369+05:30",
+        "start": "1967-01-14T11:55:35.125288+05:30",
         "end": "1967-02-13T00:55:23.583153+05:30"
       },
       "nakshatra": {
@@ -2037,7 +2037,7 @@
       },
       "all_day": true,
       "start": "2026-03-05T06:22:32.919249+05:30",
-      "end": "2026-03-05T18:18:26.701313+05:30",
+      "end": "2026-03-05T18:18:26.701273+05:30",
       "person_id": "D035",
       "person_name": "Subramanian Krishnan",
       "gotra": null,
@@ -2120,7 +2120,7 @@
         "adhika": false,
         "label": "Meena (Panguni)",
         "start": "2026-03-15T01:03:04.475926+05:30",
-        "end": "2026-04-14T09:32:39.548387+05:30"
+        "end": "2026-04-14T09:32:39.548467+05:30"
       },
       "nakshatra": {
         "index": 25,
@@ -2140,7 +2140,7 @@
           "adhika": false,
           "label": "Meena (Panguni)",
           "start": "2026-03-15T01:03:04.475926+05:30",
-          "end": "2026-04-14T09:32:39.548387+05:30"
+          "end": "2026-04-14T09:32:39.548467+05:30"
         },
         "lunar_masa_amanta": {
           "name": "Phalguna",
@@ -2327,7 +2327,7 @@
         "adhika": false,
         "label": "Meena (Panguni)",
         "start": "2026-03-15T01:03:04.475926+05:30",
-        "end": "2026-04-14T09:32:39.548387+05:30"
+        "end": "2026-04-14T09:32:39.548467+05:30"
       },
       "nakshatra": {
         "index": 8,
@@ -2515,7 +2515,7 @@
         "adhika": false,
         "label": "Meena (Panguni)",
         "start": "2026-03-15T01:03:04.475926+05:30",
-        "end": "2026-04-14T09:32:39.548387+05:30"
+        "end": "2026-04-14T09:32:39.548467+05:30"
       },
       "nakshatra": {
         "index": 13,
@@ -2632,7 +2632,7 @@
         "adhika": false,
         "label": "Meena (Panguni)",
         "start": "2026-03-15T01:03:04.475926+05:30",
-        "end": "2026-04-14T09:32:39.548387+05:30"
+        "end": "2026-04-14T09:32:39.548467+05:30"
       },
       "nakshatra": {
         "index": 19,
@@ -2693,7 +2693,7 @@
         "adhika": false,
         "label": "Meena (Panguni)",
         "start": "2026-03-15T01:03:04.475926+05:30",
-        "end": "2026-04-14T09:32:39.548387+05:30"
+        "end": "2026-04-14T09:32:39.548467+05:30"
       },
       "nakshatra": {
         "index": 20,
@@ -2944,7 +2944,7 @@
         "adhika": false,
         "label": "Meena (Panguni)",
         "start": "2026-03-15T01:03:04.475926+05:30",
-        "end": "2026-04-14T09:32:39.548387+05:30"
+        "end": "2026-04-14T09:32:39.548467+05:30"
       },
       "nakshatra": {
         "index": 24,
@@ -3059,7 +3059,7 @@
         "system": "solar",
         "adhika": false,
         "label": "Mesha (Chithirai)",
-        "start": "2026-04-14T09:32:39.548387+05:30",
+        "start": "2026-04-14T09:32:39.548467+05:30",
         "end": "2026-05-15T06:22:01.780372+05:30"
       },
       "nakshatra": {
@@ -3079,7 +3079,7 @@
           "system": "solar",
           "adhika": false,
           "label": "Mesha (Chithirai)",
-          "start": "2026-04-14T09:32:39.548387+05:30",
+          "start": "2026-04-14T09:32:39.548467+05:30",
           "end": "2026-05-15T06:22:01.780372+05:30"
         },
         "lunar_masa_amanta": {
@@ -3262,7 +3262,7 @@
         "system": "solar",
         "adhika": false,
         "label": "Mesha (Chithirai)",
-        "start": "2026-04-14T09:32:39.548387+05:30",
+        "start": "2026-04-14T09:32:39.548467+05:30",
         "end": "2026-05-15T06:22:01.780372+05:30"
       },
       "nakshatra": {
@@ -3450,7 +3450,7 @@
         "system": "solar",
         "adhika": false,
         "label": "Mesha (Chithirai)",
-        "start": "2026-04-14T09:32:39.548387+05:30",
+        "start": "2026-04-14T09:32:39.548467+05:30",
         "end": "2026-05-15T06:22:01.780372+05:30"
       },
       "nakshatra": {
@@ -7249,7 +7249,7 @@
       "details": {
         "year": 2026,
         "birth_date": "1969-09-13",
-        "birth_reference": "1969-09-13T05:57:45.090707+05:30",
+        "birth_reference": "1969-09-13T05:57:45.090747+05:30",
         "birth_source": "derived from birth date at sunrise",
         "nakshatra_start": null,
         "nakshatra_end": null,
