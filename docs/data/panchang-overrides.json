@@ -1,0 +1,24 @@
+{
+  "schema": "kula-panchang-overrides/v1",
+  "_documentation": [
+    "Optional per-person corrections for the panchangam engine.",
+    "The family tree stays the source of truth for names and dates; only add",
+    "fields here when a birth/death time or an explicitly recorded tithi is",
+    "known from a family record.",
+    "Keys: birth_time, death_time, birth_nakshatra, birth_masa, death_tithi,",
+    "death_paksha, death_masa, death_masa_system, location, gotra, include.",
+    "A person who is not in the tree may be added under people with a name."
+  ],
+  "defaults": {
+    "masa_system": "solar",
+    "tradition": "Tamil / Kerala Iyer",
+    "location": {
+      "name": "Chennai",
+      "latitude": 13.0827,
+      "longitude": 80.2707,
+      "elevation_m": 10,
+      "timezone": "Asia/Kolkata"
+    }
+  },
+  "people": {}
+}

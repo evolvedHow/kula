@@ -6,3 +6,13 @@ PyYAML>=6.0
 # Without these the importer still works; charts are skipped with a warning.
 pyswisseph>=2.10
 timezonefinder>=6.2
+# Panchangam and family tithi calendar (scripts/panchang).
+# icalendar writes the subscribable .ics feed; dateutil parses the many date
+# formats found in the relatives sheet.
+icalendar>=6.0
+python-dateutil>=2.9
+# Optional: push events into a Google Calendar instead of subscribing to the
+# .ics feed. The feed itself needs none of these.
+# google-api-python-client>=2.100
+# google-auth>=2.23
+# google-auth-oauthlib>=1.1

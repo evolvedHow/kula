@@ -351,6 +351,110 @@ already reduced to city level for living people.
 - **A place cannot be geocoded:** add it under `places:` in
   `docs/config.yml`. Use `--offline` to avoid network lookups entirely.
 
+## Panchangam and family tithi calendar
+
+`scripts/panchang/` computes the family's ritual dates from the same
+`docs/data/tree.json` that powers the site. It uses Swiss Ephemeris with the
+**Lahiri ayanamsha** and produces:
+
+- **Shraddha / tarpanam** dates for deceased members, matched on the death
+  tithi and masa (with the lunar month as a tie-breaker).
+- **Janma nakshatra** dates for living members.
+- **Amavasya tarpanam** days, which follow the aparahna rule.
+- Festival markers such as Garuda Panchami, Pradosham and Ekadasi when
+  enabled.
+
+Run the importer first so `docs/data/tree.json` is current. The panchangam
+engine never edits the tree.
+
+### Configuration
+
+Settings live in the `panchang:` block of `docs/config.yml`: ritual location
+(Chennai by default), masa system (`solar` for the Tamil/Kerala Iyer
+tradition, or `lunar_amanta` / `lunar_purnimanta`), aparahna window, included
+event kinds, and output paths.
+
+Per-person corrections — an exact birth or death time, an explicitly recorded
+tithi, or a different ritual location — go in
+`docs/data/panchang-overrides.json`, keyed by PID. The tree stays the source
+of truth for names and dates.
+
+### Commands
+
+```bash
+# What is the panchangam today (or on a given day)?
+.venv/bin/python -m scripts.panchang day --date 2026-08-17
+
+# A month at a glance, and the year's events.
+.venv/bin/python -m scripts.panchang month --year 2026 --month 8
+.venv/bin/python -m scripts.panchang list --year 2026 --kind shraddha
+
+# Why does a person get this date?  Accepts a PID or a name fragment.
+.venv/bin/python -m scripts.panchang explain C008 --year 2026
+
+# Amavasya tarpanam days.
+.venv/bin/python -m scripts.panchang amavasya --year 2026
+
+# Build the feed published with the site.
+.venv/bin/python -m scripts.panchang build --years 2026,2027
+
+# Sanity checks, and the test suite.
+.venv/bin/python -m scripts.panchang validate
+.venv/bin/python -m unittest scripts.test_panchang -v
+```
+
+`build` writes the combined `panchang.ics` / `panchang.json` plus per-year
+files under `docs/data/panchang/`. Add `--daily` or `--members` to also write
+the much larger full-day and per-person JSON dumps.
+
+The abbreviations `day`, `month`, `list`, `explain`, `amavasya`, `build`,
+`serve` and `sync-google` are subcommands; `--date` without a subcommand is
+treated as `day`.
+
+### Subscribing in Google Calendar
+
+The static `.ics` feed is the primary integration and needs no credentials:
+
+1. Build the feed (or let GitHub Pages serve the committed files).
+2. In Google Calendar choose **Other calendars → From URL**.
+3. Paste the absolute feed URL, for example
+   `https://evolvedhow.github.io/kula/data/panchang/panchang.ics`.
+
+Apple Calendar and Outlook can subscribe to the same URL. All-day events are
+used by default so a ritual date lands on the correct civil day.
+
+For local testing:
+
+```bash
+.venv/bin/python -m scripts.panchang serve --build
+# http://127.0.0.1:8082/panchang.ics
+```
+
+`sync-google` is optional. It copies events into a Google calendar through the
+API instead of subscribing; install the three `google-*` packages listed as
+comments in `requirements.txt`, then create an OAuth client at
+`private/google-credentials.json` (or a service account) and run with
+`--dry-run` first.
+
+### What the dates mean
+
+Death dates in the sheet are dates only, so the ritual tithi is evaluated
+during **aparahna** (13:30–16:00 by default), not at sunrise. Birth
+nakshatras are evaluated at sunrise unless a birth time is recorded. Solar
+masa is taken at sunrise, matching the Tamil month (Karka = Aadi).
+
+When a tithi occurs twice in one solar month, the engine prefers the
+occurrence in the **same amanta lunar month** as the original event. This
+matters for Lakshmi Ganapathy (C008): she died on 11 Aug 1994, when the
+sunrise tithi was Sukla Chaturthi but the aparahna tithi was Sukla Panchami
+in Karka/Shravana. In 2026 Sukla Panchami falls in Karka on both 18 July
+(Ashadha) and 17 August (Shravana); the lunar-month rule selects
+**17 August 2026**, which is also **Garuda Panchami**. `explain C008 --year
+2026` prints the full derivation.
+
+Dates derived from a date-only death or birth are marked `medium` confidence;
+add a time in the overrides file to make them exact.
+
 ## Configuration
 
 Everything is in `docs/config.yml`: site title, colours (`theme.preset`),

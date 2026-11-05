@@ -121,6 +121,69 @@ vedic:
   # then run the importer with .venv/bin/python.
   charts: true
 
+# ---------------------------------------------------------------------
+#  Panchangam and family tithi calendar
+#  The engine reads the generated docs/data/tree.json, so run the importer
+#  first. Build the feed with:
+#      .venv/bin/python -m scripts.panchang build --years 2026,2027
+#  The static feed is published under docs/data/panchang/. For Google
+#  Calendar, subscribe to the absolute .ics URL (Other calendars -> From URL).
+# ---------------------------------------------------------------------
+panchang:
+  years: [2026, 2027]
+  # Ritual location. Chennai is the family's Tamil home base; each person can
+  # override this in docs/data/panchang-overrides.json.
+  location:
+    name: Chennai
+    latitude: 13.0827
+    longitude: 80.2707
+    elevation_m: 10
+    timezone: Asia/Kolkata
+  # solar follows the Tamil/Kerala Iyer masam (Karka = Aadi). Use
+  # lunar_amanta or lunar_purnimanta for North Indian lunar months.
+  masa_system: solar
+  # Death tithi is taken at aparahna (13:30-16:00) when no time is recorded.
+  # Birth nakshatra is taken at sunrise when no time is recorded.
+  death_tithi_reference: aparahna
+  birth_nakshatra_reference: sunrise
+  nakshatra_reference: sunrise
+  event_mode: all-day
+  reminders_days: [1]
+  aparahna_start: "13:30"
+  aparahna_end: "16:00"
+  include:
+    amavasya: true
+    purnima: true
+    ekadasi: false
+    pradosham: false
+    shraddha: true
+    janma_nakshatra: true
+    festivals: true
+    living_members: true
+    deceased_members: true
+    private_members: false
+  sources:
+    kind: tree
+    tree_path: docs/data/tree.json
+    # Optional hand-entered times, explicit tithi/masa, and per-person
+    # ritual locations. See docs/data/panchang-overrides.json.
+    overrides: docs/data/panchang-overrides.json
+    output_dir: docs/data/panchang
+    feed_name: panchang.ics
+    gramps:
+      url: http://localhost:8081
+      token_file: ~/.config/gramps-mcp/token.json
+  server:
+    host: 127.0.0.1
+    port: 8082
+    public_url: https://evolvedhow.github.io/kula/data/panchang
+    cache_seconds: 300
+  google:
+    calendar_id: primary
+    credentials_file: private/google-credentials.json
+    token_file: private/google-token.json
+    timezone: Asia/Kolkata
+
 # Hand-verified geocodes for birth places. These always win over the cached
 # Nominatim lookups in private/geocache.json. Use them to fix a place that
 # resolves to the wrong town, or to pin down an unambiguous timezone.
