@@ -38,7 +38,11 @@ class FestivalRule:
             target = _solar_index(self.masa)
             if target is None:
                 return False
-            ingress_sign = astro.solar_sign(astro.to_jd(day.solar_masa.end))
+            # Evaluate an hour after the ingress instant.  At the exact
+            # boundary the Sun's longitude is numerically ambiguous
+            # (29.999… vs 30.000…), which can flip the sign between Swiss
+            # Ephemeris builds; an hour later the Sun is ~0.04° past it.
+            ingress_sign = astro.solar_sign(astro.to_jd(day.solar_masa.end) + 1.0 / 24.0)
             return ingress_sign == target
 
         if self.tithi is None:

@@ -1,6 +1,6 @@
 {
   "schema": "kula-panchang/v1",
-  "generated_at": "2026-11-05T14:45:05.356350+00:00",
+  "generated_at": "2026-11-05T15:12:08.313440+00:00",
   "years": [
     2026,
     2027
@@ -46,7 +46,7 @@
   },
   "counts": {
     "amavasya": 25,
-    "festival": 12,
+    "festival": 14,
     "janma_nakshatra": 196,
     "purnima": 25,
     "shraddha": 60
@@ -350,6 +350,61 @@
       "warnings": [
         "Birth time is unknown. Janma nakshatra is computed at sunrise; set birth_time in the sidecar for an exact result."
       ],
+      "confidence": "high"
+    },
+    {
+      "uid": "kula-panchang-festival-2026-01-14@kula.local",
+      "date": "2026-01-14",
+      "kind": "festival",
+      "summary": "Pongal",
+      "description": "Pongal\n\nSunrise: 06:34  Sunset: 18:01  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nFestivals: Pongal\n\nConfidence: high\nSource: panchangam",
+      "location": {
+        "name": "Chennai",
+        "latitude": 13.0827,
+        "longitude": 80.2707,
+        "elevation_m": 10.0,
+        "timezone": "Asia/Kolkata"
+      },
+      "all_day": true,
+      "start": "2026-01-14T06:34:43.331864+05:30",
+      "end": "2026-01-14T18:01:06.888003+05:30",
+      "person_id": null,
+      "person_name": null,
+      "gotra": null,
+      "tithi": {
+        "index": 26,
+        "name": "Ekadasi",
+        "label": "Krishna Ekadasi",
+        "tamil_name": "Ekadasi",
+        "paksha": "Krishna",
+        "fraction": 0.57405,
+        "difference_deg": 306.88855
+      },
+      "masa": {
+        "name": "Dhanu",
+        "tamil_name": "Margazhi",
+        "malayalam_name": "Dhanu",
+        "index": 8,
+        "system": "solar",
+        "adhika": false,
+        "label": "Dhanu (Margazhi)",
+        "start": "2025-12-16T04:20:06.037876+05:30",
+        "end": "2026-01-14T15:07:19.791191+05:30"
+      },
+      "nakshatra": {
+        "index": 17,
+        "name": "Anuradha",
+        "tamil_name": "Anusham",
+        "pada": 1,
+        "longitude_deg": 216.52588
+      },
+      "festivals": [
+        "Pongal"
+      ],
+      "details": {
+        "ritual": "Pongal"
+      },
+      "warnings": [],
       "confidence": "high"
     },
     {
@@ -2795,7 +2850,7 @@
       "date": "2026-04-14",
       "kind": "janma_nakshatra",
       "summary": "Janma Nakshatra: Siddarth Naresh - Shatabhisha",
-      "description": "Janma Nakshatra: Siddarth Naresh - Shatabhisha\n\nPerson: Siddarth Naresh (E045)\nRecorded date: 1999-04-13\nTithi: Krishna Dwadasi (Dwadasi)\nMasa: Meena (Panguni) [solar]\nNakshatra: Shatabhisha (Sadayam), pada 3\nSunrise: 05:56  Sunset: 18:21  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nBirth: 1999-04-13\nBirth nakshatra: Shatabhisha\nBirth masa: Meena (Panguni)\nLunar masa at birth: Chaitra (Chithirai)\n\nConfidence: high\nSource: derived from birth date at sunrise",
+      "description": "Janma Nakshatra: Siddarth Naresh - Shatabhisha\n\nPerson: Siddarth Naresh (E045)\nRecorded date: 1999-04-13\nTithi: Krishna Dwadasi (Dwadasi)\nMasa: Meena (Panguni) [solar]\nNakshatra: Shatabhisha (Sadayam), pada 3\nSunrise: 05:56  Sunset: 18:21  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nFestivals: Puthandu (Tamil New Year)\nBirth: 1999-04-13\nBirth nakshatra: Shatabhisha\nBirth masa: Meena (Panguni)\nLunar masa at birth: Chaitra (Chithirai)\n\nConfidence: high\nSource: derived from birth date at sunrise",
       "location": {
         "name": "Chennai",
         "latitude": 13.0827,
@@ -2836,7 +2891,9 @@
         "pada": 3,
         "longitude_deg": 315.81387
       },
-      "festivals": [],
+      "festivals": [
+        "Puthandu (Tamil New Year)"
+      ],
       "details": {
         "year": 2026,
         "birth_date": "1999-04-13",
@@ -2849,6 +2906,61 @@
       "warnings": [
         "Birth time is unknown. Janma nakshatra is computed at sunrise; set birth_time in the sidecar for an exact result."
       ],
+      "confidence": "high"
+    },
+    {
+      "uid": "kula-panchang-festival-2026-04-14@kula.local",
+      "date": "2026-04-14",
+      "kind": "festival",
+      "summary": "Puthandu (Tamil New Year)",
+      "description": "Puthandu (Tamil New Year)\n\nSunrise: 05:56  Sunset: 18:21  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nFestivals: Puthandu (Tamil New Year)\n\nConfidence: high\nSource: panchangam",
+      "location": {
+        "name": "Chennai",
+        "latitude": 13.0827,
+        "longitude": 80.2707,
+        "elevation_m": 10.0,
+        "timezone": "Asia/Kolkata"
+      },
+      "all_day": true,
+      "start": "2026-04-14T05:56:52.646493+05:30",
+      "end": "2026-04-14T18:21:44.567792+05:30",
+      "person_id": null,
+      "person_name": null,
+      "gotra": null,
+      "tithi": {
+        "index": 27,
+        "name": "Dwadasi",
+        "label": "Krishna Dwadasi",
+        "tamil_name": "Dwadasi",
+        "paksha": "Krishna",
+        "fraction": 0.20511,
+        "difference_deg": 314.46137
+      },
+      "masa": {
+        "name": "Meena",
+        "tamil_name": "Panguni",
+        "malayalam_name": "Meenam",
+        "index": 11,
+        "system": "solar",
+        "adhika": false,
+        "label": "Meena (Panguni)",
+        "start": "2026-03-15T01:03:04.475926+05:30",
+        "end": "2026-04-14T09:32:39.548387+05:30"
+      },
+      "nakshatra": {
+        "index": 24,
+        "name": "Shatabhisha",
+        "tamil_name": "Sadayam",
+        "pada": 3,
+        "longitude_deg": 314.31449
+      },
+      "festivals": [
+        "Puthandu (Tamil New Year)"
+      ],
+      "details": {
+        "ritual": "Puthandu (Tamil New Year)"
+      },
+      "warnings": [],
       "confidence": "high"
     },
     {
@@ -3550,61 +3662,6 @@
         "Death time is unknown. The tithi is computed at aparahna, the ritual reference, not at sunrise. Set death_time in the sidecar to make this exact.",
         "Birth time is unknown. Janma nakshatra is computed at sunrise; set birth_time in the sidecar for an exact result."
       ],
-      "confidence": "high"
-    },
-    {
-      "uid": "kula-panchang-festival-2026-05-15@kula.local",
-      "date": "2026-05-15",
-      "kind": "festival",
-      "summary": "Puthandu (Tamil New Year)",
-      "description": "Puthandu (Tamil New Year)\n\nSunrise: 05:43  Sunset: 18:27  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nFestivals: Puthandu (Tamil New Year)\n\nConfidence: high\nSource: panchangam",
-      "location": {
-        "name": "Chennai",
-        "latitude": 13.0827,
-        "longitude": 80.2707,
-        "elevation_m": 10.0,
-        "timezone": "Asia/Kolkata"
-      },
-      "all_day": true,
-      "start": "2026-05-15T05:43:16.470635+05:30",
-      "end": "2026-05-15T18:27:21.675961+05:30",
-      "person_id": null,
-      "person_name": null,
-      "gotra": null,
-      "tithi": {
-        "index": 28,
-        "name": "Trayodasi",
-        "label": "Krishna Trayodasi",
-        "tamil_name": "Trayodasi",
-        "paksha": "Krishna",
-        "fraction": 0.86579,
-        "difference_deg": 334.38953
-      },
-      "masa": {
-        "name": "Mesha",
-        "tamil_name": "Chithirai",
-        "malayalam_name": "Medam",
-        "index": 0,
-        "system": "solar",
-        "adhika": false,
-        "label": "Mesha (Chithirai)",
-        "start": "2026-04-14T09:32:39.548387+05:30",
-        "end": "2026-05-15T06:22:01.780372+05:30"
-      },
-      "nakshatra": {
-        "index": 1,
-        "name": "Ashwini",
-        "tamil_name": "Ashwini",
-        "pada": 2,
-        "longitude_deg": 4.36355
-      },
-      "festivals": [
-        "Puthandu (Tamil New Year)"
-      ],
-      "details": {
-        "ritual": "Puthandu (Tamil New Year)"
-      },
-      "warnings": [],
       "confidence": "high"
     },
     {
@@ -10240,6 +10297,61 @@
       "confidence": "high"
     },
     {
+      "uid": "kula-panchang-festival-2027-01-14@kula.local",
+      "date": "2027-01-14",
+      "kind": "festival",
+      "summary": "Pongal",
+      "description": "Pongal\n\nSunrise: 06:34  Sunset: 18:00  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nFestivals: Pongal\n\nConfidence: high\nSource: panchangam",
+      "location": {
+        "name": "Chennai",
+        "latitude": 13.0827,
+        "longitude": 80.2707,
+        "elevation_m": 10.0,
+        "timezone": "Asia/Kolkata"
+      },
+      "all_day": true,
+      "start": "2027-01-14T06:34:41.538150+05:30",
+      "end": "2027-01-14T18:00:59.988302+05:30",
+      "person_id": null,
+      "person_name": null,
+      "gotra": null,
+      "tithi": {
+        "index": 6,
+        "name": "Shashthi",
+        "label": "Sukla Shashthi",
+        "tamil_name": "Shashti",
+        "paksha": "Sukla",
+        "fraction": 0.70033,
+        "difference_deg": 68.4039
+      },
+      "masa": {
+        "name": "Dhanu",
+        "tamil_name": "Margazhi",
+        "malayalam_name": "Dhanu",
+        "index": 8,
+        "system": "solar",
+        "adhika": false,
+        "label": "Dhanu (Margazhi)",
+        "start": "2026-12-16T10:25:02.686357+05:30",
+        "end": "2027-01-14T21:10:25.166005+05:30"
+      },
+      "nakshatra": {
+        "index": 26,
+        "name": "Uttara Bhadrapada",
+        "tamil_name": "Uthirattathi",
+        "pada": 2,
+        "longitude_deg": 337.78435
+      },
+      "festivals": [
+        "Pongal"
+      ],
+      "details": {
+        "ritual": "Pongal"
+      },
+      "warnings": [],
+      "confidence": "high"
+    },
+    {
       "uid": "kula-panchang-c005-shraddha-2027@kula.local",
       "date": "2027-01-15",
       "kind": "shraddha",
@@ -12807,6 +12919,61 @@
       "confidence": "high"
     },
     {
+      "uid": "kula-panchang-festival-2027-04-14@kula.local",
+      "date": "2027-04-14",
+      "kind": "festival",
+      "summary": "Puthandu (Tamil New Year)",
+      "description": "Puthandu (Tamil New Year)\n\nSunrise: 05:57  Sunset: 18:21  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nFestivals: Puthandu (Tamil New Year)\n\nConfidence: high\nSource: panchangam",
+      "location": {
+        "name": "Chennai",
+        "latitude": 13.0827,
+        "longitude": 80.2707,
+        "elevation_m": 10.0,
+        "timezone": "Asia/Kolkata"
+      },
+      "all_day": true,
+      "start": "2027-04-14T05:57:03.235251+05:30",
+      "end": "2027-04-14T18:21:45.403554+05:30",
+      "person_id": null,
+      "person_name": null,
+      "gotra": null,
+      "tithi": {
+        "index": 8,
+        "name": "Ashtami",
+        "label": "Sukla Ashtami",
+        "tamil_name": "Ashtami",
+        "paksha": "Sukla",
+        "fraction": 0.56875,
+        "difference_deg": 90.82498
+      },
+      "masa": {
+        "name": "Meena",
+        "tamil_name": "Panguni",
+        "malayalam_name": "Meenam",
+        "index": 11,
+        "system": "solar",
+        "adhika": false,
+        "label": "Meena (Panguni)",
+        "start": "2027-03-15T07:00:06.444383+05:30",
+        "end": "2027-04-14T15:28:23.690028+05:30"
+      },
+      "nakshatra": {
+        "index": 7,
+        "name": "Punarvasu",
+        "tamil_name": "Punarpoosam",
+        "pada": 4,
+        "longitude_deg": 90.43618
+      },
+      "festivals": [
+        "Puthandu (Tamil New Year)"
+      ],
+      "details": {
+        "ritual": "Puthandu (Tamil New Year)"
+      },
+      "warnings": [],
+      "confidence": "high"
+    },
+    {
       "uid": "kula-panchang-f006-janma-2027@kula.local",
       "date": "2027-04-18",
       "kind": "janma_nakshatra",
@@ -13444,61 +13611,6 @@
         "Death time is unknown. The tithi is computed at aparahna, the ritual reference, not at sunrise. Set death_time in the sidecar to make this exact.",
         "Birth time is unknown. Janma nakshatra is computed at sunrise; set birth_time in the sidecar for an exact result."
       ],
-      "confidence": "high"
-    },
-    {
-      "uid": "kula-panchang-festival-2027-05-15@kula.local",
-      "date": "2027-05-15",
-      "kind": "festival",
-      "summary": "Puthandu (Tamil New Year)",
-      "description": "Puthandu (Tamil New Year)\n\nSunrise: 05:43  Sunset: 18:27  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nFestivals: Puthandu (Tamil New Year)\n\nConfidence: high\nSource: panchangam",
-      "location": {
-        "name": "Chennai",
-        "latitude": 13.0827,
-        "longitude": 80.2707,
-        "elevation_m": 10.0,
-        "timezone": "Asia/Kolkata"
-      },
-      "all_day": true,
-      "start": "2027-05-15T05:43:21.975694+05:30",
-      "end": "2027-05-15T18:27:19.929481+05:30",
-      "person_id": null,
-      "person_name": null,
-      "gotra": null,
-      "tithi": {
-        "index": 10,
-        "name": "Dashami",
-        "label": "Sukla Dashami",
-        "tamil_name": "Dasami",
-        "paksha": "Sukla",
-        "fraction": 0.446,
-        "difference_deg": 113.35196
-      },
-      "masa": {
-        "name": "Mesha",
-        "tamil_name": "Chithirai",
-        "malayalam_name": "Medam",
-        "index": 0,
-        "system": "solar",
-        "adhika": false,
-        "label": "Mesha (Chithirai)",
-        "start": "2027-04-14T15:28:23.690028+05:30",
-        "end": "2027-05-15T12:19:44.632212+05:30"
-      },
-      "nakshatra": {
-        "index": 11,
-        "name": "Purva Phalguni",
-        "tamil_name": "Pooram",
-        "pada": 3,
-        "longitude_deg": 143.08647
-      },
-      "festivals": [
-        "Puthandu (Tamil New Year)"
-      ],
-      "details": {
-        "ritual": "Puthandu (Tamil New Year)"
-      },
-      "warnings": [],
       "confidence": "high"
     },
     {

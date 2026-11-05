@@ -745,6 +745,20 @@ test("festivals never repeat on consecutive days", () => {
   }
 });
 
+test("sankranti festivals land on the ingress day, once", () => {
+  // Solar ingress happens once a year; the sign check must not be confused
+  // by the exact boundary instant (it was: Puthandu appeared on Apr 14 AND
+  // May 15 on a different Swiss Ephemeris build).
+  const fests = (y) => Object.fromEntries(
+    panchangYears[y].events.filter((e) => e.kind === "festival").map((e) => [e.summary, e.date]),
+  );
+  assert.equal(fests(2026)["Puthandu (Tamil New Year)"], "2026-04-14");
+  assert.equal(fests(2026)["Pongal"], "2026-01-14");
+  assert.equal(fests(2026)["Vinayaka Chaturthi"], "2026-09-15");
+  assert.equal(fests(2026)["Deepavali"], "2026-12-08");
+  assert.equal(fests(2027)["Puthandu (Tamil New Year)"], "2027-04-14");
+});
+
 test("panchang label helpers format kinds, months and weekdays", () => {
   assert.equal(kindLabel("janma_nakshatra"), "Janma nakshatra");
   assert.equal(kindLabel("shraddha"), "Shraddha");
