@@ -1,6 +1,6 @@
 {
   "schema": "kula-panchang/v1",
-  "generated_at": "2026-11-05T14:25:51.050772+00:00",
+  "generated_at": "2026-11-05T14:45:05.556627+00:00",
   "years": [
     2026
   ],
@@ -45,7 +45,7 @@
   },
   "counts": {
     "amavasya": 12,
-    "festival": 8,
+    "festival": 6,
     "janma_nakshatra": 98,
     "purnima": 13,
     "shraddha": 30
@@ -7204,61 +7204,6 @@
       "confidence": "high"
     },
     {
-      "uid": "kula-panchang-festival-2026-09-14@kula.local",
-      "date": "2026-09-14",
-      "kind": "festival",
-      "summary": "Vinayaka Chaturthi",
-      "description": "Vinayaka Chaturthi\n\nSunrise: 05:57  Sunset: 18:11  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nFestivals: Vinayaka Chaturthi\n\nConfidence: high\nSource: panchangam",
-      "location": {
-        "name": "Chennai",
-        "latitude": 13.0827,
-        "longitude": 80.2707,
-        "elevation_m": 10.0,
-        "timezone": "Asia/Kolkata"
-      },
-      "all_day": true,
-      "start": "2026-09-14T05:57:49.791949+05:30",
-      "end": "2026-09-14T18:11:07.865552+05:30",
-      "person_id": null,
-      "person_name": null,
-      "gotra": null,
-      "tithi": {
-        "index": 3,
-        "name": "Tritiya",
-        "label": "Sukla Tritiya",
-        "tamil_name": "Thrithiyai",
-        "paksha": "Sukla",
-        "fraction": 0.95219,
-        "difference_deg": 35.42631
-      },
-      "masa": {
-        "name": "Simha",
-        "tamil_name": "Avani",
-        "malayalam_name": "Chingam",
-        "index": 4,
-        "system": "solar",
-        "adhika": false,
-        "label": "Simha (Avani)",
-        "start": "2026-08-17T07:58:45.761926+05:30",
-        "end": "2026-09-17T07:52:57.431086+05:30"
-      },
-      "nakshatra": {
-        "index": 14,
-        "name": "Chitra",
-        "tamil_name": "Chithirai",
-        "pada": 3,
-        "longitude_deg": 182.42432
-      },
-      "festivals": [
-        "Vinayaka Chaturthi"
-      ],
-      "details": {
-        "ritual": "Vinayaka Chaturthi"
-      },
-      "warnings": [],
-      "confidence": "high"
-    },
-    {
       "uid": "kula-panchang-festival-2026-09-15@kula.local",
       "date": "2026-09-15",
       "kind": "festival",
@@ -9617,7 +9562,7 @@
       "date": "2026-12-09",
       "kind": "janma_nakshatra",
       "summary": "Janma Nakshatra: Ashok Subramaniam - Jyeshtha",
-      "description": "Janma Nakshatra: Ashok Subramaniam - Jyeshtha\n\nPerson: Ashok Subramaniam (D031)\nRecorded date: 2026-12-09\nTithi: Amavasya (Amavasai)\nMasa: Vrishchika (Karthigai) [solar]\nNakshatra: Jyeshtha (Kettai), pada 2\nSunrise: 06:19  Sunset: 17:42  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nFestivals: Deepavali\nBirth: 2026-12-09\nBirth nakshatra: Jyeshtha\nBirth masa: Vrishchika (Karthigai)\nLunar masa at birth: Kartika (Karthigai)\n\nConfidence: high\nSource: derived from birth date at sunrise",
+      "description": "Janma Nakshatra: Ashok Subramaniam - Jyeshtha\n\nPerson: Ashok Subramaniam (D031)\nRecorded date: 2026-12-09\nTithi: Amavasya (Amavasai)\nMasa: Vrishchika (Karthigai) [solar]\nNakshatra: Jyeshtha (Kettai), pada 2\nSunrise: 06:19  Sunset: 17:42  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nBirth: 2026-12-09\nBirth nakshatra: Jyeshtha\nBirth masa: Vrishchika (Karthigai)\nLunar masa at birth: Kartika (Karthigai)\n\nConfidence: high\nSource: derived from birth date at sunrise",
       "location": {
         "name": "Chennai",
         "latitude": 13.0827,
@@ -9658,9 +9603,7 @@
         "pada": 2,
         "longitude_deg": 232.69118
       },
-      "festivals": [
-        "Deepavali"
-      ],
+      "festivals": [],
       "details": {
         "year": 2026,
         "birth_date": "2026-12-09",
@@ -9673,61 +9616,6 @@
       "warnings": [
         "Birth time is unknown. Janma nakshatra is computed at sunrise; set birth_time in the sidecar for an exact result."
       ],
-      "confidence": "high"
-    },
-    {
-      "uid": "kula-panchang-festival-2026-12-09@kula.local",
-      "date": "2026-12-09",
-      "kind": "festival",
-      "summary": "Deepavali",
-      "description": "Deepavali\n\nSunrise: 06:19  Sunset: 17:42  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nFestivals: Deepavali\n\nConfidence: high\nSource: panchangam",
-      "location": {
-        "name": "Chennai",
-        "latitude": 13.0827,
-        "longitude": 80.2707,
-        "elevation_m": 10.0,
-        "timezone": "Asia/Kolkata"
-      },
-      "all_day": true,
-      "start": "2026-12-09T06:19:30.963889+05:30",
-      "end": "2026-12-09T17:42:42.294880+05:30",
-      "person_id": null,
-      "person_name": null,
-      "gotra": null,
-      "tithi": {
-        "index": 30,
-        "name": "Amavasya",
-        "label": "Amavasya",
-        "tamil_name": "Amavasai",
-        "paksha": "Krishna",
-        "fraction": 0.99852,
-        "difference_deg": 359.98221
-      },
-      "masa": {
-        "name": "Vrishchika",
-        "tamil_name": "Karthigai",
-        "malayalam_name": "Vrischikam",
-        "index": 7,
-        "system": "solar",
-        "adhika": false,
-        "label": "Vrishchika (Karthigai)",
-        "start": "2026-11-16T19:43:12.917338+05:30",
-        "end": "2026-12-16T10:25:02.686357+05:30"
-      },
-      "nakshatra": {
-        "index": 18,
-        "name": "Jyeshtha",
-        "tamil_name": "Kettai",
-        "pada": 2,
-        "longitude_deg": 232.69118
-      },
-      "festivals": [
-        "Deepavali"
-      ],
-      "details": {
-        "ritual": "Deepavali"
-      },
-      "warnings": [],
       "confidence": "high"
     },
     {

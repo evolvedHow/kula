@@ -4,6 +4,7 @@ import { layoutOutline, outlineHTML } from "./list.js";
 import { relationship, sentenceFor } from "./relate.js";
 import { pravaraFor } from "./vedic.js";
 import { renderJatagam } from "./chart.js";
+import { createPanchang, listHTML as panchangListHTML, KIND_ORDER, KIND_LABELS } from "./panchang.js";
 
 const DEFAULTS = {
   site: { title: "Family Tree", subtitle: "", intro: "", footer: "", default_person: "home", repo: "" },
@@ -22,7 +23,7 @@ const DEFAULTS = {
     search_placeholder: "Find a family member…", tree_tab: "Tree", people_tab: "Everyone",
     stories_tab: "Stories", set_me: "This is me", view_hourglass: "Both",
     view_ancestors: "Ancestors", view_descendants: "Descendants",
-    view_graph: "Relatives",
+    view_graph: "Relatives", panchang_tab: "Tithis",
     view_vertical: "Vertical", view_horizontal: "Horizontal", view_list: "List", tagged_people: "Tagged relatives",
     read_story: "Read story", back: "Back",
   },
@@ -53,6 +54,7 @@ let CFG = DEFAULTS;
 let DATA = null;
 let IDX = null;
 let VEDIC = { gotras: {} };
+let PANCHANG = null;
 const state = {
   focus: null, view: "hourglass", orientation: "vertical", selected: null, layout: null,
   k: 1, x: 0, y: 0, meId: null, auth: null, authError: null, authMe: false,
@@ -72,10 +74,11 @@ const el = {
 // ---------- Boot ----------
 
 async function boot() {
-  const [cfgText, dataRes, vedicData] = await Promise.all([
+  const [cfgText, dataRes, vedicData, panchangIndex] = await Promise.all([
     fetch("config.yml", { cache: "no-cache" }).then((r) => (r.ok ? r.text() : "")).catch(() => ""),
     fetch("data/tree.json", { cache: "no-cache" }),
     fetch("data/vedic.json", { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+    fetch("data/panchang/index.json", { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
   ]);
   if (!dataRes.ok) throw new Error("Could not load data/tree.json. Run scripts/build_site.py first.");
   const userCfg = cfgText && window.jsyaml ? window.jsyaml.load(cfgText) : {};
@@ -83,6 +86,16 @@ async function boot() {
   if (vedicData && typeof vedicData === "object") VEDIC = vedicData;
   DATA = await dataRes.json();
   IDX = buildIndex(DATA);
+  // The tithi calendar is optional: without data/panchang/index.json the tab
+  // stays hidden and the app behaves exactly as before.
+  PANCHANG = createPanchang({
+    fetchJson: (url) => fetch(url, { cache: "no-cache" }).then((r) => (r.ok ? r.json() : Promise.reject(new Error(`${url}: ${r.status}`)))),
+    personFor: (id) => IDX.people[id],
+    displayName,
+    yearsText,
+    formatDate,
+  });
+  PANCHANG.useIndex(panchangIndex);
   state.meId = localStorage.getItem(ME_KEY);
   if (state.meId && !IDX.people[state.meId]) state.meId = null;
   state.auth = readStoredAuth();
@@ -114,6 +127,15 @@ async function boot() {
   renderGenerationsRail();
   $("#loading").hidden = true;
   document.querySelector(".app").dataset.view = "ready";
+
+  if (PANCHANG.available) {
+    // Each year's events load in the background so a profile panel can list
+    // its ritual dates even before the Tithis tab is opened.
+    PANCHANG.prefetchAll().then(() => {
+      if (state.selected) selectPerson(state.selected);
+      if (parseHash().route === "panchang") renderPanchang();
+    });
+  }
 }
 
 function buildIndex(data) {
@@ -219,6 +241,9 @@ function applyText() {
   $("#tab-people").textContent = text.people_tab;
   $("#tab-stories").textContent = narratives.section_title || text.stories_tab;
   $("#tab-stories").hidden = !(narratives.enabled && IDX.stories.length);
+  $("#tab-panchang").textContent = text.panchang_tab || "Tithis";
+  $("#tab-panchang").hidden = !PANCHANG?.available;
+  $("#panchang-heading").textContent = CFG.panchang?.name || text.panchang_tab || "Tithis";
   $("#stories-heading").textContent = narratives.section_title || text.stories_tab;
   const views = $$("#view-switch button");
   views[0].textContent = text.view_hourglass;
@@ -480,7 +505,7 @@ function route_() {
 }
 
 function showView(name) {
-  for (const id of ["tree", "people", "stories", "story"]) $(`#view-${id}`).hidden = id !== name;
+  for (const id of ["tree", "people", "stories", "story", "panchang"]) $(`#view-${id}`).hidden = id !== name;
   const tab = name === "story" ? "stories" : name;
   for (const a of $$(".tabs a")) {
     if (a.dataset.tab === tab) a.setAttribute("aria-current", "page");
@@ -501,6 +526,14 @@ function route() {
   } else if (r === "story") {
     showView("story");
     renderStory(arg);
+  } else if (r === "panchang") {
+    if (!PANCHANG?.available) {
+      // No generated calendar: fall back to the tree.
+      go("tree", null, {});
+      return;
+    }
+    showView("panchang");
+    openPanchang(arg, params);
   } else {
     showView("tree");
     const focus = arg && IDX.people[arg] ? arg : defaultFocus();
@@ -973,6 +1006,15 @@ function personPanelHTML(p) {
     parts.push(`<div class="section-title">Life</div><ul class="facts">${facts.join("")}</ul>`);
   }
 
+  // Ritual dates from the panchangam feed (built from this same tree).
+  if (PANCHANG?.available && !p.hidden) {
+    const tithiRows = PANCHANG.personRowsHTML(p.id);
+    if (tithiRows) {
+      parts.push(`<div class="section-title">Tithis</div><ul class="facts">${tithiRows}</ul>
+        <p><button class="btn" type="button" data-action="panchang" data-id="${esc(p.id)}">Open in ${esc(CFG.text.panchang_tab || "Tithis")}</button></p>`);
+    }
+  }
+
   const famBlocks = [];
   const pf = p.parent_family ? IDX.families[p.parent_family] : null;
   const parents = pf ? [pf.father, pf.mother].filter(Boolean) : [];
@@ -1268,6 +1310,61 @@ function renderPeople() {
   $("#people-list").innerHTML = html || `<p class="note-count">No matches.</p>`;
 }
 
+// ---------- Panchangam (tithi calendar) ----------
+
+async function openPanchang(personId, params) {
+  const year = /^\d{4}$/.test(params.y || "") ? Number(params.y) : null;
+  const kind = String(params.k || "");
+  PANCHANG.state.person = personId && IDX.people[personId] ? personId : null;
+  if (year && PANCHANG.years().includes(year)) PANCHANG.state.year = year;
+  if (KIND_LABELS[kind]) PANCHANG.state.kind = kind;
+  $("#panchang-list").innerHTML = `<p class="note-count">Loading…</p>`;
+  renderPanchangControls();
+  // A person view spans all years, so make sure every year is loaded.
+  if (PANCHANG.state.person) await PANCHANG.prefetchAll();
+  else await PANCHANG.ensureYear(PANCHANG.state.year);
+  renderPanchang();
+}
+
+function renderPanchangControls() {
+  const yearSel = $("#panchang-year");
+  if (!yearSel.options.length) {
+    yearSel.innerHTML = PANCHANG.years().map((y) => `<option value="${y}">${y}</option>`).join("");
+  }
+  yearSel.value = String(PANCHANG.state.year);
+  yearSel.disabled = Boolean(PANCHANG.state.person);
+  const kindSel = $("#panchang-kind");
+  if (!kindSel.options.length) {
+    const counts = PANCHANG.index?.counts || {};
+    const kinds = KIND_ORDER.filter((k) => counts[k]);
+    kindSel.innerHTML = `<option value="">All events</option>`
+      + kinds.map((k) => `<option value="${k}">${esc(KIND_LABELS[k])}</option>`).join("");
+  }
+  kindSel.value = PANCHANG.state.kind;
+  const filter = $("#panchang-filter");
+  if (document.activeElement !== filter && filter.value !== PANCHANG.state.q) filter.value = PANCHANG.state.q;
+}
+
+function renderPanchang() {
+  if (!PANCHANG?.available) return;
+  renderPanchangControls();
+  const banner = $("#panchang-person-banner");
+  if (PANCHANG.state.person && IDX.people[PANCHANG.state.person]) {
+    banner.hidden = false;
+    banner.innerHTML = `Tithis for <strong>${esc(nameOf(PANCHANG.state.person))}</strong>, all years. <button class="btn" type="button" data-panchang-action="clear-person">Show everyone</button>`;
+  } else {
+    banner.hidden = true;
+    banner.innerHTML = "";
+  }
+  const sub = $("#panchang-subscribe");
+  if (sub && !sub.dataset.done) {
+    const feed = PANCHANG.feedUrl();
+    sub.innerHTML = feed ? `<a href="${esc(feed)}">Subscribe to the calendar (.ics)</a>` : "";
+    sub.dataset.done = "1";
+  }
+  $("#panchang-list").innerHTML = panchangListHTML(PANCHANG.events(), PANCHANG.helpers);
+}
+
 // ---------- Stories ----------
 
 function renderStoriesIndex() {
@@ -1525,6 +1622,7 @@ function bindEvents() {
     if (t.dataset.action === "jatagam") {
       return openJatagam(t.dataset.id);
     }
+    if (t.dataset.action === "panchang") return go("panchang", t.dataset.id);
     if (t.dataset.action === "close") return hidePanel();
     if (t.dataset.action === "me") {
       setMe(t.dataset.id);
@@ -1636,6 +1734,23 @@ function bindEvents() {
   $("#people-filter").addEventListener("input", renderPeople);
   $("#stories-filter").addEventListener("input", renderStoriesIndex);
   $("#stories-person").addEventListener("change", renderStoriesIndex);
+
+  $("#panchang-year").addEventListener("change", (e) => {
+    PANCHANG.state.year = Number(e.target.value);
+    PANCHANG.ensureYear(PANCHANG.state.year).then(renderPanchang);
+  });
+  $("#panchang-kind").addEventListener("change", (e) => {
+    PANCHANG.state.kind = e.target.value;
+    renderPanchang();
+  });
+  $("#panchang-filter").addEventListener("input", (e) => {
+    PANCHANG.state.q = e.target.value;
+    renderPanchang();
+  });
+  $("#view-panchang").addEventListener("click", (e) => {
+    const action = e.target.closest("[data-panchang-action]");
+    if (action?.dataset.panchangAction === "clear-person") go("panchang");
+  });
 
   $("#story-grid").addEventListener("click", (e) => {
     const t = e.target.closest("[data-story]");

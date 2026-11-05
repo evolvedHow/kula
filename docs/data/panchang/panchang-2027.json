@@ -1,6 +1,6 @@
 {
   "schema": "kula-panchang/v1",
-  "generated_at": "2026-11-05T14:25:51.159133+00:00",
+  "generated_at": "2026-11-05T14:45:05.686210+00:00",
   "years": [
     2027
   ],
@@ -45,7 +45,7 @@
   },
   "counts": {
     "amavasya": 13,
-    "festival": 8,
+    "festival": 6,
     "janma_nakshatra": 98,
     "purnima": 12,
     "shraddha": 30
@@ -6968,7 +6968,7 @@
       "date": "2027-09-03",
       "kind": "janma_nakshatra",
       "summary": "Janma Nakshatra: Srinivas/V Natarajan - Hasta",
-      "description": "Janma Nakshatra: Srinivas/V Natarajan - Hasta\n\nPerson: Srinivas/V Natarajan (D014)\nGotram: Harita Gotram\nRecorded date: 1969-09-13\nTithi: Sukla Dwitiya (Thuthiyai)\nMasa: Simha (Avani) [solar]\nNakshatra: Hasta (Hastham), pada 1\nSunrise: 05:57  Sunset: 18:18  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nFestivals: Vinayaka Chaturthi\nBirth: 1969-09-13\nBirth nakshatra: Hasta\nBirth masa: Simha (Avani)\nLunar masa at birth: Bhadrapada (Purattasi)\nGotram: Harita Gotram\n\nConfidence: high\nSource: derived from birth date at sunrise",
+      "description": "Janma Nakshatra: Srinivas/V Natarajan - Hasta\n\nPerson: Srinivas/V Natarajan (D014)\nGotram: Harita Gotram\nRecorded date: 1969-09-13\nTithi: Sukla Dwitiya (Thuthiyai)\nMasa: Simha (Avani) [solar]\nNakshatra: Hasta (Hastham), pada 1\nSunrise: 05:57  Sunset: 18:18  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nBirth: 1969-09-13\nBirth nakshatra: Hasta\nBirth masa: Simha (Avani)\nLunar masa at birth: Bhadrapada (Purattasi)\nGotram: Harita Gotram\n\nConfidence: high\nSource: derived from birth date at sunrise",
       "location": {
         "name": "Chennai",
         "latitude": 13.0827,
@@ -7009,9 +7009,7 @@
         "pada": 1,
         "longitude_deg": 160.52346
       },
-      "festivals": [
-        "Vinayaka Chaturthi"
-      ],
+      "festivals": [],
       "details": {
         "year": 2027,
         "birth_date": "1969-09-13",
@@ -7024,61 +7022,6 @@
       "warnings": [
         "Birth time is unknown. Janma nakshatra is computed at sunrise; set birth_time in the sidecar for an exact result."
       ],
-      "confidence": "high"
-    },
-    {
-      "uid": "kula-panchang-festival-2027-09-03@kula.local",
-      "date": "2027-09-03",
-      "kind": "festival",
-      "summary": "Vinayaka Chaturthi",
-      "description": "Vinayaka Chaturthi\n\nSunrise: 05:57  Sunset: 18:18  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nFestivals: Vinayaka Chaturthi\n\nConfidence: high\nSource: panchangam",
-      "location": {
-        "name": "Chennai",
-        "latitude": 13.0827,
-        "longitude": 80.2707,
-        "elevation_m": 10.0,
-        "timezone": "Asia/Kolkata"
-      },
-      "all_day": true,
-      "start": "2027-09-03T05:57:41.246793+05:30",
-      "end": "2027-09-03T18:18:59.291561+05:30",
-      "person_id": null,
-      "person_name": null,
-      "gotra": null,
-      "tithi": {
-        "index": 3,
-        "name": "Tritiya",
-        "label": "Sukla Tritiya",
-        "tamil_name": "Thrithiyai",
-        "paksha": "Sukla",
-        "fraction": 0.61382,
-        "difference_deg": 31.3659
-      },
-      "masa": {
-        "name": "Simha",
-        "tamil_name": "Avani",
-        "malayalam_name": "Chingam",
-        "index": 4,
-        "system": "solar",
-        "adhika": false,
-        "label": "Simha (Avani)",
-        "start": "2027-08-17T14:13:45.854409+05:30",
-        "end": "2027-09-17T14:10:34.250781+05:30"
-      },
-      "nakshatra": {
-        "index": 13,
-        "name": "Hasta",
-        "tamil_name": "Hastham",
-        "pada": 3,
-        "longitude_deg": 167.43204
-      },
-      "festivals": [
-        "Vinayaka Chaturthi"
-      ],
-      "details": {
-        "ritual": "Vinayaka Chaturthi"
-      },
-      "warnings": [],
       "confidence": "high"
     },
     {
@@ -9369,61 +9312,6 @@
         "tamil_name": "Vishakam",
         "pada": 3,
         "longitude_deg": 206.79088
-      },
-      "festivals": [
-        "Deepavali"
-      ],
-      "details": {
-        "ritual": "Deepavali"
-      },
-      "warnings": [],
-      "confidence": "high"
-    },
-    {
-      "uid": "kula-panchang-festival-2027-11-28@kula.local",
-      "date": "2027-11-28",
-      "kind": "festival",
-      "summary": "Deepavali",
-      "description": "Deepavali\n\nSunrise: 06:13  Sunset: 17:39  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nFestivals: Deepavali\n\nConfidence: high\nSource: panchangam",
-      "location": {
-        "name": "Chennai",
-        "latitude": 13.0827,
-        "longitude": 80.2707,
-        "elevation_m": 10.0,
-        "timezone": "Asia/Kolkata"
-      },
-      "all_day": true,
-      "start": "2027-11-28T06:13:26.477836+05:30",
-      "end": "2027-11-28T17:39:51.491662+05:30",
-      "person_id": null,
-      "person_name": null,
-      "gotra": null,
-      "tithi": {
-        "index": 30,
-        "name": "Amavasya",
-        "label": "Amavasya",
-        "tamil_name": "Amavasai",
-        "paksha": "Krishna",
-        "fraction": 0.88824,
-        "difference_deg": 358.65884
-      },
-      "masa": {
-        "name": "Vrishchika",
-        "tamil_name": "Karthigai",
-        "malayalam_name": "Vrischikam",
-        "index": 7,
-        "system": "solar",
-        "adhika": false,
-        "label": "Vrishchika (Karthigai)",
-        "start": "2027-11-17T01:58:35.387571+05:30",
-        "end": "2027-12-16T16:38:58.146964+05:30"
-      },
-      "nakshatra": {
-        "index": 17,
-        "name": "Anuradha",
-        "tamil_name": "Anusham",
-        "pada": 2,
-        "longitude_deg": 219.9485
       },
       "festivals": [
         "Deepavali"

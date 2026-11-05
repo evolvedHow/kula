@@ -21,7 +21,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Aryaman Mani - Rohini
 DTSTART;VALUE=DATE:20260101
 DTEND;VALUE=DATE:20260102
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e043-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Aryaman Mani - Rohini\n\nPerson: Aryaman Mani
@@ -47,7 +47,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Prabha Santhanam - Mrigashirsha
 DTSTART;VALUE=DATE:20260102
 DTEND;VALUE=DATE:20260103
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e001-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Prabha Santhanam - Mrigashirsha\n\nPerson: Pr
@@ -73,7 +73,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Margazhi Masa)
 DTSTART;VALUE=DATE:20260103
 DTEND;VALUE=DATE:20260104
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2026-01-03@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Margazhi Masa)\n\nSunrise: 06:31  Sunset: 17:54  (Asi
@@ -93,7 +93,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Sudha Venkatraman - Swati
 DTSTART;VALUE=DATE:20260112
 DTEND;VALUE=DATE:20260113
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c010-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Sudha Venkatraman - Swati\n\nPerson: Sudha Ve
@@ -121,7 +121,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Shruti Anand - Vishakha
 DTSTART;VALUE=DATE:20260113
 DTEND;VALUE=DATE:20260114
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e008-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Shruti Anand - Vishakha\n\nPerson: Shruti Ana
@@ -147,7 +147,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Pranita Venkatesh - Mula
 DTSTART;VALUE=DATE:20260117
 DTEND;VALUE=DATE:20260118
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-f008-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Pranita Venkatesh - Mula\n\nPerson: Pranita V
@@ -173,7 +173,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Thai Masa)
 DTSTART;VALUE=DATE:20260118
 DTEND;VALUE=DATE:20260119
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2026-01-18@kula.local
 CATEGORIES:amavasya,Thai Amavasai
 DESCRIPTION:Amavasya Tarpanam (Thai Masa)\n\nSunrise: 06:35  Sunset: 18:03
@@ -195,7 +195,7 @@ BEGIN:VEVENT
 SUMMARY:Thai Amavasai
 DTSTART;VALUE=DATE:20260118
 DTEND;VALUE=DATE:20260119
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-festival-2026-01-18@kula.local
 CATEGORIES:festival,Thai Amavasai
 DESCRIPTION:Thai Amavasai\n\nSunrise: 06:35  Sunset: 18:03  (Asia/Kolkata)
@@ -215,7 +215,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Jaidev Ram Mohan - Uttara Ashadha
 DTSTART;VALUE=DATE:20260119
 DTEND;VALUE=DATE:20260120
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e007-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Jaidev Ram Mohan - Uttara Ashadha\n\nPerson: 
@@ -241,7 +241,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Seethalakshmi/Vijaya Narayanan - Uttara Ashadha
 DTSTART;VALUE=DATE:20260119
 DTEND;VALUE=DATE:20260120
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c006-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Seethalakshmi/Vijaya Narayanan - Uttara Ashad
@@ -269,7 +269,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Tejas - Shravana
 DTSTART;VALUE=DATE:20260120
 DTEND;VALUE=DATE:20260121
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-f005-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Tejas - Shravana\n\nPerson: Tejas (F005)\nRec
@@ -295,7 +295,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Navina Natarajan - Shatabhisha
 DTSTART;VALUE=DATE:20260122
 DTEND;VALUE=DATE:20260123
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d015-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Navina Natarajan - Shatabhisha\n\nPerson: Nav
@@ -323,7 +323,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Priya Prakash - Shatabhisha
 DTSTART;VALUE=DATE:20260122
 DTEND;VALUE=DATE:20260123
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z014-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Priya Prakash - Shatabhisha\n\nPerson: Priya 
@@ -349,7 +349,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Viswanathan Venkatraman (Harita Gotram)
 DTSTART;VALUE=DATE:20260124
 DTEND;VALUE=DATE:20260125
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c009-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Viswanathan Venkatraman (Harita Gotram)\n
@@ -377,7 +377,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Narasimhan Ravikiran - Uttara Bhadrapada
 DTSTART;VALUE=DATE:20260124
 DTEND;VALUE=DATE:20260125
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d025-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Narasimhan Ravikiran - Uttara Bhadrapada\n\nP
@@ -403,7 +403,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Viswanathan Narayanan (Harita Gotram)
 DTSTART;VALUE=DATE:20260126
 DTEND;VALUE=DATE:20260127
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c005-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Viswanathan Narayanan (Harita Gotram)\n\n
@@ -431,7 +431,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Vish Venkatraman - Bharani
 DTSTART;VALUE=DATE:20260127
 DTEND;VALUE=DATE:20260128
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d028-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Vish Venkatraman - Bharani\n\nPerson: Vish Ve
@@ -459,7 +459,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Jyothirmai Narayan - Krittika
 DTSTART;VALUE=DATE:20260128
 DTEND;VALUE=DATE:20260129
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d009-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Jyothirmai Narayan - Krittika\n\nPerson: Jyot
@@ -485,7 +485,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Thai Masa)
 DTSTART;VALUE=DATE:20260201
 DTEND;VALUE=DATE:20260202
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2026-02-01@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Thai Masa)\n\nSunrise: 06:35  Sunset: 18:09  (Asia/Ko
@@ -505,7 +505,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Vijay Ramachandran - Ashlesha
 DTSTART;VALUE=DATE:20260202
 DTEND;VALUE=DATE:20260203
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d041-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Vijay Ramachandran - Ashlesha\n\nPerson: Vija
@@ -531,7 +531,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Indu/Valli Mani Iyer - Magha
 DTSTART;VALUE=DATE:20260203
 DTEND;VALUE=DATE:20260204
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d026-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Indu/Valli Mani Iyer - Magha\n\nPerson: Indu/
@@ -559,7 +559,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Deekshita Shiva Ramalingam - Vishakha
 DTSTART;VALUE=DATE:20260209
 DTEND;VALUE=DATE:20260210
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z024-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Deekshita Shiva Ramalingam - Vishakha\n\nPers
@@ -585,7 +585,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Ramasubban/Baba
 DTSTART;VALUE=DATE:20260210
 DTEND;VALUE=DATE:20260211
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c012-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Ramasubban/Baba\n\nPerson: Ramasubban/Bab
@@ -611,7 +611,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Venkataraman ( Ramesh ) - Anuradha
 DTSTART;VALUE=DATE:20260211
 DTEND;VALUE=DATE:20260212
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z022-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Venkataraman ( Ramesh ) - Anuradha\n\nPerson:
@@ -637,7 +637,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Saradha Venkateswaran (Harita Gotram)
 DTSTART;VALUE=DATE:20260213
 DTEND;VALUE=DATE:20260214
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c004-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Saradha Venkateswaran (Harita Gotram)\n\n
@@ -665,7 +665,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Ramachandran/Ajoy Narayanan - Mula
 DTSTART;VALUE=DATE:20260213
 DTEND;VALUE=DATE:20260214
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d018-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Ramachandran/Ajoy Narayanan - Mula\n\nPerson:
@@ -693,7 +693,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Maasi Masa)
 DTSTART;VALUE=DATE:20260217
 DTEND;VALUE=DATE:20260218
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2026-02-17@kula.local
 CATEGORIES:amavasya
 DESCRIPTION:Amavasya Tarpanam (Maasi Masa)\n\nSunrise: 06:30  Sunset: 18:1
@@ -715,7 +715,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Kala Ganapathy - Ashlesha
 DTSTART;VALUE=DATE:20260302
 DTEND;VALUE=DATE:20260303
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d023-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Kala Ganapathy - Ashlesha\n\nPerson: Kala Gan
@@ -742,7 +742,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Lata Ganapathy - Ashlesha
 DTSTART;VALUE=DATE:20260302
 DTEND;VALUE=DATE:20260303
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d024-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Lata Ganapathy - Ashlesha\n\nPerson: Lata Gan
@@ -769,7 +769,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Rajat Iyer - Ashlesha
 DTSTART;VALUE=DATE:20260302
 DTEND;VALUE=DATE:20260303
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e019-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Rajat Iyer - Ashlesha\n\nPerson: Rajat Iyer (
@@ -797,7 +797,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Maasi Masa)
 DTSTART;VALUE=DATE:20260303
 DTEND;VALUE=DATE:20260304
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2026-03-03@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Maasi Masa)\n\nSunrise: 06:23  Sunset: 18:18  (Asia/K
@@ -817,7 +817,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Subramanian Krishnan - Uttara Phalguni
 DTSTART;VALUE=DATE:20260305
 DTEND;VALUE=DATE:20260306
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d035-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Subramanian Krishnan - Uttara Phalguni\n\nPer
@@ -843,7 +843,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Panguni Masa)
 DTSTART;VALUE=DATE:20260318
 DTEND;VALUE=DATE:20260319
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2026-03-18@kula.local
 CATEGORIES:amavasya
 DESCRIPTION:Amavasya Tarpanam (Panguni Masa)\n\nSunrise: 06:14  Sunset: 18
@@ -865,7 +865,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Valliammal (Harita Gotram)
 DTSTART;VALUE=DATE:20260321
 DTEND;VALUE=DATE:20260322
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-b002-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Valliammal (Harita Gotram)\n\nPerson: Val
@@ -893,7 +893,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Saradha Mahadevan ( Kunju)
 DTSTART;VALUE=DATE:20260322
 DTEND;VALUE=DATE:20260323
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z011-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Saradha Mahadevan ( Kunju)\n\nPerson: Sar
@@ -920,7 +920,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Sumukhi Ramnath - Pushya
 DTSTART;VALUE=DATE:20260328
 DTEND;VALUE=DATE:20260329
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e040-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Sumukhi Ramnath - Pushya\n\nPerson: Sumukhi R
@@ -946,7 +946,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Rajam Narayanan (Harita Gotram)
 DTSTART;VALUE=DATE:20260330
 DTEND;VALUE=DATE:20260331
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c001-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Rajam Narayanan (Harita Gotram)\n\nPerson
@@ -974,7 +974,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Divya Valli Rajaram - Purva Phalguni
 DTSTART;VALUE=DATE:20260331
 DTEND;VALUE=DATE:20260401
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d016-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Divya Valli Rajaram - Purva Phalguni\n\nPerso
@@ -1002,7 +1002,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Panguni Masa)
 DTSTART;VALUE=DATE:20260402
 DTEND;VALUE=DATE:20260403
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2026-04-02@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Panguni Masa)\n\nSunrise: 06:04  Sunset: 18:20  (Asia
@@ -1022,7 +1022,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Sandhya Ashok - Jyeshtha
 DTSTART;VALUE=DATE:20260407
 DTEND;VALUE=DATE:20260408
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d030-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Sandhya Ashok - Jyeshtha\n\nPerson: Sandhya A
@@ -1048,7 +1048,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Sathvika Ashok - Mula
 DTSTART;VALUE=DATE:20260409
 DTEND;VALUE=DATE:20260410
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e037-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Sathvika Ashok - Mula\n\nPerson: Sathvika Ash
@@ -1074,7 +1074,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Vidya Ramnath - Purva Ashadha
 DTSTART;VALUE=DATE:20260410
 DTEND;VALUE=DATE:20260411
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d033-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Vidya Ramnath - Purva Ashadha\n\nPerson: Vidy
@@ -1100,7 +1100,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Rishi Guha Narayan - Uttara Ashadha
 DTSTART;VALUE=DATE:20260411
 DTEND;VALUE=DATE:20260412
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e013-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Rishi Guha Narayan - Uttara Ashadha\n\nPerson
@@ -1126,7 +1126,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: P V Venkateswaran/Rajamani (Harita Gotram)
 DTSTART;VALUE=DATE:20260412
 DTEND;VALUE=DATE:20260413
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c003-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: P V Venkateswaran/Rajamani (Harita Gotram
@@ -1154,7 +1154,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Siddarth Naresh - Shatabhisha
 DTSTART;VALUE=DATE:20260414
 DTEND;VALUE=DATE:20260415
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e045-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Siddarth Naresh - Shatabhisha\n\nPerson: Sidd
@@ -1180,7 +1180,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Viswanathan Ganapathy Iyer - Purva Bhadrapada
 DTSTART;VALUE=DATE:20260415
 DTEND;VALUE=DATE:20260416
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c007-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Viswanathan Ganapathy Iyer - Purva Bhadrapada
@@ -1209,7 +1209,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Chithirai Masa)
 DTSTART;VALUE=DATE:20260417
 DTEND;VALUE=DATE:20260418
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2026-04-17@kula.local
 CATEGORIES:amavasya
 DESCRIPTION:Amavasya Tarpanam (Chithirai Masa)\n\nSunrise: 05:55  Sunset: 
@@ -1231,7 +1231,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: V. Krishnamurthy
 DTSTART;VALUE=DATE:20260424
 DTEND;VALUE=DATE:20260425
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z021-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: V. Krishnamurthy\n\nPerson: V. Krishnamur
@@ -1257,7 +1257,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Sanjit Jaidev - Purva Phalguni
 DTSTART;VALUE=DATE:20260427
 DTEND;VALUE=DATE:20260428
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-f006-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Sanjit Jaidev - Purva Phalguni\n\nPerson: San
@@ -1283,7 +1283,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Manasi Ramnath - Uttara Phalguni
 DTSTART;VALUE=DATE:20260428
 DTEND;VALUE=DATE:20260429
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e039-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Manasi Ramnath - Uttara Phalguni\n\nPerson: M
@@ -1309,7 +1309,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Uttara Krishnan - Uttara Phalguni
 DTSTART;VALUE=DATE:20260428
 DTEND;VALUE=DATE:20260429
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e041-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Uttara Krishnan - Uttara Phalguni\n\nPerson: 
@@ -1335,7 +1335,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: M Sundar
 DTSTART;VALUE=DATE:20260501
 DTEND;VALUE=DATE:20260502
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c021-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: M Sundar\n\nPerson: M Sundar (C021)\nReco
@@ -1361,7 +1361,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Chithirai Masa)
 DTSTART;VALUE=DATE:20260501
 DTEND;VALUE=DATE:20260502
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2026-05-01@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Chithirai Masa)\n\nSunrise: 05:48  Sunset: 18:24  (As
@@ -1381,7 +1381,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Mahadevan
 DTSTART;VALUE=DATE:20260505
 DTEND;VALUE=DATE:20260506
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z012-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Mahadevan\n\nPerson: Mahadevan (Z012)\nRe
@@ -1407,7 +1407,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Sandhya Iyer - Purva Ashadha
 DTSTART;VALUE=DATE:20260507
 DTEND;VALUE=DATE:20260508
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d029-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Sandhya Iyer - Purva Ashadha\n\nPerson: Sandh
@@ -1435,7 +1435,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: V.V. Viswanatha Iyer (Harita Gotram)
 DTSTART;VALUE=DATE:20260512
 DTEND;VALUE=DATE:20260513
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-b001-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: V.V. Viswanatha Iyer (Harita Gotram)\n\nP
@@ -1464,7 +1464,7 @@ BEGIN:VEVENT
 SUMMARY:Puthandu (Tamil New Year)
 DTSTART;VALUE=DATE:20260515
 DTEND;VALUE=DATE:20260516
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-festival-2026-05-15@kula.local
 CATEGORIES:festival,Puthandu (Tamil New Year)
 DESCRIPTION:Puthandu (Tamil New Year)\n\nSunrise: 05:43  Sunset: 18:27  (A
@@ -1484,7 +1484,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: C.K.Lakshmanan
 DTSTART;VALUE=DATE:20260516
 DTEND;VALUE=DATE:20260517
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c018-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: C.K.Lakshmanan\n\nPerson: C.K.Lakshmanan 
@@ -1510,7 +1510,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Vaikasi Masa)
 DTSTART;VALUE=DATE:20260516
 DTEND;VALUE=DATE:20260517
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2026-05-16@kula.local
 CATEGORIES:amavasya
 DESCRIPTION:Amavasya Tarpanam (Vaikasi Masa)\n\nSunrise: 05:43  Sunset: 18
@@ -1532,7 +1532,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Spandana Arvapalli - Krittika
 DTSTART;VALUE=DATE:20260517
 DTEND;VALUE=DATE:20260518
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e004-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Spandana Arvapalli - Krittika\n\nPerson: Span
@@ -1558,7 +1558,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Valli ambal Iyer (Harita Gotram)
 DTSTART;VALUE=DATE:20260519
 DTEND;VALUE=DATE:20260520
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-b008-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Valli ambal Iyer (Harita Gotram)\n\nPerso
@@ -1586,7 +1586,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Parvati (ChellammaManni)
 DTSTART;VALUE=DATE:20260523
 DTEND;VALUE=DATE:20260524
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c019-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Parvati (ChellammaManni)\n\nPerson: Parva
@@ -1613,7 +1613,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Shreekant Parasuraman - Magha
 DTSTART;VALUE=DATE:20260523
 DTEND;VALUE=DATE:20260524
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d012-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Shreekant Parasuraman - Magha\n\nPerson: Shre
@@ -1641,7 +1641,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Hindol Mukherjee
 DTSTART;VALUE=DATE:20260525
 DTEND;VALUE=DATE:20260526
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e021-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Hindol Mukherjee\n\nPerson: Hindol Mukher
@@ -1667,7 +1667,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Uma Venkataraman - Uttara Phalguni
 DTSTART;VALUE=DATE:20260525
 DTEND;VALUE=DATE:20260526
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z023-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Uma Venkataraman - Uttara Phalguni\n\nPerson:
@@ -1693,7 +1693,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Renganathan (Rengan) - Hasta
 DTSTART;VALUE=DATE:20260527
 DTEND;VALUE=DATE:20260528
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z027-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Renganathan (Rengan) - Hasta\n\nPerson: Renga
@@ -1719,7 +1719,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Aruna - Swati
 DTSTART;VALUE=DATE:20260529
 DTEND;VALUE=DATE:20260530
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z028-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Aruna - Swati\n\nPerson: Aruna (Z028)\nRecord
@@ -1745,7 +1745,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Sharath Kumar Surendra - Swati
 DTSTART;VALUE=DATE:20260529
 DTEND;VALUE=DATE:20260530
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e017-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Sharath Kumar Surendra - Swati\n\nPerson: Sha
@@ -1771,7 +1771,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Shreya Viswanath - Anuradha
 DTSTART;VALUE=DATE:20260531
 DTEND;VALUE=DATE:20260601
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e016-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Shreya Viswanath - Anuradha\n\nPerson: Shreya
@@ -1799,7 +1799,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Vaikasi Masa)
 DTSTART;VALUE=DATE:20260531
 DTEND;VALUE=DATE:20260601
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2026-05-31@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Vaikasi Masa)\n\nSunrise: 05:41  Sunset: 18:32  (Asia
@@ -1819,7 +1819,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Anoushka Mani - Mula
 DTSTART;VALUE=DATE:20260602
 DTEND;VALUE=DATE:20260603
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e042-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Anoushka Mani - Mula\n\nPerson: Anoushka Mani
@@ -1845,7 +1845,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Shraddha Viswanath (Harita Gotram)
 DTSTART;VALUE=DATE:20260605
 DTEND;VALUE=DATE:20260606
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e015-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Shraddha Viswanath (Harita Gotram)\n\nPer
@@ -1873,7 +1873,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Usha Narayanan
 DTSTART;VALUE=DATE:20260607
 DTEND;VALUE=DATE:20260608
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d007-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Usha Narayanan\n\nPerson: Usha Narayanan 
@@ -1899,7 +1899,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Supraja Venkatraman
 DTSTART;VALUE=DATE:20260609
 DTEND;VALUE=DATE:20260610
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z026-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Supraja Venkatraman\n\nPerson: Supraja Ve
@@ -1926,7 +1926,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Vaikasi Masa)
 DTSTART;VALUE=DATE:20260614
 DTEND;VALUE=DATE:20260615
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2026-06-14@kula.local
 CATEGORIES:amavasya
 DESCRIPTION:Amavasya Tarpanam (Vaikasi Masa)\n\nSunrise: 05:42  Sunset: 18
@@ -1948,7 +1948,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Bhanumathi Santhanam
 DTSTART;VALUE=DATE:20260619
 DTEND;VALUE=DATE:20260620
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d001-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Bhanumathi Santhanam\n\nPerson: Bhanumath
@@ -1974,7 +1974,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Ananya Ashok - Magha
 DTSTART;VALUE=DATE:20260620
 DTEND;VALUE=DATE:20260621
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e035-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Ananya Ashok - Magha\n\nPerson: Ananya Ashok 
@@ -2000,7 +2000,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Krishnan Subramanian Mani
 DTSTART;VALUE=DATE:20260627
 DTEND;VALUE=DATE:20260628
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c014-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Krishnan Subramanian Mani\n\nPerson: Kris
@@ -2027,7 +2027,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Venkatesh - Mula
 DTSTART;VALUE=DATE:20260629
 DTEND;VALUE=DATE:20260630
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e011-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Venkatesh - Mula\n\nPerson: Venkatesh (E011)
@@ -2053,7 +2053,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Aani Masa)
 DTSTART;VALUE=DATE:20260629
 DTEND;VALUE=DATE:20260630
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2026-06-29@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Aani Masa)\n\nSunrise: 05:45  Sunset: 18:39  (Asia/Ko
@@ -2073,7 +2073,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Arvind Mani Iyer - Shatabhisha
 DTSTART;VALUE=DATE:20260705
 DTEND;VALUE=DATE:20260706
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d027-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Arvind Mani Iyer - Shatabhisha\n\nPerson: Arv
@@ -2099,7 +2099,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Prakash  Mahadevan - Ashwini
 DTSTART;VALUE=DATE:20260709
 DTEND;VALUE=DATE:20260710
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z013-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Prakash  Mahadevan - Ashwini\n\nPerson: Praka
@@ -2125,7 +2125,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Vidya Ramachandran - Ashwini
 DTSTART;VALUE=DATE:20260709
 DTEND;VALUE=DATE:20260710
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d032-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Vidya Ramachandran - Ashwini\n\nPerson: Vidya
@@ -2153,7 +2153,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Vishhwanath/Sriram Ganapathy - Rohini
 DTSTART;VALUE=DATE:20260712
 DTEND;VALUE=DATE:20260713
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d021-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Vishhwanath/Sriram Ganapathy - Rohini\n\nPers
@@ -2181,7 +2181,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Aani Masa)
 DTSTART;VALUE=DATE:20260714
 DTEND;VALUE=DATE:20260715
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2026-07-14@kula.local
 CATEGORIES:amavasya
 DESCRIPTION:Amavasya Tarpanam (Aani Masa)\n\nSunrise: 05:49  Sunset: 18:39
@@ -2203,7 +2203,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Lakshmi/Annam Ramasubban (Harita Gotram)
 DTSTART;VALUE=DATE:20260720
 DTEND;VALUE=DATE:20260721
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c011-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Lakshmi/Annam Ramasubban (Harita Gotram)
@@ -2231,7 +2231,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Raksha Karthik Mohan - Vishakha
 DTSTART;VALUE=DATE:20260723
 DTEND;VALUE=DATE:20260724
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-f004-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Raksha Karthik Mohan - Vishakha\n\nPerson: Ra
@@ -2257,7 +2257,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Ravi Manik - Vishakha
 DTSTART;VALUE=DATE:20260723
 DTEND;VALUE=DATE:20260724
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d038-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Ravi Manik - Vishakha\n\nPerson: Ravi Manik (
@@ -2283,7 +2283,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Nikita Natarajan - Anuradha
 DTSTART;VALUE=DATE:20260724
 DTEND;VALUE=DATE:20260725
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e022-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Nikita Natarajan - Anuradha\n\nPerson: Nikita
@@ -2311,7 +2311,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Rajalakshmi Krishnamurthy ( Rajam)
 DTSTART;VALUE=DATE:20260725
 DTEND;VALUE=DATE:20260726
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z020-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Rajalakshmi Krishnamurthy ( Rajam)\n\nPer
@@ -2338,7 +2338,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: S V Ramachandran
 DTSTART;VALUE=DATE:20260727
 DTEND;VALUE=DATE:20260728
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c017-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: S V Ramachandran\n\nPerson: S V Ramachand
@@ -2364,7 +2364,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Aadi Masa)
 DTSTART;VALUE=DATE:20260729
 DTEND;VALUE=DATE:20260730
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2026-07-29@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Aadi Masa)\n\nSunrise: 05:53  Sunset: 18:37  (Asia/Ko
@@ -2384,7 +2384,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Raksha Subhadra Rajaram - Shravana
 DTSTART;VALUE=DATE:20260730
 DTEND;VALUE=DATE:20260731
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e023-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Raksha Subhadra Rajaram - Shravana\n\nPerson:
@@ -2410,7 +2410,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Bhaswati Parasuraman - Krittika
 DTSTART;VALUE=DATE:20260807
 DTEND;VALUE=DATE:20260808
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d013-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Bhaswati Parasuraman - Krittika\n\nPerson: Bh
@@ -2438,7 +2438,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Bharathi Mani - Rohini
 DTSTART;VALUE=DATE:20260808
 DTEND;VALUE=DATE:20260809
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d037-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Bharathi Mani - Rohini\n\nPerson: Bharathi Ma
@@ -2464,7 +2464,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Vibha Prakash - Rohini
 DTSTART;VALUE=DATE:20260808
 DTEND;VALUE=DATE:20260809
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z015-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Vibha Prakash - Rohini\n\nPerson: Vibha Praka
@@ -2490,7 +2490,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Gayathri/Rukmini Ramachandran - Ardra
 DTSTART;VALUE=DATE:20260810
 DTEND;VALUE=DATE:20260811
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c016-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Gayathri/Rukmini Ramachandran - Ardra\n\nPers
@@ -2518,7 +2518,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: K Ram Mohan
 DTSTART;VALUE=DATE:20260812
 DTEND;VALUE=DATE:20260813
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d004-shraddha-2026@kula.local
 CATEGORIES:shraddha,Aadi Amavasai
 DESCRIPTION:Shraddha / Tarpanam: K Ram Mohan\n\nPerson: K Ram Mohan (D004)
@@ -2544,7 +2544,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Aadi Masa)
 DTSTART;VALUE=DATE:20260812
 DTEND;VALUE=DATE:20260813
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2026-08-12@kula.local
 CATEGORIES:amavasya,Aadi Amavasai
 DESCRIPTION:Amavasya Tarpanam (Aadi Masa)\n\nSunrise: 05:56  Sunset: 18:31
@@ -2566,7 +2566,7 @@ BEGIN:VEVENT
 SUMMARY:Aadi Amavasai
 DTSTART;VALUE=DATE:20260812
 DTEND;VALUE=DATE:20260813
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-festival-2026-08-12@kula.local
 CATEGORIES:festival,Aadi Amavasai
 DESCRIPTION:Aadi Amavasai\n\nSunrise: 05:56  Sunset: 18:31  (Asia/Kolkata)
@@ -2586,7 +2586,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: K Venkateswara Rao - Uttara Phalguni
 DTSTART;VALUE=DATE:20260815
 DTEND;VALUE=DATE:20260816
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d040-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: K Venkateswara Rao - Uttara Phalguni\n\nPerso
@@ -2612,7 +2612,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Lakshmi Ganapathy (Harita Gotram)
 DTSTART;VALUE=DATE:20260817
 DTEND;VALUE=DATE:20260818
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c008-shraddha-2026@kula.local
 CATEGORIES:shraddha,Garuda Panchami (Naga Panchami)
 DESCRIPTION:Shraddha / Tarpanam: Lakshmi Ganapathy (Harita Gotram)\n\nPers
@@ -2641,7 +2641,7 @@ BEGIN:VEVENT
 SUMMARY:Garuda Panchami (Naga Panchami)
 DTSTART;VALUE=DATE:20260817
 DTEND;VALUE=DATE:20260818
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-festival-2026-08-17@kula.local
 CATEGORIES:festival,Garuda Panchami (Naga Panchami)
 DESCRIPTION:Garuda Panchami (Naga Panchami)\n\nSunrise: 05:56  Sunset: 18:
@@ -2661,7 +2661,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Jairam Narayanan
 DTSTART;VALUE=DATE:20260820
 DTEND;VALUE=DATE:20260821
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d005-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Jairam Narayanan\n\nPerson: Jairam Naraya
@@ -2687,7 +2687,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Dyuti Lakshmi Ganapathy - Purva Ashadha
 DTSTART;VALUE=DATE:20260824
 DTEND;VALUE=DATE:20260825
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e032-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Dyuti Lakshmi Ganapathy - Purva Ashadha\n\nPe
@@ -2713,7 +2713,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Avani Masa)
 DTSTART;VALUE=DATE:20260828
 DTEND;VALUE=DATE:20260829
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2026-08-28@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Avani Masa)\n\nSunrise: 05:57  Sunset: 18:22  (Asia/K
@@ -2733,7 +2733,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Suresh Vish Narayan - Revati
 DTSTART;VALUE=DATE:20260831
 DTEND;VALUE=DATE:20260901
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d008-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Suresh Vish Narayan - Revati\n\nPerson: Sures
@@ -2759,7 +2759,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Chetna Bhargava - Mrigashirsha
 DTSTART;VALUE=DATE:20260905
 DTEND;VALUE=DATE:20260906
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d022-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Chetna Bhargava - Mrigashirsha\n\nPerson: Che
@@ -2787,7 +2787,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Kurran Parasuraman Iyer - Mrigashirsha
 DTSTART;VALUE=DATE:20260905
 DTEND;VALUE=DATE:20260906
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e018-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Kurran Parasuraman Iyer - Mrigashirsha\n\nPer
@@ -2815,7 +2815,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Vasantha Ram Mohan - Mrigashirsha
 DTSTART;VALUE=DATE:20260905
 DTEND;VALUE=DATE:20260906
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d003-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Vasantha Ram Mohan - Mrigashirsha\n\nPerson: 
@@ -2841,7 +2841,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Namrata Natarajan - Ashlesha
 DTSTART;VALUE=DATE:20260909
 DTEND;VALUE=DATE:20260910
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e020-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Namrata Natarajan - Ashlesha\n\nPerson: Namra
@@ -2869,7 +2869,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Avani Masa)
 DTSTART;VALUE=DATE:20260910
 DTEND;VALUE=DATE:20260911
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2026-09-10@kula.local
 CATEGORIES:amavasya
 DESCRIPTION:Amavasya Tarpanam (Avani Masa)\n\nSunrise: 05:57  Sunset: 18:1
@@ -2891,7 +2891,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Deepa Ramachandran - Magha
 DTSTART;VALUE=DATE:20260910
 DTEND;VALUE=DATE:20260911
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d039-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Deepa Ramachandran - Magha\n\nPerson: Deepa R
@@ -2917,7 +2917,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Srinivas/V Natarajan - Hasta
 DTSTART;VALUE=DATE:20260913
 DTEND;VALUE=DATE:20260914
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d014-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Srinivas/V Natarajan - Hasta\n\nPerson: Srini
@@ -2943,29 +2943,9 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Vinayaka Chaturthi
-DTSTART;VALUE=DATE:20260914
-DTEND;VALUE=DATE:20260915
-DTSTAMP:20261105T142550Z
-UID:kula-panchang-festival-2026-09-14@kula.local
-CATEGORIES:festival,Vinayaka Chaturthi
-DESCRIPTION:Vinayaka Chaturthi\n\nSunrise: 05:57  Sunset: 18:11  (Asia/Kol
- kata)\nAparahna: 13:30-16:00  Location: Chennai\nFestivals: Vinayaka Chatu
- rthi\n\nConfidence: high\nSource: panchangam
-LOCATION:Chennai
-TRANSP:TRANSPARENT
-X-KULA-CONFIDENCE:high
-X-KULA-KIND:festival
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:Kula Panchangam reminder
-TRIGGER:-P1D
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Vinayaka Chaturthi
 DTSTART;VALUE=DATE:20260915
 DTEND;VALUE=DATE:20260916
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-festival-2026-09-15@kula.local
 CATEGORIES:festival,Vinayaka Chaturthi
 DESCRIPTION:Vinayaka Chaturthi\n\nSunrise: 05:57  Sunset: 18:10  (Asia/Kol
@@ -2985,7 +2965,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Dhruv Viraj Venkatesan Rajaram - Anuradha
 DTSTART;VALUE=DATE:20260917
 DTEND;VALUE=DATE:20260918
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e024-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Dhruv Viraj Venkatesan Rajaram - Anuradha\n\n
@@ -3012,7 +2992,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Agustya Mani Iyer - Shatabhisha
 DTSTART;VALUE=DATE:20260925
 DTEND;VALUE=DATE:20260926
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e034-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Agustya Mani Iyer - Shatabhisha\n\nPerson: Ag
@@ -3038,7 +3018,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Purattasi Masa)
 DTSTART;VALUE=DATE:20260926
 DTEND;VALUE=DATE:20260927
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2026-09-26@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Purattasi Masa)\n\nSunrise: 05:57  Sunset: 18:02  (As
@@ -3058,7 +3038,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Sumitra Viswanath - Krittika
 DTSTART;VALUE=DATE:20261001
 DTEND;VALUE=DATE:20261002
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d011-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Sumitra Viswanath - Krittika\n\nPerson: Sumit
@@ -3086,7 +3066,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Svaksha - Ardra
 DTSTART;VALUE=DATE:20261003
 DTEND;VALUE=DATE:20261004
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-f003-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Svaksha - Ardra\n\nPerson: Svaksha (F003)\nRe
@@ -3112,7 +3092,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: L.Mill Krishna Iyer
 DTSTART;VALUE=DATE:20261004
 DTEND;VALUE=DATE:20261005
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-b009-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: L.Mill Krishna Iyer\n\nPerson: L.Mill Kri
@@ -3138,7 +3118,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Lakshmi Naresh - Punarvasu
 DTSTART;VALUE=DATE:20261004
 DTEND;VALUE=DATE:20261005
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d044-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Lakshmi Naresh - Punarvasu\n\nPerson: Lakshmi
@@ -3164,7 +3144,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Abhinav Ramnath - Magha
 DTSTART;VALUE=DATE:20261007
 DTEND;VALUE=DATE:20261008
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e038-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Abhinav Ramnath - Magha\n\nPerson: Abhinav Ra
@@ -3190,7 +3170,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Purattasi Masa)
 DTSTART;VALUE=DATE:20261010
 DTEND;VALUE=DATE:20261011
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2026-10-10@kula.local
 CATEGORIES:amavasya,Mahalaya Amavasya
 DESCRIPTION:Amavasya Tarpanam (Purattasi Masa)\n\nSunrise: 05:58  Sunset: 
@@ -3213,7 +3193,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: V Santhanam - Jyeshtha
 DTSTART;VALUE=DATE:20261015
 DTEND;VALUE=DATE:20261016
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d002-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: V Santhanam - Jyeshtha\n\nPerson: V Santhanam
@@ -3239,7 +3219,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Anahita Vijay - Jyeshtha
 DTSTART;VALUE=DATE:20261016
 DTEND;VALUE=DATE:20261017
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e044-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Anahita Vijay - Jyeshtha\n\nPerson: Anahita V
@@ -3265,7 +3245,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Aadya - Shatabhisha
 DTSTART;VALUE=DATE:20261022
 DTEND;VALUE=DATE:20261023
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-f010-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Aadya - Shatabhisha\n\nPerson: Aadya (F010)\n
@@ -3291,7 +3271,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Saatvika Venkatesh - Revati
 DTSTART;VALUE=DATE:20261025
 DTEND;VALUE=DATE:20261026
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-f009-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Saatvika Venkatesh - Revati\n\nPerson: Saatvi
@@ -3317,7 +3297,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Aippasi Masa)
 DTSTART;VALUE=DATE:20261026
 DTEND;VALUE=DATE:20261027
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2026-10-26@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Aippasi Masa)\n\nSunrise: 06:00  Sunset: 17:44  (Asia
@@ -3337,7 +3317,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Rajesh Sundar - Bharani
 DTSTART;VALUE=DATE:20261027
 DTEND;VALUE=DATE:20261028
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d045-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Rajesh Sundar - Bharani\n\nPerson: Rajesh Sun
@@ -3363,7 +3343,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Suresh Sundar - Bharani
 DTSTART;VALUE=DATE:20261027
 DTEND;VALUE=DATE:20261028
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d046-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Suresh Sundar - Bharani\n\nPerson: Suresh Sun
@@ -3389,7 +3369,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Narayanan
 DTSTART;VALUE=DATE:20261028
 DTEND;VALUE=DATE:20261029
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c002-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Narayanan\n\nPerson: Narayanan (C002)\nRe
@@ -3415,7 +3395,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Vidya Rao - Ardra
 DTSTART;VALUE=DATE:20261031
 DTEND;VALUE=DATE:20261101
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d036-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Vidya Rao - Ardra\n\nPerson: Vidya Rao (D036)
@@ -3441,7 +3421,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Adi Amartya Shankar - Magha
 DTSTART;VALUE=DATE:20261103
 DTEND;VALUE=DATE:20261104
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-f001-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Adi Amartya Shankar - Magha\n\nPerson: Adi Am
@@ -3467,7 +3447,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Viraj Ved Shankar - Magha
 DTSTART;VALUE=DATE:20261103
 DTEND;VALUE=DATE:20261104
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-f002-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Viraj Ved Shankar - Magha\n\nPerson: Viraj Ve
@@ -3493,7 +3473,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Vidyut Keshav Ganapathy - Chitra
 DTSTART;VALUE=DATE:20261107
 DTEND;VALUE=DATE:20261108
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e033-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Vidyut Keshav Ganapathy - Chitra\n\nPerson: V
@@ -3519,7 +3499,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Aippasi Masa)
 DTSTART;VALUE=DATE:20261108
 DTEND;VALUE=DATE:20261109
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2026-11-08@kula.local
 CATEGORIES:amavasya
 DESCRIPTION:Amavasya Tarpanam (Aippasi Masa)\n\nSunrise: 06:04  Sunset: 17
@@ -3541,7 +3521,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Priya Vijay Ramachandran - Vishakha
 DTSTART;VALUE=DATE:20261110
 DTEND;VALUE=DATE:20261111
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d042-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Priya Vijay Ramachandran - Vishakha\n\nPerson
@@ -3567,7 +3547,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Niveditha Naresh - Anuradha
 DTSTART;VALUE=DATE:20261111
 DTEND;VALUE=DATE:20261112
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e046-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Niveditha Naresh - Anuradha\n\nPerson: Nivedi
@@ -3593,7 +3573,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Annapurani Sundar ( Baby) - Mula
 DTSTART;VALUE=DATE:20261113
 DTEND;VALUE=DATE:20261114
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c020-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Annapurani Sundar ( Baby) - Mula\n\nPerson: A
@@ -3619,7 +3599,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Karthik Ram Mohan - Krittika
 DTSTART;VALUE=DATE:20261124
 DTEND;VALUE=DATE:20261125
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e005-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Karthik Ram Mohan - Krittika\n\nPerson: Karth
@@ -3646,7 +3626,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Karthigai Masa)
 DTSTART;VALUE=DATE:20261124
 DTEND;VALUE=DATE:20261125
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2026-11-24@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Karthigai Masa)\n\nSunrise: 06:11  Sunset: 17:39  (As
@@ -3666,7 +3646,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Varun Bhargava Ganapathy - Rohini
 DTSTART;VALUE=DATE:20261125
 DTEND;VALUE=DATE:20261126
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e029-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Varun Bhargava Ganapathy - Rohini\n\nPerson: 
@@ -3694,7 +3674,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Rajasree Venkatesh - Mrigashirsha
 DTSTART;VALUE=DATE:20261126
 DTEND;VALUE=DATE:20261127
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e012-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Rajasree Venkatesh - Mrigashirsha\n\nPerson: 
@@ -3721,7 +3701,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Sharada/Kunju Mani (Harita Gotram)
 DTSTART;VALUE=DATE:20261127
 DTEND;VALUE=DATE:20261128
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c013-shraddha-2026@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Sharada/Kunju Mani (Harita Gotram)\n\nPer
@@ -3750,7 +3730,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: P V Rajaram - Ashlesha
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d017-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: P V Rajaram - Ashlesha\n\nPerson: P V Rajaram
@@ -3776,7 +3756,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Devika Lakshmi Ganapathy - Hasta
 DTSTART;VALUE=DATE:20261204
 DTEND;VALUE=DATE:20261205
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e031-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Devika Lakshmi Ganapathy - Hasta\n\nPerson: D
@@ -3804,7 +3784,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: K S Sankaranarayanan - Hasta
 DTSTART;VALUE=DATE:20261204
 DTEND;VALUE=DATE:20261205
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e002-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: K S Sankaranarayanan - Hasta\n\nPerson: K S S
@@ -3830,7 +3810,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Abby Chen - Swati
 DTSTART;VALUE=DATE:20261206
 DTEND;VALUE=DATE:20261207
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e014-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Abby Chen - Swati\n\nPerson: Abby Chen (E014)
@@ -3856,7 +3836,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: V Viswanath/Shreedar - Swati
 DTSTART;VALUE=DATE:20261206
 DTEND;VALUE=DATE:20261207
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d010-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: V Viswanath/Shreedar - Swati\n\nPerson: V Vis
@@ -3884,7 +3864,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Karthigai Masa)
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2026-12-08@kula.local
 CATEGORIES:amavasya,Deepavali
 DESCRIPTION:Amavasya Tarpanam (Karthigai Masa)\n\nSunrise: 06:18  Sunset: 
@@ -3907,7 +3887,7 @@ BEGIN:VEVENT
 SUMMARY:Deepavali
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-festival-2026-12-08@kula.local
 CATEGORIES:festival,Deepavali
 DESCRIPTION:Deepavali\n\nSunrise: 06:18  Sunset: 17:42  (Asia/Kolkata)\nAp
@@ -3927,17 +3907,16 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Ashok Subramaniam - Jyeshtha
 DTSTART;VALUE=DATE:20261209
 DTEND;VALUE=DATE:20261210
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d031-janma-2026@kula.local
-CATEGORIES:janma_nakshatra,Deepavali
+CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Ashok Subramaniam - Jyeshtha\n\nPerson: Ashok
   Subramaniam (D031)\nRecorded date: 2026-12-09\nTithi: Amavasya (Amavasai)
  \nMasa: Vrishchika (Karthigai) [solar]\nNakshatra: Jyeshtha (Kettai)\, pad
  a 2\nSunrise: 06:19  Sunset: 17:42  (Asia/Kolkata)\nAparahna: 13:30-16:00 
-  Location: Chennai\nFestivals: Deepavali\nBirth: 2026-12-09\nBirth nakshat
- ra: Jyeshtha\nBirth masa: Vrishchika (Karthigai)\nLunar masa at birth: Kar
- tika (Karthigai)\n\nConfidence: high\nSource: derived from birth date at s
- unrise
+  Location: Chennai\nBirth: 2026-12-09\nBirth nakshatra: Jyeshtha\nBirth ma
+ sa: Vrishchika (Karthigai)\nLunar masa at birth: Kartika (Karthigai)\n\nCo
+ nfidence: high\nSource: derived from birth date at sunrise
 LOCATION:Chennai
 TRANSP:TRANSPARENT
 X-KULA-CONFIDENCE:high
@@ -3951,30 +3930,10 @@ TRIGGER:-P1D
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Deepavali
-DTSTART;VALUE=DATE:20261209
-DTEND;VALUE=DATE:20261210
-DTSTAMP:20261105T142550Z
-UID:kula-panchang-festival-2026-12-09@kula.local
-CATEGORIES:festival,Deepavali
-DESCRIPTION:Deepavali\n\nSunrise: 06:19  Sunset: 17:42  (Asia/Kolkata)\nAp
- arahna: 13:30-16:00  Location: Chennai\nFestivals: Deepavali\n\nConfidence
- : high\nSource: panchangam
-LOCATION:Chennai
-TRANSP:TRANSPARENT
-X-KULA-CONFIDENCE:high
-X-KULA-KIND:festival
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:Kula Panchangam reminder
-TRIGGER:-P1D
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Nishanth Ramachandran - Purva Ashadha
 DTSTART;VALUE=DATE:20261211
 DTEND;VALUE=DATE:20261212
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e025-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Nishanth Ramachandran - Purva Ashadha\n\nPers
@@ -4002,7 +3961,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Deepak Venkatnarayan Santhanam - Uttara Ashadha
 DTSTART;VALUE=DATE:20261212
 DTEND;VALUE=DATE:20261213
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e003-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Deepak Venkatnarayan Santhanam - Uttara Ashad
@@ -4029,7 +3988,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Nikhil Ramachandran - Dhanishtha
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e026-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Nikhil Ramachandran - Dhanishtha\n\nPerson: N
@@ -4057,7 +4016,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Roopa Karthik - Purva Bhadrapada
 DTSTART;VALUE=DATE:20261217
 DTEND;VALUE=DATE:20261218
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e006-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Roopa Karthik - Purva Bhadrapada\n\nPerson: R
@@ -4083,7 +4042,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Naresh Lakshmanan - Bharani
 DTSTART;VALUE=DATE:20261221
 DTEND;VALUE=DATE:20261222
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d043-janma-2026@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Naresh Lakshmanan - Bharani\n\nPerson: Naresh
@@ -4109,7 +4068,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Margazhi Masa)
 DTSTART;VALUE=DATE:20261224
 DTEND;VALUE=DATE:20261225
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2026-12-24@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Margazhi Masa)\n\nSunrise: 06:27  Sunset: 17:49  (Asi
@@ -4129,7 +4088,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Margazhi Masa)
 DTSTART;VALUE=DATE:20270107
 DTEND;VALUE=DATE:20270108
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2027-01-07@kula.local
 CATEGORIES:amavasya
 DESCRIPTION:Amavasya Tarpanam (Margazhi Masa)\n\nSunrise: 06:32  Sunset: 1
@@ -4151,7 +4110,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Seethalakshmi/Vijaya Narayanan - Uttara Ashadha
 DTSTART;VALUE=DATE:20270109
 DTEND;VALUE=DATE:20270110
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c006-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Seethalakshmi/Vijaya Narayanan - Uttara Ashad
@@ -4179,7 +4138,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Nikhil Ramachandran - Dhanishtha
 DTSTART;VALUE=DATE:20270111
 DTEND;VALUE=DATE:20270112
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e026-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Nikhil Ramachandran - Dhanishtha\n\nPerson: N
@@ -4207,7 +4166,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Roopa Karthik - Purva Bhadrapada
 DTSTART;VALUE=DATE:20270113
 DTEND;VALUE=DATE:20270114
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e006-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Roopa Karthik - Purva Bhadrapada\n\nPerson: R
@@ -4233,7 +4192,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Viswanathan Narayanan (Harita Gotram)
 DTSTART;VALUE=DATE:20270115
 DTEND;VALUE=DATE:20270116
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c005-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Viswanathan Narayanan (Harita Gotram)\n\n
@@ -4261,7 +4220,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Naresh Lakshmanan - Bharani
 DTSTART;VALUE=DATE:20270117
 DTEND;VALUE=DATE:20270118
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d043-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Naresh Lakshmanan - Bharani\n\nPerson: Naresh
@@ -4287,7 +4246,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Vish Venkatraman - Bharani
 DTSTART;VALUE=DATE:20270117
 DTEND;VALUE=DATE:20270118
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d028-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Vish Venkatraman - Bharani\n\nPerson: Vish Ve
@@ -4315,7 +4274,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Jyothirmai Narayan - Krittika
 DTSTART;VALUE=DATE:20270118
 DTEND;VALUE=DATE:20270119
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d009-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Jyothirmai Narayan - Krittika\n\nPerson: Jyot
@@ -4341,7 +4300,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Aryaman Mani - Rohini
 DTSTART;VALUE=DATE:20270119
 DTEND;VALUE=DATE:20270120
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e043-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Aryaman Mani - Rohini\n\nPerson: Aryaman Mani
@@ -4367,7 +4326,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Thai Masa)
 DTSTART;VALUE=DATE:20270122
 DTEND;VALUE=DATE:20270123
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2027-01-22@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Thai Masa)\n\nSunrise: 06:35  Sunset: 18:05  (Asia/Ko
@@ -4387,7 +4346,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Indu/Valli Mani Iyer - Magha
 DTSTART;VALUE=DATE:20270124
 DTEND;VALUE=DATE:20270125
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d026-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Indu/Valli Mani Iyer - Magha\n\nPerson: Indu/
@@ -4415,7 +4374,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Ramasubban/Baba
 DTSTART;VALUE=DATE:20270130
 DTEND;VALUE=DATE:20270131
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c012-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Ramasubban/Baba\n\nPerson: Ramasubban/Bab
@@ -4441,7 +4400,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Deekshita Shiva Ramalingam - Vishakha
 DTSTART;VALUE=DATE:20270130
 DTEND;VALUE=DATE:20270131
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z024-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Deekshita Shiva Ramalingam - Vishakha\n\nPers
@@ -4467,7 +4426,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Venkataraman ( Ramesh ) - Anuradha
 DTSTART;VALUE=DATE:20270131
 DTEND;VALUE=DATE:20270201
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z022-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Venkataraman ( Ramesh ) - Anuradha\n\nPerson:
@@ -4493,7 +4452,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Pranita Venkatesh - Mula
 DTSTART;VALUE=DATE:20270203
 DTEND;VALUE=DATE:20270204
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-f008-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Pranita Venkatesh - Mula\n\nPerson: Pranita V
@@ -4519,7 +4478,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Jaidev Ram Mohan - Uttara Ashadha
 DTSTART;VALUE=DATE:20270205
 DTEND;VALUE=DATE:20270206
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e007-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Jaidev Ram Mohan - Uttara Ashadha\n\nPerson: 
@@ -4545,7 +4504,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Thai Masa)
 DTSTART;VALUE=DATE:20270206
 DTEND;VALUE=DATE:20270207
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2027-02-06@kula.local
 CATEGORIES:amavasya,Thai Amavasai
 DESCRIPTION:Amavasya Tarpanam (Thai Masa)\n\nSunrise: 06:34  Sunset: 18:11
@@ -4567,7 +4526,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Tejas - Shravana
 DTSTART;VALUE=DATE:20270206
 DTEND;VALUE=DATE:20270207
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-f005-janma-2027@kula.local
 CATEGORIES:janma_nakshatra,Thai Amavasai
 DESCRIPTION:Janma Nakshatra: Tejas - Shravana\n\nPerson: Tejas (F005)\nRec
@@ -4593,7 +4552,7 @@ BEGIN:VEVENT
 SUMMARY:Thai Amavasai
 DTSTART;VALUE=DATE:20270206
 DTEND;VALUE=DATE:20270207
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-festival-2027-02-06@kula.local
 CATEGORIES:festival,Thai Amavasai
 DESCRIPTION:Thai Amavasai\n\nSunrise: 06:34  Sunset: 18:11  (Asia/Kolkata)
@@ -4613,7 +4572,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Navina Natarajan - Shatabhisha
 DTSTART;VALUE=DATE:20270208
 DTEND;VALUE=DATE:20270209
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d015-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Navina Natarajan - Shatabhisha\n\nPerson: Nav
@@ -4641,7 +4600,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Priya Prakash - Shatabhisha
 DTSTART;VALUE=DATE:20270208
 DTEND;VALUE=DATE:20270209
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z014-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Priya Prakash - Shatabhisha\n\nPerson: Priya 
@@ -4667,7 +4626,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Narasimhan Ravikiran - Uttara Bhadrapada
 DTSTART;VALUE=DATE:20270210
 DTEND;VALUE=DATE:20270211
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d025-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Narasimhan Ravikiran - Uttara Bhadrapada\n\nP
@@ -4693,7 +4652,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Viswanathan Venkatraman (Harita Gotram)
 DTSTART;VALUE=DATE:20270212
 DTEND;VALUE=DATE:20270213
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c009-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Viswanathan Venkatraman (Harita Gotram)\n
@@ -4721,7 +4680,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Kala Ganapathy - Ashlesha
 DTSTART;VALUE=DATE:20270220
 DTEND;VALUE=DATE:20270221
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d023-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Kala Ganapathy - Ashlesha\n\nPerson: Kala Gan
@@ -4748,7 +4707,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Lata Ganapathy - Ashlesha
 DTSTART;VALUE=DATE:20270220
 DTEND;VALUE=DATE:20270221
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d024-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Lata Ganapathy - Ashlesha\n\nPerson: Lata Gan
@@ -4775,7 +4734,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Rajat Iyer - Ashlesha
 DTSTART;VALUE=DATE:20270220
 DTEND;VALUE=DATE:20270221
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e019-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Rajat Iyer - Ashlesha\n\nPerson: Rajat Iyer (
@@ -4803,7 +4762,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Vijay Ramachandran - Ashlesha
 DTSTART;VALUE=DATE:20270220
 DTEND;VALUE=DATE:20270221
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d041-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Vijay Ramachandran - Ashlesha\n\nPerson: Vija
@@ -4829,7 +4788,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Subramanian Krishnan - Uttara Phalguni
 DTSTART;VALUE=DATE:20270223
 DTEND;VALUE=DATE:20270224
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d035-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Subramanian Krishnan - Uttara Phalguni\n\nPer
@@ -4855,7 +4814,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Ramachandran/Ajoy Narayanan - Mula
 DTSTART;VALUE=DATE:20270302
 DTEND;VALUE=DATE:20270303
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d018-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Ramachandran/Ajoy Narayanan - Mula\n\nPerson:
@@ -4883,7 +4842,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Saradha Venkateswaran (Harita Gotram)
 DTSTART;VALUE=DATE:20270303
 DTEND;VALUE=DATE:20270304
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c004-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Saradha Venkateswaran (Harita Gotram)\n\n
@@ -4911,7 +4870,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Maasi Masa)
 DTSTART;VALUE=DATE:20270307
 DTEND;VALUE=DATE:20270308
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2027-03-07@kula.local
 CATEGORIES:amavasya
 DESCRIPTION:Amavasya Tarpanam (Maasi Masa)\n\nSunrise: 06:21  Sunset: 18:1
@@ -4933,7 +4892,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Sumukhi Ramnath - Pushya
 DTSTART;VALUE=DATE:20270318
 DTEND;VALUE=DATE:20270319
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e040-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Sumukhi Ramnath - Pushya\n\nPerson: Sumukhi R
@@ -4959,7 +4918,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Rajam Narayanan (Harita Gotram)
 DTSTART;VALUE=DATE:20270320
 DTEND;VALUE=DATE:20270321
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c001-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Rajam Narayanan (Harita Gotram)\n\nPerson
@@ -4987,7 +4946,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Divya Valli Rajaram - Purva Phalguni
 DTSTART;VALUE=DATE:20270321
 DTEND;VALUE=DATE:20270322
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d016-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Divya Valli Rajaram - Purva Phalguni\n\nPerso
@@ -5015,7 +4974,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Uttara Krishnan - Uttara Phalguni
 DTSTART;VALUE=DATE:20270322
 DTEND;VALUE=DATE:20270323
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e041-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Uttara Krishnan - Uttara Phalguni\n\nPerson: 
@@ -5041,7 +5000,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Panguni Masa)
 DTSTART;VALUE=DATE:20270322
 DTEND;VALUE=DATE:20270323
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2027-03-22@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Panguni Masa)\n\nSunrise: 06:11  Sunset: 18:20  (Asia
@@ -5061,7 +5020,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Sandhya Ashok - Jyeshtha
 DTSTART;VALUE=DATE:20270328
 DTEND;VALUE=DATE:20270329
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d030-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Sandhya Ashok - Jyeshtha\n\nPerson: Sandhya A
@@ -5087,7 +5046,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Sathvika Ashok - Mula
 DTSTART;VALUE=DATE:20270329
 DTEND;VALUE=DATE:20270330
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e037-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Sathvika Ashok - Mula\n\nPerson: Sathvika Ash
@@ -5113,7 +5072,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Vidya Ramnath - Purva Ashadha
 DTSTART;VALUE=DATE:20270331
 DTEND;VALUE=DATE:20270401
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d033-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Vidya Ramnath - Purva Ashadha\n\nPerson: Vidy
@@ -5139,7 +5098,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: P V Venkateswaran/Rajamani (Harita Gotram)
 DTSTART;VALUE=DATE:20270401
 DTEND;VALUE=DATE:20270402
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c003-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: P V Venkateswaran/Rajamani (Harita Gotram
@@ -5167,7 +5126,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Rishi Guha Narayan - Uttara Ashadha
 DTSTART;VALUE=DATE:20270401
 DTEND;VALUE=DATE:20270402
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e013-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Rishi Guha Narayan - Uttara Ashadha\n\nPerson
@@ -5193,7 +5152,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Siddarth Naresh - Shatabhisha
 DTSTART;VALUE=DATE:20270404
 DTEND;VALUE=DATE:20270405
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e045-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Siddarth Naresh - Shatabhisha\n\nPerson: Sidd
@@ -5219,7 +5178,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Panguni Masa)
 DTSTART;VALUE=DATE:20270406
 DTEND;VALUE=DATE:20270407
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2027-04-06@kula.local
 CATEGORIES:amavasya
 DESCRIPTION:Amavasya Tarpanam (Panguni Masa)\n\nSunrise: 06:02  Sunset: 18
@@ -5241,7 +5200,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Valliammal (Harita Gotram)
 DTSTART;VALUE=DATE:20270409
 DTEND;VALUE=DATE:20270410
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-b002-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Valliammal (Harita Gotram)\n\nPerson: Val
@@ -5269,7 +5228,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Saradha Mahadevan ( Kunju)
 DTSTART;VALUE=DATE:20270410
 DTEND;VALUE=DATE:20270411
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z011-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Saradha Mahadevan ( Kunju)\n\nPerson: Sar
@@ -5296,7 +5255,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Sanjit Jaidev - Purva Phalguni
 DTSTART;VALUE=DATE:20270418
 DTEND;VALUE=DATE:20270419
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-f006-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Sanjit Jaidev - Purva Phalguni\n\nPerson: San
@@ -5322,7 +5281,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: M Sundar
 DTSTART;VALUE=DATE:20270420
 DTEND;VALUE=DATE:20270421
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c021-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: M Sundar\n\nPerson: M Sundar (C021)\nReco
@@ -5348,7 +5307,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Chithirai Masa)
 DTSTART;VALUE=DATE:20270420
 DTEND;VALUE=DATE:20270421
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2027-04-20@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Chithirai Masa)\n\nSunrise: 05:53  Sunset: 18:22  (As
@@ -5368,7 +5327,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Mahadevan
 DTSTART;VALUE=DATE:20270424
 DTEND;VALUE=DATE:20270425
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z012-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Mahadevan\n\nPerson: Mahadevan (Z012)\nRe
@@ -5394,7 +5353,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Sandhya Iyer - Purva Ashadha
 DTSTART;VALUE=DATE:20270427
 DTEND;VALUE=DATE:20270428
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d029-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Sandhya Iyer - Purva Ashadha\n\nPerson: Sandh
@@ -5422,7 +5381,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: V.V. Viswanatha Iyer (Harita Gotram)
 DTSTART;VALUE=DATE:20270502
 DTEND;VALUE=DATE:20270503
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-b001-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: V.V. Viswanatha Iyer (Harita Gotram)\n\nP
@@ -5451,7 +5410,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Viswanathan Ganapathy Iyer - Purva Bhadrapada
 DTSTART;VALUE=DATE:20270502
 DTEND;VALUE=DATE:20270503
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c007-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Viswanathan Ganapathy Iyer - Purva Bhadrapada
@@ -5480,7 +5439,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Chithirai Masa)
 DTSTART;VALUE=DATE:20270506
 DTEND;VALUE=DATE:20270507
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2027-05-06@kula.local
 CATEGORIES:amavasya
 DESCRIPTION:Amavasya Tarpanam (Chithirai Masa)\n\nSunrise: 05:46  Sunset: 
@@ -5502,7 +5461,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Spandana Arvapalli - Krittika
 DTSTART;VALUE=DATE:20270507
 DTEND;VALUE=DATE:20270508
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e004-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Spandana Arvapalli - Krittika\n\nPerson: Span
@@ -5528,7 +5487,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: V. Krishnamurthy
 DTSTART;VALUE=DATE:20270513
 DTEND;VALUE=DATE:20270514
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z021-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: V. Krishnamurthy\n\nPerson: V. Krishnamur
@@ -5554,7 +5513,7 @@ BEGIN:VEVENT
 SUMMARY:Puthandu (Tamil New Year)
 DTSTART;VALUE=DATE:20270515
 DTEND;VALUE=DATE:20270516
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-festival-2027-05-15@kula.local
 CATEGORIES:festival,Puthandu (Tamil New Year)
 DESCRIPTION:Puthandu (Tamil New Year)\n\nSunrise: 05:43  Sunset: 18:27  (A
@@ -5574,7 +5533,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Manasi Ramnath - Uttara Phalguni
 DTSTART;VALUE=DATE:20270516
 DTEND;VALUE=DATE:20270517
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e039-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Manasi Ramnath - Uttara Phalguni\n\nPerson: M
@@ -5600,7 +5559,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Sharath Kumar Surendra - Swati
 DTSTART;VALUE=DATE:20270519
 DTEND;VALUE=DATE:20270520
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e017-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Sharath Kumar Surendra - Swati\n\nPerson: Sha
@@ -5626,7 +5585,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Vaikasi Masa)
 DTSTART;VALUE=DATE:20270520
 DTEND;VALUE=DATE:20270521
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2027-05-20@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Vaikasi Masa)\n\nSunrise: 05:42  Sunset: 18:28  (Asia
@@ -5646,7 +5605,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Shreya Viswanath - Anuradha
 DTSTART;VALUE=DATE:20270521
 DTEND;VALUE=DATE:20270522
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e016-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Shreya Viswanath - Anuradha\n\nPerson: Shreya
@@ -5674,7 +5633,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Anoushka Mani - Mula
 DTSTART;VALUE=DATE:20270523
 DTEND;VALUE=DATE:20270524
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e042-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Anoushka Mani - Mula\n\nPerson: Anoushka Mani
@@ -5700,7 +5659,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Shraddha Viswanath (Harita Gotram)
 DTSTART;VALUE=DATE:20270525
 DTEND;VALUE=DATE:20270526
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e015-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Shraddha Viswanath (Harita Gotram)\n\nPer
@@ -5728,7 +5687,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Usha Narayanan
 DTSTART;VALUE=DATE:20270527
 DTEND;VALUE=DATE:20270528
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d007-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Usha Narayanan\n\nPerson: Usha Narayanan 
@@ -5754,7 +5713,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Supraja Venkatraman
 DTSTART;VALUE=DATE:20270529
 DTEND;VALUE=DATE:20270530
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z026-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Supraja Venkatraman\n\nPerson: Supraja Ve
@@ -5781,7 +5740,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: C.K.Lakshmanan
 DTSTART;VALUE=DATE:20270604
 DTEND;VALUE=DATE:20270605
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c018-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: C.K.Lakshmanan\n\nPerson: C.K.Lakshmanan 
@@ -5807,7 +5766,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Vaikasi Masa)
 DTSTART;VALUE=DATE:20270604
 DTEND;VALUE=DATE:20270605
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2027-06-04@kula.local
 CATEGORIES:amavasya
 DESCRIPTION:Amavasya Tarpanam (Vaikasi Masa)\n\nSunrise: 05:41  Sunset: 18
@@ -5829,7 +5788,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Valli ambal Iyer (Harita Gotram)
 DTSTART;VALUE=DATE:20270607
 DTEND;VALUE=DATE:20270608
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-b008-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Valli ambal Iyer (Harita Gotram)\n\nPerso
@@ -5857,7 +5816,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Shreekant Parasuraman - Magha
 DTSTART;VALUE=DATE:20270610
 DTEND;VALUE=DATE:20270611
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d012-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Shreekant Parasuraman - Magha\n\nPerson: Shre
@@ -5885,7 +5844,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Parvati (ChellammaManni)
 DTSTART;VALUE=DATE:20270611
 DTEND;VALUE=DATE:20270612
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c019-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Parvati (ChellammaManni)\n\nPerson: Parva
@@ -5912,7 +5871,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Uma Venkataraman - Uttara Phalguni
 DTSTART;VALUE=DATE:20270612
 DTEND;VALUE=DATE:20270613
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z023-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Uma Venkataraman - Uttara Phalguni\n\nPerson:
@@ -5938,7 +5897,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Hindol Mukherjee
 DTSTART;VALUE=DATE:20270613
 DTEND;VALUE=DATE:20270614
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e021-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Hindol Mukherjee\n\nPerson: Hindol Mukher
@@ -5964,7 +5923,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Renganathan (Rengan) - Hasta
 DTSTART;VALUE=DATE:20270613
 DTEND;VALUE=DATE:20270614
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z027-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Renganathan (Rengan) - Hasta\n\nPerson: Renga
@@ -5990,7 +5949,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Aruna - Swati
 DTSTART;VALUE=DATE:20270615
 DTEND;VALUE=DATE:20270616
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z028-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Aruna - Swati\n\nPerson: Aruna (Z028)\nRecord
@@ -6016,7 +5975,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Krishnan Subramanian Mani
 DTSTART;VALUE=DATE:20270616
 DTEND;VALUE=DATE:20270617
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c014-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Krishnan Subramanian Mani\n\nPerson: Kris
@@ -6043,7 +6002,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Aani Masa)
 DTSTART;VALUE=DATE:20270618
 DTEND;VALUE=DATE:20270619
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2027-06-18@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Aani Masa)\n\nSunrise: 05:42  Sunset: 18:37  (Asia/Ko
@@ -6063,7 +6022,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Venkatesh - Mula
 DTSTART;VALUE=DATE:20270619
 DTEND;VALUE=DATE:20270620
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e011-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Venkatesh - Mula\n\nPerson: Venkatesh (E011)
@@ -6089,7 +6048,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Aani Masa)
 DTSTART;VALUE=DATE:20270619
 DTEND;VALUE=DATE:20270620
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2027-06-19@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Aani Masa)\n\nSunrise: 05:43  Sunset: 18:37  (Asia/Ko
@@ -6109,7 +6068,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Arvind Mani Iyer - Shatabhisha
 DTSTART;VALUE=DATE:20270625
 DTEND;VALUE=DATE:20270626
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d027-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Arvind Mani Iyer - Shatabhisha\n\nPerson: Arv
@@ -6135,7 +6094,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Prakash  Mahadevan - Ashwini
 DTSTART;VALUE=DATE:20270629
 DTEND;VALUE=DATE:20270630
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z013-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Prakash  Mahadevan - Ashwini\n\nPerson: Praka
@@ -6161,7 +6120,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Vidya Ramachandran - Ashwini
 DTSTART;VALUE=DATE:20270629
 DTEND;VALUE=DATE:20270630
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d032-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Vidya Ramachandran - Ashwini\n\nPerson: Vidya
@@ -6189,7 +6148,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Vishhwanath/Sriram Ganapathy - Rohini
 DTSTART;VALUE=DATE:20270702
 DTEND;VALUE=DATE:20270703
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d021-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Vishhwanath/Sriram Ganapathy - Rohini\n\nPers
@@ -6217,7 +6176,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Aani Masa)
 DTSTART;VALUE=DATE:20270703
 DTEND;VALUE=DATE:20270704
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2027-07-03@kula.local
 CATEGORIES:amavasya
 DESCRIPTION:Amavasya Tarpanam (Aani Masa)\n\nSunrise: 05:46  Sunset: 18:39
@@ -6239,7 +6198,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Ananya Ashok - Magha
 DTSTART;VALUE=DATE:20270707
 DTEND;VALUE=DATE:20270708
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e035-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Ananya Ashok - Magha\n\nPerson: Ananya Ashok 
@@ -6265,7 +6224,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Bhanumathi Santhanam
 DTSTART;VALUE=DATE:20270708
 DTEND;VALUE=DATE:20270709
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d001-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Bhanumathi Santhanam\n\nPerson: Bhanumath
@@ -6291,7 +6250,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Aadi Masa)
 DTSTART;VALUE=DATE:20270718
 DTEND;VALUE=DATE:20270719
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2027-07-18@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Aadi Masa)\n\nSunrise: 05:50  Sunset: 18:39  (Asia/Ko
@@ -6311,7 +6270,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Bhaswati Parasuraman - Krittika
 DTSTART;VALUE=DATE:20270728
 DTEND;VALUE=DATE:20270729
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d013-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Bhaswati Parasuraman - Krittika\n\nPerson: Bh
@@ -6339,7 +6298,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Bharathi Mani - Rohini
 DTSTART;VALUE=DATE:20270729
 DTEND;VALUE=DATE:20270730
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d037-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Bharathi Mani - Rohini\n\nPerson: Bharathi Ma
@@ -6365,7 +6324,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Vibha Prakash - Rohini
 DTSTART;VALUE=DATE:20270729
 DTEND;VALUE=DATE:20270730
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z015-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Vibha Prakash - Rohini\n\nPerson: Vibha Praka
@@ -6391,7 +6350,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Gayathri/Rukmini Ramachandran - Ardra
 DTSTART;VALUE=DATE:20270731
 DTEND;VALUE=DATE:20270801
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c016-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Gayathri/Rukmini Ramachandran - Ardra\n\nPers
@@ -6419,7 +6378,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: K Ram Mohan
 DTSTART;VALUE=DATE:20270802
 DTEND;VALUE=DATE:20270803
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d004-shraddha-2027@kula.local
 CATEGORIES:shraddha,Aadi Amavasai
 DESCRIPTION:Shraddha / Tarpanam: K Ram Mohan\n\nPerson: K Ram Mohan (D004)
@@ -6445,7 +6404,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Aadi Masa)
 DTSTART;VALUE=DATE:20270802
 DTEND;VALUE=DATE:20270803
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2027-08-02@kula.local
 CATEGORIES:amavasya,Aadi Amavasai
 DESCRIPTION:Amavasya Tarpanam (Aadi Masa)\n\nSunrise: 05:54  Sunset: 18:36
@@ -6467,7 +6426,7 @@ BEGIN:VEVENT
 SUMMARY:Aadi Amavasai
 DTSTART;VALUE=DATE:20270802
 DTEND;VALUE=DATE:20270803
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-festival-2027-08-02@kula.local
 CATEGORIES:festival,Aadi Amavasai
 DESCRIPTION:Aadi Amavasai\n\nSunrise: 05:54  Sunset: 18:36  (Asia/Kolkata)
@@ -6487,7 +6446,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Lakshmi Ganapathy (Harita Gotram)
 DTSTART;VALUE=DATE:20270806
 DTEND;VALUE=DATE:20270807
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c008-shraddha-2027@kula.local
 CATEGORIES:shraddha,Garuda Panchami (Naga Panchami)
 DESCRIPTION:Shraddha / Tarpanam: Lakshmi Ganapathy (Harita Gotram)\n\nPers
@@ -6516,7 +6475,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: K Venkateswara Rao - Uttara Phalguni
 DTSTART;VALUE=DATE:20270806
 DTEND;VALUE=DATE:20270807
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d040-janma-2027@kula.local
 CATEGORIES:janma_nakshatra,Garuda Panchami (Naga Panchami)
 DESCRIPTION:Janma Nakshatra: K Venkateswara Rao - Uttara Phalguni\n\nPerso
@@ -6543,7 +6502,7 @@ BEGIN:VEVENT
 SUMMARY:Garuda Panchami (Naga Panchami)
 DTSTART;VALUE=DATE:20270806
 DTEND;VALUE=DATE:20270807
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-festival-2027-08-06@kula.local
 CATEGORIES:festival,Garuda Panchami (Naga Panchami)
 DESCRIPTION:Garuda Panchami (Naga Panchami)\n\nSunrise: 05:55  Sunset: 18:
@@ -6563,7 +6522,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Lakshmi/Annam Ramasubban (Harita Gotram)
 DTSTART;VALUE=DATE:20270808
 DTEND;VALUE=DATE:20270809
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c011-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Lakshmi/Annam Ramasubban (Harita Gotram)
@@ -6591,7 +6550,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Raksha Karthik Mohan - Vishakha
 DTSTART;VALUE=DATE:20270810
 DTEND;VALUE=DATE:20270811
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-f004-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Raksha Karthik Mohan - Vishakha\n\nPerson: Ra
@@ -6617,7 +6576,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Ravi Manik - Vishakha
 DTSTART;VALUE=DATE:20270810
 DTEND;VALUE=DATE:20270811
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d038-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Ravi Manik - Vishakha\n\nPerson: Ravi Manik (
@@ -6643,7 +6602,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Nikita Natarajan - Anuradha
 DTSTART;VALUE=DATE:20270811
 DTEND;VALUE=DATE:20270812
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e022-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Nikita Natarajan - Anuradha\n\nPerson: Nikita
@@ -6671,7 +6630,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Rajalakshmi Krishnamurthy ( Rajam)
 DTSTART;VALUE=DATE:20270813
 DTEND;VALUE=DATE:20270814
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-z020-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Rajalakshmi Krishnamurthy ( Rajam)\n\nPer
@@ -6698,7 +6657,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: S V Ramachandran
 DTSTART;VALUE=DATE:20270814
 DTEND;VALUE=DATE:20270815
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c017-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: S V Ramachandran\n\nPerson: S V Ramachand
@@ -6724,7 +6683,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Raksha Subhadra Rajaram - Shravana
 DTSTART;VALUE=DATE:20270816
 DTEND;VALUE=DATE:20270817
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e023-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Raksha Subhadra Rajaram - Shravana\n\nPerson:
@@ -6750,7 +6709,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Aadi Masa)
 DTSTART;VALUE=DATE:20270817
 DTEND;VALUE=DATE:20270818
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2027-08-17@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Aadi Masa)\n\nSunrise: 05:56  Sunset: 18:29  (Asia/Ko
@@ -6770,7 +6729,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Suresh Vish Narayan - Revati
 DTSTART;VALUE=DATE:20270822
 DTEND;VALUE=DATE:20270823
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d008-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Suresh Vish Narayan - Revati\n\nPerson: Sures
@@ -6796,7 +6755,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Chetna Bhargava - Mrigashirsha
 DTSTART;VALUE=DATE:20270827
 DTEND;VALUE=DATE:20270828
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d022-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Chetna Bhargava - Mrigashirsha\n\nPerson: Che
@@ -6824,7 +6783,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Kurran Parasuraman Iyer - Mrigashirsha
 DTSTART;VALUE=DATE:20270827
 DTEND;VALUE=DATE:20270828
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e018-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Kurran Parasuraman Iyer - Mrigashirsha\n\nPer
@@ -6852,7 +6811,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Vasantha Ram Mohan - Mrigashirsha
 DTSTART;VALUE=DATE:20270827
 DTEND;VALUE=DATE:20270828
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d003-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Vasantha Ram Mohan - Mrigashirsha\n\nPerson: 
@@ -6878,7 +6837,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Namrata Natarajan - Ashlesha
 DTSTART;VALUE=DATE:20270830
 DTEND;VALUE=DATE:20270831
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e020-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Namrata Natarajan - Ashlesha\n\nPerson: Namra
@@ -6906,7 +6865,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Avani Masa)
 DTSTART;VALUE=DATE:20270831
 DTEND;VALUE=DATE:20270901
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2027-08-31@kula.local
 CATEGORIES:amavasya
 DESCRIPTION:Amavasya Tarpanam (Avani Masa)\n\nSunrise: 05:57  Sunset: 18:2
@@ -6928,7 +6887,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Deepa Ramachandran - Magha
 DTSTART;VALUE=DATE:20270831
 DTEND;VALUE=DATE:20270901
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d039-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Deepa Ramachandran - Magha\n\nPerson: Deepa R
@@ -6954,17 +6913,17 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Srinivas/V Natarajan - Hasta
 DTSTART;VALUE=DATE:20270903
 DTEND;VALUE=DATE:20270904
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d014-janma-2027@kula.local
-CATEGORIES:janma_nakshatra,Vinayaka Chaturthi
+CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Srinivas/V Natarajan - Hasta\n\nPerson: Srini
  vas/V Natarajan (D014)\nGotram: Harita Gotram\nRecorded date: 1969-09-13\n
  Tithi: Sukla Dwitiya (Thuthiyai)\nMasa: Simha (Avani) [solar]\nNakshatra: 
  Hasta (Hastham)\, pada 1\nSunrise: 05:57  Sunset: 18:18  (Asia/Kolkata)\nA
- parahna: 13:30-16:00  Location: Chennai\nFestivals: Vinayaka Chaturthi\nBi
- rth: 1969-09-13\nBirth nakshatra: Hasta\nBirth masa: Simha (Avani)\nLunar 
- masa at birth: Bhadrapada (Purattasi)\nGotram: Harita Gotram\n\nConfidence
- : high\nSource: derived from birth date at sunrise
+ parahna: 13:30-16:00  Location: Chennai\nBirth: 1969-09-13\nBirth nakshatr
+ a: Hasta\nBirth masa: Simha (Avani)\nLunar masa at birth: Bhadrapada (Pura
+ ttasi)\nGotram: Harita Gotram\n\nConfidence: high\nSource: derived from bi
+ rth date at sunrise
 LOCATION:Chennai
 TRANSP:TRANSPARENT
 X-KULA-CONFIDENCE:high
@@ -6980,29 +6939,9 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Vinayaka Chaturthi
-DTSTART;VALUE=DATE:20270903
-DTEND;VALUE=DATE:20270904
-DTSTAMP:20261105T142550Z
-UID:kula-panchang-festival-2027-09-03@kula.local
-CATEGORIES:festival,Vinayaka Chaturthi
-DESCRIPTION:Vinayaka Chaturthi\n\nSunrise: 05:57  Sunset: 18:18  (Asia/Kol
- kata)\nAparahna: 13:30-16:00  Location: Chennai\nFestivals: Vinayaka Chatu
- rthi\n\nConfidence: high\nSource: panchangam
-LOCATION:Chennai
-TRANSP:TRANSPARENT
-X-KULA-CONFIDENCE:high
-X-KULA-KIND:festival
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:Kula Panchangam reminder
-TRIGGER:-P1D
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Vinayaka Chaturthi
 DTSTART;VALUE=DATE:20270904
 DTEND;VALUE=DATE:20270905
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-festival-2027-09-04@kula.local
 CATEGORIES:festival,Vinayaka Chaturthi
 DESCRIPTION:Vinayaka Chaturthi\n\nSunrise: 05:57  Sunset: 18:18  (Asia/Kol
@@ -7022,7 +6961,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Jairam Narayanan
 DTSTART;VALUE=DATE:20270907
 DTEND;VALUE=DATE:20270908
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d005-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Jairam Narayanan\n\nPerson: Jairam Naraya
@@ -7048,7 +6987,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Dhruv Viraj Venkatesan Rajaram - Anuradha
 DTSTART;VALUE=DATE:20270907
 DTEND;VALUE=DATE:20270908
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e024-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Dhruv Viraj Venkatesan Rajaram - Anuradha\n\n
@@ -7075,7 +7014,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Dyuti Lakshmi Ganapathy - Purva Ashadha
 DTSTART;VALUE=DATE:20270910
 DTEND;VALUE=DATE:20270911
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e032-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Dyuti Lakshmi Ganapathy - Purva Ashadha\n\nPe
@@ -7101,7 +7040,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Avani Masa)
 DTSTART;VALUE=DATE:20270915
 DTEND;VALUE=DATE:20270916
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2027-09-15@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Avani Masa)\n\nSunrise: 05:57  Sunset: 18:10  (Asia/K
@@ -7121,7 +7060,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Sumitra Viswanath - Krittika
 DTSTART;VALUE=DATE:20270921
 DTEND;VALUE=DATE:20270922
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d011-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Sumitra Viswanath - Krittika\n\nPerson: Sumit
@@ -7149,7 +7088,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: L.Mill Krishna Iyer
 DTSTART;VALUE=DATE:20270924
 DTEND;VALUE=DATE:20270925
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-b009-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: L.Mill Krishna Iyer\n\nPerson: L.Mill Kri
@@ -7175,7 +7114,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Svaksha - Ardra
 DTSTART;VALUE=DATE:20270924
 DTEND;VALUE=DATE:20270925
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-f003-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Svaksha - Ardra\n\nPerson: Svaksha (F003)\nRe
@@ -7201,7 +7140,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Lakshmi Naresh - Punarvasu
 DTSTART;VALUE=DATE:20270925
 DTEND;VALUE=DATE:20270926
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d044-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Lakshmi Naresh - Punarvasu\n\nPerson: Lakshmi
@@ -7227,7 +7166,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Abhinav Ramnath - Magha
 DTSTART;VALUE=DATE:20270928
 DTEND;VALUE=DATE:20270929
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e038-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Abhinav Ramnath - Magha\n\nPerson: Abhinav Ra
@@ -7253,7 +7192,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Purattasi Masa)
 DTSTART;VALUE=DATE:20270929
 DTEND;VALUE=DATE:20270930
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2027-09-29@kula.local
 CATEGORIES:amavasya,Mahalaya Amavasya
 DESCRIPTION:Amavasya Tarpanam (Purattasi Masa)\n\nSunrise: 05:57  Sunset: 
@@ -7276,7 +7215,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Anahita Vijay - Jyeshtha
 DTSTART;VALUE=DATE:20271005
 DTEND;VALUE=DATE:20271006
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e044-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Anahita Vijay - Jyeshtha\n\nPerson: Anahita V
@@ -7302,7 +7241,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: V Santhanam - Jyeshtha
 DTSTART;VALUE=DATE:20271005
 DTEND;VALUE=DATE:20271006
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d002-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: V Santhanam - Jyeshtha\n\nPerson: V Santhanam
@@ -7328,7 +7267,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Agustya Mani Iyer - Shatabhisha
 DTSTART;VALUE=DATE:20271012
 DTEND;VALUE=DATE:20271013
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e034-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Agustya Mani Iyer - Shatabhisha\n\nPerson: Ag
@@ -7354,7 +7293,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Purattasi Masa)
 DTSTART;VALUE=DATE:20271015
 DTEND;VALUE=DATE:20271016
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2027-10-15@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Purattasi Masa)\n\nSunrise: 05:59  Sunset: 17:50  (As
@@ -7374,7 +7313,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Narayanan
 DTSTART;VALUE=DATE:20271018
 DTEND;VALUE=DATE:20271019
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c002-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Narayanan\n\nPerson: Narayanan (C002)\nRe
@@ -7400,7 +7339,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Vidya Rao - Ardra
 DTSTART;VALUE=DATE:20271021
 DTEND;VALUE=DATE:20271022
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d036-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Vidya Rao - Ardra\n\nPerson: Vidya Rao (D036)
@@ -7426,7 +7365,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Adi Amartya Shankar - Magha
 DTSTART;VALUE=DATE:20271025
 DTEND;VALUE=DATE:20271026
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-f001-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Adi Amartya Shankar - Magha\n\nPerson: Adi Am
@@ -7452,7 +7391,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Viraj Ved Shankar - Magha
 DTSTART;VALUE=DATE:20271025
 DTEND;VALUE=DATE:20271026
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-f002-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Viraj Ved Shankar - Magha\n\nPerson: Viraj Ve
@@ -7478,7 +7417,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Aippasi Masa)
 DTSTART;VALUE=DATE:20271029
 DTEND;VALUE=DATE:20271030
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2027-10-29@kula.local
 CATEGORIES:amavasya
 DESCRIPTION:Amavasya Tarpanam (Aippasi Masa)\n\nSunrise: 06:01  Sunset: 17
@@ -7500,7 +7439,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Vidyut Keshav Ganapathy - Chitra
 DTSTART;VALUE=DATE:20271029
 DTEND;VALUE=DATE:20271030
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e033-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Vidyut Keshav Ganapathy - Chitra\n\nPerson: V
@@ -7526,7 +7465,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Priya Vijay Ramachandran - Vishakha
 DTSTART;VALUE=DATE:20271031
 DTEND;VALUE=DATE:20271101
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d042-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Priya Vijay Ramachandran - Vishakha\n\nPerson
@@ -7552,7 +7491,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Niveditha Naresh - Anuradha
 DTSTART;VALUE=DATE:20271101
 DTEND;VALUE=DATE:20271102
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e046-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Niveditha Naresh - Anuradha\n\nPerson: Nivedi
@@ -7578,7 +7517,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Annapurani Sundar ( Baby) - Mula
 DTSTART;VALUE=DATE:20271103
 DTEND;VALUE=DATE:20271104
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c020-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Annapurani Sundar ( Baby) - Mula\n\nPerson: A
@@ -7604,7 +7543,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Aadya - Shatabhisha
 DTSTART;VALUE=DATE:20271108
 DTEND;VALUE=DATE:20271109
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-f010-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Aadya - Shatabhisha\n\nPerson: Aadya (F010)\n
@@ -7630,7 +7569,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Saatvika Venkatesh - Revati
 DTSTART;VALUE=DATE:20271112
 DTEND;VALUE=DATE:20271113
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-f009-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Saatvika Venkatesh - Revati\n\nPerson: Saatvi
@@ -7656,7 +7595,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Rajesh Sundar - Bharani
 DTSTART;VALUE=DATE:20271114
 DTEND;VALUE=DATE:20271115
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d045-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Rajesh Sundar - Bharani\n\nPerson: Rajesh Sun
@@ -7682,7 +7621,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Suresh Sundar - Bharani
 DTSTART;VALUE=DATE:20271114
 DTEND;VALUE=DATE:20271115
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d046-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Suresh Sundar - Bharani\n\nPerson: Suresh Sun
@@ -7708,7 +7647,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Aippasi Masa)
 DTSTART;VALUE=DATE:20271114
 DTEND;VALUE=DATE:20271115
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2027-11-14@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Aippasi Masa)\n\nSunrise: 06:06  Sunset: 17:39  (Asia
@@ -7728,7 +7667,7 @@ BEGIN:VEVENT
 SUMMARY:Shraddha / Tarpanam: Sharada/Kunju Mani (Harita Gotram)
 DTSTART;VALUE=DATE:20271117
 DTEND;VALUE=DATE:20271118
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c013-shraddha-2027@kula.local
 CATEGORIES:shraddha
 DESCRIPTION:Shraddha / Tarpanam: Sharada/Kunju Mani (Harita Gotram)\n\nPer
@@ -7757,7 +7696,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: P V Rajaram - Ashlesha
 DTSTART;VALUE=DATE:20271120
 DTEND;VALUE=DATE:20271121
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d017-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: P V Rajaram - Ashlesha\n\nPerson: P V Rajaram
@@ -7783,7 +7722,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Devika Lakshmi Ganapathy - Hasta
 DTSTART;VALUE=DATE:20271124
 DTEND;VALUE=DATE:20271125
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e031-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Devika Lakshmi Ganapathy - Hasta\n\nPerson: D
@@ -7811,7 +7750,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: K S Sankaranarayanan - Hasta
 DTSTART;VALUE=DATE:20271124
 DTEND;VALUE=DATE:20271125
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e002-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: K S Sankaranarayanan - Hasta\n\nPerson: K S S
@@ -7837,7 +7776,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Abby Chen - Swati
 DTSTART;VALUE=DATE:20271126
 DTEND;VALUE=DATE:20271127
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e014-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Abby Chen - Swati\n\nPerson: Abby Chen (E014)
@@ -7863,7 +7802,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: V Viswanath/Shreedar - Swati
 DTSTART;VALUE=DATE:20271126
 DTEND;VALUE=DATE:20271127
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d010-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: V Viswanath/Shreedar - Swati\n\nPerson: V Vis
@@ -7891,7 +7830,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Karthigai Masa)
 DTSTART;VALUE=DATE:20271127
 DTEND;VALUE=DATE:20271128
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2027-11-27@kula.local
 CATEGORIES:amavasya,Deepavali
 DESCRIPTION:Amavasya Tarpanam (Karthigai Masa)\n\nSunrise: 06:12  Sunset: 
@@ -7914,7 +7853,7 @@ BEGIN:VEVENT
 SUMMARY:Deepavali
 DTSTART;VALUE=DATE:20271127
 DTEND;VALUE=DATE:20271128
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-festival-2027-11-27@kula.local
 CATEGORIES:festival,Deepavali
 DESCRIPTION:Deepavali\n\nSunrise: 06:12  Sunset: 17:39  (Asia/Kolkata)\nAp
@@ -7931,30 +7870,10 @@ TRIGGER:-P1D
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Deepavali
-DTSTART;VALUE=DATE:20271128
-DTEND;VALUE=DATE:20271129
-DTSTAMP:20261105T142550Z
-UID:kula-panchang-festival-2027-11-28@kula.local
-CATEGORIES:festival,Deepavali
-DESCRIPTION:Deepavali\n\nSunrise: 06:13  Sunset: 17:39  (Asia/Kolkata)\nAp
- arahna: 13:30-16:00  Location: Chennai\nFestivals: Deepavali\n\nConfidence
- : high\nSource: panchangam
-LOCATION:Chennai
-TRANSP:TRANSPARENT
-X-KULA-CONFIDENCE:high
-X-KULA-KIND:festival
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:Kula Panchangam reminder
-TRIGGER:-P1D
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Ashok Subramaniam - Jyeshtha
 DTSTART;VALUE=DATE:20271129
 DTEND;VALUE=DATE:20271130
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-d031-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Ashok Subramaniam - Jyeshtha\n\nPerson: Ashok
@@ -7980,7 +7899,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Nishanth Ramachandran - Purva Ashadha
 DTSTART;VALUE=DATE:20271201
 DTEND;VALUE=DATE:20271202
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e025-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Nishanth Ramachandran - Purva Ashadha\n\nPers
@@ -8008,7 +7927,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Karthik Ram Mohan - Krittika
 DTSTART;VALUE=DATE:20271212
 DTEND;VALUE=DATE:20271213
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e005-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Karthik Ram Mohan - Krittika\n\nPerson: Karth
@@ -8035,7 +7954,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Varun Bhargava Ganapathy - Rohini
 DTSTART;VALUE=DATE:20271213
 DTEND;VALUE=DATE:20271214
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e029-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Varun Bhargava Ganapathy - Rohini\n\nPerson: 
@@ -8063,7 +7982,7 @@ BEGIN:VEVENT
 SUMMARY:Purnima (Karthigai Masa)
 DTSTART;VALUE=DATE:20271213
 DTEND;VALUE=DATE:20271214
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-purnima-2027-12-13@kula.local
 CATEGORIES:purnima
 DESCRIPTION:Purnima (Karthigai Masa)\n\nSunrise: 06:21  Sunset: 17:44  (As
@@ -8083,7 +8002,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Prabha Santhanam - Mrigashirsha
 DTSTART;VALUE=DATE:20271214
 DTEND;VALUE=DATE:20271215
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e001-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Prabha Santhanam - Mrigashirsha\n\nPerson: Pr
@@ -8109,7 +8028,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Rajasree Venkatesh - Mrigashirsha
 DTSTART;VALUE=DATE:20271214
 DTEND;VALUE=DATE:20271215
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e012-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Rajasree Venkatesh - Mrigashirsha\n\nPerson: 
@@ -8136,7 +8055,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Sudha Venkatraman - Swati
 DTSTART;VALUE=DATE:20271223
 DTEND;VALUE=DATE:20271224
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-c010-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Sudha Venkatraman - Swati\n\nPerson: Sudha Ve
@@ -8164,7 +8083,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Shruti Anand - Vishakha
 DTSTART;VALUE=DATE:20271224
 DTEND;VALUE=DATE:20271225
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e008-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Shruti Anand - Vishakha\n\nPerson: Shruti Ana
@@ -8190,7 +8109,7 @@ BEGIN:VEVENT
 SUMMARY:Amavasya Tarpanam (Margazhi Masa)
 DTSTART;VALUE=DATE:20271227
 DTEND;VALUE=DATE:20271228
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-amavasya-2027-12-27@kula.local
 CATEGORIES:amavasya
 DESCRIPTION:Amavasya Tarpanam (Margazhi Masa)\n\nSunrise: 06:28  Sunset: 1
@@ -8212,7 +8131,7 @@ BEGIN:VEVENT
 SUMMARY:Janma Nakshatra: Deepak Venkatnarayan Santhanam - Uttara Ashadha
 DTSTART;VALUE=DATE:20271230
 DTEND;VALUE=DATE:20271231
-DTSTAMP:20261105T142550Z
+DTSTAMP:20261105T144505Z
 UID:kula-panchang-e003-janma-2027@kula.local
 CATEGORIES:janma_nakshatra
 DESCRIPTION:Janma Nakshatra: Deepak Venkatnarayan Santhanam - Uttara Ashad

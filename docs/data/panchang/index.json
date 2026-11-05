@@ -1,6 +1,6 @@
 {
   "schema": "kula-panchang-index/v1",
-  "generated_at": "2026-11-05T14:25:51.252112+00:00",
+  "generated_at": "2026-11-05T14:45:05.813246+00:00",
   "calendar": "Kula Family Panchangam",
   "description": "Family shraddha, janma nakshatra and panchangam events",
   "location": {
@@ -26,18 +26,18 @@
   "feed": "panchang.ics",
   "counts": {
     "amavasya": 25,
-    "festival": 16,
+    "festival": 12,
     "janma_nakshatra": 196,
     "purnima": 25,
     "shraddha": 60
   },
-  "total_events": 322,
+  "total_events": 318,
   "per_year": {
     "2026": {
-      "events": 161,
+      "events": 159,
       "counts": {
         "amavasya": 12,
-        "festival": 8,
+        "festival": 6,
         "janma_nakshatra": 98,
         "purnima": 13,
         "shraddha": 30
@@ -46,10 +46,10 @@
       "json": "panchang-2026.json"
     },
     "2027": {
-      "events": 161,
+      "events": 159,
       "counts": {
         "amavasya": 13,
-        "festival": 8,
+        "festival": 6,
         "janma_nakshatra": 98,
         "purnima": 12,
         "shraddha": 30

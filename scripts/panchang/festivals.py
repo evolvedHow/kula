@@ -8,7 +8,6 @@ new festival; the daily engine and the ICS feed pick it up automatically.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import time
 from typing import TYPE_CHECKING
 
 from . import astronomy as astro
@@ -25,6 +24,11 @@ class FestivalRule:
     paksha: str | None = None
     tithi: int | None = None
     sankranti: bool = False
+    # The single reference instant whose tithi decides the festival day.
+    # sunrise is the South Indian panchang convention; Amavasya observances
+    # use the aparahna (ritual) tithi instead.  Using one instant keeps a
+    # festival on exactly one day even when its tithi spans two sunrises.
+    reference: str = "sunrise"  # sunrise | noon | aparahna | sunset
     description: str = ""
 
     def matches(self, day: "DailyPanchang") -> bool:
@@ -49,16 +53,30 @@ class FestivalRule:
         else:
             return False
 
-        # Festivals are observed on the day the tithi prevails at sunrise or
-        # during the morning/aparhna puja window, not only at one instant.
-        observed = _observed_tithi_indices(day)
-        if self.tithi not in observed:
-            return False
         if self.paksha:
             expected = "Sukla" if self.tithi <= 15 else "Krishna"
             if self.paksha != expected:
                 return False
-        return True
+        return _tithi_at_reference(day, self.reference) == self.tithi
+
+
+_REFERENCE_ATTRS = {
+    "sunrise": "sunrise",
+    "noon": "solar_noon",
+    "aparahna": "aparahna_mid",
+    "aparahna_start": "aparahna_start",
+    "aparahna_end": "aparahna_end",
+    "sunset": "sunset",
+}
+
+
+def _tithi_at_reference(day: "DailyPanchang", reference: str) -> int:
+    attr = _REFERENCE_ATTRS.get(reference, "sunrise")
+    if attr == "aparahna_mid":
+        # The midpoint is what the daily engine uses for its aparahna tithi.
+        return day.tithi_aparahna.index
+    moment = getattr(day, attr, day.sunrise)
+    return astro.tithi_state(astro.to_jd(moment)).index
 
 
 def _solar_index(name: str | None) -> int | None:
@@ -67,18 +85,20 @@ def _solar_index(name: str | None) -> int | None:
     return astro.parse_solar_masa(name)
 
 
-def _observed_tithi_indices(day: "DailyPanchang") -> set[int]:
-    indices = {
-        day.tithi_sunrise.index,
-        day.tithi_aparahna.index,
-        astro.tithi_state(astro.to_jd(day.aparahna_start)).index,
-        astro.tithi_state(astro.to_jd(day.aparahna_end)).index,
-    }
-    tz = astro.timezone_for(day.location)
-    morning = day.day
-    puja = astro.at_local_time(morning, time(9, 0), day.location)
-    indices.add(astro.tithi_state(astro.to_jd(puja)).index)
-    return indices
+def festival_details(day: "DailyPanchang") -> list[dict]:
+    return [
+        {
+            "name": rule.name,
+            "masa_system": rule.masa_system,
+            "masa": rule.masa,
+            "paksha": rule.paksha,
+            "tithi": rule.tithi,
+            "sankranti": rule.sankranti,
+            "description": rule.description,
+        }
+        for rule in RULES
+        if rule.matches(day)
+    ]
 
 
 RULES: tuple[FestivalRule, ...] = (
@@ -110,6 +130,7 @@ RULES: tuple[FestivalRule, ...] = (
         "Bhadrapada",
         "Krishna",
         30,
+        reference="aparahna",
         description="Pitru Paksha closing Amavasya.",
     ),
     FestivalRule(
@@ -118,6 +139,7 @@ RULES: tuple[FestivalRule, ...] = (
         "Kartika",
         "Krishna",
         30,
+        reference="aparahna",
     ),
     FestivalRule(
         "Aadi Amavasai",
@@ -125,6 +147,7 @@ RULES: tuple[FestivalRule, ...] = (
         "Karka",
         "Krishna",
         30,
+        reference="aparahna",
         description="Tamil Aadi month Amavasya; tarpanam.",
     ),
     FestivalRule(
@@ -133,6 +156,7 @@ RULES: tuple[FestivalRule, ...] = (
         "Makara",
         "Krishna",
         30,
+        reference="aparahna",
         description="Tamil Thai month Amavasya; tarpanam.",
     ),
     FestivalRule(
@@ -155,18 +179,3 @@ RULES: tuple[FestivalRule, ...] = (
 def match_festivals(day: "DailyPanchang") -> list[str]:
     return [rule.name for rule in RULES if rule.matches(day)]
 
-
-def festival_details(day: "DailyPanchang") -> list[dict]:
-    return [
-        {
-            "name": rule.name,
-            "masa_system": rule.masa_system,
-            "masa": rule.masa,
-            "paksha": rule.paksha,
-            "tithi": rule.tithi,
-            "sankranti": rule.sankranti,
-            "description": rule.description,
-        }
-        for rule in RULES
-        if rule.matches(day)
-    ]

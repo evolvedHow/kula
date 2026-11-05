@@ -27,6 +27,7 @@
           <a href="#/tree" data-tab="tree" id="tab-tree">Tree</a>
           <a href="#/people" data-tab="people" id="tab-people">Everyone</a>
           <a href="#/stories" data-tab="stories" id="tab-stories" hidden>Stories</a>
+          <a href="#/panchang" data-tab="panchang" id="tab-panchang" hidden>Tithis</a>
         </nav>
         <div class="search" role="search">
           <input id="search" type="search" autocomplete="off" placeholder="Find a family member…" aria-label="Search people">
@@ -96,6 +97,20 @@
 
       <section class="view view-story" id="view-story" hidden>
         <article class="story" id="story"></article>
+      </section>
+
+      <section class="view view-panchang" id="view-panchang" hidden>
+        <div class="list-head">
+          <h2 id="panchang-heading">Tithis</h2>
+          <div class="panchang-filters">
+            <select id="panchang-year" aria-label="Year"></select>
+            <select id="panchang-kind" aria-label="Event type"></select>
+            <input id="panchang-filter" type="search" placeholder="Search names or festivals…" aria-label="Search tithis">
+          </div>
+        </div>
+        <p class="panchang-lead">Ritual dates computed from the family tree: shraddha (death tithi) and janma nakshatra for each member, plus Amavasya, Purnima and festival days. <span id="panchang-subscribe"></span></p>
+        <p class="panchang-person-banner" id="panchang-person-banner" hidden></p>
+        <div class="panchang-list" id="panchang-list"></div>
       </section>
 
       <div class="loading" id="loading">

@@ -28,6 +28,10 @@ const { relationship, sentenceFor } = await loadModule("assets/relate.js");
 const { normalizeGotra, pravaraFor } = await loadModule("assets/vedic.js");
 const { RASI_BOXES, GRAHA_ORDER, degText, renderSouthIndianChart, renderChartReport, renderJatagam } =
   await loadModule("assets/chart.js");
+const {
+  createPanchang, KIND_ORDER, KIND_LABELS, kindLabel, dayParts, monthLabel,
+  eventDetail, filterEvents, groupByMonth, eventRowHTML, listHTML,
+} = await loadModule("assets/panchang.js");
 
 const vedic = JSON.parse(read("data/vedic.json"));
 
@@ -698,4 +702,140 @@ test("chart payloads in tree.json are well formed when present", () => {
     assert.equal(p.vedic.rashi, chart.moon.rashi, `${p.id} rashi should come from the engine`);
     assert.equal(p.vedic.pada, chart.moon.pada, `${p.id} pada should come from the engine`);
   }
+});
+
+// ---------- Panchangam (tithi calendar) ----------
+
+const panchangIndex = JSON.parse(read("data/panchang/index.json"));
+const panchangYears = Object.fromEntries(
+  panchangIndex.years.map((y) => [y, JSON.parse(read(`data/panchang/panchang-${y}.json`))]),
+);
+
+test("the panchang feed is tied to the tree: person events reference real people", () => {
+  for (const [year, payload] of Object.entries(panchangYears)) {
+    assert.ok(payload.events.length > 0, `${year} should have events`);
+    const uids = payload.events.map((e) => e.uid);
+    assert.equal(new Set(uids).size, uids.length, `${year} has duplicate uids`);
+    for (const event of payload.events) {
+      assert.ok(event.date.startsWith(year), `${event.uid} is outside ${year}`);
+      assert.ok(KIND_LABELS[event.kind], `${event.uid} has an unknown kind ${event.kind}`);
+      if (event.person_id) {
+        assert.ok(people[event.person_id], `${event.uid} references ${event.person_id}, who is not in tree.json`);
+      }
+    }
+  }
+});
+
+test("the C008 shraddha lands on Garuda Panchami", () => {
+  const event = panchangYears[2026].events.find((e) => e.person_id === "C008" && e.kind === "shraddha");
+  assert.ok(event, "C008 should have a 2026 shraddha");
+  assert.equal(event.date, "2026-08-17");
+  assert.ok(event.festivals.some((f) => f.includes("Garuda Panchami")), event.festivals.join(","));
+});
+
+test("festivals never repeat on consecutive days", () => {
+  for (const [year, payload] of Object.entries(panchangYears)) {
+    const byName = {};
+    for (const event of payload.events.filter((e) => e.kind === "festival")) {
+      (byName[event.summary] ||= []).push(event.date);
+    }
+    for (const [name, dates] of Object.entries(byName)) {
+      assert.equal(dates.length, 1, `${name} repeats in ${year}: ${dates.join(", ")}`);
+    }
+  }
+});
+
+test("panchang label helpers format kinds, months and weekdays", () => {
+  assert.equal(kindLabel("janma_nakshatra"), "Janma nakshatra");
+  assert.equal(kindLabel("shraddha"), "Shraddha");
+  assert.equal(monthLabel("2026-08"), "August 2026");
+  assert.deepEqual(dayParts("2026-08-17"), { day: 17, dow: "Mon" });
+  assert.ok(KIND_ORDER.includes("shraddha"));
+});
+
+test("filterEvents narrows by person, kind and the tree's display name", () => {
+  const events = panchangYears[2026].events;
+  const personNameFor = (pid) => people[pid]?.name?.display || "";
+  assert.ok(filterEvents(events, { person: "C008" }).every((e) => e.person_id === "C008"));
+  assert.ok(filterEvents(events, { kind: "shraddha" }).every((e) => e.kind === "shraddha"));
+  // Names are matched from tree.json, not from the event payload.
+  const byTreeName = filterEvents(events, { q: "lakshmi ganapathy", personNameFor });
+  assert.ok(byTreeName.some((e) => e.person_id === "C008"), "search should match the tree name");
+  const byFestival = filterEvents(events, { q: "garuda" });
+  assert.ok(byFestival.some((e) => (e.festivals || []).some((f) => f.includes("Garuda"))));
+  assert.equal(filterEvents(events, { kind: "amavasya", q: "lakshmi" }).length, 0);
+});
+
+test("eventDetail picks nakshatra for janma, tithi for shraddha, masa for the rest", () => {
+  const shraddha = panchangYears[2026].events.find((e) => e.person_id === "C008");
+  assert.ok(eventDetail(shraddha).includes("Sukla Panchami"));
+  const janma = panchangYears[2026].events.find((e) => e.kind === "janma_nakshatra");
+  assert.ok(eventDetail(janma).includes(janma.nakshatra.name));
+  const amavasya = panchangYears[2026].events.find((e) => e.kind === "amavasya");
+  assert.equal(eventDetail(amavasya), amavasya.masa.label);
+});
+
+test("eventRowHTML links members to the tree and never leaks raw HTML", () => {
+  const helpers = {
+    personFor: (id) => people[id],
+    displayName: (p) => p.name.display,
+    yearsText: () => "1940 – 1994",
+  };
+  const shraddha = panchangYears[2026].events.find((e) => e.person_id === "C008");
+  const html = eventRowHTML(shraddha, helpers);
+  assert.ok(html.includes('data-focus="C008"'), "the name should navigate to the person");
+  assert.ok(html.includes("Lakshmi Ganapathy"));
+  assert.ok(html.includes("Garuda Panchami"));
+  assert.ok(html.includes('class="panchang-kind"'));
+
+  const generic = eventRowHTML(panchangYears[2026].events.find((e) => e.kind === "amavasya"), helpers);
+  assert.ok(!generic.includes("data-focus"), "a panchang-wide day has no person link");
+  assert.ok(generic.includes("Amavasya Tarpanam"));
+
+  const hostile = eventRowHTML({ date: "2026-01-01", kind: "festival", summary: "<img src=x>" }, helpers);
+  assert.ok(!hostile.includes("<img"), "summary text must be escaped");
+});
+
+test("listHTML groups by month in date order", () => {
+  const groups = groupByMonth(panchangYears[2026].events);
+  assert.equal(groups[0].label, "January 2026");
+  const flat = groups.flatMap((g) => g.events.map((e) => e.date));
+  assert.deepEqual(flat, [...flat].sort(), "groups must keep chronological order");
+  const html = listHTML(groups[0].events, {});
+  assert.ok(html.includes("group-label"));
+  assert.ok(listHTML([], {}).includes("No tithis"));
+});
+
+test("createPanchang loads years lazily and person views span every year", async () => {
+  const files = { "data/panchang/index.json": panchangIndex };
+  for (const year of panchangIndex.years) {
+    files[`data/panchang/panchang-${year}.json`] = panchangYears[year];
+  }
+  const panchang = createPanchang({
+    fetchJson: async (url) => {
+      if (url in files) return files[url];
+      throw new Error(`unexpected fetch: ${url}`);
+    },
+    personFor: (id) => people[id],
+    displayName: (p) => p.name.display,
+    yearsText: () => "",
+    formatDate: (iso) => iso,
+    today: () => new Date("2026-06-01T12:00:00"),
+  });
+  assert.equal(panchang.useIndex(panchangIndex), panchangIndex);
+  assert.equal(panchang.available, true);
+  assert.equal(panchang.state.year, 2026, "the current year is the default");
+  assert.deepEqual(panchang.events(), [], "events load lazily");
+
+  await panchang.ensureYear(2026);
+  assert.equal(panchang.events().length, panchangYears[2026].events.length);
+
+  await panchang.prefetchAll();
+  panchang.state.person = "C008";
+  const mine = panchang.events();
+  assert.deepEqual(mine.map((e) => e.date), ["2026-08-17", "2027-08-06"],
+    "a person view lists that member's tithis across all years");
+  const rows = panchang.personRowsHTML("C008");
+  assert.ok(rows.includes("Shraddha 2026") && rows.includes("2026-08-17"));
+  assert.ok(panchang.feedUrl().endsWith("panchang.ics"));
 });

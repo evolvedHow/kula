@@ -1,0 +1,69 @@
+name: Panchangam feed
+
+# Rebuilds the tithi calendar under docs/data/panchang/ from the committed
+# tree.  Runs whenever the family data or the engine changes, once a year so
+# the feed always covers the current and next year, and on demand.
+#
+# The generated paths are deliberately NOT in the push trigger: the commit
+# this workflow creates only touches docs/data/panchang/, so it cannot loop.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - docs/data/tree.json
+      - docs/config.yml
+      - scripts/panchang/**
+      - scripts/panchangam.py
+      - scripts/test_panchang.py
+      - .github/workflows/panchang.yml
+  schedule:
+    - cron: "0 6 1 12 *"   # 1 December, 06:00 UTC — prepare next year's feed
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: panchang
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m venv .venv
+          .venv/bin/pip install -r requirements.txt
+
+      - name: Validate the engine
+        run: |
+          .venv/bin/python -m scripts.panchang validate
+          .venv/bin/python -m unittest scripts.test_panchang -v
+
+      - name: Build the feed for the current and next year
+        run: |
+          YEAR=$(date -u +%Y)
+          .venv/bin/python -m scripts.panchang build --years "$YEAR,$((YEAR + 1))"
+
+      - name: Check the site can consume the feed
+        run: node --test scripts/test_frontend.mjs
+
+      - name: Commit the regenerated feed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data/panchang
+          if git diff --cached --quiet; then
+            echo "Feed is already up to date."
+          else
+            YEAR=$(date -u +%Y)
+            git commit -m "Rebuild panchang feed for $YEAR–$((YEAR + 1))"
+            git push
+          fi

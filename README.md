@@ -361,8 +361,14 @@ already reduced to city level for living people.
   tithi and masa (with the lunar month as a tie-breaker).
 - **Janma nakshatra** dates for living members.
 - **Amavasya tarpanam** days, which follow the aparahna rule.
-- Festival markers such as Garuda Panchami, Pradosham and Ekadasi when
-  enabled.
+- Festival markers such as Garuda Panchami, Pongal and Deepavali, each on a
+  single day.
+
+The site shows these in a **Tithis tab** (next to Tree / Everyone / Stories),
+grouped by month and filterable by year, event kind and name. Every event name
+links back to that person's place in the tree, and each profile panel lists
+the member's own ritual dates with an "Open in Tithis" button. The tab and the
+panel section appear only when `docs/data/panchang/index.json` exists.
 
 Run the importer first so `docs/data/tree.json` is current. The panchangam
 engine never edits the tree.
@@ -410,6 +416,15 @@ the much larger full-day and per-person JSON dumps.
 The abbreviations `day`, `month`, `list`, `explain`, `amavasya`, `build`,
 `serve` and `sync-google` are subcommands; `--date` without a subcommand is
 treated as `day`.
+
+### Keeping the feed current
+
+The dates only change when the tree changes or a new year begins, so nothing
+is recomputed per visitor. A GitHub Action (`.github/workflows/panchang.yml`)
+rebuilds and commits the feed automatically when `docs/data/tree.json`, the
+engine or the panchang config changes on `main`, and every December it rolls
+the feed forward to the current and next year. Run it by hand any time from
+the Actions tab, or locally with `build --years`.
 
 ### Subscribing in Google Calendar
 
