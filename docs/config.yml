@@ -30,6 +30,7 @@ source:
     persons: "Persons"
     vedic: "Vedic"
     config: "$Config"
+    kg: "KG"
     unions: "Unions"
     offsprings: "Offsprings"
   # The older hierarchical family sheet is the authority for birth, death and

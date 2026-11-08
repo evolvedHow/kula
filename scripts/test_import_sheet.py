@@ -31,13 +31,13 @@ def table(header, rows):
 def sheet_data():
     return {
         "Persons": table(
-            ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "GENDER", "DOB", "POB", "CUR_LOC", "STATUS", "NOTES"],
+            ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "GENDER", "DOB", "POB", "STATUS", "NOTES"],
             [
-                ["P001", "Alex", "Alpha One", "P001-Alex", "Male", "1 Jan 1940", "Chennai", "", "Deceased", ""],
-                ["P002", "Alex", "Beta Two", "P002-Alex", "Female", "2 Feb 1942", "", "", "Deceased", ""],
+                ["P001", "Alex", "Alpha One", "P001-Alex", "Male", "1 Jan 1940", "Chennai", "Deceased", ""],
+                ["P002", "Alex", "Beta Two", "P002-Alex", "Female", "2 Feb 1942", "", "Deceased", ""],
                 # REF_NAME deliberately blank: it must be derived from PID + KNOWN_NAME.
                 ["P003", "Casey", "Casey Child", "", "Female", "3 Mar 1970",
-                 "Mumbai, Maharashtra, India", "Pune, Maharashtra, India", "Living", ""],
+                 "Mumbai, Maharashtra, India", "Living", ""],
             ],
         ),
         "Unions": table(
@@ -52,10 +52,10 @@ def sheet_data():
             ],
         ),
         "Vedic": table(
-            ["PERSON", "GOTRA", "VEDA", "SHAKHA", "SUTRA", "NAKSHATRA", "PURVIKAM", "KULA_DEVATHA", "PARVATA"],
-            [["P003-Casey", "Harita", "Yajur", "", "", "", "", "", ""]],
+            ["PERSON", "GOTRA", "VEDA", "SHAKHA", "SUTRA", "PURVIKAM", "KULA_DEVATHA", "PARVATA"],
+            [["P003-Casey", "Harita", "Yajur", "", "", "", "", ""]],
         ),
-        "$Config": table(["GOTRA", "VEDA", "SHAKHA", "SUTRA", "NAKSHATRA"], [["Harita", "Yajur", "", "", ""]]),
+        "$Config": table(["GOTRA", "VEDA", "SHAKHA", "SUTRA"], [["Harita", "Yajur", "", ""]]),
     }
 
 
@@ -63,14 +63,14 @@ def authority_sheet_data():
     return {
         "Persons": table(
             ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "EMAIL", "GENDER", "DOB",
-             "POB", "CUR_LOC", "STATUS", "DOD", "POD", "NOTES"],
+             "POB", "STATUS", "DOD", "NOTES"],
             [
                 ["P001", "Sam", "Sam Iyer", "P001-Sam", "", "Male", "29 Jun 2026",
-                 "Mumbai, Maharashtra, India", "", "Living", "", "", ""],
+                 "Mumbai, Maharashtra, India", "Living", "", ""],
                 ["P002", "Ravi", "Ravi Iyer", "P002-Ravi", "", "Male", "1 Jan 1950",
-                 "Chennai", "", "Deceased", "19488.0", "", ""],
+                 "Chennai", "Deceased", "19488.0", ""],
                 ["P003", "Meena", "Meena Iyer", "P003-Meena", "", "Female", "", "",
-                 "", "Living", "", "", ""],
+                 "Living", "", ""],
             ],
         ),
     }
@@ -172,7 +172,6 @@ class BuildTests(unittest.TestCase):
 
     def test_living_locations_are_city_level_only(self):
         self.assertEqual(self.people["P003"]["birth"]["place"], "Mumbai")
-        self.assertEqual(self.people["P003"]["current_location"], "Pune")
 
     def test_no_resolution_warnings_for_the_synthetic_sheet(self):
         self.assertEqual(self.warnings, [])
@@ -181,12 +180,12 @@ class BuildTests(unittest.TestCase):
         sheets = {
             "Persons": table(
                 ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "GENDER", "DOB",
-                 "POB", "CUR_LOC", "STATUS", "NOTES", "GEN", "GENERATION"],
+                 "POB", "STATUS", "NOTES", "GEN", "GENERATION"],
                 [
                     ["P020", "Gen", "Gen Person", "P020-Gen", "Male", "",
-                     "", "", "Living", "", "", "d"],
+                     "", "Living", "", "", "d"],
                     ["P021", "Blank", "Blank Gen", "P021-Blank", "Female", "",
-                     "", "", "Living", "", "B", ""],
+                     "", "Living", "", "B", ""],
                 ],
             ),
             "Unions": table(["UID", "PID1", "PID2", "REF_NAME", "REL_START", "REL_END", "NOTES"], []),
@@ -206,9 +205,9 @@ class BuildTests(unittest.TestCase):
         sheets = {
             "Persons": table(
                 ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "GENDER", "DOB",
-                 "POB", "CUR_LOC", "STATUS", "NOTES"],
+                 "POB", "STATUS", "NOTES"],
                 [["P030", "Solo", "Solo Person", "P030-Solo", "Male", "",
-                  "", "", "Living", ""]],
+                  "", "Living", ""]],
             ),
             "Unions": table(
                 ["UID", "PID1", "PID2", "REF_NAME", "REL_START", "REL_END", "NOTES"],
@@ -235,8 +234,8 @@ class BuildTests(unittest.TestCase):
         sheets = {
             "Persons": table(
                 ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "GENDER", "DOB",
-                 "POB", "CUR_LOC", "STATUS", "NOTES"],
-                [["P010", "Kala", "Kala Iyer", "P010-Kala", "Female", "", "", "", "Living", ""]],
+                 "POB", "STATUS", "NOTES"],
+                [["P010", "Kala", "Kala Iyer", "P010-Kala", "Female", "", "", "Living", ""]],
             ),
             "Unions": table(
                 ["UID", "PID1", "PID2", "REF_NAME", "REL_START", "REL_END", "NOTES"],
@@ -251,6 +250,88 @@ class BuildTests(unittest.TestCase):
         family = data["families"][0]
         self.assertIsNone(family["father"])
         self.assertEqual(family["mother"], "P010")
+
+
+class KgBuildTests(unittest.TestCase):
+    def kg_sheets(self, kg_rows):
+        return {
+            "Persons": table(
+                ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "GENDER", "DOB", "POB", "STATUS", "NOTES"],
+                [
+                    ["P-101", "Himavan", "King Himavan", "P-101-Himavan", "Male", "", "", "Living", ""],
+                    ["P-102", "Mena", "Queen Menavati", "P-102-Mena", "Female", "", "", "Living", ""],
+                    ["P-201", "Shiva", "Lord Shiva", "P-201-Shiva", "Male", "", "", "Living", ""],
+                    ["P-202", "Parvati", "Goddess Parvati", "P-202-Parvati", "Female", "", "", "Living", ""],
+                    ["P-301", "Murugan", "Lord Murugan", "P-301-Murugan", "Male", "", "", "Living", ""],
+                ],
+            ),
+            "KG": table(
+                ["SUBJECT", "PREDICATE", "OBJECT", "DATE", "NOTES"],
+                kg_rows,
+            ),
+            "Vedic": table(["PERSON"], []),
+            "$Config": table(["GOTRA"], []),
+        }
+
+    def test_kg_spouse_and_parent_edges_create_family(self):
+        sheets = self.kg_sheets([
+            ["P-101-Himavan", "spouseOf", "P-102-Mena", "", ""],
+            ["P-101-Himavan", "parentOf", "P-202-Parvati", "", ""],
+        ])
+        data, warnings = build(sheets, {"site": {"default_person": "P-101"},
+                                        "vedic": {"charts": False}})
+        self.assertEqual(len(data["families"]), 1)
+        fam = data["families"][0]
+        self.assertEqual(fam["father"], "P-101")
+        self.assertEqual(fam["mother"], "P-102")
+        self.assertEqual(fam["children"], ["P-202"])
+        parvati = next(p for p in data["people"] if p["id"] == "P-202")
+        self.assertEqual(parvati["parent_family"], fam["id"])
+        edge_types = {e["type"] for e in data["graph"]["edges"]}
+        self.assertEqual(edge_types, {"partner", "offspring"})
+
+    def test_kg_child_of_is_reversed_to_parent(self):
+        sheets = self.kg_sheets([
+            ["P-202-Parvati", "childOf", "P-101-Himavan", "", ""],
+        ])
+        data, _ = build(sheets, {"site": {"default_person": "P-101"},
+                                 "vedic": {"charts": False}})
+        self.assertEqual(len(data["families"]), 1)
+        self.assertEqual(data["families"][0]["children"], ["P-202"])
+
+    def test_kg_infer_co_parenting_through_spouses(self):
+        sheets = self.kg_sheets([
+            ["P-101-Himavan", "spouseOf", "P-102-Mena", "", ""],
+            ["P-101-Himavan", "parentOf", "P-202-Parvati", "", ""],
+        ])
+        data, _ = build(sheets, {"site": {"default_person": "P-101"},
+                                 "vedic": {"charts": False}})
+        fam = data["families"][0]
+        self.assertIn("P-202", fam["children"])
+        # Both spouses should list the same family.
+        for pid in ("P-101", "P-102"):
+            person = next(p for p in data["people"] if p["id"] == pid)
+            self.assertIn(fam["id"], person["families"])
+
+    def test_kg_takes_precedence_over_legacy_unions(self):
+        sheets = self.kg_sheets([
+            ["P-201-Shiva", "spouseOf", "P-202-Parvati", "", ""],
+        ])
+        sheets["Unions"] = table(
+            ["UID", "PID1", "PID2", "REF_NAME", "REL_START", "REL_END", "NOTES"],
+            [["U001", "P-101", "P-102", "", "", "", ""]],
+        )
+        sheets["Offsprings"] = table(
+            ["OID", "UNION_OF", "OFFSPRING", "NOTES"],
+            [["O001", "U001", "P-202", ""]],
+        )
+        data, _ = build(sheets, {"site": {"default_person": "P-201"},
+                                 "vedic": {"charts": False}})
+        family_ids = {f["id"] for f in data["families"]}
+        self.assertEqual(len(data["families"]), 1)
+        self.assertNotIn("U001", family_ids)
+        self.assertEqual(data["families"][0]["father"], "P-201")
+        self.assertEqual(data["families"][0]["mother"], "P-202")
 
 
 class VedicInheritanceTests(unittest.TestCase):

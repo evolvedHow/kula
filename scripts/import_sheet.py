@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Build the static family-tree data from the relatives Google Sheet.
 
-The sheet is the source of truth. It has five tabs:
+The sheet is the source of truth. It has these tabs:
 
-    Persons     PID, KNOWN_NAME, FULL_NAME, REF_NAME, EMAIL, GENDER, DOB, POB, CUR_LOC, STATUS, DOD, POD, NOTES, GEN
-    Vedic       PERSON, GOTRA, VEDA, SHAKHA, SUTRA, NAKSHATRA, KULA_DEVATHA, SAMPRADAYA, ACHARYA_THIRUMALIGAI, PURVIKAM, PARVATA
-    $Config     GOTRA, VEDA, SHAKHA, SUTRA, NAKSHATRA
+    Persons     PID, KNOWN_NAME, FULL_NAME, REF_NAME, EMAIL, GENDER, DOB, POB, STATUS, DOD, NOTES, GEN
+    Vedic       PERSON, GOTRA, VEDA, SHAKHA, SUTRA, KULA_DEVATHA, SAMPRADAYA, ACHARYA_THIRUMALIGAI, PURVIKAM, PARVATA
+    $Config     GOTRA, VEDA, SHAKHA, SUTRA
+    KG          SUBJECT, PREDICATE, OBJECT, DATE, NOTES
     Unions      UID, PID1, PID2, REF_NAME, REL_START, REL_END, NOTES
     Offsprings  OID, UNION_OF, OFFSPRING, NOTES
 
@@ -13,12 +14,12 @@ Usage:
     python3 scripts/import_sheet.py --url "https://docs.google.com/spreadsheets/d/.../edit"
     python3 scripts/import_sheet.py --url "..." private/relatives.xlsx
 
-The tab values PID1/PID2/UNION_OF/OFFSPRING are readable keys of the form
-"<PID>-<KNOWN_NAME>", for example "P049-Sriram". KNOWN_NAME is the pseudo key
-people use while entering data; the PID prefix keeps it unique when known
-names repeat. The importer resolves each reference by that PID prefix (with
-REF_NAME and unique-known-name fallbacks for hand-edited sheets), so a name
-edit in the Persons tab cannot break the union or offspring links.
+Relationship data is read from the KG tab first. SUBJECT and OBJECT are human-
+readable refs such as "P-101-Himavan"; the PID prefix is the real key. The
+importer resolves each reference by that PID prefix (with REF_NAME and unique-
+known-name fallbacks for hand-edited sheets), then infers co-parenting through
+spouses and builds the union/children model the site expects. If KG is empty,
+the importer falls back to the legacy Unions/Offsprings tabs.
 
 Every original column is kept as a node or edge attribute, and the site also
 gets a compact people/families/notes view so the existing tree, list and
@@ -69,6 +70,7 @@ DEFAULT_TABS = {
     "persons": "Persons",
     "vedic": "Vedic",
     "config": "$Config",
+    "kg": "KG",
     "unions": "Unions",
     "offsprings": "Offsprings",
 }
@@ -77,13 +79,12 @@ NS = {
     "r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
 }
 PERSON_CORE = ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "EMAIL", "GENDER", "DOB",
-               "POB", "CUR_LOC", "STATUS", "DOD", "POD", "NOTES", "GEN"]
+               "POB", "STATUS", "DOD", "NOTES", "GEN"]
 VEDIC_FIELDS = {
     "GOTRA": "gotra",
     "VEDA": "veda",
     "SHAKHA": "shakha",
     "SUTRA": "sutra",
-    "NAKSHATRA": "nakshatra",
     "KULA_DEVATHA": "kula_devatha",
     "SAMPRADAYA": "sampradaya",
     "ACHARYA_THIRUMALIGAI": "acharya_thirumaligai",
@@ -401,9 +402,9 @@ def merge_authority(people, rows, config=None):
     return warnings
 
 
-PID_RE = re.compile(r"^\s*([PI]\d+)\b", re.IGNORECASE)
-ANY_PID_RE = re.compile(r"\b([PI]\d+)\b", re.IGNORECASE)
-UNION_RE = re.compile(r"^\s*(U\d+)\b", re.IGNORECASE)
+PID_RE = re.compile(r"^\s*([PI]-?\d+)\b", re.IGNORECASE)
+ANY_PID_RE = re.compile(r"\b([PI]-?\d+)\b", re.IGNORECASE)
+UNION_RE = re.compile(r"^\s*(U-?\d+)\b", re.IGNORECASE)
 
 
 def pid_prefix(value):
@@ -505,6 +506,151 @@ def union_resolver(families):
     return resolve
 
 
+KG_PREDICATES = {
+    "spouse": {"spouseof", "spouse", "husband", "wife", "married"},
+    "parent": {"parentof", "parent", "father", "mother"},
+    "child": {"childof", "child", "offspring", "son", "daughter"},
+}
+
+
+def build_families_from_kg(kg_rows, resolve, persons_raw, warnings=None):
+    """Convert KG relationship triples into the family/union model.
+
+    The KG tab stores human-readable edges such as
+    ``P-101-Himavan parentOf P-201-Parvati``. The PID prefix is extracted and
+    resolved; the name suffix is ignored. Spouse links are bidirectional, and
+    parent/child links are mirrored (``childOf`` is the reverse of
+    ``parentOf``). Co-parenting is inferred through spouses, so a child linked
+    to one parent is automatically linked to that parent's spouses.
+
+    Returns ``(families, parent_family, warnings)`` where ``families`` is the
+    list used by the rest of the importer and ``parent_family`` maps each child
+    PID to the UID of the family they belong to.
+    """
+    warnings = warnings if warnings is not None else []
+
+    spouse_map = {}
+    children_map = {}
+    parent_map = {}
+
+    def add_set(mapping, key, value):
+        mapping.setdefault(key, set()).add(value)
+
+    for row in kg_rows:
+        sub = (row.get("SUBJECT") or "").strip()
+        pred = (row.get("PREDICATE") or "").strip().lower()
+        obj = (row.get("OBJECT") or "").strip()
+        sub_pid = resolve(sub) if sub else None
+        obj_pid = resolve(obj) if obj else None
+
+        if not sub_pid or not obj_pid or not pred:
+            continue
+        if sub_pid == obj_pid:
+            warnings.append(f"KG row ignores self-reference: {sub} {pred} {obj}")
+            continue
+
+        if pred in KG_PREDICATES["spouse"]:
+            add_set(spouse_map, sub_pid, obj_pid)
+            add_set(spouse_map, obj_pid, sub_pid)
+        elif pred in KG_PREDICATES["parent"]:
+            add_set(children_map, sub_pid, obj_pid)
+            add_set(parent_map, obj_pid, sub_pid)
+        elif pred in KG_PREDICATES["child"]:
+            add_set(children_map, obj_pid, sub_pid)
+            add_set(parent_map, sub_pid, obj_pid)
+
+    # Infer co-parenting through spouses.
+    for p1, spouses in list(spouse_map.items()):
+        for sp in spouses:
+            for child in children_map.get(sp, set()):
+                add_set(children_map, p1, child)
+                add_set(parent_map, child, p1)
+
+    # Build families: group children by their (ordered) set of parents.
+    child_to_parents = {}
+    for child, parents in parent_map.items():
+        child_to_parents[child] = frozenset(parents)
+
+    parent_set_to_children = {}
+    for child, parents in child_to_parents.items():
+        parent_set_to_children.setdefault(parents, []).append(child)
+
+    # Families for spouses without children.
+    seen_parent_sets = set(parent_set_to_children.keys())
+    for p1, spouses in spouse_map.items():
+        for sp in spouses:
+            pair = frozenset({p1, sp})
+            if pair not in seen_parent_sets:
+                parent_set_to_children[pair] = []
+                seen_parent_sets.add(pair)
+
+    # Single parents with children are already captured by parent_map.
+    # Spouses without children are captured above.
+
+    def gender(pid):
+        return next((gender_code(p.get("GENDER")) for p in persons_raw
+                     if (p.get("PID") or "").strip().upper() == pid), "O")
+
+    def assign_parents(parent_set):
+        """Return (father, mother) from a parent set using gender hints."""
+        parents = list(parent_set)
+        if len(parents) == 0:
+            return None, None
+        if len(parents) == 1:
+            pid = parents[0]
+            return (None, pid) if gender(pid) == "F" else (pid, None)
+        if len(parents) >= 2:
+            genders = [(gender(p), p) for p in parents]
+            males = [p for g, p in genders if g == "M"]
+            females = [p for g, p in genders if g == "F"]
+            others = [p for g, p in genders if g == "O"]
+            father = males[0] if males else (others[0] if others else parents[0])
+            mother = females[0] if females else None
+            if mother == father:
+                mother = None
+            if len(parents) > 2:
+                extras = [p for p in parents if p not in (father, mother)]
+                warnings.append(
+                    f"KG: child has more than two parents ({', '.join(parents)}); "
+                    f"using {father} and {mother or 'no mother'}, ignoring {', '.join(extras)}")
+            return father, mother
+
+    families = []
+    family_by_uid = {}
+    parent_family = {}
+    uid_counter = 1
+
+    known_by_pid = {
+        (p.get("PID") or "").strip().upper(): (p.get("KNOWN_NAME") or "").strip()
+        for p in persons_raw
+    }
+
+    for parent_set, children in parent_set_to_children.items():
+        father, mother = assign_parents(parent_set)
+        partners = [p for p in (father, mother) if p]
+        ref = " & ".join(make_ref(pid, known_by_pid.get(pid, "")) for pid in partners)
+        uid = f"F{uid_counter:03d}"
+        uid_counter += 1
+
+        fam = {
+            "id": uid,
+            "father": father,
+            "mother": mother,
+            "children": list(dict.fromkeys(children)),
+            "relation": "Married" if len(partners) == 2 else "Unknown",
+            "marriage": None,
+            "notes": "",
+            "ref_name": ref or uid,
+            "attributes": {"UID": uid, "REF_NAME": ref or uid},
+        }
+        families.append(fam)
+        family_by_uid[uid] = fam
+        for child in fam["children"]:
+            parent_family.setdefault(child, uid)
+
+    return families, parent_family, warnings
+
+
 # Nakshatra is personal: it depends on the exact time and place of birth and
 # is computed from the birth chart. It must never be inherited from a parent
 # or a spouse. Everything else in the Vedic tab is part of the lineage.
@@ -586,6 +732,7 @@ def build(sheets, config, tabs=None, authority_rows=None):
     persons_raw = records(sheets.get(tabs["persons"], []), PERSON_CORE)
     unions_raw = records(sheets.get(tabs["unions"], []), ["UID", "PID1", "PID2", "REF_NAME", "REL_START", "REL_END", "NOTES"])
     offspring_raw = records(sheets.get(tabs["offsprings"], []), ["OID", "UNION_OF", "OFFSPRING", "NOTES"])
+    kg_raw = records(sheets.get(tabs["kg"], []), ["SUBJECT", "PREDICATE", "OBJECT", "DATE", "NOTES"])
     vedic_raw = records(sheets.get(tabs["vedic"], []), ["PERSON", *VEDIC_FIELDS])
     config_raw = records(sheets.get(tabs["config"], []), ["GOTRA"])
     # Stories/Notes tab is optional. Try "Stories" first, then "Notes".
@@ -614,104 +761,111 @@ def build(sheets, config, tabs=None, authority_rows=None):
             vedic_by_pid[pid] = values
 
     # Families first so people can list their unions and parent family.
-    families = []
-    family_by_uid = {}
-    seen_uids = set()
-    for row in unions_raw:
-        uid = (row.get("UID") or "").strip()
-        if not uid:
-            continue
-        if uid in seen_uids:
-            warnings.append(f"Duplicate union UID {uid!r}, skipping duplicate row")
-            continue
-        seen_uids.add(uid)
-        p1 = resolve(row.get("PID1"))
-        p2 = resolve(row.get("PID2"))
-        if not p1 and not p2:
-            warnings.append(f"Union {uid} has no resolvable partners")
-            continue
-        if not p1 and (row.get("PID1") or "").strip():
-            warnings.append(f"Union {uid}: unknown PID1 {row.get('PID1')!r}")
-        if not p2 and (row.get("PID2") or "").strip():
-            warnings.append(f"Union {uid}: unknown PID2 {row.get('PID2')!r}")
-        ref = " & ".join(
-            make_ref(pid, known_by_pid.get(pid, ""))
-            for pid in (p1, p2) if pid
-        ) or (row.get("REF_NAME") or "").strip() or uid
-        attrs = dict(row)
-        attrs["UID"] = uid
-        attrs["PID1"] = p1 or ""
-        attrs["PID2"] = p2 or ""
-        attrs["REF_NAME"] = ref
-        if p1:
-            attrs["PID1_REF"] = row.get("PID1", "")
-        if p2:
-            attrs["PID2_REF"] = row.get("PID2", "")
-        # A self-union (the same PID in both partner slots) is a sheet typo. Keep
-        # the raw values in the attributes, but treat it as a single partner so
-        # the graph does not emit two identical partner edges and the List view
-        # does not show someone married to themselves.
-        if p1 and p1 == p2:
-            warnings.append(
-                f"Union {uid}: both partner slots are {p1}; treating it as a "
-                "single-partner union. Check PID1/PID2 in the sheet.")
-            p2 = ""
-        date, year = parse_dmy(row.get("REL_START"))
-        father, mother = p1, p2
-        if p2 and p1:
-            g1 = next((gender_code(p.get("GENDER")) for p in persons_raw if p["PID"] == p1), "O")
-            g2 = next((gender_code(p.get("GENDER")) for p in persons_raw if p["PID"] == p2), "O")
-            if g1 == "F" and g2 != "F":
-                father, mother = p2, p1
-            elif g1 == g2:
-                father, mother = p1, p2
-                if g1 == "F":
-                    warnings.append(
-                        f"Union {uid}: both partners are recorded as female; using PID1 "
-                        "as father and PID2 as mother because the data model has two "
-                        "parent slots. Check GENDER if this is a data-entry error.")
-        elif p1 and not p2:
-            g1 = next((gender_code(p.get("GENDER")) for p in persons_raw if p["PID"] == p1), "O")
-            father, mother = (None, p1) if g1 == "F" else (p1, None)
-        elif p2 and not p1:
-            g2 = next((gender_code(p.get("GENDER")) for p in persons_raw if p["PID"] == p2), "O")
-            father, mother = (None, p2) if g2 == "F" else (p2, None)
-        fam = {
-            "id": uid,
-            "father": father,
-            "mother": mother,
-            "children": [],
-            "relation": "Married" if date else "Unknown",
-            "marriage": {"date": date, "year": year, "place": ""} if date else None,
-            "notes": row.get("NOTES", ""),
-            "ref_name": ref,
-            "attributes": attrs,
-        }
-        families.append(fam)
-        family_by_uid[uid] = fam
-
-    resolve_union = union_resolver(families)
-
-    # Offspring edges create both the family's children and the person's
-    # parent_family link.
-    for row in offspring_raw:
-        uid = resolve_union(row.get("UNION_OF"))
-        child = resolve(row.get("OFFSPRING"))
-        if not uid or not child:
-            warnings.append(f"Offspring {row.get('OID')}: could not resolve "
-                            f"{row.get('UNION_OF')!r} -> {row.get('OFFSPRING')!r}")
-            continue
-        fam = family_by_uid[uid]
-        if child in (fam["father"], fam["mother"]):
-            warnings.append(f"Offspring {row.get('OID')}: {child} is a partner of {uid}, skipped")
-            continue
-        if child not in fam["children"]:
-            fam["children"].append(child)
-
+    # Prefer the modern KG tab; fall back to legacy Unions/Offsprings.
     parent_family = {}
-    for fam in families:
-        for child in fam["children"]:
-            parent_family.setdefault(child, fam["id"])
+    if kg_raw:
+        families, parent_family, warnings = build_families_from_kg(
+            kg_raw, resolve, persons_raw, warnings)
+        family_by_uid = {f["id"]: f for f in families}
+    else:
+        families = []
+        family_by_uid = {}
+        seen_uids = set()
+        for row in unions_raw:
+            uid = (row.get("UID") or "").strip()
+            if not uid:
+                continue
+            if uid in seen_uids:
+                warnings.append(f"Duplicate union UID {uid!r}, skipping duplicate row")
+                continue
+            seen_uids.add(uid)
+            p1 = resolve(row.get("PID1"))
+            p2 = resolve(row.get("PID2"))
+            if not p1 and not p2:
+                warnings.append(f"Union {uid} has no resolvable partners")
+                continue
+            if not p1 and (row.get("PID1") or "").strip():
+                warnings.append(f"Union {uid}: unknown PID1 {row.get('PID1')!r}")
+            if not p2 and (row.get("PID2") or "").strip():
+                warnings.append(f"Union {uid}: unknown PID2 {row.get('PID2')!r}")
+            ref = " & ".join(
+                make_ref(pid, known_by_pid.get(pid, ""))
+                for pid in (p1, p2) if pid
+            ) or (row.get("REF_NAME") or "").strip() or uid
+            attrs = dict(row)
+            attrs["UID"] = uid
+            attrs["PID1"] = p1 or ""
+            attrs["PID2"] = p2 or ""
+            attrs["REF_NAME"] = ref
+            if p1:
+                attrs["PID1_REF"] = row.get("PID1", "")
+            if p2:
+                attrs["PID2_REF"] = row.get("PID2", "")
+            # A self-union (the same PID in both partner slots) is a sheet typo. Keep
+            # the raw values in the attributes, but treat it as a single partner so
+            # the graph does not emit two identical partner edges and the List view
+            # does not show someone married to themselves.
+            if p1 and p1 == p2:
+                warnings.append(
+                    f"Union {uid}: both partner slots are {p1}; treating it as a "
+                    "single-partner union. Check PID1/PID2 in the sheet.")
+                p2 = ""
+            date, year = parse_dmy(row.get("REL_START"))
+            father, mother = p1, p2
+            if p2 and p1:
+                g1 = next((gender_code(p.get("GENDER")) for p in persons_raw if p["PID"] == p1), "O")
+                g2 = next((gender_code(p.get("GENDER")) for p in persons_raw if p["PID"] == p2), "O")
+                if g1 == "F" and g2 != "F":
+                    father, mother = p2, p1
+                elif g1 == g2:
+                    father, mother = p1, p2
+                    if g1 == "F":
+                        warnings.append(
+                            f"Union {uid}: both partners are recorded as female; using PID1 "
+                            "as father and PID2 as mother because the data model has two "
+                            "parent slots. Check GENDER if this is a data-entry error.")
+            elif p1 and not p2:
+                g1 = next((gender_code(p.get("GENDER")) for p in persons_raw if p["PID"] == p1), "O")
+                father, mother = (None, p1) if g1 == "F" else (p1, None)
+            elif p2 and not p1:
+                g2 = next((gender_code(p.get("GENDER")) for p in persons_raw if p["PID"] == p2), "O")
+                father, mother = (None, p2) if g2 == "F" else (p2, None)
+            fam = {
+                "id": uid,
+                "father": father,
+                "mother": mother,
+                "children": [],
+                "relation": "Married" if date else "Unknown",
+                "marriage": {"date": date, "year": year, "place": ""} if date else None,
+                "notes": row.get("NOTES", ""),
+                "ref_name": ref,
+                "attributes": attrs,
+            }
+            families.append(fam)
+            family_by_uid[uid] = fam
+
+        resolve_union = union_resolver(families)
+
+        # Offspring edges create both the family's children and the person's
+        # parent_family link.
+        for row in offspring_raw:
+            uid = resolve_union(row.get("UNION_OF"))
+            child = resolve(row.get("OFFSPRING"))
+            if not uid or not child:
+                warnings.append(f"Offspring {row.get('OID')}: could not resolve "
+                                f"{row.get('UNION_OF')!r} -> {row.get('OFFSPRING')!r}")
+                continue
+            fam = family_by_uid[uid]
+            if child in (fam["father"], fam["mother"]):
+                warnings.append(f"Offspring {row.get('OID')}: {child} is a partner of {uid}, skipped")
+                continue
+            if child not in fam["children"]:
+                fam["children"].append(child)
+
+        parent_family = {}
+        for fam in families:
+            for child in fam["children"]:
+                parent_family.setdefault(child, fam["id"])
 
     people = []
     person_by_pid = {}
@@ -728,11 +882,7 @@ def build(sheets, config, tabs=None, authority_rows=None):
         # parse_birth turns Sheets date-time serials and text dates into a
         # friendly display string, and keeps the datetime for the horoscope.
         dob, dob_dt, dob_has_time = parse_birth(row.get("DOB"))
-        cur = city_only(row.get("CUR_LOC")) if living else (row.get("CUR_LOC") or "").strip()
         events = []
-        if cur:
-            events.append({"type": "Current location", "role": "", "date": None,
-                           "year": None, "place": cur, "description": ""})
         # Keep the original sheet columns for reference, but show Sheets
         # date-time serials (e.g. "16827.0") as friendly dates.
         attrs = dict(row)
@@ -741,9 +891,6 @@ def build(sheets, config, tabs=None, authority_rows=None):
         dod, _, _ = parse_birth(row.get("DOD"))
         if dod:
             attrs["DOD"] = dod
-        pod = (row.get("POD") or "").strip()
-        if pod:
-            attrs["POD"] = pod
         generation = ((row.get("GEN") or row.get("GENERATION") or "").strip().upper())
         person = {
             "id": pid,
@@ -759,7 +906,7 @@ def build(sheets, config, tabs=None, authority_rows=None):
             },
             "birth": None,
             "death": None,
-            "current_location": cur,
+            "current_location": "",
             "events": events,
             "families": [],
             "parent_family": parent_family.get(pid),
@@ -824,33 +971,41 @@ def build(sheets, config, tabs=None, authority_rows=None):
                 "to": fam["id"],
                 "attributes": {"role": "partner", "union": fam["id"]},
             })
+    # Build offspring edges from the families' children lists. When the legacy
+    # Offsprings tab exists, preserve its OID/NOTES attributes; otherwise
+    # synthesise a simple edge from the KG-derived family.
     offspring_attrs = {}
     seen_oids = set()
-    for row in offspring_raw:
-        uid = resolve_union(row.get("UNION_OF"))
-        child = resolve(row.get("OFFSPRING"))
-        oid = (row.get("OID") or "").strip()
-        if oid and oid in seen_oids:
-            warnings.append(f"Duplicate offspring ID {oid}, using first occurrence")
-            continue
-        if oid:
-            seen_oids.add(oid)
-        if uid and child and child in family_by_uid[uid]["children"]:
-            offspring_attrs.setdefault((uid, child), []).append(row)
-    for (uid, child), rows in offspring_attrs.items():
-        first = rows[0]
-        edges.append({
-            "id": first.get("OID") or f"{uid}-{child}",
-            "type": "offspring",
-            "from": uid,
-            "to": child,
-            "attributes": {
-                "OID": first.get("OID", ""),
-                "UNION_OF": first.get("UNION_OF", ""),
-                "OFFSPRING": first.get("OFFSPRING", ""),
-                "NOTES": " ".join(r.get("NOTES", "") for r in rows if r.get("NOTES")).strip(),
-            },
-        })
+    if not kg_raw:
+        for row in offspring_raw:
+            uid = resolve_union(row.get("UNION_OF"))
+            child = resolve(row.get("OFFSPRING"))
+            oid = (row.get("OID") or "").strip()
+            if oid and oid in seen_oids:
+                warnings.append(f"Duplicate offspring ID {oid}, using first occurrence")
+                continue
+            if oid:
+                seen_oids.add(oid)
+            if uid and child and child in family_by_uid[uid]["children"]:
+                offspring_attrs.setdefault((uid, child), []).append(row)
+
+    for fam in families:
+        for child in fam["children"]:
+            key = (fam["id"], child)
+            rows = offspring_attrs.get(key, [])
+            first = rows[0] if rows else {}
+            edges.append({
+                "id": first.get("OID") or f"{fam['id']}-{child}",
+                "type": "offspring",
+                "from": fam["id"],
+                "to": child,
+                "attributes": {
+                    "OID": first.get("OID", ""),
+                    "UNION_OF": first.get("UNION_OF", ""),
+                    "OFFSPRING": first.get("OFFSPRING", ""),
+                    "NOTES": " ".join(r.get("NOTES", "") for r in rows if r.get("NOTES")).strip(),
+                },
+            })
 
     # --- Notes and Stories -----------------------------------------------------
     notes = []
