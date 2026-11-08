@@ -829,7 +829,7 @@ function previewFormula_(refLetter, row, source, list) {
  */
 function populateInstructionsSheet_(sheet) {
   sheet.clear();
-  sheet.setGridLines(true);
+  sheet.setHiddenGridlines(false);
 
   const instructionsContent = [
     ["🌳 KULA GENEALOGY SYSTEM — USER GUIDE"],
