@@ -1,0 +1,25 @@
+{
+  "timeZone": "America/New_York",
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "oauthScopes": [
+    "https://www.googleapis.com/auth/spreadsheets.currentonly",
+    "https://www.googleapis.com/auth/script.container.ui"
+  ],
+  "addOns": {
+    "common": {
+      "logoUrl": "https://evolvedhow.github.io/kula/assets/kula.jpg",
+      "name": "குல :: [WELCOME TO KULA GENEALOGY PLUGIN] :: कुल",
+      "layoutProperties": {
+        "primaryColor": "#1c4587",
+        "secondaryColor": "#1c4587"
+      }
+    },
+    "sheets": {
+      "homepageTrigger": {
+        "runFunction": "onHomepage",
+        "enabled": true
+      }
+    }
+  }
+}
