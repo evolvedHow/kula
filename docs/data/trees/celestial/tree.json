@@ -1,0 +1,7914 @@
+{
+ "schema": "kula.site/2.0",
+ "generated_at": "2026-11-08T22:37:35+00:00",
+ "source": "Google Sheet",
+ "home": "P-1001",
+ "counts": {
+  "people": 81,
+  "hidden_living": 0,
+  "families": 40,
+  "stories": 0,
+  "notes": 0,
+  "charts": 0,
+  "places": 51
+ },
+ "people": [
+  {
+   "id": "P-1001",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Brahma",
+    "given": "Lord",
+    "surname": "Brahma",
+    "alternates": [
+     "Brahma"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Brahmaloka / cosmic lotus"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F005"
+   ],
+   "parent_family": "F001",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1001",
+    "KNOWN_NAME": "Brahma",
+    "FULL_NAME": "Lord Brahma",
+    "REF_NAME": "P-1001-Brahma",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Brahmaloka / cosmic lotus",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Primordial creator deity; in a major Puranic account emerges from the lotus arising from Vishnu's navel. Birth date is not historically datable. Traditions: Puranic, Smarta. Sources: Bhagavata Purana; Vishnu Purana. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1001-Brahma",
+   "vedic": {}
+  },
+  {
+   "id": "P-1002",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Goddess Saraswati",
+    "given": "Goddess",
+    "surname": "Saraswati",
+    "alternates": [
+     "Saraswati"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Brahmaloka / cosmic manifestation"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F005"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1002",
+    "KNOWN_NAME": "Saraswati",
+    "FULL_NAME": "Goddess Saraswati",
+    "REF_NAME": "P-1002-Saraswati",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Brahmaloka / cosmic manifestation",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Goddess of knowledge, speech, music and learning; commonly regarded as Brahma's consort, though accounts of her origin and relationship vary. Birth date unknown. Traditions: Puranic, Smarta. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1002-Saraswati",
+   "vedic": {}
+  },
+  {
+   "id": "P-1003",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Vishnu / Narayana",
+    "given": "Lord Vishnu /",
+    "surname": "Narayana",
+    "alternates": [
+     "Vishnu"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Vaikuntha / primordial cosmic waters"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F001"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1003",
+    "KNOWN_NAME": "Vishnu",
+    "FULL_NAME": "Lord Vishnu / Narayana",
+    "REF_NAME": "P-1003-Vishnu",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Vaikuntha / primordial cosmic waters",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Preserver and supreme deity in Vaishnava traditions; described as primordial and eternal. In one widely known Puranic cosmology Brahma emerges from the lotus from his navel. No historical birth date. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1003-Vishnu",
+   "vedic": {}
+  },
+  {
+   "id": "P-1004",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Goddess Lakshmi / Shri",
+    "given": "Goddess Lakshmi /",
+    "surname": "Shri",
+    "alternates": [
+     "Lakshmi"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Kshira Sagara (cosmic ocean of milk)"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F001"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1004",
+    "KNOWN_NAME": "Lakshmi",
+    "FULL_NAME": "Goddess Lakshmi / Shri",
+    "REF_NAME": "P-1004-Lakshmi",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Kshira Sagara (cosmic ocean of milk)",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Goddess of prosperity, fortune and auspiciousness; emerges during the Samudra Manthana in a major Puranic account and is Vishnu's consort. No historical birth date. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1004-Lakshmi",
+   "vedic": {}
+  },
+  {
+   "id": "P-1005",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Shiva / Mahadeva / Rudra",
+    "given": "Lord Shiva / Mahadeva /",
+    "surname": "Rudra",
+    "alternates": [
+     "Shiva"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Mount Kailasa / primordial"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F003",
+    "F020",
+    "F021"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1005",
+    "KNOWN_NAME": "Shiva",
+    "FULL_NAME": "Lord Shiva / Mahadeva / Rudra",
+    "REF_NAME": "P-1005-Shiva",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Mount Kailasa / primordial",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "A principal deity associated with transformation, dissolution, asceticism and grace. Often described as self-existent. Consort of Sati and, in her later birth, Parvati. Traditions: Shaiva, Smarta. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1005-Shiva",
+   "vedic": {}
+  },
+  {
+   "id": "P-1006",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Goddess Sati / Dakshayani",
+    "given": "Goddess Sati /",
+    "surname": "Dakshayani",
+    "alternates": [
+     "Sati"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Daksha's household; traditional location varies"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F021"
+   ],
+   "parent_family": "F004",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1006",
+    "KNOWN_NAME": "Sati",
+    "FULL_NAME": "Goddess Sati / Dakshayani",
+    "REF_NAME": "P-1006-Sati",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Daksha's household; traditional location varies",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Daughter of Daksha and Prasuti; first consort of Shiva. After her self-immolation she is reborn as Parvati in a major Shaiva narrative. No historical birth date. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1006-Sati",
+   "vedic": {}
+  },
+  {
+   "id": "P-1007",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Goddess Parvati / Uma / Gauri",
+    "given": "Goddess Parvati / Uma /",
+    "surname": "Gauri",
+    "alternates": [
+     "Parvati"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Himalaya / Himavan's household"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F003",
+    "F020"
+   ],
+   "parent_family": "F002",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1007",
+    "KNOWN_NAME": "Parvati",
+    "FULL_NAME": "Goddess Parvati / Uma / Gauri",
+    "REF_NAME": "P-1007-Parvati",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Himalaya / Himavan's household",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Daughter of Himavan and Maina; rebirth/manifestation of Sati and consort of Shiva. Mother of Ganesha, Kartikeya and (in some Puranic accounts) Ashokasundari. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1007-Parvati",
+   "vedic": {}
+  },
+  {
+   "id": "P-1008",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Himavan / Himavat, personification of the Himalaya",
+    "given": "Himavan / Himavat, personification of the",
+    "surname": "Himalaya",
+    "alternates": [
+     "Himavan"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Himalayas"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F002"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1008",
+    "KNOWN_NAME": "Himavan",
+    "FULL_NAME": "Himavan / Himavat, personification of the Himalaya",
+    "REF_NAME": "P-1008-Himavan",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Himalayas",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Mountain king and personification of the Himalaya; father of Parvati and, in some accounts, Mainaka and Ganga. Consort of Maina. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1008-Himavan",
+   "vedic": {}
+  },
+  {
+   "id": "P-1009",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Queen Maina / Menavati",
+    "given": "Queen Maina /",
+    "surname": "Menavati",
+    "alternates": [
+     "Maina"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Himalayas"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F002"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1009",
+    "KNOWN_NAME": "Maina",
+    "FULL_NAME": "Queen Maina / Menavati",
+    "REF_NAME": "P-1009-Maina",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Himalayas",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Consort of Himavan and mother of Parvati in major Puranic accounts. Also called Menavati or Mena. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1009-Maina",
+   "vedic": {}
+  },
+  {
+   "id": "P-1010",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Ganesha / Ganapati / Vinayaka",
+    "given": "Lord Ganesha / Ganapati /",
+    "surname": "Vinayaka",
+    "alternates": [
+     "Ganesha"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Mount Kailasa"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F003",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1010",
+    "KNOWN_NAME": "Ganesha",
+    "FULL_NAME": "Lord Ganesha / Ganapati / Vinayaka",
+    "REF_NAME": "P-1010-Ganesha",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Mount Kailasa",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Son of Shiva and Parvati in the widely known Shaiva tradition; remover of obstacles and patron of beginnings, wisdom and learning. Birth narratives vary. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1010-Ganesha",
+   "vedic": {}
+  },
+  {
+   "id": "P-1011",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Kartikeya / Skanda / Murugan / Subrahmanya",
+    "given": "Lord Kartikeya / Skanda / Murugan /",
+    "surname": "Subrahmanya",
+    "alternates": [
+     "Kartikeya"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Saravana (reed forest); traditions also associate him with Kailasa"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F022",
+    "F023"
+   ],
+   "parent_family": "F003",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1011",
+    "KNOWN_NAME": "Kartikeya",
+    "FULL_NAME": "Lord Kartikeya / Skanda / Murugan / Subrahmanya",
+    "REF_NAME": "P-1011-Kartikeya",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Saravana (reed forest); traditions also associate him with Kailasa",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Son of Shiva and Parvati in widely known traditions; commander of the divine hosts. South Indian traditions especially revere him as Murugan. Birth accounts vary. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1011-Kartikeya",
+   "vedic": {}
+  },
+  {
+   "id": "P-1012",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Goddess Ashokasundari",
+    "given": "Goddess",
+    "surname": "Ashokasundari",
+    "alternates": [
+     "Ashokasundari"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Mount Kailasa"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F003",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1012",
+    "KNOWN_NAME": "Ashokasundari",
+    "FULL_NAME": "Goddess Ashokasundari",
+    "REF_NAME": "P-1012-Ashokasundari",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Mount Kailasa",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Daughter of Shiva and Parvati in a narrative found notably in the Padma Purana; less prominent in some regional traditions. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1012-Ashokasundari",
+   "vedic": {}
+  },
+  {
+   "id": "P-1013",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Goddess Valli",
+    "given": "Goddess",
+    "surname": "Valli",
+    "alternates": [
+     "Valli"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Valli Malai / tribal community setting in Tamil tradition"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F022"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1013",
+    "KNOWN_NAME": "Valli",
+    "FULL_NAME": "Goddess Valli",
+    "REF_NAME": "P-1013-Valli",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Valli Malai / tribal community setting in Tamil tradition",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Consort of Murugan/Kartikeya in Tamil traditions; her origin and marriage narrative are devotional and regional. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1013-Valli",
+   "vedic": {}
+  },
+  {
+   "id": "P-1014",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Goddess Devasena / Deivayanai",
+    "given": "Goddess Devasena /",
+    "surname": "Deivayanai",
+    "alternates": [
+     "Devasena"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Celestial realm / Indra's household"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F023"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1014",
+    "KNOWN_NAME": "Devasena",
+    "FULL_NAME": "Goddess Devasena / Deivayanai",
+    "REF_NAME": "P-1014-Devasena",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Celestial realm / Indra's household",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Consort of Kartikeya/Murugan; associated with Indra's family and the celestial army. Accounts of her parentage vary. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1014-Devasena",
+   "vedic": {}
+  },
+  {
+   "id": "P-1015",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Prajapati Daksha",
+    "given": "Prajapati",
+    "surname": "Daksha",
+    "alternates": [
+     "Daksha"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Brahmaloka / terrestrial sacrificial realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F004"
+   ],
+   "parent_family": "F005",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1015",
+    "KNOWN_NAME": "Daksha",
+    "FULL_NAME": "Prajapati Daksha",
+    "REF_NAME": "P-1015-Daksha",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Brahmaloka / terrestrial sacrificial realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Prajapati and progenitor figure; often described as a mind-born son of Brahma, though genealogies vary. Father of Sati and many daughters. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1015-Daksha",
+   "vedic": {}
+  },
+  {
+   "id": "P-1016",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Prasuti",
+    "given": "Prasuti",
+    "surname": "",
+    "alternates": []
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Prajapati lineage; traditional location varies"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F004"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1016",
+    "KNOWN_NAME": "Prasuti",
+    "FULL_NAME": "Prasuti",
+    "REF_NAME": "P-1016-Prasuti",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Prajapati lineage; traditional location varies",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Consort of Daksha and mother of several daughters, including Sati in important Puranic genealogies. Her own parentage varies by text. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1016-Prasuti",
+   "vedic": {}
+  },
+  {
+   "id": "P-1017",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Sage Marichi / Prajapati Marichi",
+    "given": "Sage Marichi / Prajapati",
+    "surname": "Marichi",
+    "alternates": [
+     "Marichi"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Brahmaloka / cosmic creation"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F006"
+   ],
+   "parent_family": "F005",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1017",
+    "KNOWN_NAME": "Marichi",
+    "FULL_NAME": "Sage Marichi / Prajapati Marichi",
+    "REF_NAME": "P-1017-Marichi",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Brahmaloka / cosmic creation",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "One of Brahma's mind-born sons and a Prajapati; father of Kashyapa in major Puranic genealogies. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1017-Marichi",
+   "vedic": {}
+  },
+  {
+   "id": "P-1018",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Prajapati Kashyapa",
+    "given": "Prajapati",
+    "surname": "Kashyapa",
+    "alternates": [
+     "Kashyapa"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Hermitage / cosmic creation setting"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F007",
+    "F024",
+    "F025",
+    "F026",
+    "F027",
+    "F028"
+   ],
+   "parent_family": "F006",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1018",
+    "KNOWN_NAME": "Kashyapa",
+    "FULL_NAME": "Prajapati Kashyapa",
+    "REF_NAME": "P-1018-Kashyapa",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Hermitage / cosmic creation setting",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Son of Marichi; major progenitor married to several daughters of Daksha. His descendants include Adityas, Daityas, Danavas, birds and Nagas. Lists differ by Purana. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1018-Kashyapa",
+   "vedic": {}
+  },
+  {
+   "id": "P-1019",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Goddess Aditi",
+    "given": "Goddess",
+    "surname": "Aditi",
+    "alternates": [
+     "Aditi"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Celestial realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F027"
+   ],
+   "parent_family": "F004",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1019",
+    "KNOWN_NAME": "Aditi",
+    "FULL_NAME": "Goddess Aditi",
+    "REF_NAME": "P-1019-Aditi",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Celestial realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Daughter of Daksha and Prasuti in common Puranic genealogies; consort of Kashyapa and mother of the Adityas, including Indra and Vivasvan/Surya in many lists. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1019-Aditi",
+   "vedic": {}
+  },
+  {
+   "id": "P-1020",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Goddess Diti",
+    "given": "Goddess",
+    "surname": "Diti",
+    "alternates": [
+     "Diti"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Celestial realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F026"
+   ],
+   "parent_family": "F004",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1020",
+    "KNOWN_NAME": "Diti",
+    "FULL_NAME": "Goddess Diti",
+    "REF_NAME": "P-1020-Diti",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Celestial realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Daughter of Daksha and Prasuti; consort of Kashyapa and mother of the Daityas, including Hiranyaksha and Hiranyakashipu. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1020-Diti",
+   "vedic": {}
+  },
+  {
+   "id": "P-1021",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Goddess Danu",
+    "given": "Goddess",
+    "surname": "Danu",
+    "alternates": [
+     "Danu"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Celestial realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F025"
+   ],
+   "parent_family": "F004",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1021",
+    "KNOWN_NAME": "Danu",
+    "FULL_NAME": "Goddess Danu",
+    "REF_NAME": "P-1021-Danu",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Celestial realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Daughter of Daksha in many genealogies; consort of Kashyapa and mother of the Danavas. Individual child lists vary. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1021-Danu",
+   "vedic": {}
+  },
+  {
+   "id": "P-1022",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Vinata",
+    "given": "Vinata",
+    "surname": "",
+    "alternates": []
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Celestial realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F007",
+    "F024"
+   ],
+   "parent_family": "F004",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1022",
+    "KNOWN_NAME": "Vinata",
+    "FULL_NAME": "Vinata",
+    "REF_NAME": "P-1022-Vinata",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Celestial realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Consort of Kashyapa; mother of Garuda and Aruna. Her story is prominent in the Mahabharata. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1022-Vinata",
+   "vedic": {}
+  },
+  {
+   "id": "P-1023",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Kadru",
+    "given": "Kadru",
+    "surname": "",
+    "alternates": []
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Celestial realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F028"
+   ],
+   "parent_family": "F004",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1023",
+    "KNOWN_NAME": "Kadru",
+    "FULL_NAME": "Kadru",
+    "REF_NAME": "P-1023-Kadru",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Celestial realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Consort of Kashyapa; mother of the Nagas, including Shesha, Vasuki and Takshaka in well-known accounts. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1023-Kadru",
+   "vedic": {}
+  },
+  {
+   "id": "P-1024",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Indra / Shakra",
+    "given": "Lord Indra /",
+    "surname": "Shakra",
+    "alternates": [
+     "Indra"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Svarga (heaven)"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F008"
+   ],
+   "parent_family": "F007",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1024",
+    "KNOWN_NAME": "Indra",
+    "FULL_NAME": "Lord Indra / Shakra",
+    "REF_NAME": "P-1024-Indra",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Svarga (heaven)",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "King of the Devas; counted among the Adityas in many traditions and son of Kashyapa and Aditi. Consort of Shachi/Indrani. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1024-Indra",
+   "vedic": {}
+  },
+  {
+   "id": "P-1025",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Goddess Shachi / Indrani / Pulomaja",
+    "given": "Goddess Shachi / Indrani /",
+    "surname": "Pulomaja",
+    "alternates": [
+     "Shachi"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Svarga"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F008"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1025",
+    "KNOWN_NAME": "Shachi",
+    "FULL_NAME": "Goddess Shachi / Indrani / Pulomaja",
+    "REF_NAME": "P-1025-Shachi",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Svarga",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Consort of Indra and queen of the Devas; often identified as daughter of the Asura Puloman. Her parentage is not represented here because Puloman is outside this initial core set. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1025-Shachi",
+   "vedic": {}
+  },
+  {
+   "id": "P-1026",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Jayanta",
+    "given": "Jayanta",
+    "surname": "",
+    "alternates": []
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Svarga"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F008",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1026",
+    "KNOWN_NAME": "Jayanta",
+    "FULL_NAME": "Jayanta",
+    "REF_NAME": "P-1026-Jayanta",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Svarga",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Son of Indra and Shachi in Puranic accounts; a celestial prince. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1026-Jayanta",
+   "vedic": {}
+  },
+  {
+   "id": "P-1027",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Surya / Vivasvan / Aditya",
+    "given": "Lord Surya / Vivasvan /",
+    "surname": "Aditya",
+    "alternates": [
+     "Surya"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Solar realm / celestial heavens"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F009",
+    "F029",
+    "F030"
+   ],
+   "parent_family": "F007",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1027",
+    "KNOWN_NAME": "Surya",
+    "FULL_NAME": "Lord Surya / Vivasvan / Aditya",
+    "REF_NAME": "P-1027-Surya",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Solar realm / celestial heavens",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Solar deity; son of Kashyapa and Aditi in many Puranic genealogies. Consorts include Sanjna and Chhaya in well-known narratives. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1027-Surya",
+   "vedic": {}
+  },
+  {
+   "id": "P-1028",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Goddess Sanjna / Saranyu",
+    "given": "Goddess Sanjna /",
+    "surname": "Saranyu",
+    "alternates": [
+     "Sanjna"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Vishvakarma's household / celestial realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F009",
+    "F029"
+   ],
+   "parent_family": "F010",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1028",
+    "KNOWN_NAME": "Sanjna",
+    "FULL_NAME": "Goddess Sanjna / Saranyu",
+    "REF_NAME": "P-1028-Sanjna",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Vishvakarma's household / celestial realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Consort of Surya; daughter of Vishvakarma in a common account. Mother of Yama, Yami and Manu Vaivasvata in major traditions. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1028-Sanjna",
+   "vedic": {}
+  },
+  {
+   "id": "P-1029",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Goddess Chhaya",
+    "given": "Goddess",
+    "surname": "Chhaya",
+    "alternates": [
+     "Chhaya"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Created as Sanjna's shadow"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F030"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1029",
+    "KNOWN_NAME": "Chhaya",
+    "FULL_NAME": "Goddess Chhaya",
+    "REF_NAME": "P-1029-Chhaya",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Created as Sanjna's shadow",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Shadow-form or substitute of Sanjna and consort of Surya; mother of Shani and Savarni Manu in well-known accounts. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1029-Chhaya",
+   "vedic": {}
+  },
+  {
+   "id": "P-1030",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Yama / Dharmaraja",
+    "given": "Lord Yama /",
+    "surname": "Dharmaraja",
+    "alternates": [
+     "Yama"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Yamaloka"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F009",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1030",
+    "KNOWN_NAME": "Yama",
+    "FULL_NAME": "Lord Yama / Dharmaraja",
+    "REF_NAME": "P-1030-Yama",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Yamaloka",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "God of death and justice; son of Surya and Sanjna in a major Puranic genealogy; twin of Yami. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1030-Yama",
+   "vedic": {}
+  },
+  {
+   "id": "P-1031",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Goddess Yami / Yamuna",
+    "given": "Goddess Yami /",
+    "surname": "Yamuna",
+    "alternates": [
+     "Yami"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Celestial realm / earthly river"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F009",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1031",
+    "KNOWN_NAME": "Yami",
+    "FULL_NAME": "Goddess Yami / Yamuna",
+    "REF_NAME": "P-1031-Yami",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Celestial realm / earthly river",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Daughter of Surya and Sanjna; often associated with the river Yamuna and twin sister of Yama. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1031-Yami",
+   "vedic": {}
+  },
+  {
+   "id": "P-1032",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Manu Vaivasvata / Shraddhadeva",
+    "given": "Manu Vaivasvata /",
+    "surname": "Shraddhadeva",
+    "alternates": [
+     "Vaivasvata Manu"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Earth; associated with the primordial flood narrative"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F009",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1032",
+    "KNOWN_NAME": "Vaivasvata Manu",
+    "FULL_NAME": "Manu Vaivasvata / Shraddhadeva",
+    "REF_NAME": "P-1032-Vaivasvata Manu",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Earth; associated with the primordial flood narrative",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Son of Surya and Sanjna in Puranic accounts; the Manu of the present manvantara. Chronology is cosmological, not historical. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1032-Vaivasvata Manu",
+   "vedic": {}
+  },
+  {
+   "id": "P-1033",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Shani / Shanaishchara",
+    "given": "Lord Shani /",
+    "surname": "Shanaishchara",
+    "alternates": [
+     "Shani"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Celestial realm / Saturn"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F009",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1033",
+    "KNOWN_NAME": "Shani",
+    "FULL_NAME": "Lord Shani / Shanaishchara",
+    "REF_NAME": "P-1033-Shani",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Celestial realm / Saturn",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Son of Surya and Chhaya; planetary deity associated with Saturn, karma and discipline. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1033-Shani",
+   "vedic": {}
+  },
+  {
+   "id": "P-1034",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Savarni Manu",
+    "given": "Savarni",
+    "surname": "Manu",
+    "alternates": []
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Celestial realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F009",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1034",
+    "KNOWN_NAME": "Savarni Manu",
+    "FULL_NAME": "Savarni Manu",
+    "REF_NAME": "P-1034-Savarni Manu",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Celestial realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Son of Surya and Chhaya in a common Puranic account; associated with a future manvantara. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1034-Savarni Manu",
+   "vedic": {}
+  },
+  {
+   "id": "P-1035",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Varuna",
+    "given": "Lord",
+    "surname": "Varuna",
+    "alternates": [
+     "Varuna"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Cosmic waters / celestial realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F007",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1035",
+    "KNOWN_NAME": "Varuna",
+    "FULL_NAME": "Lord Varuna",
+    "REF_NAME": "P-1035-Varuna",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Cosmic waters / celestial realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Vedic deity associated with cosmic order and waters; counted among the Adityas in many lists and often made son of Kashyapa and Aditi in Puranic genealogies. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1035-Varuna",
+   "vedic": {}
+  },
+  {
+   "id": "P-1036",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Mitra",
+    "given": "Lord",
+    "surname": "Mitra",
+    "alternates": [
+     "Mitra"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Celestial realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F007",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1036",
+    "KNOWN_NAME": "Mitra",
+    "FULL_NAME": "Lord Mitra",
+    "REF_NAME": "P-1036-Mitra",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Celestial realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Vedic Aditya associated with agreements, friendship and social order; Puranic genealogies often place him among Aditi's sons. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1036-Mitra",
+   "vedic": {}
+  },
+  {
+   "id": "P-1037",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Aryaman",
+    "given": "Lord",
+    "surname": "Aryaman",
+    "alternates": [
+     "Aryaman"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Celestial realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F007",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1037",
+    "KNOWN_NAME": "Aryaman",
+    "FULL_NAME": "Lord Aryaman",
+    "REF_NAME": "P-1037-Aryaman",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Celestial realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Vedic Aditya associated with hospitality, alliances and social bonds; included among Aditi's sons in common lists. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1037-Aryaman",
+   "vedic": {}
+  },
+  {
+   "id": "P-1038",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Bhaga",
+    "given": "Lord",
+    "surname": "Bhaga",
+    "alternates": [
+     "Bhaga"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Celestial realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F007",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1038",
+    "KNOWN_NAME": "Bhaga",
+    "FULL_NAME": "Lord Bhaga",
+    "REF_NAME": "P-1038-Bhaga",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Celestial realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Vedic Aditya associated with fortune and one's share; included among Aditi's sons in Puranic lists. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1038-Bhaga",
+   "vedic": {}
+  },
+  {
+   "id": "P-1039",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Vamana",
+    "given": "Lord",
+    "surname": "Vamana",
+    "alternates": [
+     "Vamana"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Aditi and Kashyapa's hermitage; traditional location varies"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F007",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1039",
+    "KNOWN_NAME": "Vamana",
+    "FULL_NAME": "Lord Vamana",
+    "REF_NAME": "P-1039-Vamana",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Aditi and Kashyapa's hermitage; traditional location varies",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Dwarf incarnation of Vishnu, born to Kashyapa and Aditi in the Vamana narrative. This is an avatar-birth genealogy; avatar identity is not encoded as parentage. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1039-Vamana",
+   "vedic": {}
+  },
+  {
+   "id": "P-1040",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Hiranyaksha",
+    "given": "Hiranyaksha",
+    "surname": "",
+    "alternates": []
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Daitya realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F007",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1040",
+    "KNOWN_NAME": "Hiranyaksha",
+    "FULL_NAME": "Hiranyaksha",
+    "REF_NAME": "P-1040-Hiranyaksha",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Daitya realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Daitya son of Diti and Kashyapa; antagonist in the Varaha narrative. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1040-Hiranyaksha",
+   "vedic": {}
+  },
+  {
+   "id": "P-1041",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Hiranyakashipu",
+    "given": "Hiranyakashipu",
+    "surname": "",
+    "alternates": []
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Daitya realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F015"
+   ],
+   "parent_family": "F007",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1041",
+    "KNOWN_NAME": "Hiranyakashipu",
+    "FULL_NAME": "Hiranyakashipu",
+    "REF_NAME": "P-1041-Hiranyakashipu",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Daitya realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Daitya son of Diti and Kashyapa; father of Prahlada. Prominent in the Narasimha narrative. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1041-Hiranyakashipu",
+   "vedic": {}
+  },
+  {
+   "id": "P-1042",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Prahlada",
+    "given": "Prahlada",
+    "surname": "",
+    "alternates": []
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Daitya realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F015",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1042",
+    "KNOWN_NAME": "Prahlada",
+    "FULL_NAME": "Prahlada",
+    "REF_NAME": "P-1042-Prahlada",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Daitya realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Son of Hiranyakashipu and Kayadhu; celebrated devotee of Vishnu. Kayadhu is not included in this initial core dataset. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1042-Prahlada",
+   "vedic": {}
+  },
+  {
+   "id": "P-1043",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Garuda",
+    "given": "Lord",
+    "surname": "Garuda",
+    "alternates": [
+     "Garuda"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Celestial realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F007",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1043",
+    "KNOWN_NAME": "Garuda",
+    "FULL_NAME": "Lord Garuda",
+    "REF_NAME": "P-1043-Garuda",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Celestial realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Son of Kashyapa and Vinata; divine eagle and vehicle of Vishnu. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1043-Garuda",
+   "vedic": {}
+  },
+  {
+   "id": "P-1044",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Aruna",
+    "given": "Aruna",
+    "surname": "",
+    "alternates": []
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Celestial realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F007",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1044",
+    "KNOWN_NAME": "Aruna",
+    "FULL_NAME": "Aruna",
+    "REF_NAME": "P-1044-Aruna",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Celestial realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Son of Kashyapa and Vinata; charioteer of Surya in epic and Puranic accounts. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1044-Aruna",
+   "vedic": {}
+  },
+  {
+   "id": "P-1045",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Ananta Shesha",
+    "given": "Ananta",
+    "surname": "Shesha",
+    "alternates": [
+     "Shesha"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Patala / cosmic waters"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F007",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1045",
+    "KNOWN_NAME": "Shesha",
+    "FULL_NAME": "Ananta Shesha",
+    "REF_NAME": "P-1045-Shesha",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Patala / cosmic waters",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Naga son of Kashyapa and Kadru in common genealogies; cosmic serpent associated with Vishnu. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1045-Shesha",
+   "vedic": {}
+  },
+  {
+   "id": "P-1046",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Naga king Vasuki",
+    "given": "Naga king",
+    "surname": "Vasuki",
+    "alternates": [
+     "Vasuki"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Naga realm / Patala"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F007",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1046",
+    "KNOWN_NAME": "Vasuki",
+    "FULL_NAME": "Naga king Vasuki",
+    "REF_NAME": "P-1046-Vasuki",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Naga realm / Patala",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Naga son of Kashyapa and Kadru in common genealogies; associated with the Samudra Manthana. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1046-Vasuki",
+   "vedic": {}
+  },
+  {
+   "id": "P-1047",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Naga king Takshaka",
+    "given": "Naga king",
+    "surname": "Takshaka",
+    "alternates": [
+     "Takshaka"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Naga realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F007",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1047",
+    "KNOWN_NAME": "Takshaka",
+    "FULL_NAME": "Naga king Takshaka",
+    "REF_NAME": "P-1047-Takshaka",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Naga realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Naga son of Kashyapa and Kadru in common genealogies; prominent in the Mahabharata. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1047-Takshaka",
+   "vedic": {}
+  },
+  {
+   "id": "P-1048",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Sage Atri",
+    "given": "Sage",
+    "surname": "Atri",
+    "alternates": [
+     "Atri"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Hermitage of Atri"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F011"
+   ],
+   "parent_family": "F005",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1048",
+    "KNOWN_NAME": "Atri",
+    "FULL_NAME": "Sage Atri",
+    "REF_NAME": "P-1048-Atri",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Hermitage of Atri",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "One of Brahma's mind-born sons in many accounts; one of the Saptarishis. Consort of Anasuya. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1048-Atri",
+   "vedic": {}
+  },
+  {
+   "id": "P-1049",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Sage Anasuya",
+    "given": "Sage",
+    "surname": "Anasuya",
+    "alternates": [
+     "Anasuya"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Atri's hermitage"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F011"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1049",
+    "KNOWN_NAME": "Anasuya",
+    "FULL_NAME": "Sage Anasuya",
+    "REF_NAME": "P-1049-Anasuya",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Atri's hermitage",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Renowned wife of Atri; mother of Dattatreya and Durvasa, and of Soma/Chandra in some traditions. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1049-Anasuya",
+   "vedic": {}
+  },
+  {
+   "id": "P-1050",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Dattatreya",
+    "given": "Lord",
+    "surname": "Dattatreya",
+    "alternates": [
+     "Dattatreya"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Atri and Anasuya's hermitage"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F011",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1050",
+    "KNOWN_NAME": "Dattatreya",
+    "FULL_NAME": "Lord Dattatreya",
+    "REF_NAME": "P-1050-Dattatreya",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Atri and Anasuya's hermitage",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Divine sage, often understood as a combined manifestation of the Trimurti; son of Atri and Anasuya in a major tradition. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1050-Dattatreya",
+   "vedic": {}
+  },
+  {
+   "id": "P-1051",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Sage Durvasa",
+    "given": "Sage",
+    "surname": "Durvasa",
+    "alternates": [
+     "Durvasa"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Atri's hermitage"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F011",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1051",
+    "KNOWN_NAME": "Durvasa",
+    "FULL_NAME": "Sage Durvasa",
+    "REF_NAME": "P-1051-Durvasa",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Atri's hermitage",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Powerful and often quick-tempered sage; son of Atri and Anasuya in a major tradition. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1051-Durvasa",
+   "vedic": {}
+  },
+  {
+   "id": "P-1052",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Chandra / Soma",
+    "given": "Lord Chandra /",
+    "surname": "Soma",
+    "alternates": [
+     "Chandra"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Lunar realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F012",
+    "F031"
+   ],
+   "parent_family": "F011",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1052",
+    "KNOWN_NAME": "Chandra",
+    "FULL_NAME": "Lord Chandra / Soma",
+    "REF_NAME": "P-1052-Chandra",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Lunar realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Moon deity; in one important genealogy son of Atri and Anasuya. Also associated with the 27 Nakshatra wives, daughters of Daksha, in Puranic accounts. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1052-Chandra",
+   "vedic": {}
+  },
+  {
+   "id": "P-1053",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Goddess Rohini / Nakshatra Rohini",
+    "given": "Goddess Rohini / Nakshatra",
+    "surname": "Rohini",
+    "alternates": [
+     "Rohini (Nakshatra)"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Celestial realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F031"
+   ],
+   "parent_family": "F004",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1053",
+    "KNOWN_NAME": "Rohini (Nakshatra)",
+    "FULL_NAME": "Goddess Rohini / Nakshatra Rohini",
+    "REF_NAME": "P-1053-Rohini (Nakshatra)",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Celestial realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "One of the 27 Nakshatra daughters of Daksha and a principal consort of Chandra; lunar mansion Rohini. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1053-Rohini (Nakshatra)",
+   "vedic": {}
+  },
+  {
+   "id": "P-1054",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Goddess Tara",
+    "given": "Goddess",
+    "surname": "Tara",
+    "alternates": [
+     "Tara"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Celestial realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F012",
+    "F032"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1054",
+    "KNOWN_NAME": "Tara",
+    "FULL_NAME": "Goddess Tara",
+    "REF_NAME": "P-1054-Tara",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Celestial realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Wife of Brihaspati in the Budha birth narrative; her union with Chandra leads to Budha. The episode is told differently across texts. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1054-Tara",
+   "vedic": {}
+  },
+  {
+   "id": "P-1055",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Brihaspati / Guru",
+    "given": "Lord Brihaspati /",
+    "surname": "Guru",
+    "alternates": [
+     "Brihaspati"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Svarga"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F032"
+   ],
+   "parent_family": "F013",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1055",
+    "KNOWN_NAME": "Brihaspati",
+    "FULL_NAME": "Lord Brihaspati / Guru",
+    "REF_NAME": "P-1055-Brihaspati",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Svarga",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Guru of the Devas; often described as son of Angiras. Husband of Tara in the Chandra-Budha narrative. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1055-Brihaspati",
+   "vedic": {}
+  },
+  {
+   "id": "P-1056",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Budha",
+    "given": "Lord",
+    "surname": "Budha",
+    "alternates": [
+     "Budha"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Celestial realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F014"
+   ],
+   "parent_family": "F012",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1056",
+    "KNOWN_NAME": "Budha",
+    "FULL_NAME": "Lord Budha",
+    "REF_NAME": "P-1056-Budha",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Celestial realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Planetary deity Mercury; son of Chandra and Tara in the widely known Puranic account; consort of Ila and father of Pururavas. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1056-Budha",
+   "vedic": {}
+  },
+  {
+   "id": "P-1057",
+   "gender": "O",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Ila / Sudyumna",
+    "given": "Ila /",
+    "surname": "Sudyumna",
+    "alternates": [
+     "Ila"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Earthly kingdom; location varies by account"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1057",
+    "KNOWN_NAME": "Ila",
+    "FULL_NAME": "Ila / Sudyumna",
+    "REF_NAME": "P-1057-Ila",
+    "EMAIL": "",
+    "GENDER": "Other",
+    "DOB": "",
+    "POB": "Earthly kingdom; location varies by account",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "A figure whose gender changes in the Puranic narrative; consort of Budha and parent of Pururavas. Gender field is recorded as 'Other' to avoid flattening the story. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1057-Ila",
+   "vedic": {}
+  },
+  {
+   "id": "P-1058",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "King Pururavas",
+    "given": "King",
+    "surname": "Pururavas",
+    "alternates": [
+     "Pururavas"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Pratishthana (often identified with Prayaga/Prayagraj region)"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F014",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1058",
+    "KNOWN_NAME": "Pururavas",
+    "FULL_NAME": "King Pururavas",
+    "REF_NAME": "P-1058-Pururavas",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Pratishthana (often identified with Prayaga/Prayagraj region)",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Son of Budha and Ila; legendary king and ancestor in the Lunar dynasty. His story with Urvashi is prominent in Vedic and later literature. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1058-Pururavas",
+   "vedic": {}
+  },
+  {
+   "id": "P-1059",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Sage Angiras",
+    "given": "Sage",
+    "surname": "Angiras",
+    "alternates": [
+     "Angiras"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Brahmaloka / hermitage"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F013"
+   ],
+   "parent_family": "F005",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1059",
+    "KNOWN_NAME": "Angiras",
+    "FULL_NAME": "Sage Angiras",
+    "REF_NAME": "P-1059-Angiras",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Brahmaloka / hermitage",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "One of Brahma's mind-born sons in many lists; father of Brihaspati in common Puranic genealogies. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1059-Angiras",
+   "vedic": {}
+  },
+  {
+   "id": "P-1060",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Vishvakarma",
+    "given": "Lord",
+    "surname": "Vishvakarma",
+    "alternates": [
+     "Vishvakarma"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Celestial realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F010"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1060",
+    "KNOWN_NAME": "Vishvakarma",
+    "FULL_NAME": "Lord Vishvakarma",
+    "REF_NAME": "P-1060-Vishvakarma",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Celestial realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Divine architect and craftsman; father of Sanjna in a common Surya genealogy. His own parentage varies. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1060-Vishvakarma",
+   "vedic": {}
+  },
+  {
+   "id": "P-1061",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "King Dasharatha",
+    "given": "King",
+    "surname": "Dasharatha",
+    "alternates": [
+     "Dasharatha"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Ayodhya"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F016",
+    "F033",
+    "F034",
+    "F035"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1061",
+    "KNOWN_NAME": "Dasharatha",
+    "FULL_NAME": "King Dasharatha",
+    "REF_NAME": "P-1061-Dasharatha",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Ayodhya, Kosala",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "King of Ayodhya; father of Rama, Bharata, Lakshmana and Shatrughna in the Ramayana. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1061-Dasharatha",
+   "vedic": {}
+  },
+  {
+   "id": "P-1062",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Queen Kausalya",
+    "given": "Queen",
+    "surname": "Kausalya",
+    "alternates": [
+     "Kausalya"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Kosala / Ayodhya"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F016",
+    "F033"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1062",
+    "KNOWN_NAME": "Kausalya",
+    "FULL_NAME": "Queen Kausalya",
+    "REF_NAME": "P-1062-Kausalya",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Kosala / Ayodhya",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Principal queen of Dasharatha and mother of Rama. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1062-Kausalya",
+   "vedic": {}
+  },
+  {
+   "id": "P-1063",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Queen Kaikeyi",
+    "given": "Queen",
+    "surname": "Kaikeyi",
+    "alternates": [
+     "Kaikeyi"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Kekaya kingdom / Ayodhya"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F034"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1063",
+    "KNOWN_NAME": "Kaikeyi",
+    "FULL_NAME": "Queen Kaikeyi",
+    "REF_NAME": "P-1063-Kaikeyi",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Kekaya kingdom / Ayodhya",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Queen of Dasharatha and mother of Bharata. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1063-Kaikeyi",
+   "vedic": {}
+  },
+  {
+   "id": "P-1064",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Queen Sumitra",
+    "given": "Queen",
+    "surname": "Sumitra",
+    "alternates": [
+     "Sumitra"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Ayodhya"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F035"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1064",
+    "KNOWN_NAME": "Sumitra",
+    "FULL_NAME": "Queen Sumitra",
+    "REF_NAME": "P-1064-Sumitra",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Ayodhya",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Queen of Dasharatha and mother of Lakshmana and Shatrughna. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1064-Sumitra",
+   "vedic": {}
+  },
+  {
+   "id": "P-1065",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Rama / Ramachandra",
+    "given": "Lord Rama /",
+    "surname": "Ramachandra",
+    "alternates": [
+     "Rama"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Ayodhya"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F017"
+   ],
+   "parent_family": "F016",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1065",
+    "KNOWN_NAME": "Rama",
+    "FULL_NAME": "Lord Rama / Ramachandra",
+    "REF_NAME": "P-1065-Rama",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Ayodhya",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Prince and king of Ayodhya; son of Dasharatha and Kausalya; consort of Sita. Avatar of Vishnu in Vaishnava traditions (avatar relation not encoded as parentage). Associated with Treta Yuga. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1065-Rama",
+   "vedic": {}
+  },
+  {
+   "id": "P-1066",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Goddess Sita / Janaki",
+    "given": "Goddess Sita /",
+    "surname": "Janaki",
+    "alternates": [
+     "Sita"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Mithila; discovered in a furrow by King Janaka"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F017"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1066",
+    "KNOWN_NAME": "Sita",
+    "FULL_NAME": "Goddess Sita / Janaki",
+    "REF_NAME": "P-1066-Sita",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Mithila; discovered in a furrow by King Janaka",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Consort of Rama; traditionally described as emerging from the earth and raised by Janaka and Sunayana. Her birth/origin accounts vary; no historical date. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1066-Sita",
+   "vedic": {}
+  },
+  {
+   "id": "P-1067",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lava",
+    "given": "Lava",
+    "surname": "",
+    "alternates": []
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Valmiki's hermitage; traditional location varies"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F017",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1067",
+    "KNOWN_NAME": "Lava",
+    "FULL_NAME": "Lava",
+    "REF_NAME": "P-1067-Lava",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Valmiki's hermitage; traditional location varies",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Son of Rama and Sita; twin of Kusha in the Ramayana tradition. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1067-Lava",
+   "vedic": {}
+  },
+  {
+   "id": "P-1068",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Kusha",
+    "given": "Kusha",
+    "surname": "",
+    "alternates": []
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Valmiki's hermitage; traditional location varies"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F017",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1068",
+    "KNOWN_NAME": "Kusha",
+    "FULL_NAME": "Kusha",
+    "REF_NAME": "P-1068-Kusha",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Valmiki's hermitage; traditional location varies",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Son of Rama and Sita; twin of Lava in the Ramayana tradition. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1068-Kusha",
+   "vedic": {}
+  },
+  {
+   "id": "P-1069",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Vasudeva",
+    "given": "Vasudeva",
+    "surname": "",
+    "alternates": []
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Mathura / Yadava kingdom"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F019",
+    "F036",
+    "F037"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1069",
+    "KNOWN_NAME": "Vasudeva",
+    "FULL_NAME": "Vasudeva",
+    "REF_NAME": "P-1069-Vasudeva",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Mathura / Yadava kingdom",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Father of Krishna and Balarama in the Mahabharata and Bhagavata traditions; husband of Devaki and, in Balarama's birth account, Rohini. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1069-Vasudeva",
+   "vedic": {}
+  },
+  {
+   "id": "P-1070",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Devaki",
+    "given": "Devaki",
+    "surname": "",
+    "alternates": []
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Mathura"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F018",
+    "F019",
+    "F037"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1070",
+    "KNOWN_NAME": "Devaki",
+    "FULL_NAME": "Devaki",
+    "REF_NAME": "P-1070-Devaki",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Mathura",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Mother of Krishna and several of his siblings; consort of Vasudeva. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1070-Devaki",
+   "vedic": {}
+  },
+  {
+   "id": "P-1071",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Nanda Baba",
+    "given": "Nanda",
+    "surname": "Baba",
+    "alternates": [
+     "Nanda"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Gokula / Vraja"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F018",
+    "F038"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1071",
+    "KNOWN_NAME": "Nanda",
+    "FULL_NAME": "Nanda Baba",
+    "REF_NAME": "P-1071-Nanda",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Gokula / Vraja",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Foster father of Krishna in the Bhagavata tradition; consort of Yashoda. Foster parenthood is represented using parentOf with explicit notes. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1071-Nanda",
+   "vedic": {}
+  },
+  {
+   "id": "P-1072",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Mother Yashoda",
+    "given": "Mother",
+    "surname": "Yashoda",
+    "alternates": [
+     "Yashoda"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Gokula / Vraja"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F038"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1072",
+    "KNOWN_NAME": "Yashoda",
+    "FULL_NAME": "Mother Yashoda",
+    "REF_NAME": "P-1072-Yashoda",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Gokula / Vraja",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Foster mother of Krishna; consort of Nanda. The parentOf edge is explicitly marked foster/adoptive in notes. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1072-Yashoda",
+   "vedic": {}
+  },
+  {
+   "id": "P-1073",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Krishna / Vasudeva",
+    "given": "Lord Krishna /",
+    "surname": "Vasudeva",
+    "alternates": [
+     "Krishna"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Mathura"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F039",
+    "F040"
+   ],
+   "parent_family": "F018",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1073",
+    "KNOWN_NAME": "Krishna",
+    "FULL_NAME": "Lord Krishna / Vasudeva",
+    "REF_NAME": "P-1073-Krishna",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Mathura",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Son of Vasudeva and Devaki; raised by Nanda and Yashoda. Avatar of Vishnu in Vaishnava traditions (avatar relation not encoded as parentage). Associated with Dvapara Yuga. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1073-Krishna",
+   "vedic": {}
+  },
+  {
+   "id": "P-1074",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Balarama / Baladeva",
+    "given": "Lord Balarama /",
+    "surname": "Baladeva",
+    "alternates": [
+     "Balarama"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Mathura; raised in Vraja"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F019",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1074",
+    "KNOWN_NAME": "Balarama",
+    "FULL_NAME": "Lord Balarama / Baladeva",
+    "REF_NAME": "P-1074-Balarama",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Mathura; raised in Vraja",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Son of Vasudeva and Rohini; embryo is transferred from Devaki to Rohini in the Bhagavata narrative. Elder brother of Krishna. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1074-Balarama",
+   "vedic": {}
+  },
+  {
+   "id": "P-1075",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Goddess Rukmini",
+    "given": "Goddess",
+    "surname": "Rukmini",
+    "alternates": [
+     "Rukmini"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Vidarbha / Kundina"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F040"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1075",
+    "KNOWN_NAME": "Rukmini",
+    "FULL_NAME": "Goddess Rukmini",
+    "REF_NAME": "P-1075-Rukmini",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Vidarbha / Kundina",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Principal consort of Krishna; daughter of Bhishmaka in the Bhagavata tradition. Parentage not added in this core dataset. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1075-Rukmini",
+   "vedic": {}
+  },
+  {
+   "id": "P-1076",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Goddess Satyabhama",
+    "given": "Goddess",
+    "surname": "Satyabhama",
+    "alternates": [
+     "Satyabhama"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Dvaraka / Yadava tradition"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F039"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1076",
+    "KNOWN_NAME": "Satyabhama",
+    "FULL_NAME": "Goddess Satyabhama",
+    "REF_NAME": "P-1076-Satyabhama",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Dvaraka / Yadava tradition",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "One of Krishna's principal consorts; parentage and details vary across Puranic accounts. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1076-Satyabhama",
+   "vedic": {}
+  },
+  {
+   "id": "P-1077",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Rohini, wife of Vasudeva",
+    "given": "Rohini, wife of",
+    "surname": "Vasudeva",
+    "alternates": [
+     "Rohini (Vasudeva's wife)"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Mathura / Vraja"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F036"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1077",
+    "KNOWN_NAME": "Rohini (Vasudeva's wife)",
+    "FULL_NAME": "Rohini, wife of Vasudeva",
+    "REF_NAME": "P-1077-Rohini (Vasudeva's wife)",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Mathura / Vraja",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Wife of Vasudeva and mother of Balarama in the common birth-transfer narrative; distinct from Rohini the lunar mansion and consort of Chandra. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1077-Rohini (Vasudeva's wife)",
+   "vedic": {}
+  },
+  {
+   "id": "P-1078",
+   "gender": "F",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Queen Kayadhu",
+    "given": "Queen",
+    "surname": "Kayadhu",
+    "alternates": [
+     "Kayadhu"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Daitya realm"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [
+    "F015"
+   ],
+   "parent_family": null,
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1078",
+    "KNOWN_NAME": "Kayadhu",
+    "FULL_NAME": "Queen Kayadhu",
+    "REF_NAME": "P-1078-Kayadhu",
+    "EMAIL": "",
+    "GENDER": "Female",
+    "DOB": "",
+    "POB": "Daitya realm",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Consort of Hiranyakashipu and mother of Prahlada in the Bhagavata tradition. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1078-Kayadhu",
+   "vedic": {}
+  },
+  {
+   "id": "P-1079",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Prince Bharata",
+    "given": "Prince",
+    "surname": "Bharata",
+    "alternates": [
+     "Bharata"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Ayodhya"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F016",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1079",
+    "KNOWN_NAME": "Bharata",
+    "FULL_NAME": "Prince Bharata",
+    "REF_NAME": "P-1079-Bharata",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Ayodhya, Kosala",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Son of Dasharatha and Kaikeyi; brother of Rama in the Ramayana. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1079-Bharata",
+   "vedic": {}
+  },
+  {
+   "id": "P-1080",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Lord Lakshmana",
+    "given": "Lord",
+    "surname": "Lakshmana",
+    "alternates": [
+     "Lakshmana"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Ayodhya"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F016",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1080",
+    "KNOWN_NAME": "Lakshmana",
+    "FULL_NAME": "Lord Lakshmana",
+    "REF_NAME": "P-1080-Lakshmana",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Ayodhya, Kosala",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Son of Dasharatha and Sumitra; devoted brother of Rama in the Ramayana. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1080-Lakshmana",
+   "vedic": {}
+  },
+  {
+   "id": "P-1081",
+   "gender": "M",
+   "living": true,
+   "hidden": false,
+   "generation": "",
+   "name": {
+    "display": "Prince Shatrughna",
+    "given": "Prince",
+    "surname": "Shatrughna",
+    "alternates": [
+     "Shatrughna"
+    ]
+   },
+   "birth": {
+    "date": "",
+    "year": null,
+    "place": "Ayodhya"
+   },
+   "death": null,
+   "current_location": "",
+   "events": [],
+   "families": [],
+   "parent_family": "F016",
+   "notes": [],
+   "stories": [],
+   "attributes": {
+    "PID": "P-1081",
+    "KNOWN_NAME": "Shatrughna",
+    "FULL_NAME": "Prince Shatrughna",
+    "REF_NAME": "P-1081-Shatrughna",
+    "EMAIL": "",
+    "GENDER": "Male",
+    "DOB": "",
+    "POB": "Ayodhya, Kosala",
+    "STATUS": "Unknown",
+    "DOD": "",
+    "NOTES": "Son of Dasharatha and Sumitra; brother of Rama in the Ramayana. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+    "GEN": ""
+   },
+   "ref_name": "P-1081-Shatrughna",
+   "vedic": {}
+  }
+ ],
+ "families": [
+  {
+   "id": "F001",
+   "father": "P-1003",
+   "mother": "P-1004",
+   "children": [
+    "P-1001"
+   ],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1003-Vishnu & P-1004-Lakshmi",
+   "attributes": {
+    "UID": "F001",
+    "REF_NAME": "P-1003-Vishnu & P-1004-Lakshmi"
+   }
+  },
+  {
+   "id": "F002",
+   "father": "P-1008",
+   "mother": "P-1009",
+   "children": [
+    "P-1007"
+   ],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1008-Himavan & P-1009-Maina",
+   "attributes": {
+    "UID": "F002",
+    "REF_NAME": "P-1008-Himavan & P-1009-Maina"
+   }
+  },
+  {
+   "id": "F003",
+   "father": "P-1005",
+   "mother": "P-1007",
+   "children": [
+    "P-1010",
+    "P-1011",
+    "P-1012"
+   ],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1005-Shiva & P-1007-Parvati",
+   "attributes": {
+    "UID": "F003",
+    "REF_NAME": "P-1005-Shiva & P-1007-Parvati"
+   }
+  },
+  {
+   "id": "F004",
+   "father": "P-1015",
+   "mother": "P-1016",
+   "children": [
+    "P-1006",
+    "P-1019",
+    "P-1020",
+    "P-1021",
+    "P-1022",
+    "P-1023",
+    "P-1053"
+   ],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1015-Daksha & P-1016-Prasuti",
+   "attributes": {
+    "UID": "F004",
+    "REF_NAME": "P-1015-Daksha & P-1016-Prasuti"
+   }
+  },
+  {
+   "id": "F005",
+   "father": "P-1001",
+   "mother": "P-1002",
+   "children": [
+    "P-1017",
+    "P-1048",
+    "P-1059",
+    "P-1015"
+   ],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1001-Brahma & P-1002-Saraswati",
+   "attributes": {
+    "UID": "F005",
+    "REF_NAME": "P-1001-Brahma & P-1002-Saraswati"
+   }
+  },
+  {
+   "id": "F006",
+   "father": "P-1017",
+   "mother": null,
+   "children": [
+    "P-1018"
+   ],
+   "relation": "Unknown",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1017-Marichi",
+   "attributes": {
+    "UID": "F006",
+    "REF_NAME": "P-1017-Marichi"
+   }
+  },
+  {
+   "id": "F007",
+   "father": "P-1018",
+   "mother": "P-1022",
+   "children": [
+    "P-1024",
+    "P-1027",
+    "P-1035",
+    "P-1036",
+    "P-1037",
+    "P-1038",
+    "P-1039",
+    "P-1040",
+    "P-1041",
+    "P-1043",
+    "P-1044",
+    "P-1045",
+    "P-1046",
+    "P-1047"
+   ],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1018-Kashyapa & P-1022-Vinata",
+   "attributes": {
+    "UID": "F007",
+    "REF_NAME": "P-1018-Kashyapa & P-1022-Vinata"
+   }
+  },
+  {
+   "id": "F008",
+   "father": "P-1024",
+   "mother": "P-1025",
+   "children": [
+    "P-1026"
+   ],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1024-Indra & P-1025-Shachi",
+   "attributes": {
+    "UID": "F008",
+    "REF_NAME": "P-1024-Indra & P-1025-Shachi"
+   }
+  },
+  {
+   "id": "F009",
+   "father": "P-1027",
+   "mother": "P-1028",
+   "children": [
+    "P-1030",
+    "P-1031",
+    "P-1032",
+    "P-1033",
+    "P-1034"
+   ],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1027-Surya & P-1028-Sanjna",
+   "attributes": {
+    "UID": "F009",
+    "REF_NAME": "P-1027-Surya & P-1028-Sanjna"
+   }
+  },
+  {
+   "id": "F010",
+   "father": "P-1060",
+   "mother": null,
+   "children": [
+    "P-1028"
+   ],
+   "relation": "Unknown",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1060-Vishvakarma",
+   "attributes": {
+    "UID": "F010",
+    "REF_NAME": "P-1060-Vishvakarma"
+   }
+  },
+  {
+   "id": "F011",
+   "father": "P-1048",
+   "mother": "P-1049",
+   "children": [
+    "P-1050",
+    "P-1051",
+    "P-1052"
+   ],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1048-Atri & P-1049-Anasuya",
+   "attributes": {
+    "UID": "F011",
+    "REF_NAME": "P-1048-Atri & P-1049-Anasuya"
+   }
+  },
+  {
+   "id": "F012",
+   "father": "P-1052",
+   "mother": "P-1054",
+   "children": [
+    "P-1056"
+   ],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1052-Chandra & P-1054-Tara",
+   "attributes": {
+    "UID": "F012",
+    "REF_NAME": "P-1052-Chandra & P-1054-Tara"
+   }
+  },
+  {
+   "id": "F013",
+   "father": "P-1059",
+   "mother": null,
+   "children": [
+    "P-1055"
+   ],
+   "relation": "Unknown",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1059-Angiras",
+   "attributes": {
+    "UID": "F013",
+    "REF_NAME": "P-1059-Angiras"
+   }
+  },
+  {
+   "id": "F014",
+   "father": "P-1056",
+   "mother": null,
+   "children": [
+    "P-1058"
+   ],
+   "relation": "Unknown",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1056-Budha",
+   "attributes": {
+    "UID": "F014",
+    "REF_NAME": "P-1056-Budha"
+   }
+  },
+  {
+   "id": "F015",
+   "father": "P-1041",
+   "mother": "P-1078",
+   "children": [
+    "P-1042"
+   ],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1041-Hiranyakashipu & P-1078-Kayadhu",
+   "attributes": {
+    "UID": "F015",
+    "REF_NAME": "P-1041-Hiranyakashipu & P-1078-Kayadhu"
+   }
+  },
+  {
+   "id": "F016",
+   "father": "P-1061",
+   "mother": "P-1062",
+   "children": [
+    "P-1065",
+    "P-1079",
+    "P-1080",
+    "P-1081"
+   ],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1061-Dasharatha & P-1062-Kausalya",
+   "attributes": {
+    "UID": "F016",
+    "REF_NAME": "P-1061-Dasharatha & P-1062-Kausalya"
+   }
+  },
+  {
+   "id": "F017",
+   "father": "P-1065",
+   "mother": "P-1066",
+   "children": [
+    "P-1067",
+    "P-1068"
+   ],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1065-Rama & P-1066-Sita",
+   "attributes": {
+    "UID": "F017",
+    "REF_NAME": "P-1065-Rama & P-1066-Sita"
+   }
+  },
+  {
+   "id": "F018",
+   "father": "P-1071",
+   "mother": "P-1070",
+   "children": [
+    "P-1073"
+   ],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1071-Nanda & P-1070-Devaki",
+   "attributes": {
+    "UID": "F018",
+    "REF_NAME": "P-1071-Nanda & P-1070-Devaki"
+   }
+  },
+  {
+   "id": "F019",
+   "father": "P-1069",
+   "mother": "P-1070",
+   "children": [
+    "P-1074"
+   ],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1069-Vasudeva & P-1070-Devaki",
+   "attributes": {
+    "UID": "F019",
+    "REF_NAME": "P-1069-Vasudeva & P-1070-Devaki"
+   }
+  },
+  {
+   "id": "F020",
+   "father": "P-1005",
+   "mother": "P-1007",
+   "children": [],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1005-Shiva & P-1007-Parvati",
+   "attributes": {
+    "UID": "F020",
+    "REF_NAME": "P-1005-Shiva & P-1007-Parvati"
+   }
+  },
+  {
+   "id": "F021",
+   "father": "P-1005",
+   "mother": "P-1006",
+   "children": [],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1005-Shiva & P-1006-Sati",
+   "attributes": {
+    "UID": "F021",
+    "REF_NAME": "P-1005-Shiva & P-1006-Sati"
+   }
+  },
+  {
+   "id": "F022",
+   "father": "P-1011",
+   "mother": "P-1013",
+   "children": [],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1011-Kartikeya & P-1013-Valli",
+   "attributes": {
+    "UID": "F022",
+    "REF_NAME": "P-1011-Kartikeya & P-1013-Valli"
+   }
+  },
+  {
+   "id": "F023",
+   "father": "P-1011",
+   "mother": "P-1014",
+   "children": [],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1011-Kartikeya & P-1014-Devasena",
+   "attributes": {
+    "UID": "F023",
+    "REF_NAME": "P-1011-Kartikeya & P-1014-Devasena"
+   }
+  },
+  {
+   "id": "F024",
+   "father": "P-1018",
+   "mother": "P-1022",
+   "children": [],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1018-Kashyapa & P-1022-Vinata",
+   "attributes": {
+    "UID": "F024",
+    "REF_NAME": "P-1018-Kashyapa & P-1022-Vinata"
+   }
+  },
+  {
+   "id": "F025",
+   "father": "P-1018",
+   "mother": "P-1021",
+   "children": [],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1018-Kashyapa & P-1021-Danu",
+   "attributes": {
+    "UID": "F025",
+    "REF_NAME": "P-1018-Kashyapa & P-1021-Danu"
+   }
+  },
+  {
+   "id": "F026",
+   "father": "P-1018",
+   "mother": "P-1020",
+   "children": [],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1018-Kashyapa & P-1020-Diti",
+   "attributes": {
+    "UID": "F026",
+    "REF_NAME": "P-1018-Kashyapa & P-1020-Diti"
+   }
+  },
+  {
+   "id": "F027",
+   "father": "P-1018",
+   "mother": "P-1019",
+   "children": [],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1018-Kashyapa & P-1019-Aditi",
+   "attributes": {
+    "UID": "F027",
+    "REF_NAME": "P-1018-Kashyapa & P-1019-Aditi"
+   }
+  },
+  {
+   "id": "F028",
+   "father": "P-1018",
+   "mother": "P-1023",
+   "children": [],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1018-Kashyapa & P-1023-Kadru",
+   "attributes": {
+    "UID": "F028",
+    "REF_NAME": "P-1018-Kashyapa & P-1023-Kadru"
+   }
+  },
+  {
+   "id": "F029",
+   "father": "P-1027",
+   "mother": "P-1028",
+   "children": [],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1027-Surya & P-1028-Sanjna",
+   "attributes": {
+    "UID": "F029",
+    "REF_NAME": "P-1027-Surya & P-1028-Sanjna"
+   }
+  },
+  {
+   "id": "F030",
+   "father": "P-1027",
+   "mother": "P-1029",
+   "children": [],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1027-Surya & P-1029-Chhaya",
+   "attributes": {
+    "UID": "F030",
+    "REF_NAME": "P-1027-Surya & P-1029-Chhaya"
+   }
+  },
+  {
+   "id": "F031",
+   "father": "P-1052",
+   "mother": "P-1053",
+   "children": [],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1052-Chandra & P-1053-Rohini (Nakshatra)",
+   "attributes": {
+    "UID": "F031",
+    "REF_NAME": "P-1052-Chandra & P-1053-Rohini (Nakshatra)"
+   }
+  },
+  {
+   "id": "F032",
+   "father": "P-1055",
+   "mother": "P-1054",
+   "children": [],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1055-Brihaspati & P-1054-Tara",
+   "attributes": {
+    "UID": "F032",
+    "REF_NAME": "P-1055-Brihaspati & P-1054-Tara"
+   }
+  },
+  {
+   "id": "F033",
+   "father": "P-1061",
+   "mother": "P-1062",
+   "children": [],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1061-Dasharatha & P-1062-Kausalya",
+   "attributes": {
+    "UID": "F033",
+    "REF_NAME": "P-1061-Dasharatha & P-1062-Kausalya"
+   }
+  },
+  {
+   "id": "F034",
+   "father": "P-1061",
+   "mother": "P-1063",
+   "children": [],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1061-Dasharatha & P-1063-Kaikeyi",
+   "attributes": {
+    "UID": "F034",
+    "REF_NAME": "P-1061-Dasharatha & P-1063-Kaikeyi"
+   }
+  },
+  {
+   "id": "F035",
+   "father": "P-1061",
+   "mother": "P-1064",
+   "children": [],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1061-Dasharatha & P-1064-Sumitra",
+   "attributes": {
+    "UID": "F035",
+    "REF_NAME": "P-1061-Dasharatha & P-1064-Sumitra"
+   }
+  },
+  {
+   "id": "F036",
+   "father": "P-1069",
+   "mother": "P-1077",
+   "children": [],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1069-Vasudeva & P-1077-Rohini (Vasudeva's wife)",
+   "attributes": {
+    "UID": "F036",
+    "REF_NAME": "P-1069-Vasudeva & P-1077-Rohini (Vasudeva's wife)"
+   }
+  },
+  {
+   "id": "F037",
+   "father": "P-1069",
+   "mother": "P-1070",
+   "children": [],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1069-Vasudeva & P-1070-Devaki",
+   "attributes": {
+    "UID": "F037",
+    "REF_NAME": "P-1069-Vasudeva & P-1070-Devaki"
+   }
+  },
+  {
+   "id": "F038",
+   "father": "P-1071",
+   "mother": "P-1072",
+   "children": [],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1071-Nanda & P-1072-Yashoda",
+   "attributes": {
+    "UID": "F038",
+    "REF_NAME": "P-1071-Nanda & P-1072-Yashoda"
+   }
+  },
+  {
+   "id": "F039",
+   "father": "P-1073",
+   "mother": "P-1076",
+   "children": [],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1073-Krishna & P-1076-Satyabhama",
+   "attributes": {
+    "UID": "F039",
+    "REF_NAME": "P-1073-Krishna & P-1076-Satyabhama"
+   }
+  },
+  {
+   "id": "F040",
+   "father": "P-1073",
+   "mother": "P-1075",
+   "children": [],
+   "relation": "Married",
+   "marriage": null,
+   "notes": "",
+   "ref_name": "P-1073-Krishna & P-1075-Rukmini",
+   "attributes": {
+    "UID": "F040",
+    "REF_NAME": "P-1073-Krishna & P-1075-Rukmini"
+   }
+  }
+ ],
+ "notes": [],
+ "generations": [],
+ "graph": {
+  "schema": "kula.graph/1.0",
+  "nodes": [
+   {
+    "id": "P-1001",
+    "type": "person",
+    "person_id": "P-1001",
+    "ref_name": "P-1001-Brahma",
+    "attributes": {
+     "PID": "P-1001",
+     "KNOWN_NAME": "Brahma",
+     "FULL_NAME": "Lord Brahma",
+     "REF_NAME": "P-1001-Brahma",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Brahmaloka / cosmic lotus",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Primordial creator deity; in a major Puranic account emerges from the lotus arising from Vishnu's navel. Birth date is not historically datable. Traditions: Puranic, Smarta. Sources: Bhagavata Purana; Vishnu Purana. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1002",
+    "type": "person",
+    "person_id": "P-1002",
+    "ref_name": "P-1002-Saraswati",
+    "attributes": {
+     "PID": "P-1002",
+     "KNOWN_NAME": "Saraswati",
+     "FULL_NAME": "Goddess Saraswati",
+     "REF_NAME": "P-1002-Saraswati",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Brahmaloka / cosmic manifestation",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Goddess of knowledge, speech, music and learning; commonly regarded as Brahma's consort, though accounts of her origin and relationship vary. Birth date unknown. Traditions: Puranic, Smarta. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1003",
+    "type": "person",
+    "person_id": "P-1003",
+    "ref_name": "P-1003-Vishnu",
+    "attributes": {
+     "PID": "P-1003",
+     "KNOWN_NAME": "Vishnu",
+     "FULL_NAME": "Lord Vishnu / Narayana",
+     "REF_NAME": "P-1003-Vishnu",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Vaikuntha / primordial cosmic waters",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Preserver and supreme deity in Vaishnava traditions; described as primordial and eternal. In one widely known Puranic cosmology Brahma emerges from the lotus from his navel. No historical birth date. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1004",
+    "type": "person",
+    "person_id": "P-1004",
+    "ref_name": "P-1004-Lakshmi",
+    "attributes": {
+     "PID": "P-1004",
+     "KNOWN_NAME": "Lakshmi",
+     "FULL_NAME": "Goddess Lakshmi / Shri",
+     "REF_NAME": "P-1004-Lakshmi",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Kshira Sagara (cosmic ocean of milk)",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Goddess of prosperity, fortune and auspiciousness; emerges during the Samudra Manthana in a major Puranic account and is Vishnu's consort. No historical birth date. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1005",
+    "type": "person",
+    "person_id": "P-1005",
+    "ref_name": "P-1005-Shiva",
+    "attributes": {
+     "PID": "P-1005",
+     "KNOWN_NAME": "Shiva",
+     "FULL_NAME": "Lord Shiva / Mahadeva / Rudra",
+     "REF_NAME": "P-1005-Shiva",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Mount Kailasa / primordial",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "A principal deity associated with transformation, dissolution, asceticism and grace. Often described as self-existent. Consort of Sati and, in her later birth, Parvati. Traditions: Shaiva, Smarta. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1006",
+    "type": "person",
+    "person_id": "P-1006",
+    "ref_name": "P-1006-Sati",
+    "attributes": {
+     "PID": "P-1006",
+     "KNOWN_NAME": "Sati",
+     "FULL_NAME": "Goddess Sati / Dakshayani",
+     "REF_NAME": "P-1006-Sati",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Daksha's household; traditional location varies",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Daughter of Daksha and Prasuti; first consort of Shiva. After her self-immolation she is reborn as Parvati in a major Shaiva narrative. No historical birth date. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1007",
+    "type": "person",
+    "person_id": "P-1007",
+    "ref_name": "P-1007-Parvati",
+    "attributes": {
+     "PID": "P-1007",
+     "KNOWN_NAME": "Parvati",
+     "FULL_NAME": "Goddess Parvati / Uma / Gauri",
+     "REF_NAME": "P-1007-Parvati",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Himalaya / Himavan's household",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Daughter of Himavan and Maina; rebirth/manifestation of Sati and consort of Shiva. Mother of Ganesha, Kartikeya and (in some Puranic accounts) Ashokasundari. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1008",
+    "type": "person",
+    "person_id": "P-1008",
+    "ref_name": "P-1008-Himavan",
+    "attributes": {
+     "PID": "P-1008",
+     "KNOWN_NAME": "Himavan",
+     "FULL_NAME": "Himavan / Himavat, personification of the Himalaya",
+     "REF_NAME": "P-1008-Himavan",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Himalayas",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Mountain king and personification of the Himalaya; father of Parvati and, in some accounts, Mainaka and Ganga. Consort of Maina. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1009",
+    "type": "person",
+    "person_id": "P-1009",
+    "ref_name": "P-1009-Maina",
+    "attributes": {
+     "PID": "P-1009",
+     "KNOWN_NAME": "Maina",
+     "FULL_NAME": "Queen Maina / Menavati",
+     "REF_NAME": "P-1009-Maina",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Himalayas",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Consort of Himavan and mother of Parvati in major Puranic accounts. Also called Menavati or Mena. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1010",
+    "type": "person",
+    "person_id": "P-1010",
+    "ref_name": "P-1010-Ganesha",
+    "attributes": {
+     "PID": "P-1010",
+     "KNOWN_NAME": "Ganesha",
+     "FULL_NAME": "Lord Ganesha / Ganapati / Vinayaka",
+     "REF_NAME": "P-1010-Ganesha",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Mount Kailasa",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Son of Shiva and Parvati in the widely known Shaiva tradition; remover of obstacles and patron of beginnings, wisdom and learning. Birth narratives vary. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1011",
+    "type": "person",
+    "person_id": "P-1011",
+    "ref_name": "P-1011-Kartikeya",
+    "attributes": {
+     "PID": "P-1011",
+     "KNOWN_NAME": "Kartikeya",
+     "FULL_NAME": "Lord Kartikeya / Skanda / Murugan / Subrahmanya",
+     "REF_NAME": "P-1011-Kartikeya",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Saravana (reed forest); traditions also associate him with Kailasa",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Son of Shiva and Parvati in widely known traditions; commander of the divine hosts. South Indian traditions especially revere him as Murugan. Birth accounts vary. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1012",
+    "type": "person",
+    "person_id": "P-1012",
+    "ref_name": "P-1012-Ashokasundari",
+    "attributes": {
+     "PID": "P-1012",
+     "KNOWN_NAME": "Ashokasundari",
+     "FULL_NAME": "Goddess Ashokasundari",
+     "REF_NAME": "P-1012-Ashokasundari",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Mount Kailasa",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Daughter of Shiva and Parvati in a narrative found notably in the Padma Purana; less prominent in some regional traditions. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1013",
+    "type": "person",
+    "person_id": "P-1013",
+    "ref_name": "P-1013-Valli",
+    "attributes": {
+     "PID": "P-1013",
+     "KNOWN_NAME": "Valli",
+     "FULL_NAME": "Goddess Valli",
+     "REF_NAME": "P-1013-Valli",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Valli Malai / tribal community setting in Tamil tradition",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Consort of Murugan/Kartikeya in Tamil traditions; her origin and marriage narrative are devotional and regional. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1014",
+    "type": "person",
+    "person_id": "P-1014",
+    "ref_name": "P-1014-Devasena",
+    "attributes": {
+     "PID": "P-1014",
+     "KNOWN_NAME": "Devasena",
+     "FULL_NAME": "Goddess Devasena / Deivayanai",
+     "REF_NAME": "P-1014-Devasena",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Celestial realm / Indra's household",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Consort of Kartikeya/Murugan; associated with Indra's family and the celestial army. Accounts of her parentage vary. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1015",
+    "type": "person",
+    "person_id": "P-1015",
+    "ref_name": "P-1015-Daksha",
+    "attributes": {
+     "PID": "P-1015",
+     "KNOWN_NAME": "Daksha",
+     "FULL_NAME": "Prajapati Daksha",
+     "REF_NAME": "P-1015-Daksha",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Brahmaloka / terrestrial sacrificial realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Prajapati and progenitor figure; often described as a mind-born son of Brahma, though genealogies vary. Father of Sati and many daughters. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1016",
+    "type": "person",
+    "person_id": "P-1016",
+    "ref_name": "P-1016-Prasuti",
+    "attributes": {
+     "PID": "P-1016",
+     "KNOWN_NAME": "Prasuti",
+     "FULL_NAME": "Prasuti",
+     "REF_NAME": "P-1016-Prasuti",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Prajapati lineage; traditional location varies",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Consort of Daksha and mother of several daughters, including Sati in important Puranic genealogies. Her own parentage varies by text. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1017",
+    "type": "person",
+    "person_id": "P-1017",
+    "ref_name": "P-1017-Marichi",
+    "attributes": {
+     "PID": "P-1017",
+     "KNOWN_NAME": "Marichi",
+     "FULL_NAME": "Sage Marichi / Prajapati Marichi",
+     "REF_NAME": "P-1017-Marichi",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Brahmaloka / cosmic creation",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "One of Brahma's mind-born sons and a Prajapati; father of Kashyapa in major Puranic genealogies. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1018",
+    "type": "person",
+    "person_id": "P-1018",
+    "ref_name": "P-1018-Kashyapa",
+    "attributes": {
+     "PID": "P-1018",
+     "KNOWN_NAME": "Kashyapa",
+     "FULL_NAME": "Prajapati Kashyapa",
+     "REF_NAME": "P-1018-Kashyapa",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Hermitage / cosmic creation setting",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Son of Marichi; major progenitor married to several daughters of Daksha. His descendants include Adityas, Daityas, Danavas, birds and Nagas. Lists differ by Purana. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1019",
+    "type": "person",
+    "person_id": "P-1019",
+    "ref_name": "P-1019-Aditi",
+    "attributes": {
+     "PID": "P-1019",
+     "KNOWN_NAME": "Aditi",
+     "FULL_NAME": "Goddess Aditi",
+     "REF_NAME": "P-1019-Aditi",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Celestial realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Daughter of Daksha and Prasuti in common Puranic genealogies; consort of Kashyapa and mother of the Adityas, including Indra and Vivasvan/Surya in many lists. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1020",
+    "type": "person",
+    "person_id": "P-1020",
+    "ref_name": "P-1020-Diti",
+    "attributes": {
+     "PID": "P-1020",
+     "KNOWN_NAME": "Diti",
+     "FULL_NAME": "Goddess Diti",
+     "REF_NAME": "P-1020-Diti",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Celestial realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Daughter of Daksha and Prasuti; consort of Kashyapa and mother of the Daityas, including Hiranyaksha and Hiranyakashipu. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1021",
+    "type": "person",
+    "person_id": "P-1021",
+    "ref_name": "P-1021-Danu",
+    "attributes": {
+     "PID": "P-1021",
+     "KNOWN_NAME": "Danu",
+     "FULL_NAME": "Goddess Danu",
+     "REF_NAME": "P-1021-Danu",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Celestial realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Daughter of Daksha in many genealogies; consort of Kashyapa and mother of the Danavas. Individual child lists vary. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1022",
+    "type": "person",
+    "person_id": "P-1022",
+    "ref_name": "P-1022-Vinata",
+    "attributes": {
+     "PID": "P-1022",
+     "KNOWN_NAME": "Vinata",
+     "FULL_NAME": "Vinata",
+     "REF_NAME": "P-1022-Vinata",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Celestial realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Consort of Kashyapa; mother of Garuda and Aruna. Her story is prominent in the Mahabharata. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1023",
+    "type": "person",
+    "person_id": "P-1023",
+    "ref_name": "P-1023-Kadru",
+    "attributes": {
+     "PID": "P-1023",
+     "KNOWN_NAME": "Kadru",
+     "FULL_NAME": "Kadru",
+     "REF_NAME": "P-1023-Kadru",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Celestial realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Consort of Kashyapa; mother of the Nagas, including Shesha, Vasuki and Takshaka in well-known accounts. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1024",
+    "type": "person",
+    "person_id": "P-1024",
+    "ref_name": "P-1024-Indra",
+    "attributes": {
+     "PID": "P-1024",
+     "KNOWN_NAME": "Indra",
+     "FULL_NAME": "Lord Indra / Shakra",
+     "REF_NAME": "P-1024-Indra",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Svarga (heaven)",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "King of the Devas; counted among the Adityas in many traditions and son of Kashyapa and Aditi. Consort of Shachi/Indrani. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1025",
+    "type": "person",
+    "person_id": "P-1025",
+    "ref_name": "P-1025-Shachi",
+    "attributes": {
+     "PID": "P-1025",
+     "KNOWN_NAME": "Shachi",
+     "FULL_NAME": "Goddess Shachi / Indrani / Pulomaja",
+     "REF_NAME": "P-1025-Shachi",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Svarga",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Consort of Indra and queen of the Devas; often identified as daughter of the Asura Puloman. Her parentage is not represented here because Puloman is outside this initial core set. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1026",
+    "type": "person",
+    "person_id": "P-1026",
+    "ref_name": "P-1026-Jayanta",
+    "attributes": {
+     "PID": "P-1026",
+     "KNOWN_NAME": "Jayanta",
+     "FULL_NAME": "Jayanta",
+     "REF_NAME": "P-1026-Jayanta",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Svarga",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Son of Indra and Shachi in Puranic accounts; a celestial prince. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1027",
+    "type": "person",
+    "person_id": "P-1027",
+    "ref_name": "P-1027-Surya",
+    "attributes": {
+     "PID": "P-1027",
+     "KNOWN_NAME": "Surya",
+     "FULL_NAME": "Lord Surya / Vivasvan / Aditya",
+     "REF_NAME": "P-1027-Surya",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Solar realm / celestial heavens",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Solar deity; son of Kashyapa and Aditi in many Puranic genealogies. Consorts include Sanjna and Chhaya in well-known narratives. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1028",
+    "type": "person",
+    "person_id": "P-1028",
+    "ref_name": "P-1028-Sanjna",
+    "attributes": {
+     "PID": "P-1028",
+     "KNOWN_NAME": "Sanjna",
+     "FULL_NAME": "Goddess Sanjna / Saranyu",
+     "REF_NAME": "P-1028-Sanjna",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Vishvakarma's household / celestial realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Consort of Surya; daughter of Vishvakarma in a common account. Mother of Yama, Yami and Manu Vaivasvata in major traditions. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1029",
+    "type": "person",
+    "person_id": "P-1029",
+    "ref_name": "P-1029-Chhaya",
+    "attributes": {
+     "PID": "P-1029",
+     "KNOWN_NAME": "Chhaya",
+     "FULL_NAME": "Goddess Chhaya",
+     "REF_NAME": "P-1029-Chhaya",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Created as Sanjna's shadow",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Shadow-form or substitute of Sanjna and consort of Surya; mother of Shani and Savarni Manu in well-known accounts. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1030",
+    "type": "person",
+    "person_id": "P-1030",
+    "ref_name": "P-1030-Yama",
+    "attributes": {
+     "PID": "P-1030",
+     "KNOWN_NAME": "Yama",
+     "FULL_NAME": "Lord Yama / Dharmaraja",
+     "REF_NAME": "P-1030-Yama",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Yamaloka",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "God of death and justice; son of Surya and Sanjna in a major Puranic genealogy; twin of Yami. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1031",
+    "type": "person",
+    "person_id": "P-1031",
+    "ref_name": "P-1031-Yami",
+    "attributes": {
+     "PID": "P-1031",
+     "KNOWN_NAME": "Yami",
+     "FULL_NAME": "Goddess Yami / Yamuna",
+     "REF_NAME": "P-1031-Yami",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Celestial realm / earthly river",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Daughter of Surya and Sanjna; often associated with the river Yamuna and twin sister of Yama. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1032",
+    "type": "person",
+    "person_id": "P-1032",
+    "ref_name": "P-1032-Vaivasvata Manu",
+    "attributes": {
+     "PID": "P-1032",
+     "KNOWN_NAME": "Vaivasvata Manu",
+     "FULL_NAME": "Manu Vaivasvata / Shraddhadeva",
+     "REF_NAME": "P-1032-Vaivasvata Manu",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Earth; associated with the primordial flood narrative",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Son of Surya and Sanjna in Puranic accounts; the Manu of the present manvantara. Chronology is cosmological, not historical. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1033",
+    "type": "person",
+    "person_id": "P-1033",
+    "ref_name": "P-1033-Shani",
+    "attributes": {
+     "PID": "P-1033",
+     "KNOWN_NAME": "Shani",
+     "FULL_NAME": "Lord Shani / Shanaishchara",
+     "REF_NAME": "P-1033-Shani",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Celestial realm / Saturn",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Son of Surya and Chhaya; planetary deity associated with Saturn, karma and discipline. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1034",
+    "type": "person",
+    "person_id": "P-1034",
+    "ref_name": "P-1034-Savarni Manu",
+    "attributes": {
+     "PID": "P-1034",
+     "KNOWN_NAME": "Savarni Manu",
+     "FULL_NAME": "Savarni Manu",
+     "REF_NAME": "P-1034-Savarni Manu",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Celestial realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Son of Surya and Chhaya in a common Puranic account; associated with a future manvantara. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1035",
+    "type": "person",
+    "person_id": "P-1035",
+    "ref_name": "P-1035-Varuna",
+    "attributes": {
+     "PID": "P-1035",
+     "KNOWN_NAME": "Varuna",
+     "FULL_NAME": "Lord Varuna",
+     "REF_NAME": "P-1035-Varuna",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Cosmic waters / celestial realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Vedic deity associated with cosmic order and waters; counted among the Adityas in many lists and often made son of Kashyapa and Aditi in Puranic genealogies. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1036",
+    "type": "person",
+    "person_id": "P-1036",
+    "ref_name": "P-1036-Mitra",
+    "attributes": {
+     "PID": "P-1036",
+     "KNOWN_NAME": "Mitra",
+     "FULL_NAME": "Lord Mitra",
+     "REF_NAME": "P-1036-Mitra",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Celestial realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Vedic Aditya associated with agreements, friendship and social order; Puranic genealogies often place him among Aditi's sons. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1037",
+    "type": "person",
+    "person_id": "P-1037",
+    "ref_name": "P-1037-Aryaman",
+    "attributes": {
+     "PID": "P-1037",
+     "KNOWN_NAME": "Aryaman",
+     "FULL_NAME": "Lord Aryaman",
+     "REF_NAME": "P-1037-Aryaman",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Celestial realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Vedic Aditya associated with hospitality, alliances and social bonds; included among Aditi's sons in common lists. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1038",
+    "type": "person",
+    "person_id": "P-1038",
+    "ref_name": "P-1038-Bhaga",
+    "attributes": {
+     "PID": "P-1038",
+     "KNOWN_NAME": "Bhaga",
+     "FULL_NAME": "Lord Bhaga",
+     "REF_NAME": "P-1038-Bhaga",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Celestial realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Vedic Aditya associated with fortune and one's share; included among Aditi's sons in Puranic lists. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1039",
+    "type": "person",
+    "person_id": "P-1039",
+    "ref_name": "P-1039-Vamana",
+    "attributes": {
+     "PID": "P-1039",
+     "KNOWN_NAME": "Vamana",
+     "FULL_NAME": "Lord Vamana",
+     "REF_NAME": "P-1039-Vamana",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Aditi and Kashyapa's hermitage; traditional location varies",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Dwarf incarnation of Vishnu, born to Kashyapa and Aditi in the Vamana narrative. This is an avatar-birth genealogy; avatar identity is not encoded as parentage. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1040",
+    "type": "person",
+    "person_id": "P-1040",
+    "ref_name": "P-1040-Hiranyaksha",
+    "attributes": {
+     "PID": "P-1040",
+     "KNOWN_NAME": "Hiranyaksha",
+     "FULL_NAME": "Hiranyaksha",
+     "REF_NAME": "P-1040-Hiranyaksha",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Daitya realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Daitya son of Diti and Kashyapa; antagonist in the Varaha narrative. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1041",
+    "type": "person",
+    "person_id": "P-1041",
+    "ref_name": "P-1041-Hiranyakashipu",
+    "attributes": {
+     "PID": "P-1041",
+     "KNOWN_NAME": "Hiranyakashipu",
+     "FULL_NAME": "Hiranyakashipu",
+     "REF_NAME": "P-1041-Hiranyakashipu",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Daitya realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Daitya son of Diti and Kashyapa; father of Prahlada. Prominent in the Narasimha narrative. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1042",
+    "type": "person",
+    "person_id": "P-1042",
+    "ref_name": "P-1042-Prahlada",
+    "attributes": {
+     "PID": "P-1042",
+     "KNOWN_NAME": "Prahlada",
+     "FULL_NAME": "Prahlada",
+     "REF_NAME": "P-1042-Prahlada",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Daitya realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Son of Hiranyakashipu and Kayadhu; celebrated devotee of Vishnu. Kayadhu is not included in this initial core dataset. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1043",
+    "type": "person",
+    "person_id": "P-1043",
+    "ref_name": "P-1043-Garuda",
+    "attributes": {
+     "PID": "P-1043",
+     "KNOWN_NAME": "Garuda",
+     "FULL_NAME": "Lord Garuda",
+     "REF_NAME": "P-1043-Garuda",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Celestial realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Son of Kashyapa and Vinata; divine eagle and vehicle of Vishnu. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1044",
+    "type": "person",
+    "person_id": "P-1044",
+    "ref_name": "P-1044-Aruna",
+    "attributes": {
+     "PID": "P-1044",
+     "KNOWN_NAME": "Aruna",
+     "FULL_NAME": "Aruna",
+     "REF_NAME": "P-1044-Aruna",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Celestial realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Son of Kashyapa and Vinata; charioteer of Surya in epic and Puranic accounts. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1045",
+    "type": "person",
+    "person_id": "P-1045",
+    "ref_name": "P-1045-Shesha",
+    "attributes": {
+     "PID": "P-1045",
+     "KNOWN_NAME": "Shesha",
+     "FULL_NAME": "Ananta Shesha",
+     "REF_NAME": "P-1045-Shesha",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Patala / cosmic waters",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Naga son of Kashyapa and Kadru in common genealogies; cosmic serpent associated with Vishnu. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1046",
+    "type": "person",
+    "person_id": "P-1046",
+    "ref_name": "P-1046-Vasuki",
+    "attributes": {
+     "PID": "P-1046",
+     "KNOWN_NAME": "Vasuki",
+     "FULL_NAME": "Naga king Vasuki",
+     "REF_NAME": "P-1046-Vasuki",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Naga realm / Patala",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Naga son of Kashyapa and Kadru in common genealogies; associated with the Samudra Manthana. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1047",
+    "type": "person",
+    "person_id": "P-1047",
+    "ref_name": "P-1047-Takshaka",
+    "attributes": {
+     "PID": "P-1047",
+     "KNOWN_NAME": "Takshaka",
+     "FULL_NAME": "Naga king Takshaka",
+     "REF_NAME": "P-1047-Takshaka",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Naga realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Naga son of Kashyapa and Kadru in common genealogies; prominent in the Mahabharata. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1048",
+    "type": "person",
+    "person_id": "P-1048",
+    "ref_name": "P-1048-Atri",
+    "attributes": {
+     "PID": "P-1048",
+     "KNOWN_NAME": "Atri",
+     "FULL_NAME": "Sage Atri",
+     "REF_NAME": "P-1048-Atri",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Hermitage of Atri",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "One of Brahma's mind-born sons in many accounts; one of the Saptarishis. Consort of Anasuya. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1049",
+    "type": "person",
+    "person_id": "P-1049",
+    "ref_name": "P-1049-Anasuya",
+    "attributes": {
+     "PID": "P-1049",
+     "KNOWN_NAME": "Anasuya",
+     "FULL_NAME": "Sage Anasuya",
+     "REF_NAME": "P-1049-Anasuya",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Atri's hermitage",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Renowned wife of Atri; mother of Dattatreya and Durvasa, and of Soma/Chandra in some traditions. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1050",
+    "type": "person",
+    "person_id": "P-1050",
+    "ref_name": "P-1050-Dattatreya",
+    "attributes": {
+     "PID": "P-1050",
+     "KNOWN_NAME": "Dattatreya",
+     "FULL_NAME": "Lord Dattatreya",
+     "REF_NAME": "P-1050-Dattatreya",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Atri and Anasuya's hermitage",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Divine sage, often understood as a combined manifestation of the Trimurti; son of Atri and Anasuya in a major tradition. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1051",
+    "type": "person",
+    "person_id": "P-1051",
+    "ref_name": "P-1051-Durvasa",
+    "attributes": {
+     "PID": "P-1051",
+     "KNOWN_NAME": "Durvasa",
+     "FULL_NAME": "Sage Durvasa",
+     "REF_NAME": "P-1051-Durvasa",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Atri's hermitage",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Powerful and often quick-tempered sage; son of Atri and Anasuya in a major tradition. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1052",
+    "type": "person",
+    "person_id": "P-1052",
+    "ref_name": "P-1052-Chandra",
+    "attributes": {
+     "PID": "P-1052",
+     "KNOWN_NAME": "Chandra",
+     "FULL_NAME": "Lord Chandra / Soma",
+     "REF_NAME": "P-1052-Chandra",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Lunar realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Moon deity; in one important genealogy son of Atri and Anasuya. Also associated with the 27 Nakshatra wives, daughters of Daksha, in Puranic accounts. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1053",
+    "type": "person",
+    "person_id": "P-1053",
+    "ref_name": "P-1053-Rohini (Nakshatra)",
+    "attributes": {
+     "PID": "P-1053",
+     "KNOWN_NAME": "Rohini (Nakshatra)",
+     "FULL_NAME": "Goddess Rohini / Nakshatra Rohini",
+     "REF_NAME": "P-1053-Rohini (Nakshatra)",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Celestial realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "One of the 27 Nakshatra daughters of Daksha and a principal consort of Chandra; lunar mansion Rohini. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1054",
+    "type": "person",
+    "person_id": "P-1054",
+    "ref_name": "P-1054-Tara",
+    "attributes": {
+     "PID": "P-1054",
+     "KNOWN_NAME": "Tara",
+     "FULL_NAME": "Goddess Tara",
+     "REF_NAME": "P-1054-Tara",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Celestial realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Wife of Brihaspati in the Budha birth narrative; her union with Chandra leads to Budha. The episode is told differently across texts. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1055",
+    "type": "person",
+    "person_id": "P-1055",
+    "ref_name": "P-1055-Brihaspati",
+    "attributes": {
+     "PID": "P-1055",
+     "KNOWN_NAME": "Brihaspati",
+     "FULL_NAME": "Lord Brihaspati / Guru",
+     "REF_NAME": "P-1055-Brihaspati",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Svarga",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Guru of the Devas; often described as son of Angiras. Husband of Tara in the Chandra-Budha narrative. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1056",
+    "type": "person",
+    "person_id": "P-1056",
+    "ref_name": "P-1056-Budha",
+    "attributes": {
+     "PID": "P-1056",
+     "KNOWN_NAME": "Budha",
+     "FULL_NAME": "Lord Budha",
+     "REF_NAME": "P-1056-Budha",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Celestial realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Planetary deity Mercury; son of Chandra and Tara in the widely known Puranic account; consort of Ila and father of Pururavas. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1057",
+    "type": "person",
+    "person_id": "P-1057",
+    "ref_name": "P-1057-Ila",
+    "attributes": {
+     "PID": "P-1057",
+     "KNOWN_NAME": "Ila",
+     "FULL_NAME": "Ila / Sudyumna",
+     "REF_NAME": "P-1057-Ila",
+     "EMAIL": "",
+     "GENDER": "Other",
+     "DOB": "",
+     "POB": "Earthly kingdom; location varies by account",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "A figure whose gender changes in the Puranic narrative; consort of Budha and parent of Pururavas. Gender field is recorded as 'Other' to avoid flattening the story. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1058",
+    "type": "person",
+    "person_id": "P-1058",
+    "ref_name": "P-1058-Pururavas",
+    "attributes": {
+     "PID": "P-1058",
+     "KNOWN_NAME": "Pururavas",
+     "FULL_NAME": "King Pururavas",
+     "REF_NAME": "P-1058-Pururavas",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Pratishthana (often identified with Prayaga/Prayagraj region)",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Son of Budha and Ila; legendary king and ancestor in the Lunar dynasty. His story with Urvashi is prominent in Vedic and later literature. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1059",
+    "type": "person",
+    "person_id": "P-1059",
+    "ref_name": "P-1059-Angiras",
+    "attributes": {
+     "PID": "P-1059",
+     "KNOWN_NAME": "Angiras",
+     "FULL_NAME": "Sage Angiras",
+     "REF_NAME": "P-1059-Angiras",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Brahmaloka / hermitage",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "One of Brahma's mind-born sons in many lists; father of Brihaspati in common Puranic genealogies. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1060",
+    "type": "person",
+    "person_id": "P-1060",
+    "ref_name": "P-1060-Vishvakarma",
+    "attributes": {
+     "PID": "P-1060",
+     "KNOWN_NAME": "Vishvakarma",
+     "FULL_NAME": "Lord Vishvakarma",
+     "REF_NAME": "P-1060-Vishvakarma",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Celestial realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Divine architect and craftsman; father of Sanjna in a common Surya genealogy. His own parentage varies. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1061",
+    "type": "person",
+    "person_id": "P-1061",
+    "ref_name": "P-1061-Dasharatha",
+    "attributes": {
+     "PID": "P-1061",
+     "KNOWN_NAME": "Dasharatha",
+     "FULL_NAME": "King Dasharatha",
+     "REF_NAME": "P-1061-Dasharatha",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Ayodhya, Kosala",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "King of Ayodhya; father of Rama, Bharata, Lakshmana and Shatrughna in the Ramayana. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1062",
+    "type": "person",
+    "person_id": "P-1062",
+    "ref_name": "P-1062-Kausalya",
+    "attributes": {
+     "PID": "P-1062",
+     "KNOWN_NAME": "Kausalya",
+     "FULL_NAME": "Queen Kausalya",
+     "REF_NAME": "P-1062-Kausalya",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Kosala / Ayodhya",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Principal queen of Dasharatha and mother of Rama. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1063",
+    "type": "person",
+    "person_id": "P-1063",
+    "ref_name": "P-1063-Kaikeyi",
+    "attributes": {
+     "PID": "P-1063",
+     "KNOWN_NAME": "Kaikeyi",
+     "FULL_NAME": "Queen Kaikeyi",
+     "REF_NAME": "P-1063-Kaikeyi",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Kekaya kingdom / Ayodhya",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Queen of Dasharatha and mother of Bharata. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1064",
+    "type": "person",
+    "person_id": "P-1064",
+    "ref_name": "P-1064-Sumitra",
+    "attributes": {
+     "PID": "P-1064",
+     "KNOWN_NAME": "Sumitra",
+     "FULL_NAME": "Queen Sumitra",
+     "REF_NAME": "P-1064-Sumitra",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Ayodhya",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Queen of Dasharatha and mother of Lakshmana and Shatrughna. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1065",
+    "type": "person",
+    "person_id": "P-1065",
+    "ref_name": "P-1065-Rama",
+    "attributes": {
+     "PID": "P-1065",
+     "KNOWN_NAME": "Rama",
+     "FULL_NAME": "Lord Rama / Ramachandra",
+     "REF_NAME": "P-1065-Rama",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Ayodhya",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Prince and king of Ayodhya; son of Dasharatha and Kausalya; consort of Sita. Avatar of Vishnu in Vaishnava traditions (avatar relation not encoded as parentage). Associated with Treta Yuga. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1066",
+    "type": "person",
+    "person_id": "P-1066",
+    "ref_name": "P-1066-Sita",
+    "attributes": {
+     "PID": "P-1066",
+     "KNOWN_NAME": "Sita",
+     "FULL_NAME": "Goddess Sita / Janaki",
+     "REF_NAME": "P-1066-Sita",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Mithila; discovered in a furrow by King Janaka",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Consort of Rama; traditionally described as emerging from the earth and raised by Janaka and Sunayana. Her birth/origin accounts vary; no historical date. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1067",
+    "type": "person",
+    "person_id": "P-1067",
+    "ref_name": "P-1067-Lava",
+    "attributes": {
+     "PID": "P-1067",
+     "KNOWN_NAME": "Lava",
+     "FULL_NAME": "Lava",
+     "REF_NAME": "P-1067-Lava",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Valmiki's hermitage; traditional location varies",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Son of Rama and Sita; twin of Kusha in the Ramayana tradition. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1068",
+    "type": "person",
+    "person_id": "P-1068",
+    "ref_name": "P-1068-Kusha",
+    "attributes": {
+     "PID": "P-1068",
+     "KNOWN_NAME": "Kusha",
+     "FULL_NAME": "Kusha",
+     "REF_NAME": "P-1068-Kusha",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Valmiki's hermitage; traditional location varies",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Son of Rama and Sita; twin of Lava in the Ramayana tradition. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1069",
+    "type": "person",
+    "person_id": "P-1069",
+    "ref_name": "P-1069-Vasudeva",
+    "attributes": {
+     "PID": "P-1069",
+     "KNOWN_NAME": "Vasudeva",
+     "FULL_NAME": "Vasudeva",
+     "REF_NAME": "P-1069-Vasudeva",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Mathura / Yadava kingdom",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Father of Krishna and Balarama in the Mahabharata and Bhagavata traditions; husband of Devaki and, in Balarama's birth account, Rohini. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1070",
+    "type": "person",
+    "person_id": "P-1070",
+    "ref_name": "P-1070-Devaki",
+    "attributes": {
+     "PID": "P-1070",
+     "KNOWN_NAME": "Devaki",
+     "FULL_NAME": "Devaki",
+     "REF_NAME": "P-1070-Devaki",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Mathura",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Mother of Krishna and several of his siblings; consort of Vasudeva. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1071",
+    "type": "person",
+    "person_id": "P-1071",
+    "ref_name": "P-1071-Nanda",
+    "attributes": {
+     "PID": "P-1071",
+     "KNOWN_NAME": "Nanda",
+     "FULL_NAME": "Nanda Baba",
+     "REF_NAME": "P-1071-Nanda",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Gokula / Vraja",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Foster father of Krishna in the Bhagavata tradition; consort of Yashoda. Foster parenthood is represented using parentOf with explicit notes. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1072",
+    "type": "person",
+    "person_id": "P-1072",
+    "ref_name": "P-1072-Yashoda",
+    "attributes": {
+     "PID": "P-1072",
+     "KNOWN_NAME": "Yashoda",
+     "FULL_NAME": "Mother Yashoda",
+     "REF_NAME": "P-1072-Yashoda",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Gokula / Vraja",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Foster mother of Krishna; consort of Nanda. The parentOf edge is explicitly marked foster/adoptive in notes. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1073",
+    "type": "person",
+    "person_id": "P-1073",
+    "ref_name": "P-1073-Krishna",
+    "attributes": {
+     "PID": "P-1073",
+     "KNOWN_NAME": "Krishna",
+     "FULL_NAME": "Lord Krishna / Vasudeva",
+     "REF_NAME": "P-1073-Krishna",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Mathura",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Son of Vasudeva and Devaki; raised by Nanda and Yashoda. Avatar of Vishnu in Vaishnava traditions (avatar relation not encoded as parentage). Associated with Dvapara Yuga. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1074",
+    "type": "person",
+    "person_id": "P-1074",
+    "ref_name": "P-1074-Balarama",
+    "attributes": {
+     "PID": "P-1074",
+     "KNOWN_NAME": "Balarama",
+     "FULL_NAME": "Lord Balarama / Baladeva",
+     "REF_NAME": "P-1074-Balarama",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Mathura; raised in Vraja",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Son of Vasudeva and Rohini; embryo is transferred from Devaki to Rohini in the Bhagavata narrative. Elder brother of Krishna. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1075",
+    "type": "person",
+    "person_id": "P-1075",
+    "ref_name": "P-1075-Rukmini",
+    "attributes": {
+     "PID": "P-1075",
+     "KNOWN_NAME": "Rukmini",
+     "FULL_NAME": "Goddess Rukmini",
+     "REF_NAME": "P-1075-Rukmini",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Vidarbha / Kundina",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Principal consort of Krishna; daughter of Bhishmaka in the Bhagavata tradition. Parentage not added in this core dataset. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1076",
+    "type": "person",
+    "person_id": "P-1076",
+    "ref_name": "P-1076-Satyabhama",
+    "attributes": {
+     "PID": "P-1076",
+     "KNOWN_NAME": "Satyabhama",
+     "FULL_NAME": "Goddess Satyabhama",
+     "REF_NAME": "P-1076-Satyabhama",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Dvaraka / Yadava tradition",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "One of Krishna's principal consorts; parentage and details vary across Puranic accounts. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1077",
+    "type": "person",
+    "person_id": "P-1077",
+    "ref_name": "P-1077-Rohini (Vasudeva's wife)",
+    "attributes": {
+     "PID": "P-1077",
+     "KNOWN_NAME": "Rohini (Vasudeva's wife)",
+     "FULL_NAME": "Rohini, wife of Vasudeva",
+     "REF_NAME": "P-1077-Rohini (Vasudeva's wife)",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Mathura / Vraja",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Wife of Vasudeva and mother of Balarama in the common birth-transfer narrative; distinct from Rohini the lunar mansion and consort of Chandra. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1078",
+    "type": "person",
+    "person_id": "P-1078",
+    "ref_name": "P-1078-Kayadhu",
+    "attributes": {
+     "PID": "P-1078",
+     "KNOWN_NAME": "Kayadhu",
+     "FULL_NAME": "Queen Kayadhu",
+     "REF_NAME": "P-1078-Kayadhu",
+     "EMAIL": "",
+     "GENDER": "Female",
+     "DOB": "",
+     "POB": "Daitya realm",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Consort of Hiranyakashipu and mother of Prahlada in the Bhagavata tradition. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1079",
+    "type": "person",
+    "person_id": "P-1079",
+    "ref_name": "P-1079-Bharata",
+    "attributes": {
+     "PID": "P-1079",
+     "KNOWN_NAME": "Bharata",
+     "FULL_NAME": "Prince Bharata",
+     "REF_NAME": "P-1079-Bharata",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Ayodhya, Kosala",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Son of Dasharatha and Kaikeyi; brother of Rama in the Ramayana. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1080",
+    "type": "person",
+    "person_id": "P-1080",
+    "ref_name": "P-1080-Lakshmana",
+    "attributes": {
+     "PID": "P-1080",
+     "KNOWN_NAME": "Lakshmana",
+     "FULL_NAME": "Lord Lakshmana",
+     "REF_NAME": "P-1080-Lakshmana",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Ayodhya, Kosala",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Son of Dasharatha and Sumitra; devoted brother of Rama in the Ramayana. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "P-1081",
+    "type": "person",
+    "person_id": "P-1081",
+    "ref_name": "P-1081-Shatrughna",
+    "attributes": {
+     "PID": "P-1081",
+     "KNOWN_NAME": "Shatrughna",
+     "FULL_NAME": "Prince Shatrughna",
+     "REF_NAME": "P-1081-Shatrughna",
+     "EMAIL": "",
+     "GENDER": "Male",
+     "DOB": "",
+     "POB": "Ayodhya, Kosala",
+     "STATUS": "Unknown",
+     "DOD": "",
+     "NOTES": "Son of Dasharatha and Sumitra; brother of Rama in the Ramayana. | Chronology: mythological/undated; no historically verified birth date. See source/tradition notes.",
+     "GEN": ""
+    }
+   },
+   {
+    "id": "F001",
+    "type": "union",
+    "union_id": "F001",
+    "ref_name": "P-1003-Vishnu & P-1004-Lakshmi",
+    "attributes": {
+     "UID": "F001",
+     "REF_NAME": "P-1003-Vishnu & P-1004-Lakshmi"
+    }
+   },
+   {
+    "id": "F002",
+    "type": "union",
+    "union_id": "F002",
+    "ref_name": "P-1008-Himavan & P-1009-Maina",
+    "attributes": {
+     "UID": "F002",
+     "REF_NAME": "P-1008-Himavan & P-1009-Maina"
+    }
+   },
+   {
+    "id": "F003",
+    "type": "union",
+    "union_id": "F003",
+    "ref_name": "P-1005-Shiva & P-1007-Parvati",
+    "attributes": {
+     "UID": "F003",
+     "REF_NAME": "P-1005-Shiva & P-1007-Parvati"
+    }
+   },
+   {
+    "id": "F004",
+    "type": "union",
+    "union_id": "F004",
+    "ref_name": "P-1015-Daksha & P-1016-Prasuti",
+    "attributes": {
+     "UID": "F004",
+     "REF_NAME": "P-1015-Daksha & P-1016-Prasuti"
+    }
+   },
+   {
+    "id": "F005",
+    "type": "union",
+    "union_id": "F005",
+    "ref_name": "P-1001-Brahma & P-1002-Saraswati",
+    "attributes": {
+     "UID": "F005",
+     "REF_NAME": "P-1001-Brahma & P-1002-Saraswati"
+    }
+   },
+   {
+    "id": "F006",
+    "type": "union",
+    "union_id": "F006",
+    "ref_name": "P-1017-Marichi",
+    "attributes": {
+     "UID": "F006",
+     "REF_NAME": "P-1017-Marichi"
+    }
+   },
+   {
+    "id": "F007",
+    "type": "union",
+    "union_id": "F007",
+    "ref_name": "P-1018-Kashyapa & P-1022-Vinata",
+    "attributes": {
+     "UID": "F007",
+     "REF_NAME": "P-1018-Kashyapa & P-1022-Vinata"
+    }
+   },
+   {
+    "id": "F008",
+    "type": "union",
+    "union_id": "F008",
+    "ref_name": "P-1024-Indra & P-1025-Shachi",
+    "attributes": {
+     "UID": "F008",
+     "REF_NAME": "P-1024-Indra & P-1025-Shachi"
+    }
+   },
+   {
+    "id": "F009",
+    "type": "union",
+    "union_id": "F009",
+    "ref_name": "P-1027-Surya & P-1028-Sanjna",
+    "attributes": {
+     "UID": "F009",
+     "REF_NAME": "P-1027-Surya & P-1028-Sanjna"
+    }
+   },
+   {
+    "id": "F010",
+    "type": "union",
+    "union_id": "F010",
+    "ref_name": "P-1060-Vishvakarma",
+    "attributes": {
+     "UID": "F010",
+     "REF_NAME": "P-1060-Vishvakarma"
+    }
+   },
+   {
+    "id": "F011",
+    "type": "union",
+    "union_id": "F011",
+    "ref_name": "P-1048-Atri & P-1049-Anasuya",
+    "attributes": {
+     "UID": "F011",
+     "REF_NAME": "P-1048-Atri & P-1049-Anasuya"
+    }
+   },
+   {
+    "id": "F012",
+    "type": "union",
+    "union_id": "F012",
+    "ref_name": "P-1052-Chandra & P-1054-Tara",
+    "attributes": {
+     "UID": "F012",
+     "REF_NAME": "P-1052-Chandra & P-1054-Tara"
+    }
+   },
+   {
+    "id": "F013",
+    "type": "union",
+    "union_id": "F013",
+    "ref_name": "P-1059-Angiras",
+    "attributes": {
+     "UID": "F013",
+     "REF_NAME": "P-1059-Angiras"
+    }
+   },
+   {
+    "id": "F014",
+    "type": "union",
+    "union_id": "F014",
+    "ref_name": "P-1056-Budha",
+    "attributes": {
+     "UID": "F014",
+     "REF_NAME": "P-1056-Budha"
+    }
+   },
+   {
+    "id": "F015",
+    "type": "union",
+    "union_id": "F015",
+    "ref_name": "P-1041-Hiranyakashipu & P-1078-Kayadhu",
+    "attributes": {
+     "UID": "F015",
+     "REF_NAME": "P-1041-Hiranyakashipu & P-1078-Kayadhu"
+    }
+   },
+   {
+    "id": "F016",
+    "type": "union",
+    "union_id": "F016",
+    "ref_name": "P-1061-Dasharatha & P-1062-Kausalya",
+    "attributes": {
+     "UID": "F016",
+     "REF_NAME": "P-1061-Dasharatha & P-1062-Kausalya"
+    }
+   },
+   {
+    "id": "F017",
+    "type": "union",
+    "union_id": "F017",
+    "ref_name": "P-1065-Rama & P-1066-Sita",
+    "attributes": {
+     "UID": "F017",
+     "REF_NAME": "P-1065-Rama & P-1066-Sita"
+    }
+   },
+   {
+    "id": "F018",
+    "type": "union",
+    "union_id": "F018",
+    "ref_name": "P-1071-Nanda & P-1070-Devaki",
+    "attributes": {
+     "UID": "F018",
+     "REF_NAME": "P-1071-Nanda & P-1070-Devaki"
+    }
+   },
+   {
+    "id": "F019",
+    "type": "union",
+    "union_id": "F019",
+    "ref_name": "P-1069-Vasudeva & P-1070-Devaki",
+    "attributes": {
+     "UID": "F019",
+     "REF_NAME": "P-1069-Vasudeva & P-1070-Devaki"
+    }
+   },
+   {
+    "id": "F020",
+    "type": "union",
+    "union_id": "F020",
+    "ref_name": "P-1005-Shiva & P-1007-Parvati",
+    "attributes": {
+     "UID": "F020",
+     "REF_NAME": "P-1005-Shiva & P-1007-Parvati"
+    }
+   },
+   {
+    "id": "F021",
+    "type": "union",
+    "union_id": "F021",
+    "ref_name": "P-1005-Shiva & P-1006-Sati",
+    "attributes": {
+     "UID": "F021",
+     "REF_NAME": "P-1005-Shiva & P-1006-Sati"
+    }
+   },
+   {
+    "id": "F022",
+    "type": "union",
+    "union_id": "F022",
+    "ref_name": "P-1011-Kartikeya & P-1013-Valli",
+    "attributes": {
+     "UID": "F022",
+     "REF_NAME": "P-1011-Kartikeya & P-1013-Valli"
+    }
+   },
+   {
+    "id": "F023",
+    "type": "union",
+    "union_id": "F023",
+    "ref_name": "P-1011-Kartikeya & P-1014-Devasena",
+    "attributes": {
+     "UID": "F023",
+     "REF_NAME": "P-1011-Kartikeya & P-1014-Devasena"
+    }
+   },
+   {
+    "id": "F024",
+    "type": "union",
+    "union_id": "F024",
+    "ref_name": "P-1018-Kashyapa & P-1022-Vinata",
+    "attributes": {
+     "UID": "F024",
+     "REF_NAME": "P-1018-Kashyapa & P-1022-Vinata"
+    }
+   },
+   {
+    "id": "F025",
+    "type": "union",
+    "union_id": "F025",
+    "ref_name": "P-1018-Kashyapa & P-1021-Danu",
+    "attributes": {
+     "UID": "F025",
+     "REF_NAME": "P-1018-Kashyapa & P-1021-Danu"
+    }
+   },
+   {
+    "id": "F026",
+    "type": "union",
+    "union_id": "F026",
+    "ref_name": "P-1018-Kashyapa & P-1020-Diti",
+    "attributes": {
+     "UID": "F026",
+     "REF_NAME": "P-1018-Kashyapa & P-1020-Diti"
+    }
+   },
+   {
+    "id": "F027",
+    "type": "union",
+    "union_id": "F027",
+    "ref_name": "P-1018-Kashyapa & P-1019-Aditi",
+    "attributes": {
+     "UID": "F027",
+     "REF_NAME": "P-1018-Kashyapa & P-1019-Aditi"
+    }
+   },
+   {
+    "id": "F028",
+    "type": "union",
+    "union_id": "F028",
+    "ref_name": "P-1018-Kashyapa & P-1023-Kadru",
+    "attributes": {
+     "UID": "F028",
+     "REF_NAME": "P-1018-Kashyapa & P-1023-Kadru"
+    }
+   },
+   {
+    "id": "F029",
+    "type": "union",
+    "union_id": "F029",
+    "ref_name": "P-1027-Surya & P-1028-Sanjna",
+    "attributes": {
+     "UID": "F029",
+     "REF_NAME": "P-1027-Surya & P-1028-Sanjna"
+    }
+   },
+   {
+    "id": "F030",
+    "type": "union",
+    "union_id": "F030",
+    "ref_name": "P-1027-Surya & P-1029-Chhaya",
+    "attributes": {
+     "UID": "F030",
+     "REF_NAME": "P-1027-Surya & P-1029-Chhaya"
+    }
+   },
+   {
+    "id": "F031",
+    "type": "union",
+    "union_id": "F031",
+    "ref_name": "P-1052-Chandra & P-1053-Rohini (Nakshatra)",
+    "attributes": {
+     "UID": "F031",
+     "REF_NAME": "P-1052-Chandra & P-1053-Rohini (Nakshatra)"
+    }
+   },
+   {
+    "id": "F032",
+    "type": "union",
+    "union_id": "F032",
+    "ref_name": "P-1055-Brihaspati & P-1054-Tara",
+    "attributes": {
+     "UID": "F032",
+     "REF_NAME": "P-1055-Brihaspati & P-1054-Tara"
+    }
+   },
+   {
+    "id": "F033",
+    "type": "union",
+    "union_id": "F033",
+    "ref_name": "P-1061-Dasharatha & P-1062-Kausalya",
+    "attributes": {
+     "UID": "F033",
+     "REF_NAME": "P-1061-Dasharatha & P-1062-Kausalya"
+    }
+   },
+   {
+    "id": "F034",
+    "type": "union",
+    "union_id": "F034",
+    "ref_name": "P-1061-Dasharatha & P-1063-Kaikeyi",
+    "attributes": {
+     "UID": "F034",
+     "REF_NAME": "P-1061-Dasharatha & P-1063-Kaikeyi"
+    }
+   },
+   {
+    "id": "F035",
+    "type": "union",
+    "union_id": "F035",
+    "ref_name": "P-1061-Dasharatha & P-1064-Sumitra",
+    "attributes": {
+     "UID": "F035",
+     "REF_NAME": "P-1061-Dasharatha & P-1064-Sumitra"
+    }
+   },
+   {
+    "id": "F036",
+    "type": "union",
+    "union_id": "F036",
+    "ref_name": "P-1069-Vasudeva & P-1077-Rohini (Vasudeva's wife)",
+    "attributes": {
+     "UID": "F036",
+     "REF_NAME": "P-1069-Vasudeva & P-1077-Rohini (Vasudeva's wife)"
+    }
+   },
+   {
+    "id": "F037",
+    "type": "union",
+    "union_id": "F037",
+    "ref_name": "P-1069-Vasudeva & P-1070-Devaki",
+    "attributes": {
+     "UID": "F037",
+     "REF_NAME": "P-1069-Vasudeva & P-1070-Devaki"
+    }
+   },
+   {
+    "id": "F038",
+    "type": "union",
+    "union_id": "F038",
+    "ref_name": "P-1071-Nanda & P-1072-Yashoda",
+    "attributes": {
+     "UID": "F038",
+     "REF_NAME": "P-1071-Nanda & P-1072-Yashoda"
+    }
+   },
+   {
+    "id": "F039",
+    "type": "union",
+    "union_id": "F039",
+    "ref_name": "P-1073-Krishna & P-1076-Satyabhama",
+    "attributes": {
+     "UID": "F039",
+     "REF_NAME": "P-1073-Krishna & P-1076-Satyabhama"
+    }
+   },
+   {
+    "id": "F040",
+    "type": "union",
+    "union_id": "F040",
+    "ref_name": "P-1073-Krishna & P-1075-Rukmini",
+    "attributes": {
+     "UID": "F040",
+     "REF_NAME": "P-1073-Krishna & P-1075-Rukmini"
+    }
+   }
+  ],
+  "edges": [
+   {
+    "id": "F001-P-1003",
+    "type": "partner",
+    "from": "P-1003",
+    "to": "F001",
+    "attributes": {
+     "role": "partner",
+     "union": "F001"
+    }
+   },
+   {
+    "id": "F001-P-1004",
+    "type": "partner",
+    "from": "P-1004",
+    "to": "F001",
+    "attributes": {
+     "role": "partner",
+     "union": "F001"
+    }
+   },
+   {
+    "id": "F002-P-1008",
+    "type": "partner",
+    "from": "P-1008",
+    "to": "F002",
+    "attributes": {
+     "role": "partner",
+     "union": "F002"
+    }
+   },
+   {
+    "id": "F002-P-1009",
+    "type": "partner",
+    "from": "P-1009",
+    "to": "F002",
+    "attributes": {
+     "role": "partner",
+     "union": "F002"
+    }
+   },
+   {
+    "id": "F003-P-1005",
+    "type": "partner",
+    "from": "P-1005",
+    "to": "F003",
+    "attributes": {
+     "role": "partner",
+     "union": "F003"
+    }
+   },
+   {
+    "id": "F003-P-1007",
+    "type": "partner",
+    "from": "P-1007",
+    "to": "F003",
+    "attributes": {
+     "role": "partner",
+     "union": "F003"
+    }
+   },
+   {
+    "id": "F004-P-1015",
+    "type": "partner",
+    "from": "P-1015",
+    "to": "F004",
+    "attributes": {
+     "role": "partner",
+     "union": "F004"
+    }
+   },
+   {
+    "id": "F004-P-1016",
+    "type": "partner",
+    "from": "P-1016",
+    "to": "F004",
+    "attributes": {
+     "role": "partner",
+     "union": "F004"
+    }
+   },
+   {
+    "id": "F005-P-1001",
+    "type": "partner",
+    "from": "P-1001",
+    "to": "F005",
+    "attributes": {
+     "role": "partner",
+     "union": "F005"
+    }
+   },
+   {
+    "id": "F005-P-1002",
+    "type": "partner",
+    "from": "P-1002",
+    "to": "F005",
+    "attributes": {
+     "role": "partner",
+     "union": "F005"
+    }
+   },
+   {
+    "id": "F006-P-1017",
+    "type": "partner",
+    "from": "P-1017",
+    "to": "F006",
+    "attributes": {
+     "role": "partner",
+     "union": "F006"
+    }
+   },
+   {
+    "id": "F007-P-1018",
+    "type": "partner",
+    "from": "P-1018",
+    "to": "F007",
+    "attributes": {
+     "role": "partner",
+     "union": "F007"
+    }
+   },
+   {
+    "id": "F007-P-1022",
+    "type": "partner",
+    "from": "P-1022",
+    "to": "F007",
+    "attributes": {
+     "role": "partner",
+     "union": "F007"
+    }
+   },
+   {
+    "id": "F008-P-1024",
+    "type": "partner",
+    "from": "P-1024",
+    "to": "F008",
+    "attributes": {
+     "role": "partner",
+     "union": "F008"
+    }
+   },
+   {
+    "id": "F008-P-1025",
+    "type": "partner",
+    "from": "P-1025",
+    "to": "F008",
+    "attributes": {
+     "role": "partner",
+     "union": "F008"
+    }
+   },
+   {
+    "id": "F009-P-1027",
+    "type": "partner",
+    "from": "P-1027",
+    "to": "F009",
+    "attributes": {
+     "role": "partner",
+     "union": "F009"
+    }
+   },
+   {
+    "id": "F009-P-1028",
+    "type": "partner",
+    "from": "P-1028",
+    "to": "F009",
+    "attributes": {
+     "role": "partner",
+     "union": "F009"
+    }
+   },
+   {
+    "id": "F010-P-1060",
+    "type": "partner",
+    "from": "P-1060",
+    "to": "F010",
+    "attributes": {
+     "role": "partner",
+     "union": "F010"
+    }
+   },
+   {
+    "id": "F011-P-1048",
+    "type": "partner",
+    "from": "P-1048",
+    "to": "F011",
+    "attributes": {
+     "role": "partner",
+     "union": "F011"
+    }
+   },
+   {
+    "id": "F011-P-1049",
+    "type": "partner",
+    "from": "P-1049",
+    "to": "F011",
+    "attributes": {
+     "role": "partner",
+     "union": "F011"
+    }
+   },
+   {
+    "id": "F012-P-1052",
+    "type": "partner",
+    "from": "P-1052",
+    "to": "F012",
+    "attributes": {
+     "role": "partner",
+     "union": "F012"
+    }
+   },
+   {
+    "id": "F012-P-1054",
+    "type": "partner",
+    "from": "P-1054",
+    "to": "F012",
+    "attributes": {
+     "role": "partner",
+     "union": "F012"
+    }
+   },
+   {
+    "id": "F013-P-1059",
+    "type": "partner",
+    "from": "P-1059",
+    "to": "F013",
+    "attributes": {
+     "role": "partner",
+     "union": "F013"
+    }
+   },
+   {
+    "id": "F014-P-1056",
+    "type": "partner",
+    "from": "P-1056",
+    "to": "F014",
+    "attributes": {
+     "role": "partner",
+     "union": "F014"
+    }
+   },
+   {
+    "id": "F015-P-1041",
+    "type": "partner",
+    "from": "P-1041",
+    "to": "F015",
+    "attributes": {
+     "role": "partner",
+     "union": "F015"
+    }
+   },
+   {
+    "id": "F015-P-1078",
+    "type": "partner",
+    "from": "P-1078",
+    "to": "F015",
+    "attributes": {
+     "role": "partner",
+     "union": "F015"
+    }
+   },
+   {
+    "id": "F016-P-1061",
+    "type": "partner",
+    "from": "P-1061",
+    "to": "F016",
+    "attributes": {
+     "role": "partner",
+     "union": "F016"
+    }
+   },
+   {
+    "id": "F016-P-1062",
+    "type": "partner",
+    "from": "P-1062",
+    "to": "F016",
+    "attributes": {
+     "role": "partner",
+     "union": "F016"
+    }
+   },
+   {
+    "id": "F017-P-1065",
+    "type": "partner",
+    "from": "P-1065",
+    "to": "F017",
+    "attributes": {
+     "role": "partner",
+     "union": "F017"
+    }
+   },
+   {
+    "id": "F017-P-1066",
+    "type": "partner",
+    "from": "P-1066",
+    "to": "F017",
+    "attributes": {
+     "role": "partner",
+     "union": "F017"
+    }
+   },
+   {
+    "id": "F018-P-1071",
+    "type": "partner",
+    "from": "P-1071",
+    "to": "F018",
+    "attributes": {
+     "role": "partner",
+     "union": "F018"
+    }
+   },
+   {
+    "id": "F018-P-1070",
+    "type": "partner",
+    "from": "P-1070",
+    "to": "F018",
+    "attributes": {
+     "role": "partner",
+     "union": "F018"
+    }
+   },
+   {
+    "id": "F019-P-1069",
+    "type": "partner",
+    "from": "P-1069",
+    "to": "F019",
+    "attributes": {
+     "role": "partner",
+     "union": "F019"
+    }
+   },
+   {
+    "id": "F019-P-1070",
+    "type": "partner",
+    "from": "P-1070",
+    "to": "F019",
+    "attributes": {
+     "role": "partner",
+     "union": "F019"
+    }
+   },
+   {
+    "id": "F020-P-1005",
+    "type": "partner",
+    "from": "P-1005",
+    "to": "F020",
+    "attributes": {
+     "role": "partner",
+     "union": "F020"
+    }
+   },
+   {
+    "id": "F020-P-1007",
+    "type": "partner",
+    "from": "P-1007",
+    "to": "F020",
+    "attributes": {
+     "role": "partner",
+     "union": "F020"
+    }
+   },
+   {
+    "id": "F021-P-1005",
+    "type": "partner",
+    "from": "P-1005",
+    "to": "F021",
+    "attributes": {
+     "role": "partner",
+     "union": "F021"
+    }
+   },
+   {
+    "id": "F021-P-1006",
+    "type": "partner",
+    "from": "P-1006",
+    "to": "F021",
+    "attributes": {
+     "role": "partner",
+     "union": "F021"
+    }
+   },
+   {
+    "id": "F022-P-1011",
+    "type": "partner",
+    "from": "P-1011",
+    "to": "F022",
+    "attributes": {
+     "role": "partner",
+     "union": "F022"
+    }
+   },
+   {
+    "id": "F022-P-1013",
+    "type": "partner",
+    "from": "P-1013",
+    "to": "F022",
+    "attributes": {
+     "role": "partner",
+     "union": "F022"
+    }
+   },
+   {
+    "id": "F023-P-1011",
+    "type": "partner",
+    "from": "P-1011",
+    "to": "F023",
+    "attributes": {
+     "role": "partner",
+     "union": "F023"
+    }
+   },
+   {
+    "id": "F023-P-1014",
+    "type": "partner",
+    "from": "P-1014",
+    "to": "F023",
+    "attributes": {
+     "role": "partner",
+     "union": "F023"
+    }
+   },
+   {
+    "id": "F024-P-1018",
+    "type": "partner",
+    "from": "P-1018",
+    "to": "F024",
+    "attributes": {
+     "role": "partner",
+     "union": "F024"
+    }
+   },
+   {
+    "id": "F024-P-1022",
+    "type": "partner",
+    "from": "P-1022",
+    "to": "F024",
+    "attributes": {
+     "role": "partner",
+     "union": "F024"
+    }
+   },
+   {
+    "id": "F025-P-1018",
+    "type": "partner",
+    "from": "P-1018",
+    "to": "F025",
+    "attributes": {
+     "role": "partner",
+     "union": "F025"
+    }
+   },
+   {
+    "id": "F025-P-1021",
+    "type": "partner",
+    "from": "P-1021",
+    "to": "F025",
+    "attributes": {
+     "role": "partner",
+     "union": "F025"
+    }
+   },
+   {
+    "id": "F026-P-1018",
+    "type": "partner",
+    "from": "P-1018",
+    "to": "F026",
+    "attributes": {
+     "role": "partner",
+     "union": "F026"
+    }
+   },
+   {
+    "id": "F026-P-1020",
+    "type": "partner",
+    "from": "P-1020",
+    "to": "F026",
+    "attributes": {
+     "role": "partner",
+     "union": "F026"
+    }
+   },
+   {
+    "id": "F027-P-1018",
+    "type": "partner",
+    "from": "P-1018",
+    "to": "F027",
+    "attributes": {
+     "role": "partner",
+     "union": "F027"
+    }
+   },
+   {
+    "id": "F027-P-1019",
+    "type": "partner",
+    "from": "P-1019",
+    "to": "F027",
+    "attributes": {
+     "role": "partner",
+     "union": "F027"
+    }
+   },
+   {
+    "id": "F028-P-1018",
+    "type": "partner",
+    "from": "P-1018",
+    "to": "F028",
+    "attributes": {
+     "role": "partner",
+     "union": "F028"
+    }
+   },
+   {
+    "id": "F028-P-1023",
+    "type": "partner",
+    "from": "P-1023",
+    "to": "F028",
+    "attributes": {
+     "role": "partner",
+     "union": "F028"
+    }
+   },
+   {
+    "id": "F029-P-1027",
+    "type": "partner",
+    "from": "P-1027",
+    "to": "F029",
+    "attributes": {
+     "role": "partner",
+     "union": "F029"
+    }
+   },
+   {
+    "id": "F029-P-1028",
+    "type": "partner",
+    "from": "P-1028",
+    "to": "F029",
+    "attributes": {
+     "role": "partner",
+     "union": "F029"
+    }
+   },
+   {
+    "id": "F030-P-1027",
+    "type": "partner",
+    "from": "P-1027",
+    "to": "F030",
+    "attributes": {
+     "role": "partner",
+     "union": "F030"
+    }
+   },
+   {
+    "id": "F030-P-1029",
+    "type": "partner",
+    "from": "P-1029",
+    "to": "F030",
+    "attributes": {
+     "role": "partner",
+     "union": "F030"
+    }
+   },
+   {
+    "id": "F031-P-1052",
+    "type": "partner",
+    "from": "P-1052",
+    "to": "F031",
+    "attributes": {
+     "role": "partner",
+     "union": "F031"
+    }
+   },
+   {
+    "id": "F031-P-1053",
+    "type": "partner",
+    "from": "P-1053",
+    "to": "F031",
+    "attributes": {
+     "role": "partner",
+     "union": "F031"
+    }
+   },
+   {
+    "id": "F032-P-1055",
+    "type": "partner",
+    "from": "P-1055",
+    "to": "F032",
+    "attributes": {
+     "role": "partner",
+     "union": "F032"
+    }
+   },
+   {
+    "id": "F032-P-1054",
+    "type": "partner",
+    "from": "P-1054",
+    "to": "F032",
+    "attributes": {
+     "role": "partner",
+     "union": "F032"
+    }
+   },
+   {
+    "id": "F033-P-1061",
+    "type": "partner",
+    "from": "P-1061",
+    "to": "F033",
+    "attributes": {
+     "role": "partner",
+     "union": "F033"
+    }
+   },
+   {
+    "id": "F033-P-1062",
+    "type": "partner",
+    "from": "P-1062",
+    "to": "F033",
+    "attributes": {
+     "role": "partner",
+     "union": "F033"
+    }
+   },
+   {
+    "id": "F034-P-1061",
+    "type": "partner",
+    "from": "P-1061",
+    "to": "F034",
+    "attributes": {
+     "role": "partner",
+     "union": "F034"
+    }
+   },
+   {
+    "id": "F034-P-1063",
+    "type": "partner",
+    "from": "P-1063",
+    "to": "F034",
+    "attributes": {
+     "role": "partner",
+     "union": "F034"
+    }
+   },
+   {
+    "id": "F035-P-1061",
+    "type": "partner",
+    "from": "P-1061",
+    "to": "F035",
+    "attributes": {
+     "role": "partner",
+     "union": "F035"
+    }
+   },
+   {
+    "id": "F035-P-1064",
+    "type": "partner",
+    "from": "P-1064",
+    "to": "F035",
+    "attributes": {
+     "role": "partner",
+     "union": "F035"
+    }
+   },
+   {
+    "id": "F036-P-1069",
+    "type": "partner",
+    "from": "P-1069",
+    "to": "F036",
+    "attributes": {
+     "role": "partner",
+     "union": "F036"
+    }
+   },
+   {
+    "id": "F036-P-1077",
+    "type": "partner",
+    "from": "P-1077",
+    "to": "F036",
+    "attributes": {
+     "role": "partner",
+     "union": "F036"
+    }
+   },
+   {
+    "id": "F037-P-1069",
+    "type": "partner",
+    "from": "P-1069",
+    "to": "F037",
+    "attributes": {
+     "role": "partner",
+     "union": "F037"
+    }
+   },
+   {
+    "id": "F037-P-1070",
+    "type": "partner",
+    "from": "P-1070",
+    "to": "F037",
+    "attributes": {
+     "role": "partner",
+     "union": "F037"
+    }
+   },
+   {
+    "id": "F038-P-1071",
+    "type": "partner",
+    "from": "P-1071",
+    "to": "F038",
+    "attributes": {
+     "role": "partner",
+     "union": "F038"
+    }
+   },
+   {
+    "id": "F038-P-1072",
+    "type": "partner",
+    "from": "P-1072",
+    "to": "F038",
+    "attributes": {
+     "role": "partner",
+     "union": "F038"
+    }
+   },
+   {
+    "id": "F039-P-1073",
+    "type": "partner",
+    "from": "P-1073",
+    "to": "F039",
+    "attributes": {
+     "role": "partner",
+     "union": "F039"
+    }
+   },
+   {
+    "id": "F039-P-1076",
+    "type": "partner",
+    "from": "P-1076",
+    "to": "F039",
+    "attributes": {
+     "role": "partner",
+     "union": "F039"
+    }
+   },
+   {
+    "id": "F040-P-1073",
+    "type": "partner",
+    "from": "P-1073",
+    "to": "F040",
+    "attributes": {
+     "role": "partner",
+     "union": "F040"
+    }
+   },
+   {
+    "id": "F040-P-1075",
+    "type": "partner",
+    "from": "P-1075",
+    "to": "F040",
+    "attributes": {
+     "role": "partner",
+     "union": "F040"
+    }
+   },
+   {
+    "id": "F001-P-1001",
+    "type": "offspring",
+    "from": "F001",
+    "to": "P-1001",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F002-P-1007",
+    "type": "offspring",
+    "from": "F002",
+    "to": "P-1007",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F003-P-1010",
+    "type": "offspring",
+    "from": "F003",
+    "to": "P-1010",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F003-P-1011",
+    "type": "offspring",
+    "from": "F003",
+    "to": "P-1011",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F003-P-1012",
+    "type": "offspring",
+    "from": "F003",
+    "to": "P-1012",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F004-P-1006",
+    "type": "offspring",
+    "from": "F004",
+    "to": "P-1006",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F004-P-1019",
+    "type": "offspring",
+    "from": "F004",
+    "to": "P-1019",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F004-P-1020",
+    "type": "offspring",
+    "from": "F004",
+    "to": "P-1020",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F004-P-1021",
+    "type": "offspring",
+    "from": "F004",
+    "to": "P-1021",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F004-P-1022",
+    "type": "offspring",
+    "from": "F004",
+    "to": "P-1022",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F004-P-1023",
+    "type": "offspring",
+    "from": "F004",
+    "to": "P-1023",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F004-P-1053",
+    "type": "offspring",
+    "from": "F004",
+    "to": "P-1053",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F005-P-1017",
+    "type": "offspring",
+    "from": "F005",
+    "to": "P-1017",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F005-P-1048",
+    "type": "offspring",
+    "from": "F005",
+    "to": "P-1048",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F005-P-1059",
+    "type": "offspring",
+    "from": "F005",
+    "to": "P-1059",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F005-P-1015",
+    "type": "offspring",
+    "from": "F005",
+    "to": "P-1015",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F006-P-1018",
+    "type": "offspring",
+    "from": "F006",
+    "to": "P-1018",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F007-P-1024",
+    "type": "offspring",
+    "from": "F007",
+    "to": "P-1024",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F007-P-1027",
+    "type": "offspring",
+    "from": "F007",
+    "to": "P-1027",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F007-P-1035",
+    "type": "offspring",
+    "from": "F007",
+    "to": "P-1035",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F007-P-1036",
+    "type": "offspring",
+    "from": "F007",
+    "to": "P-1036",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F007-P-1037",
+    "type": "offspring",
+    "from": "F007",
+    "to": "P-1037",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F007-P-1038",
+    "type": "offspring",
+    "from": "F007",
+    "to": "P-1038",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F007-P-1039",
+    "type": "offspring",
+    "from": "F007",
+    "to": "P-1039",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F007-P-1040",
+    "type": "offspring",
+    "from": "F007",
+    "to": "P-1040",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F007-P-1041",
+    "type": "offspring",
+    "from": "F007",
+    "to": "P-1041",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F007-P-1043",
+    "type": "offspring",
+    "from": "F007",
+    "to": "P-1043",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F007-P-1044",
+    "type": "offspring",
+    "from": "F007",
+    "to": "P-1044",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F007-P-1045",
+    "type": "offspring",
+    "from": "F007",
+    "to": "P-1045",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F007-P-1046",
+    "type": "offspring",
+    "from": "F007",
+    "to": "P-1046",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F007-P-1047",
+    "type": "offspring",
+    "from": "F007",
+    "to": "P-1047",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F008-P-1026",
+    "type": "offspring",
+    "from": "F008",
+    "to": "P-1026",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F009-P-1030",
+    "type": "offspring",
+    "from": "F009",
+    "to": "P-1030",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F009-P-1031",
+    "type": "offspring",
+    "from": "F009",
+    "to": "P-1031",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F009-P-1032",
+    "type": "offspring",
+    "from": "F009",
+    "to": "P-1032",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F009-P-1033",
+    "type": "offspring",
+    "from": "F009",
+    "to": "P-1033",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F009-P-1034",
+    "type": "offspring",
+    "from": "F009",
+    "to": "P-1034",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F010-P-1028",
+    "type": "offspring",
+    "from": "F010",
+    "to": "P-1028",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F011-P-1050",
+    "type": "offspring",
+    "from": "F011",
+    "to": "P-1050",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F011-P-1051",
+    "type": "offspring",
+    "from": "F011",
+    "to": "P-1051",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F011-P-1052",
+    "type": "offspring",
+    "from": "F011",
+    "to": "P-1052",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F012-P-1056",
+    "type": "offspring",
+    "from": "F012",
+    "to": "P-1056",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F013-P-1055",
+    "type": "offspring",
+    "from": "F013",
+    "to": "P-1055",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F014-P-1058",
+    "type": "offspring",
+    "from": "F014",
+    "to": "P-1058",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F015-P-1042",
+    "type": "offspring",
+    "from": "F015",
+    "to": "P-1042",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F016-P-1065",
+    "type": "offspring",
+    "from": "F016",
+    "to": "P-1065",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F016-P-1079",
+    "type": "offspring",
+    "from": "F016",
+    "to": "P-1079",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F016-P-1080",
+    "type": "offspring",
+    "from": "F016",
+    "to": "P-1080",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F016-P-1081",
+    "type": "offspring",
+    "from": "F016",
+    "to": "P-1081",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F017-P-1067",
+    "type": "offspring",
+    "from": "F017",
+    "to": "P-1067",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F017-P-1068",
+    "type": "offspring",
+    "from": "F017",
+    "to": "P-1068",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F018-P-1073",
+    "type": "offspring",
+    "from": "F018",
+    "to": "P-1073",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   },
+   {
+    "id": "F019-P-1074",
+    "type": "offspring",
+    "from": "F019",
+    "to": "P-1074",
+    "attributes": {
+     "OID": "",
+     "UNION_OF": "",
+     "OFFSPRING": "",
+     "NOTES": ""
+    }
+   }
+  ]
+ },
+ "vedic_catalog": [
+  {
+   "GOTRA": "Bharadwaja",
+   "VEDA": "Rig",
+   "SHAKHA": "Krishna /Taittiriya",
+   "SUTRA": "Apastamba",
+   "SAMPRADAYA": "Vadakalai",
+   "ACHARYA_THIRUMALIGAI": "Ahobila Matham",
+   "KULA_DEVATHA": "Tirupati Venkateswara"
+  },
+  {
+   "GOTRA": "Kashyapa",
+   "VEDA": "Sama",
+   "SHAKHA": "Kanva",
+   "SUTRA": "Bodhayana",
+   "SAMPRADAYA": "Thenkalai",
+   "ACHARYA_THIRUMALIGAI": "Parakala Matham",
+   "KULA_DEVATHA": "Oppiliappan"
+  },
+  {
+   "GOTRA": "Srivatsa",
+   "VEDA": "Yajur",
+   "SHAKHA": "Madhyandina",
+   "SUTRA": "Ashvalayana",
+   "SAMPRADAYA": "Smarta",
+   "ACHARYA_THIRUMALIGAI": "Andavan Ashramam",
+   "KULA_DEVATHA": "Srirangam Ranganathar"
+  },
+  {
+   "GOTRA": "Harita",
+   "VEDA": "Athvana",
+   "SHAKHA": "Shakala",
+   "SUTRA": "Katyayana",
+   "SAMPRADAYA": "Madhwa",
+   "ACHARYA_THIRUMALIGAI": "Swayamacharya",
+   "KULA_DEVATHA": "Kanchi Varadarajar"
+  },
+  {
+   "GOTRA": "Vadhula",
+   "VEDA": "Other",
+   "SHAKHA": "Kauthuma",
+   "SUTRA": "Drahyayana",
+   "SAMPRADAYA": "Other",
+   "ACHARYA_THIRUMALIGAI": "Vanamamalai Matham",
+   "KULA_DEVATHA": "Swamimalai Murugan"
+  },
+  {
+   "GOTRA": "Kaushika (Vishwamitra)",
+   "VEDA": "",
+   "SHAKHA": "Ranayaniya",
+   "SUTRA": "Satyashadha",
+   "SAMPRADAYA": "",
+   "ACHARYA_THIRUMALIGAI": "Kanchi Kamakoti",
+   "KULA_DEVATHA": "Guruvayurappan"
+  },
+  {
+   "GOTRA": "Gargya",
+   "VEDA": "",
+   "SHAKHA": "Jaiminiya",
+   "SUTRA": "Bharadwaja",
+   "SAMPRADAYA": "",
+   "ACHARYA_THIRUMALIGAI": "Sringeri Sharada",
+   "KULA_DEVATHA": "Chidambaram Nataraja"
+  },
+  {
+   "GOTRA": "Gautama",
+   "VEDA": "",
+   "SHAKHA": "Maitrayani",
+   "SUTRA": "Vaikhanasa",
+   "SAMPRADAYA": "",
+   "ACHARYA_THIRUMALIGAI": "Other",
+   "KULA_DEVATHA": "Kanchi Kamakshi"
+  },
+  {
+   "GOTRA": "Atri",
+   "VEDA": "",
+   "SHAKHA": "Katha",
+   "SUTRA": "Other",
+   "SAMPRADAYA": "",
+   "ACHARYA_THIRUMALIGAI": "",
+   "KULA_DEVATHA": "Cheluvanarayana Swamy"
+  },
+  {
+   "GOTRA": "Vasistha",
+   "VEDA": "",
+   "SHAKHA": "Shaunaka",
+   "SUTRA": "",
+   "SAMPRADAYA": "",
+   "ACHARYA_THIRUMALIGAI": "",
+   "KULA_DEVATHA": "Shasta"
+  },
+  {
+   "GOTRA": "Kaundinya",
+   "VEDA": "",
+   "SHAKHA": "Paippalada",
+   "SUTRA": "",
+   "SAMPRADAYA": "",
+   "ACHARYA_THIRUMALIGAI": "",
+   "KULA_DEVATHA": "Other"
+  },
+  {
+   "GOTRA": "Sandilya",
+   "VEDA": "",
+   "SHAKHA": "Other",
+   "SUTRA": "",
+   "SAMPRADAYA": "",
+   "ACHARYA_THIRUMALIGAI": "",
+   "KULA_DEVATHA": ""
+  },
+  {
+   "GOTRA": "Naidhruva",
+   "VEDA": "",
+   "SHAKHA": "",
+   "SUTRA": "",
+   "SAMPRADAYA": "",
+   "ACHARYA_THIRUMALIGAI": "",
+   "KULA_DEVATHA": ""
+  },
+  {
+   "GOTRA": "Parasara",
+   "VEDA": "",
+   "SHAKHA": "",
+   "SUTRA": "",
+   "SAMPRADAYA": "",
+   "ACHARYA_THIRUMALIGAI": "",
+   "KULA_DEVATHA": ""
+  },
+  {
+   "GOTRA": "Agastya",
+   "VEDA": "",
+   "SHAKHA": "",
+   "SUTRA": "",
+   "SAMPRADAYA": "",
+   "ACHARYA_THIRUMALIGAI": "",
+   "KULA_DEVATHA": ""
+  },
+  {
+   "GOTRA": "Kutsa",
+   "VEDA": "",
+   "SHAKHA": "",
+   "SUTRA": "",
+   "SAMPRADAYA": "",
+   "ACHARYA_THIRUMALIGAI": "",
+   "KULA_DEVATHA": ""
+  },
+  {
+   "GOTRA": "Mudgala",
+   "VEDA": "",
+   "SHAKHA": "",
+   "SUTRA": "",
+   "SAMPRADAYA": "",
+   "ACHARYA_THIRUMALIGAI": "",
+   "KULA_DEVATHA": ""
+  },
+  {
+   "GOTRA": "Sankriti",
+   "VEDA": "",
+   "SHAKHA": "",
+   "SUTRA": "",
+   "SAMPRADAYA": "",
+   "ACHARYA_THIRUMALIGAI": "",
+   "KULA_DEVATHA": ""
+  },
+  {
+   "GOTRA": "Shatamarshana",
+   "VEDA": "",
+   "SHAKHA": "",
+   "SUTRA": "",
+   "SAMPRADAYA": "",
+   "ACHARYA_THIRUMALIGAI": "",
+   "KULA_DEVATHA": ""
+  },
+  {
+   "GOTRA": "Kutsa",
+   "VEDA": "",
+   "SHAKHA": "",
+   "SUTRA": "",
+   "SAMPRADAYA": "",
+   "ACHARYA_THIRUMALIGAI": "",
+   "KULA_DEVATHA": ""
+  },
+  {
+   "GOTRA": "Mudgala",
+   "VEDA": "",
+   "SHAKHA": "",
+   "SUTRA": "",
+   "SAMPRADAYA": "",
+   "ACHARYA_THIRUMALIGAI": "",
+   "KULA_DEVATHA": ""
+  },
+  {
+   "GOTRA": "Sankriti",
+   "VEDA": "",
+   "SHAKHA": "",
+   "SUTRA": "",
+   "SAMPRADAYA": "",
+   "ACHARYA_THIRUMALIGAI": "",
+   "KULA_DEVATHA": ""
+  },
+  {
+   "GOTRA": "Shatamarshana",
+   "VEDA": "",
+   "SHAKHA": "",
+   "SUTRA": "",
+   "SAMPRADAYA": "",
+   "ACHARYA_THIRUMALIGAI": "",
+   "KULA_DEVATHA": ""
+  },
+  {
+   "GOTRA": "Shatatapa",
+   "VEDA": "",
+   "SHAKHA": "",
+   "SUTRA": "",
+   "SAMPRADAYA": "",
+   "ACHARYA_THIRUMALIGAI": "",
+   "KULA_DEVATHA": ""
+  },
+  {
+   "GOTRA": "Vishvakarman",
+   "VEDA": "",
+   "SHAKHA": "",
+   "SUTRA": "",
+   "SAMPRADAYA": "",
+   "ACHARYA_THIRUMALIGAI": "",
+   "KULA_DEVATHA": ""
+  },
+  {
+   "GOTRA": "Upamanyu",
+   "VEDA": "",
+   "SHAKHA": "",
+   "SUTRA": "",
+   "SAMPRADAYA": "",
+   "ACHARYA_THIRUMALIGAI": "",
+   "KULA_DEVATHA": ""
+  },
+  {
+   "GOTRA": "Rathitara",
+   "VEDA": "",
+   "SHAKHA": "",
+   "SUTRA": "",
+   "SAMPRADAYA": "",
+   "ACHARYA_THIRUMALIGAI": "",
+   "KULA_DEVATHA": ""
+  },
+  {
+   "GOTRA": "Other",
+   "VEDA": "",
+   "SHAKHA": "",
+   "SUTRA": "",
+   "SAMPRADAYA": "",
+   "ACHARYA_THIRUMALIGAI": "",
+   "KULA_DEVATHA": ""
+  }
+ ]
+}

@@ -11,7 +11,7 @@ on:
   push:
     branches: [main]
     paths:
-      - docs/data/tree.json
+      - docs/data/trees/peru/tree.json
       - docs/config.yml
       - scripts/panchang/**
       - scripts/panchangam.py
@@ -59,7 +59,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/data/panchang
+          git add docs/data/trees/peru/panchang
           if git diff --cached --quiet; then
             echo "Feed is already up to date."
           else

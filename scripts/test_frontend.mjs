@@ -33,9 +33,9 @@ const {
   eventDetail, filterEvents, groupByMonth, eventRowHTML, listHTML,
 } = await loadModule("assets/panchang.js");
 
-const vedic = JSON.parse(read("data/vedic.json"));
+const vedic = JSON.parse(read("data/trees/peru/vedic.json"));
 
-const tree = JSON.parse(read("data/tree.json"));
+const tree = JSON.parse(read("data/trees/peru/tree.json"));
 const people = Object.fromEntries(tree.people.map((p) => [p.id, p]));
 const families = Object.fromEntries(tree.families.map((f) => [f.id, f]));
 const index = { people, families };
@@ -706,9 +706,9 @@ test("chart payloads in tree.json are well formed when present", () => {
 
 // ---------- Panchangam (tithi calendar) ----------
 
-const panchangIndex = JSON.parse(read("data/panchang/index.json"));
+const panchangIndex = JSON.parse(read("data/trees/peru/panchang/index.json"));
 const panchangYears = Object.fromEntries(
-  panchangIndex.years.map((y) => [y, JSON.parse(read(`data/panchang/panchang-${y}.json`))]),
+  panchangIndex.years.map((y) => [y, JSON.parse(read(`data/trees/peru/panchang/panchang-${y}.json`))]),
 );
 
 test("the panchang feed is tied to the tree: person events reference real people", () => {
@@ -821,15 +821,16 @@ test("listHTML groups by month in date order", () => {
 });
 
 test("createPanchang loads years lazily and person views span every year", async () => {
-  const files = { "data/panchang/index.json": panchangIndex };
+  const files = { "data/trees/peru/panchang/index.json": panchangIndex };
   for (const year of panchangIndex.years) {
-    files[`data/panchang/panchang-${year}.json`] = panchangYears[year];
+    files[`data/trees/peru/panchang/panchang-${year}.json`] = panchangYears[year];
   }
   const panchang = createPanchang({
     fetchJson: async (url) => {
       if (url in files) return files[url];
       throw new Error(`unexpected fetch: ${url}`);
     },
+    basePath: "data/trees/peru/panchang",
     personFor: (id) => people[id],
     displayName: (p) => p.name.display,
     yearsText: () => "",

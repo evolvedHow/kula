@@ -61,9 +61,9 @@ source:
 # The selector appears in the top bar. If no `trees` list is provided, the app
 # falls back to the single-tree layout in `data/`.
 trees:
-  - id: default
+  - id: peru
     label: "Peru Iyers"
-    folder: "data"
+    folder: "data/trees/peru"
     default: true
     # Per-tree auth (optional). If omitted, the top-level auth.google rules
     # below are used. Set allowed_domains or allowed_emails to restrict access.
@@ -74,6 +74,10 @@ trees:
     #   google:
     #     allowed_domains: ["gmail.com"]
     #     allowed_emails: ["you@example.com"]
+
+  - id: celestial
+    label: "Celestial"
+    folder: "data/trees/celestial"
 
 theme:
   # Pick a palette from the `presets:` section below (or add your own there)
@@ -143,11 +147,12 @@ vedic:
 
 # ---------------------------------------------------------------------
 #  Panchangam and family tithi calendar
-#  The engine reads the generated docs/data/tree.json, so run the importer
-#  first. Build the feed with:
+#  The engine reads the generated tree.json, so run the importer first.
+#  Build the feed with:
 #      .venv/bin/python -m scripts.panchang build --years 2026,2027
-#  The static feed is published under docs/data/panchang/. For Google
-#  Calendar, subscribe to the absolute .ics URL (Other calendars -> From URL).
+#  The static feed is published under docs/data/trees/peru/panchang/. For
+#  Google Calendar, subscribe to the absolute .ics URL (Other calendars ->
+#  From URL).
 # ---------------------------------------------------------------------
 panchang:
   years: [2026, 2027]
@@ -184,11 +189,11 @@ panchang:
     private_members: false
   sources:
     kind: tree
-    tree_path: docs/data/tree.json
+    tree_path: docs/data/trees/peru/tree.json
     # Optional hand-entered times, explicit tithi/masa, and per-person
     # ritual locations. See docs/data/panchang-overrides.json.
     overrides: docs/data/panchang-overrides.json
-    output_dir: docs/data/panchang
+    output_dir: docs/data/trees/peru/panchang
     feed_name: panchang.ics
     gramps:
       url: http://localhost:8081
@@ -196,7 +201,7 @@ panchang:
   server:
     host: 127.0.0.1
     port: 8082
-    public_url: https://evolvedhow.github.io/kula/data/panchang
+    public_url: https://evolvedhow.github.io/kula/data/trees/peru/panchang
     cache_seconds: 300
   google:
     calendar_id: primary

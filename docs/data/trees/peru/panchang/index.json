@@ -13,7 +13,7 @@
   "masa_system": "solar",
   "source": "tree",
   "source_metadata": {
-    "tree": "docs/data/tree.json",
+    "tree": "docs/data/trees/peru/tree.json",
     "generated_at": "2026-11-05T13:48:02+00:00",
     "people_count": 151,
     "family_count": 56,

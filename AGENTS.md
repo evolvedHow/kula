@@ -10,7 +10,8 @@ CSV dump predates the panchang work and stays untracked; `private/` is
 gitignored).
 
 - Source of truth: a Google Sheet → `scripts/import_sheet.py` →
-  `docs/data/tree.json`. Never edit `tree.json` by hand; regenerate it.
+  `docs/data/trees/<tree>/tree.json`. Never edit `tree.json` by hand;
+  regenerate it. The default tree lives at `docs/data/trees/peru/`.
 - Relationships are entered in the sheet's `KG` tab as readable triples
   (`SUBJECT`, `PREDICATE`, `OBJECT`), e.g. `P-101-Himavan spouseOf P-102-Mena`.
   `import_sheet.py` extracts the PID prefix and builds the union/children model.
@@ -39,17 +40,19 @@ gitignored).
   `masa_system: solar`), lunar amanta month kept as tie-breaker when a tithi
   occurs twice in one solar month.
 - Build: `.venv/bin/python -m scripts.panchang build --years 2026,2027` →
-  `docs/data/panchang/` (index.json + per-year `panchang-<year>.json/.ics` +
-  combined `panchang.json/.ics`). `--daily`/`--members` write large optional
-  dumps (not needed by the site). `.venv/bin/python -m scripts.panchang
-  validate` runs sanity checks; `explain <PID> --year Y` shows a derivation.
+  `docs/data/trees/peru/panchang/` (index.json + per-year
+  `panchang-<year>.json/.ics` + combined `panchang.json/.ics`).
+  `--daily`/`--members` write large optional dumps (not needed by the site).
+  `.venv/bin/python -m scripts.panchang validate` runs sanity checks;
+  `explain <PID> --year Y` shows a derivation.
 - Site integration: Tithis tab (`#/panchang`, `#/panchang/<PID>`,
   `?y=YYYY&k=kind`) rendered by `docs/assets/panchang.js`; profile panels list
-  the member's ritual dates. Tab hides itself when `data/panchang/index.json`
-  is absent.
+  the member's ritual dates. Tab hides itself when
+  `data/trees/peru/panchang/index.json` is absent.
 - CI: `.github/workflows/panchang.yml` rebuilds and commits the feed on pushes
-  touching `tree.json`/config/engine and every December (current + next year).
-  `docs/data/panchang/` is excluded from the push trigger to prevent loops.
+  touching `docs/data/trees/peru/tree.json`/config/engine and every December
+  (current + next year). `docs/data/trees/peru/panchang/` is excluded from the
+  push trigger to prevent loops.
 
 ## Gotchas learned the hard way
 
