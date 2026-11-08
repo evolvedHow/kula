@@ -1,6 +1,8 @@
 /**********************************************************************
  *  KULA GENEALOGY PLUGIN — KNOWLEDGE GRAPH EDITION
  *
+ *  @OnlyCurrentDoc
+ *
  *  Entry points, in the order Google calls them:
  *    onInstall  - first install; delegates to onOpen so menus appear.
  *    onOpen     - simple trigger on every spreadsheet open (menu build).
@@ -20,7 +22,7 @@ const CFG = {
   FLATGRAPH: 'KG_FLAT',   // Output tab for flattened graph triples
   VEDIC: 'Vedic',
   STORIES: 'Stories',
-  CONFIG: '$Config',      // Gotra defaults for veda, shakha, sutra, nakshatra
+  CONFIG: '$Config',      // Gotra defaults for veda, shakha, sutra
   MAPPING: 'ID_Mapping_Key',
   REPORT: 'Renumber_Report',
   REFACTOR: 'Refactor_Report'
@@ -37,31 +39,56 @@ const PREDICATES = ['spouseOf', 'parentOf', 'childOf'];
  */
 const SCHEMA = {
   [CFG.PERSONS]: {
-    headers: ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "EMAIL", "GENDER", "DOB", "POB", "CUR_LOC", "STATUS", "DOD", "POD", "NOTES", "GEN"],
+    headers: ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "EMAIL", "GENDER", "DOB", "POB", "STATUS", "DOD", "NOTES", "GEN"],
     sample: [
-      ["A001", "Venkiteswara Iyer", "Venkiteswara Iyer", "", "", "M", "1900", "Perumbavoor", "", "Deceased", "1965", "Kolkatta", "Head Patriarch", "A"],
-      ["A002", "Rajammal", "Rajammal Iyer", "", "", "F", "1905", "Perumbavoor", "", "Deceased", "1980", "Chennai", "Spouse", "A"],
-      ["B001", "Viswanatha Iyer", "Viswanatha Iyer", "", "", "M", "1930", "Perumbavoor", "", "Living", "", "", "Child", "B"]
+      ["P-101", "Himavan", "King Himavan", "himavan", "himavan@kula.internal", "Male", "1932-01-15T07:00:00", "Uttarkashi, Uttarakhand, India", "Deceased", "2015-08-20T10:00:00", "Maternal Grandfather (King of Himalayas)", "1"],
+      ["P-102", "Mena", "Queen Menavati", "menavati", "menavati@kula.internal", "Female", "1935-06-10T08:30:00", "Uttarkashi, Uttarakhand, India", "Deceased", "2018-11-12T14:15:00", "Maternal Grandmother (Wife of Himavan)", "1"],
+      ["P-201", "Shiva", "Lord Mahadeva Shiva", "shiva", "shiva@kula.internal", "Male", "1955-03-04T23:45:00", "Chidambaram, Tamil Nadu, India", "Living", "", "Father / Consort of Parvati", "2"],
+      ["P-202", "Parvati", "Goddess Meenakshi Parvati", "parvati", "parvati@kula.internal", "Female", "1960-04-14T05:30:00", "Varanasi, Uttar Pradesh, India", "Living", "", "Mother / Daughter of Himavan & Menavati", "2"],
+      ["P-203", "Mainaka", "Mainaka Parvata", "mainaka", "mainaka@kula.internal", "Male", "1958-08-18T12:00:00", "Uttarkashi, Uttarakhand, India", "Living", "", "Maternal Uncle (Son of Himavan & Menavati)", "2"],
+      ["P-204", "Ganga", "Goddess Ganga Devi", "ganga", "ganga@kula.internal", "Female", "1962-10-05T09:15:00", "Gangotri, Uttarakhand, India", "Living", "", "Maternal Aunt (Daughter of Himavan & Menavati)", "2"],
+      ["P-301", "Murugan", "Lord Kartikeya Subramanya", "murugan", "murugan@kula.internal", "Male", "1983-05-24T06:15:00", "Madurai, Tamil Nadu, India", "Living", "", "Eldest Son / Commander of Divine Forces", "3"],
+      ["P-302", "Ganesha", "Lord Vinayagar Ganesha", "ganesha", "ganesha@kula.internal", "Male", "1985-09-18T11:45:00", "Chinchwad, Maharashtra, India", "Living", "", "Younger Son / Lord of Wisdom & Obstacles", "3"],
+      ["P-303", "Ashokasundari", "Goddess Ashokasundari", "ashokasundari", "ashokasundari@kula.internal", "Female", "1988-11-12T14:20:00", "Ujjain, Madhya Pradesh, India", "Living", "", "Daughter of Shiva & Parvati", "3"],
+      ["P-304", "Valli", "Valli Devi", "valli", "valli@kula.internal", "Female", "1986-02-14T10:00:00", "Vellore, Tamil Nadu, India", "Living", "", "Spouse of Murugan", "3"],
+      [
+        "P-305", "Deivayanai", "Devasena Devi", "deivayanai", "deivayanai@kula.internal", "Female",
+        "1985-07-20T16:30:00", "Tiruttani, Tamil Nadu, India", "Living", "", "Spouse of Murugan", "3"
+      ]
     ]
   },
   [CFG.KG]: {
     // PIDs only; SUBJECT_NAME/OBJECT_NAME are read-only previews.
     headers: ["SUBJECT", "SUBJECT_NAME", "PREDICATE", "OBJECT", "OBJECT_NAME", "DATE", "NOTES"],
     sample: [
-      ["A001", "", "spouseOf", "A002", "", "", ""],
-      ["A001", "", "parentOf", "B001", "", "", ""]
+      ["P-101", "", "spouseOf", "P-102", "", "", "Himavan married to Menavati"],
+      ["P-101", "", "parentOf", "P-202", "", "", "Himavan parent of Parvati"],
+      ["P-101", "", "parentOf", "P-203", "", "", "Himavan parent of Mainaka"],
+      ["P-101", "", "parentOf", "P-204", "", "", "Himavan parent of Ganga"],
+      ["P-201", "", "spouseOf", "P-202", "", "", "Shiva married to Parvati"],
+      ["P-202", "", "parentOf", "P-301", "", "", "Parvati parent of Murugan"],
+      ["P-202", "", "parentOf", "P-302", "", "", "Parvati parent of Ganesha"],
+      ["P-202", "", "parentOf", "P-303", "", "", "Parvati parent of Ashokasundari"],
+      ["P-301", "", "spouseOf", "P-304", "", "", "Murugan married to Valli"],
+      ["P-301", "", "spouseOf", "P-305", "", "", "Murugan married to Deivayanai"]
     ]
   },
   [CFG.VEDIC]: {
-    // Matches the columns the live Kula-Data sheet already uses. PARVATA was
-    // dropped: the sheet never carried it, so demanding it made every Vedic
-    // tab look incomplete.
-    headers: ["PERSON", "PERSON_NAME", "GOTRA", "VEDA", "SHAKHA", "SUTRA", "NAKSHATRA", "KULA_DEVATHA", "SAMPRADAYA", "ACHARYA_THIRUMALIGAI", "PURVIKAM"],
-    sample: ["A001", "", "Bharadwaja", "Yajurveda", "Apastamba", "Bodhayana", "Rohini", "", "", "", ""]
+    headers: ["PERSON", "PERSON_NAME", "GOTRA", "VEDA", "SHAKHA", "SUTRA", "KULA_DEVATHA", "SAMPRADAYA", "ACHARYA_THIRUMALIGAI", "PURVIKAM"],
+    sample: [
+      ["P-101", "", "Kashyapa", "Rig", "Shakala", "Ashvalayana", "Chidambaram Nataraja", "Smarta", "Sringeri Sharada", "Uttarkashi"],
+      ["P-201", "", "Bharadwaja", "Yajur", "Krishna /Taittiriya", "Apastamba", "Chidambaram Nataraja", "Smarta", "Kanchi Kamakoti", "Chidambaram"],
+      ["P-202", "", "Kashyapa", "Yajur", "Krishna /Taittiriya", "Apastamba", "Kanchi Kamakshi", "Smarta", "Kanchi Kamakoti", "Madurai"],
+      ["P-301", "", "Bharadwaja", "Yajur", "Krishna /Taittiriya", "Apastamba", "Swamimalai Murugan", "Smarta", "Kanchi Kamakoti", "Palani"],
+      ["P-302", "", "Bharadwaja", "Yajur", "Krishna /Taittiriya", "Apastamba", "Chidambaram Nataraja", "Smarta", "Kanchi Kamakoti", "Chinchwad"]
+    ]
   },
   [CFG.STORIES]: {
     headers: ["NOTE_ID", "TYPE", "TITLE", "IS_STORY", "TAGGED_PEOPLE", "TAGGED_NAMES", "TEXT", "UPDATED"],
-    sample: ["N001", "Story", "Family Migration", "TRUE", "A001", "", "Moved to Kolkata in 1925.", ""]
+    sample: [
+      ["N-001", "Story", "Divine Lineage Origin", "TRUE", "P-101,P-102,P-202", "", "King Himavan and Queen Menavati established the ancestral mountain home in Uttarkashi before Parvati's marriage.", "2026-11-08"],
+      ["N-002", "Story", "Abode at Palani", "TRUE", "P-301,P-304,P-305", "", "Lord Murugan established his principal worship place at Palani alongside Valli and Deivayanai.", "2026-11-08"]
+    ]
   }
 };
 
@@ -195,82 +222,98 @@ function onInstall(e) {
 }
 
 /* ====================================================================
- * 1b. ADD-ON HOMEPAGE (CARD SERVICE)
+ * 1b. ADD-ON HOMEPAGE (CARD SERVICE) - SAGE GREEN THEME
  * ==================================================================== */
 
 /**
- * Builds the add-on homepage card. This is the function named by
- * addOns.sheets.homepageTrigger and it must return Card objects - an
- * alert or a spreadsheet menu cannot be rendered here.
+ * Builds a filled text button with a material icon and short label.
  *
- * @param {Object=} e Homepage event object.
- * @return {Card[]} A single-element array holding the homepage card.
+ * @param {string} iconName Google Font Icon name (e.g. 'settings').
+ * @param {string} label Short text shown on the button.
+ * @param {string} functionName Apps Script function to run on click.
+ * @param {string} backgroundColor Background color for the filled button.
+ * @return {CardService.TextButton} Configured text button.
  */
+function materialButton_(iconName, label, functionName, backgroundColor) {
+  const materialIcon = CardService.newMaterialIcon()
+    .setName(iconName)
+    .setFill(true);
+  return CardService.newTextButton()
+    .setText(label)
+    .setMaterialIcon(materialIcon)
+    .setTextButtonStyle(CardService.TextButtonStyle.FILLED)
+    .setBackgroundColor(backgroundColor)
+    .setOnClickAction(CardService.newAction().setFunctionName(functionName));
+}
+
 function onHomepage(e) {
-  const card = CardService.newCardBuilder()
-    .setHeader(
-      CardService.newCardHeader()
-        .setTitle('Kula Genealogy System')
-        .setSubtitle('Knowledge-graph workspace')
-    );
+  // Sage Green Color Palette Definitions
+  const COLOR_PRIMARY = '#4A6B5D';
+  const COLOR_HEADER = '#2D3A34';
+  const COLOR_SUBTEXT = '#5A6E64';
+  const COLOR_CARD_BG = '#F0F4F1';
 
-  const status = CardService.newCardSection().setHeader('Workspace');
-  status.addWidget(CardService.newTextParagraph().setText(describeWorkspace_()));
-  card.addSection(status);
+  const card = CardService.newCardBuilder();
 
-  const setup = CardService.newCardSection().setHeader('Setup');
-  setup.addWidget(
-    CardService.newTextButton()
-      .setText('Setup / reset workspace tabs')
-      .setOnClickAction(CardService.newAction().setFunctionName('cardSetup'))
-  );
-  setup.addWidget(
-    CardService.newTextButton()
-      .setText('Normalize references to PIDs')
-      .setOnClickAction(CardService.newAction().setFunctionName('cardNormalizeReferences'))
-  );
-  setup.addWidget(
-    CardService.newTextButton()
-      .setText('Check sheet setup')
-      .setOnClickAction(CardService.newAction().setFunctionName('cardCheckSetup'))
-  );
-  setup.addWidget(
-    CardService.newTextButton()
-      .setText('Validate references')
-      .setOnClickAction(CardService.newAction().setFunctionName('cardValidateData'))
-  );
-  card.addSection(setup);
 
-  const flatten = CardService.newCardSection().setHeader('Flatten knowledge graph');
-  flatten.addWidget(
-    CardService.newTextButton()
-      .setText('All relationships')
-      .setOnClickAction(CardService.newAction().setFunctionName('cardFlattenAll'))
+  const headerText = CardService.newTextParagraph().setText(
+    `<div style="text-align: center; background-color: ${COLOR_CARD_BG}; padding: 12px; border-radius: 8px;">` +
+      `<b style="color: ${COLOR_HEADER}; font-size: 16px;">குல :: ƙüłā🧬 KULA GENEALOGY :: कुल</b><br>` +
+      `<span style="color: ${COLOR_SUBTEXT}; font-size: 8px;">ver: 2601 | vish.ganapathy@gmail.com</span>` +
+    `</div>`
   );
-  flatten.addWidget(
-    CardService.newTextButton()
-      .setText('Parents only')
-      .setOnClickAction(CardService.newAction().setFunctionName('cardFlattenParents'))
-  );
-  flatten.addWidget(
-    CardService.newTextButton()
-      .setText('Offsprings only')
-      .setOnClickAction(CardService.newAction().setFunctionName('cardFlattenOffsprings'))
-  );
-  card.addSection(flatten);
 
-  const numbering = CardService.newCardSection().setHeader('Person numbering');
-  numbering.addWidget(
-    CardService.newTextButton()
-      .setText('Preview numbering tiers')
-      .setOnClickAction(CardService.newAction().setFunctionName('cardPreviewRenumber'))
+
+  const headerSection = CardService.newCardSection()
+    .addWidget(headerText);
+  card.addSection(headerSection);
+
+  // 2. Workspace Status Section
+  const statusSection = CardService.newCardSection()
+    .setHeader('Workspace Status');
+  statusSection.addWidget(
+    CardService.newTextParagraph().setText(
+      `<font color="${COLOR_PRIMARY}"><b>Active Status:</b></font><br>` +
+      describeWorkspace_()
+    )
   );
-  numbering.addWidget(
-    CardService.newTextButton()
-      .setText('Apply generational PIDs')
-      .setOnClickAction(CardService.newAction().setFunctionName('cardApplyRenumber'))
-  );
-  card.addSection(numbering);
+  card.addSection(statusSection);
+
+  // 3. Workspace Operations (Setup, Normalize, Audit, Validate)
+  const setupSection = CardService.newCardSection()
+    .setHeader('Workspace Setup & Audit');
+
+  const setupButtons = CardService.newButtonSet()
+    .addButton(materialButton_('settings', 'Setup', 'cardSetup', COLOR_PRIMARY))
+    .addButton(materialButton_('refresh', 'Normalize', 'cardNormalizeReferences', COLOR_PRIMARY))
+    .addButton(materialButton_('search', 'Audit', 'cardCheckSetup', COLOR_PRIMARY))
+    .addButton(materialButton_('check_box', 'Validate', 'cardValidateData', COLOR_PRIMARY));
+
+  setupSection.addWidget(setupButtons);
+  card.addSection(setupSection);
+
+  // 4. Graph Operations (Flattening)
+  const flattenSection = CardService.newCardSection()
+    .setHeader('Flatten Knowledge Graph');
+
+  const flattenButtons = CardService.newButtonSet()
+    .addButton(materialButton_('unfold_more', 'Flatten', 'cardFlattenAll', COLOR_PRIMARY))
+    .addButton(materialButton_('people', 'Parents', 'cardFlattenParents', COLOR_PRIMARY))
+    .addButton(materialButton_('person', 'Offspring', 'cardFlattenOffsprings', COLOR_PRIMARY));
+
+  flattenSection.addWidget(flattenButtons);
+  card.addSection(flattenSection);
+
+  // 5. Person Numbering Section
+  const numberingSection = CardService.newCardSection()
+    .setHeader('Person Numbering');
+
+  const numberingButtons = CardService.newButtonSet()
+    .addButton(materialButton_('visibility', 'Preview', 'cardPreviewRenumber', COLOR_PRIMARY))
+    .addButton(materialButton_('play_arrow', 'Apply', 'cardApplyRenumber', COLOR_PRIMARY));
+
+  numberingSection.addWidget(numberingButtons);
+  card.addSection(numberingSection);
 
   return [card.build()];
 }
@@ -281,18 +324,23 @@ function onHomepage(e) {
  * @return {string} Plain-text status block for the homepage card.
  */
 function describeWorkspace_() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  if (!ss) {
-    return 'No spreadsheet is open. Open your Kula workbook, then reopen this add-on.';
-  }
+  try {
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    if (!ss) {
+      return 'No spreadsheet is open. Open your Kula workbook, then reopen this add-on.';
+    }
 
-  const required = [CFG.INSTRUCTIONS, CFG.PERSONS, CFG.KG, CFG.VEDIC, CFG.STORIES];
-  const missing = required.filter(name => !ss.getSheetByName(name));
+    const required = [CFG.INSTRUCTIONS, CFG.PERSONS, CFG.KG, CFG.VEDIC, CFG.STORIES];
+    const missing = required.filter(name => !ss.getSheetByName(name));
+    const name = ss.getName();
 
-  if (missing.length === 0) {
-    return `Working on "${ss.getName()}".\nAll required tabs are present.`;
+    if (missing.length === 0) {
+      return `Working on "${name}".\nAll required tabs are present.`;
+    }
+    return `Working on "${name}".\nMissing tabs: ${missing.join(', ')}.`;
+  } catch (e) {
+    return 'Please authorize this add-on to access the current spreadsheet, then refresh the sidebar.';
   }
-  return `Working on "${ss.getName()}".\nMissing tabs: ${missing.join(', ')}.`;
 }
 
 /* --- Card callbacks ------------------------------------------------- */
@@ -402,6 +450,7 @@ function setupDatabaseTabsCore_() {
 
   const refs = applyLinkedFormulas_(ss);
   applyValidations_(ss);
+  applyDuplicateHighlighting_(ss);
   refreshPreviewColumns_(ss);
 
   let note = '';
@@ -794,18 +843,34 @@ function populateInstructionsSheet_(sheet) {
   sheet.clear();
   sheet.setHiddenGridlines(false);
 
+  const EASYGUIDE = `
+    குல :: [WELCOME TO KULA GENEALOGY PLUGIN] :: कुल
+    ================================================
+    1. Use the plugin option: Setup / reset workspace tabs to generate template
+    2. Persons tab - Define every person you want on the family tree.
+    3. KG tab - Define relationships between persons; using TWO keywords: spouseOf and parentOf
+  `;
+
+  const easyGuideRows = EASYGUIDE.split('\n')
+    .map(line => line.trim())
+    .filter(line => line.length > 0)
+    .map(line => [line, "", ""]);
+
   const instructionsContent = [
-    ["🌳 KULA GENEALOGY SYSTEM — USER GUIDE"],
+    ...easyGuideRows,
+    [""],
+    ["குல :: [WELCOME TO KULA GENEALOGY PLUGIN] :: कुल — USER GUIDE"],
     ["Welcome to the Kula Genealogy Knowledge Graph plugin! This system turns your family database into an inferred relational graph."],
     [""],
     ["📌 CORE TABS (CREATED BY SETUP)"],
-    ["1. Persons", "Core individual metadata: PID, names, contact, gender, birth, death, places, generation."],
-    ["2. KG (Knowledge Graph)", "The single edge repository: SUBJECT | SUBJECT_NAME | PREDICATE | OBJECT | OBJECT_NAME | DATE | NOTES."],
-    ["3. Vedic", "Per-person lineage: PERSON, PERSON_NAME, gotra, veda, shakha, sutra, nakshatra, kula devatha, sampradaya, acharya thirumaligai, purvikam."],
+    ["1. Persons", "Mandatory: Every person in the tree has one entry here."],
+    ["2. Vedic", "Optional: Vedic lineage information."],
+    ["3. KG (Knowledge Graph)", "Define relationships between persons using just TWO keywords; spouseOf and parentOf."],
     ["4. Stories", "Narratives and notes. TAGGED_PEOPLE links a note to one or more people; TAGGED_NAMES shows the names."],
+    ["5. $Config", "HIDDEN. Gotra defaults, generated from the GOTRA values already in the Vedic tab."],
     [""],
+
     ["📦 GENERATED TABS (MENU OPTIONS)"],
-    ["• $Config", "Gotra defaults, generated from the GOTRA values already in the Vedic tab."],
     ["• KG_FLAT", "Flattened graph triples, written by the flattener. Do not edit."],
     ["• Renumber_Report", "Audit of the last numbering run. Do not edit."],
     [""],
@@ -838,14 +903,16 @@ function populateInstructionsSheet_(sheet) {
     instructionsContent.map(row => [row[0] || "", row[1] || "", row[2] || ""])
   );
 
-  // Styling Instructions Tab
-  sheet.getRange("A1:B1").merge().setFontWeight("bold").setFontSize(14).setBackground("#1c4587").setFontColor("#ffffff");
-  sheet.getRange("A4:B4").setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
-  sheet.getRange("A10:B10").setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
-  sheet.getRange("A15:B15").setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
-  sheet.getRange("A18:C18").setFontWeight("bold").setBackground("#d9ead3");
-  sheet.getRange("A21:B21").setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
-  sheet.getRange("A29:B29").setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
+  // Styling Instructions Tab. Offsets are relative to the main title row,
+  // which sits just below the easy guide so the guide stays at the top.
+  const titleRow = easyGuideRows.length + 2;
+  sheet.getRange(titleRow, 1, 1, 2).merge().setFontWeight("bold").setFontSize(14).setBackground("#1c4587").setFontColor("#ffffff");
+  sheet.getRange(titleRow + 3, 1, 1, 2).setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
+  sheet.getRange(titleRow + 9, 1, 1, 2).setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
+  sheet.getRange(titleRow + 14, 1, 1, 2).setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
+  sheet.getRange(titleRow + 17, 1, 1, 3).setFontWeight("bold").setBackground("#d9ead3");
+  sheet.getRange(titleRow + 20, 1, 1, 2).setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
+  sheet.getRange(titleRow + 28, 1, 1, 2).setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
 
   sheet.autoResizeColumn(1);
   sheet.autoResizeColumn(2);
@@ -1137,7 +1204,7 @@ function applyValidations_(ss) {
   if (vedic) {
     const vedicHeader = vedic.getRange(1, 1, 1, vedic.getLastColumn() || 1).getValues()[0];
     const vedicRows = setupCoverage_(vedic) - 1;
-    const configColumns = ['GOTRA', 'VEDA', 'SHAKHA', 'SUTRA', 'NAKSHATRA', 'SAMPRADAYA', 'ACHARYA_THIRUMALIGAI', 'KULA_DEVATHA'];
+    const configColumns = ['GOTRA', 'VEDA', 'SHAKHA', 'SUTRA', 'SAMPRADAYA', 'ACHARYA_THIRUMALIGAI', 'KULA_DEVATHA'];
 
     configColumns.forEach(name => {
       const values = configValues_(ss, name);
@@ -1154,6 +1221,86 @@ function applyValidations_(ss) {
       vedic.getRange(2, col, vedicRows, 1).setDataValidation(rule);
     });
   }
+}
+
+/**
+ * Adds conditional-formatting rules that turn duplicate identifiers light red
+ * with red font. Duplicates are allowed; this is only a visual cue.
+ *
+ * @param {SpreadsheetApp.Spreadsheet} ss Spreadsheet to format.
+ */
+function applyDuplicateHighlighting_(ss) {
+  const persons = ss.getSheetByName(CFG.PERSONS);
+  if (persons) {
+    persons.clearConditionalFormatRules();
+    const header = persons.getRange(1, 1, 1, persons.getLastColumn() || 1).getValues()[0];
+    highlightColumnDuplicates_(persons, header, 'PID');
+    highlightColumnDuplicates_(persons, header, 'KNOWN_NAME');
+    highlightColumnDuplicates_(persons, header, 'FULL_NAME');
+  }
+
+  const vedic = ss.getSheetByName(CFG.VEDIC);
+  if (vedic) {
+    vedic.clearConditionalFormatRules();
+    const header = vedic.getRange(1, 1, 1, vedic.getLastColumn() || 1).getValues()[0];
+    highlightColumnDuplicates_(vedic, header, 'PERSON');
+  }
+
+  const kg = ss.getSheetByName(CFG.KG);
+  if (kg) {
+    kg.clearConditionalFormatRules();
+    const header = kg.getRange(1, 1, 1, kg.getLastColumn() || 1).getValues()[0];
+    const subCol = columnOf_(header, 'SUBJECT');
+    const predCol = columnOf_(header, 'PREDICATE');
+    const objCol = columnOf_(header, 'OBJECT');
+    if (subCol !== -1 && predCol !== -1 && objCol !== -1) {
+      const maxRows = kg.getMaxRows() - 1;
+      const range = kg.getRange(2, 1, maxRows, kg.getLastColumn() || 1);
+      const subLetter = columnLetter_(subCol);
+      const predLetter = columnLetter_(predCol);
+      const objLetter = columnLetter_(objCol);
+      const formula = `=AND($${subLetter}2<>"", COUNTIFS($${subLetter}$2:$${subLetter}, $${subLetter}2, $${predLetter}$2:$${predLetter}, $${predLetter}2, $${objLetter}$2:$${objLetter}, $${objLetter}2)>1)`;
+      const rule = SpreadsheetApp.newConditionalFormatRule()
+        .whenFormulaSatisfied(formula)
+        .setBackground('#F4CCCC')
+        .setFontColor('#CC0000')
+        .setRanges([range])
+        .build();
+      kg.setConditionalFormatRules(kg.getConditionalFormatRules().concat([rule]));
+    }
+  }
+
+  const stories = ss.getSheetByName(CFG.STORIES);
+  if (stories) {
+    stories.clearConditionalFormatRules();
+    const header = stories.getRange(1, 1, 1, stories.getLastColumn() || 1).getValues()[0];
+    highlightColumnDuplicates_(stories, header, 'NOTE_ID');
+  }
+}
+
+/**
+ * Highlights duplicate non-empty values in a single column.
+ *
+ * @param {SpreadsheetApp.Sheet} sheet Sheet to format.
+ * @param {string[]} header Header row values.
+ * @param {string} columnName Column to check for duplicates.
+ */
+function highlightColumnDuplicates_(sheet, header, columnName) {
+  const col = columnOf_(header, columnName);
+  if (col === -1) return;
+  const maxRows = sheet.getMaxRows() - 1;
+  if (maxRows <= 0) return;
+
+  const range = sheet.getRange(2, col, maxRows, 1);
+  const letter = columnLetter_(col);
+  const formula = `=AND(${letter}2<>"", COUNTIF($${letter}$2:$${letter}, ${letter}2)>1)`;
+  const rule = SpreadsheetApp.newConditionalFormatRule()
+    .whenFormulaSatisfied(formula)
+    .setBackground('#F4CCCC')
+    .setFontColor('#CC0000')
+    .setRanges([range])
+    .build();
+  sheet.setConditionalFormatRules(sheet.getConditionalFormatRules().concat([rule]));
 }
 
 /* ====================================================================
