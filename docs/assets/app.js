@@ -58,6 +58,7 @@ let PANCHANG = null;
 const state = {
   focus: null, view: "hourglass", orientation: "vertical", selected: null, layout: null,
   k: 1, x: 0, y: 0, meId: null, auth: null, authError: null, authMe: false,
+  tree: null, trees: [],
   // List view: collapsed person ids and the generation last jumped to.
   collapsed: new Set(), listGen: null,
 };
@@ -74,36 +75,221 @@ const el = {
 // ---------- Boot ----------
 
 async function boot() {
-  const [cfgText, dataRes, vedicData, panchangIndex] = await Promise.all([
-    fetch("config.yml", { cache: "no-cache" }).then((r) => (r.ok ? r.text() : "")).catch(() => ""),
-    fetch("data/tree.json", { cache: "no-cache" }),
-    fetch("data/vedic.json", { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
-    fetch("data/panchang/index.json", { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
-  ]);
-  if (!dataRes.ok) throw new Error("Could not load data/tree.json. Run scripts/build_site.py first.");
+  const cfgText = await fetch("config.yml", { cache: "no-cache" })
+    .then((r) => (r.ok ? r.text() : "")).catch(() => "");
   const userCfg = cfgText && window.jsyaml ? window.jsyaml.load(cfgText) : {};
   CFG = merge(DEFAULTS, userCfg || {});
+
+  initTrees();
+  const tree = pickTree();
+  if (!tree) {
+    $("#loading").hidden = true;
+    renderNoTree();
+    return;
+  }
+  await loadTree(tree.id);
+}
+
+// ---------- Multi-tree support ----------
+
+const TREE_KEY = "family-tree:tree";
+
+function initTrees() {
+  const configured = CFG.trees || [];
+  if (!configured.length) {
+    // Backwards compatibility: a single-tree site uses the legacy data/ folder.
+    state.trees = [{
+      id: "default",
+      label: CFG.site?.title || "Family Tree",
+      folder: "data",
+      default: true,
+    }];
+  } else {
+    state.trees = configured.map((t) => ({
+      id: String(t.id),
+      label: t.label || t.id,
+      folder: (t.folder || `data/trees/${t.id}`).replace(/\/$/, ""),
+      default: !!t.default,
+      auth: t.auth || null,
+    }));
+  }
+}
+
+function treeById(id) {
+  return state.trees.find((t) => t.id === id) || null;
+}
+
+function defaultTree() {
+  return state.trees.find((t) => t.default) || state.trees[0] || null;
+}
+
+function pickTree() {
+  const params = parseHash().params;
+  const wanted = params.tree || localStorage.getItem(TREE_KEY) || "";
+  const tree = treeById(wanted) || defaultTree();
+  if (tree) state.tree = tree.id;
+  return tree;
+}
+
+function treeFolder(path = "") {
+  const tree = treeById(state.tree);
+  const base = tree?.folder || "data";
+  return path ? `${base}/${path}` : base;
+}
+
+function renderNoTree() {
+  const app = document.querySelector(".app");
+  if (app) app.dataset.view = "error";
+  const loading = $("#loading");
+  if (loading) {
+    loading.textContent = "No trees configured. Add a `trees:` section to config.yml.";
+    loading.hidden = false;
+  }
+}
+
+function renderTreeSelector() {
+  const slot = $("#tree-selector");
+  if (!slot) return;
+  if (state.trees.length <= 1) {
+    slot.hidden = true;
+    return;
+  }
+  slot.hidden = false;
+  const visible = visibleTrees();
+  slot.innerHTML = `<label for="tree-select" class="visually-hidden">Family tree</label>
+    <select id="tree-select" aria-label="Family tree">
+      ${visible.map((t) => `<option value="${esc(t.id)}" ${t.id === state.tree ? "selected" : ""}>${esc(t.label)}</option>`).join("")}
+    </select>`;
+  const select = $("#tree-select", slot);
+  if (select) {
+    select.addEventListener("change", (e) => switchTree(e.target.value));
+  }
+}
+
+function visibleTrees() {
+  return state.trees.filter((t) => {
+    if (!t.auth?.google) return true;
+    return isAuthorizedForTree(t);
+  });
+}
+
+function treeAuth() {
+  const tree = treeById(state.tree);
+  const base = CFG.auth?.google || {};
+  const override = tree?.auth?.google || {};
+  if (!base.client_id && !override.client_id) return null;
+  return {
+    ...base,
+    ...override,
+    // client_id always comes from the top-level auth config; per-tree blocks
+    // can only tighten allowed_domains / allowed_emails / people / auto_me.
+    client_id: base.client_id || override.client_id,
+  };
+}
+
+function isAuthorizedForTree(tree) {
+  const auth = tree?.auth?.google;
+  if (!auth) return true;
+  if (!state.auth?.email) return false;
+  const domains = (auth.allowed_domains || []).map((d) => String(d).toLowerCase()).filter(Boolean);
+  const emails = (auth.allowed_emails || []).map((e) => String(e).toLowerCase()).filter(Boolean);
+  const email = String(state.auth.email).toLowerCase();
+  if (emails.length && emails.includes(email)) return true;
+  if (domains.length) {
+    const domain = email.split("@")[1] || "";
+    if (domains.includes(domain)) return true;
+  }
+  return !domains.length && !emails.length;
+}
+
+function renderTreeAccessRequired() {
+  const app = document.querySelector(".app");
+  if (app) app.dataset.view = "error";
+  const loading = $("#loading");
+  if (loading) {
+    loading.innerHTML = `<p>This tree is restricted. Please sign in with Google to continue.</p><div id="tree-signin"></div>`;
+    loading.hidden = false;
+  }
+  bindTopbar();
+  applyTheme();
+  renderTreeSelector();
+  renderTreeSignIn();
+}
+
+function renderTreeSignIn() {
+  const slot = $("#tree-signin");
+  if (!slot || !googleReady || !window.google?.accounts?.id) return;
+  const google = treeAuth();
+  if (!google?.client_id) return;
+  window.google.accounts.id.renderButton(slot, {
+    type: "standard",
+    size: "large",
+    text: "signin_with",
+  });
+}
+
+async function switchTree(id) {
+  if (!treeById(id)) return;
+  localStorage.setItem(TREE_KEY, id);
+  state.tree = id;
+  // Reset view state so the new tree renders cleanly.
+  state.focus = null;
+  state.selected = null;
+  state.layout = null;
+  state.collapsed.clear();
+  state.listGen = null;
+  $("#loading").hidden = false;
+  document.querySelector(".app").dataset.view = "loading";
+  await loadTree(id);
+  const focus = defaultFocus();
+  go("tree", focus, { tree: id });
+}
+
+async function loadTree(id) {
+  const tree = treeById(id);
+  if (!tree) throw new Error(`Unknown tree ${id}`);
+  state.tree = id;
+
+  // Re-check auth for the newly selected tree.
+  if (tree.auth?.google && !isAuthorizedForTree(tree)) {
+    $("#loading").hidden = true;
+    renderTreeAccessRequired();
+    // Load the Google sign-in library so the restricted page can offer a button.
+    initAuth();
+    return;
+  }
+
+  const [dataRes, vedicData, panchangIndex] = await Promise.all([
+    fetch(`${tree.folder}/tree.json`, { cache: "no-cache" }),
+    fetch(`${tree.folder}/vedic.json`, { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+    fetch(`${tree.folder}/panchang/index.json`, { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+  ]);
+  if (!dataRes.ok) throw new Error(`Could not load ${tree.folder}/tree.json. Run the importer first.`);
   if (vedicData && typeof vedicData === "object") VEDIC = vedicData;
   DATA = await dataRes.json();
   IDX = buildIndex(DATA);
-  // The tithi calendar is optional: without data/panchang/index.json the tab
-  // stays hidden and the app behaves exactly as before.
+
   PANCHANG = createPanchang({
     fetchJson: (url) => fetch(url, { cache: "no-cache" }).then((r) => (r.ok ? r.json() : Promise.reject(new Error(`${url}: ${r.status}`)))),
+    basePath: `${tree.folder}/panchang`,
     personFor: (id) => IDX.people[id],
     displayName,
     yearsText,
     formatDate,
   });
   PANCHANG.useIndex(panchangIndex);
+
+  finishBoot();
+}
+
+function finishBoot() {
   state.meId = localStorage.getItem(ME_KEY);
   if (state.meId && !IDX.people[state.meId]) state.meId = null;
   state.auth = readStoredAuth();
-  const google = CFG.auth?.google;
+  const google = treeAuth();
   if (!google?.client_id) {
     state.auth = null;
   } else if (state.auth?.email) {
-    // Re-resolve the mapping so config changes take effect on the next load.
     state.auth.pid = mappedPersonId(google, state.auth.email);
     if (google.auto_me !== false && state.auth.pid) {
       state.meId = state.auth.pid;
@@ -111,17 +297,16 @@ async function boot() {
     }
   }
   const narrow = window.innerWidth <= 640;
-  // On mobile the indented list reads better than a wide canvas; hierarchy
-  // views remain available via the view switch and are still the default on
-  // desktop.
   state.view = narrow ? "list" : (CFG.layout.default_view || "hourglass");
   if (state.view === "graph" && !DATA.graph) state.view = narrow ? "list" : "hourglass";
   state.orientation = CFG.layout.orientation === "horizontal" ? "horizontal" : "vertical";
 
+  renderTreeSelector();
   applyTheme();
   applyText();
   bindEvents();
   initAuth();
+  window.removeEventListener("hashchange", route);
   window.addEventListener("hashchange", route);
   route();
   renderGenerationsRail();
@@ -129,8 +314,6 @@ async function boot() {
   document.querySelector(".app").dataset.view = "ready";
 
   if (PANCHANG.available) {
-    // Each year's events load in the background so a profile panel can list
-    // its ritual dates even before the Tithis tab is opened.
     PANCHANG.prefetchAll().then(() => {
       if (state.selected) selectPerson(state.selected);
       if (parseHash().route === "panchang") renderPanchang();
@@ -495,7 +678,11 @@ function parseHash() {
 }
 
 function go(route, arg = null, params = {}) {
-  const qs = new URLSearchParams(params).toString();
+  const current = parseHash().params;
+  // Preserve the current tree across navigation unless explicitly overridden.
+  const merged = { tree: state.tree, ...current, ...params };
+  if (!merged.tree) delete merged.tree;
+  const qs = new URLSearchParams(merged).toString();
   const hash = `#/${route}${arg ? `/${encodeURIComponent(arg)}` : ""}${qs ? `?${qs}` : ""}`;
   if (location.hash === hash) route_(); else location.hash = hash;
 }
@@ -1124,7 +1311,7 @@ function mappedPersonId(google, email) {
 }
 
 function initAuth() {
-  const google = CFG.auth?.google;
+  const google = treeAuth();
   const box = $("#auth");
   if (!box) return;
   if (!google?.client_id) {
@@ -1152,7 +1339,7 @@ function initAuth() {
 }
 
 function setupGoogle() {
-  const google = CFG.auth?.google;
+  const google = treeAuth();
   if (!google?.client_id || !window.google?.accounts?.id) return;
   googleReady = true;
   window.google.accounts.id.initialize({
@@ -1165,9 +1352,12 @@ function setupGoogle() {
 }
 
 function renderAuth() {
-  const box = $("#auth");
+  // While a tree is blocked for this visitor, render the sign-in button inside
+  // the access-required message instead of the normal auth slot.
+  const pending = $("#tree-signin");
+  const box = pending || $("#auth");
   if (!box) return;
-  const google = CFG.auth?.google;
+  const google = treeAuth();
   if (!google?.client_id) {
     box.hidden = true;
     box.innerHTML = "";
@@ -1202,18 +1392,18 @@ function renderAuth() {
       window.google.accounts.id.renderButton(slot, {
         type: "standard",
         theme: document.documentElement.dataset.mode === "dark" ? "filled_black" : "outline",
-        size: "large",
+        size: pending ? "large" : "large",
         shape: "pill",
         text: "signin_with",
         logo_alignment: "left",
-        width: 190,
+        width: pending ? 250 : 190,
       });
     }
   }
 }
 
 function handleGoogleCredential(response) {
-  const google = CFG.auth?.google;
+  const google = treeAuth();
   let payload;
   try {
     payload = decodeJwt(response.credential);
@@ -1232,8 +1422,11 @@ function handleGoogleCredential(response) {
 
   const email = payload.email.toLowerCase();
   const allowed = (google.allowed_domains || []).map((d) => String(d).toLowerCase()).filter(Boolean);
+  const allowedEmails = (google.allowed_emails || []).map((e) => String(e).toLowerCase()).filter(Boolean);
   const domain = email.split("@")[1] || "";
-  if (allowed.length && !allowed.includes(domain)) {
+  if (allowedEmails.length && allowedEmails.includes(email)) {
+    // explicit email allowlist wins
+  } else if (allowed.length && !allowed.includes(domain)) {
     setAuthError(`Only ${allowed.join(", ")} accounts can sign in.`);
     return;
   }
@@ -1252,7 +1445,23 @@ function handleGoogleCredential(response) {
     setMe(linked);
     state.authMe = true;
   }
+
+  // If the current tree was blocked for this visitor, a successful sign-in may
+  // now grant access; reload the tree data so the UI can unlock.
+  const tree = treeById(state.tree);
+  if (tree?.auth?.google) {
+    if (!isAuthorizedForTree(tree)) {
+      renderTreeAccessRequired();
+      return;
+    }
+    if (!DATA) {
+      loadTree(state.tree);
+      return;
+    }
+  }
+
   renderAuth();
+  renderTreeSelector();
   refreshMeChip();
   if (state.selected) selectPerson(state.selected, { silent: true });
 }
@@ -1470,6 +1679,30 @@ function closeSearch() {
 
 let dragMoved = false;
 
+function bindTopbar() {
+  const topbar = $("#topbar");
+  const topbarToggle = $("#topbar-toggle");
+  if (!topbar || !topbarToggle || topbarToggle.dataset.bound) return;
+  topbarToggle.dataset.bound = "1";
+  topbarToggle.addEventListener("click", () => {
+    const expanded = topbar.classList.toggle("expanded");
+    topbarToggle.setAttribute("aria-expanded", String(expanded));
+  });
+  // Close the mobile tray when a navigation or search choice is made.
+  $("#topbar-tray").addEventListener("click", (e) => {
+    if (e.target.closest(".tabs a, .me-chip, .auth-chip, #search, #tree-select")) {
+      topbar.classList.remove("expanded");
+      topbarToggle.setAttribute("aria-expanded", "false");
+    }
+  });
+  document.addEventListener("click", (e) => {
+    if (!topbar.classList.contains("expanded")) return;
+    if (e.target.closest("#topbar")) return;
+    topbar.classList.remove("expanded");
+    topbarToggle.setAttribute("aria-expanded", "false");
+  });
+}
+
 function bindEvents() {
   const vp = $("#viewport");
   const pointers = new Map();
@@ -1656,25 +1889,7 @@ function bindEvents() {
     if (state.meId) go("tree", state.meId, { v: state.view, o: state.orientation });
   });
 
-  const topbar = $("#topbar");
-  const topbarToggle = $("#topbar-toggle");
-  topbarToggle.addEventListener("click", () => {
-    const expanded = topbar.classList.toggle("expanded");
-    topbarToggle.setAttribute("aria-expanded", String(expanded));
-  });
-  // Close the mobile tray when a navigation or search choice is made.
-  $("#topbar-tray").addEventListener("click", (e) => {
-    if (e.target.closest(".tabs a, .me-chip, .auth-chip, #search")) {
-      topbar.classList.remove("expanded");
-      topbarToggle.setAttribute("aria-expanded", "false");
-    }
-  });
-  document.addEventListener("click", (e) => {
-    if (!topbar.classList.contains("expanded")) return;
-    if (e.target.closest("#topbar")) return;
-    topbar.classList.remove("expanded");
-    topbarToggle.setAttribute("aria-expanded", "false");
-  });
+  bindTopbar();
 
   const chartModal = $("#chart-modal");
   if (chartModal) {

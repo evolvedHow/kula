@@ -56,6 +56,25 @@ source:
       dod: ["Date of death", "DOD", "Death date"]
       pod: ["Place of death", "POD", "Death place"]
 
+# Multiple independent trees can live in the same site. Each tree has its own
+# data folder with tree.json, vedic.json and an optional panchang/ subfolder.
+# The selector appears in the top bar. If no `trees` list is provided, the app
+# falls back to the single-tree layout in `data/`.
+trees:
+  - id: default
+    label: "Peru Iyers"
+    folder: "data"
+    default: true
+    # Per-tree auth (optional). If omitted, the top-level auth.google rules
+    # below are used. Set allowed_domains or allowed_emails to restrict access.
+    # The client_id is always read from the top-level auth.google block.
+    # Note: on a static GitHub Pages site this gates the UI; the JSON files
+    # themselves are still public URLs unless protected by a separate backend.
+    # auth:
+    #   google:
+    #     allowed_domains: ["gmail.com"]
+    #     allowed_emails: ["you@example.com"]
+
 theme:
   # Pick a palette from the `presets:` section below (or add your own there)
   preset: sage
@@ -236,6 +255,7 @@ text:
 #  Google sign-in (optional)
 #  Client-side only: it identifies a visitor and can set "This is me".
 #  It does not make the site private. Keep privacy rules in the build.
+#  Per-tree auth overrides can be set under each `trees:` entry above.
 # ---------------------------------------------------------------------
 auth:
   google:

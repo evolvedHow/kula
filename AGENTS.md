@@ -15,8 +15,14 @@ gitignored).
   (`SUBJECT`, `PREDICATE`, `OBJECT`), e.g. `P-101-Himavan spouseOf P-102-Mena`.
   `import_sheet.py` extracts the PID prefix and builds the union/children model.
   If `KG` is empty, the importer falls back to the legacy `Unions`/`Offsprings` tabs.
-- Config: `docs/config.yml` (site, theme, auth, `panchang:` block, plus
-  `source.tabs` for sheet tab names).
+- Multiple independent trees can coexist in one site. Configure them in
+  `docs/config.yml` under `trees:`; each tree has its own data folder
+  (`<folder>/tree.json`, `vedic.json`, optional `panchang/`). Use
+  `scripts/import_sheet.py --tree <id>` to write to `docs/data/trees/<id>/`.
+  Per-tree `auth.google.allowed_domains` / `allowed_emails` can gate the UI on
+  a static site, but the underlying JSON files remain public URLs.
+- Config: `docs/config.yml` (site, theme, auth, `panchang:` block,
+  `source.tabs`, and `trees:`).
 - Python work always uses the venv: `.venv/bin/python`.
 - Frontend is ES modules in `docs/assets/`, no build step. Modules are pure
   string/DOM-free where possible so they can be tested in Node via

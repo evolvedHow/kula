@@ -1142,6 +1142,8 @@ def main(argv=None):
                     help="Local .xlsx of the original authority sheet (overrides source.authority.cache)")
     ap.add_argument("--config", default="docs/config.yml")
     ap.add_argument("--out", default="docs/data/tree.json")
+    ap.add_argument("--tree", default=None,
+                    help="Tree id to write to. When set, output goes to docs/data/trees/<tree>/tree.json unless --out is also given.")
     ap.add_argument("--cache", default=None,
                     help="Where to keep a downloaded workbook for offline rebuilds (overrides source.cache)")
     ap.add_argument("--offline", action="store_true",
@@ -1202,7 +1204,10 @@ def main(argv=None):
 
     data, warnings = build(sheets, cfg, tabs, authority_rows=authority_rows)
 
-    out = Path(args.out)
+    if args.tree and args.out == "docs/data/tree.json":
+        out = Path(f"docs/data/trees/{args.tree}/tree.json")
+    else:
+        out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
 

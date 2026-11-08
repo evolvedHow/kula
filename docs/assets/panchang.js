@@ -180,6 +180,7 @@ export function createPanchang(deps) {
   const inflight = new Map();
   const state = { year: null, kind: "", q: "", person: null };
   let index = null;
+  const basePath = (deps.basePath || "data/panchang").replace(/\/$/, "");
 
   const helpers = {
     personFor: deps.personFor,
@@ -209,7 +210,7 @@ export function createPanchang(deps) {
   async function ensureYear(year) {
     if (eventsByYear.has(year)) return eventsByYear.get(year);
     if (!inflight.has(year)) {
-      inflight.set(year, Promise.resolve(deps.fetchJson(`data/panchang/${yearJsonFile(year)}`))
+      inflight.set(year, Promise.resolve(deps.fetchJson(`${basePath}/${yearJsonFile(year)}`))
         .then((payload) => eventsByYear.set(year, payload?.events || []))
         .catch(() => eventsByYear.set(year, []))
         .finally(() => inflight.delete(year)));
@@ -259,7 +260,7 @@ export function createPanchang(deps) {
   }
 
   function feedUrl() {
-    return index?.feed ? `data/panchang/${index.feed}` : null;
+    return index?.feed ? `${basePath}/${index.feed}` : null;
   }
 
   return {
