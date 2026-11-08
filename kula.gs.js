@@ -189,7 +189,7 @@ function onOpen(e) {
 
   const setupMenu = ui.createMenu('🚀 Plugin Setup')
     .addItem('Setup / Reset Workspace Tabs', 'setupDatabaseTabs')
-    .addItem('Normalize References (PID only)', 'normalizeReferences');
+    .addItem('Normalize References (REF_NAME)', 'normalizeReferences');
 
   const flattenSubMenu = ui.createMenu('🕸 Flatten Knowledge Graph')
     .addItem('All (Spouses, Parents & Offsprings)', 'runFlattenAll')
@@ -549,14 +549,14 @@ function normalizeReferences() {
 }
 
 /**
- * Reduces every stored relationship reference to its bare PID and installs
- * the read-only name preview columns.
+ * Refreshes every stored relationship reference to the current REF_NAME
+ * (e.g. "P-101-Himavan") and installs the read-only name preview columns.
  *
- * The sheet keeps PIDs as the relational identity; names are rendered by
- * formula from the Persons roster, so a rename can never leave a stale name
- * half behind. Composite refs ("A001-John") and bare PIDs are both accepted on
- * input; only composites are rewritten. Ids that are not in Persons, such as
- * legacy "I0113" tags, are reported and left untouched.
+ * Humans enter relationships using REF_NAME so they can see who is who. The
+ * export to the public Kula app can map REF_NAME back to the bare PID. Bare
+ * PIDs and stale composite refs are both rewritten to the current REF_NAME.
+ * Ids that are not in Persons, such as legacy tags, are reported and left
+ * untouched.
  *
  * @param {boolean} dryRun When true, only counts what would change.
  * @return {string} Preview or result summary.
@@ -570,12 +570,17 @@ function normalizeReferencesCore_(dryRun) {
   if (pData.length === 0) throw new Error("'Persons' has no header row.");
 
   const pidCol = columnOf_(pData[0], 'PID') - 1;
+  const refNameCol = columnOf_(pData[0], 'REF_NAME') - 1;
   if (pidCol < 0) throw new Error("Persons must have a PID column. Run 'Plugin Setup' first.");
 
   const knownPids = new Set();
+  const pidToRefName = {};
   for (let r = 1; r < pData.length; r++) {
     const pid = String(pData[r][pidCol] || '').trim().toUpperCase();
-    if (pid) knownPids.add(pid);
+    if (!pid) continue;
+    knownPids.add(pid);
+    const refName = refNameCol >= 0 ? String(pData[r][refNameCol] || '').trim() : '';
+    pidToRefName[pid] = refName || pid;
   }
 
   const changes = [];
@@ -597,7 +602,7 @@ function normalizeReferencesCore_(dryRun) {
         const text = String(before === null || before === undefined ? '' : before).trim();
         if (!text) return;
 
-        const result = normalizeRefText_(text, knownPids, target.split);
+        const result = normalizeRefText_(text, knownPids, pidToRefName, target.split);
         if (result.text !== text) {
           changes.push({
             sheet: target.sheet,
@@ -617,7 +622,7 @@ function normalizeReferencesCore_(dryRun) {
 
   if (dryRun) {
     return `Normalize preview\n\n` +
-           `• ${changes.length} cell(s) would be reduced to bare PIDs\n` +
+           `• ${changes.length} reference cell(s) would be refreshed to the current REF_NAME\n` +
            `• ${unresolved.length} unknown id(s) would be left untouched\n` +
            `• name preview columns would be added or refreshed\n\n` +
            `Nothing was changed.`;
@@ -633,21 +638,24 @@ function normalizeReferencesCore_(dryRun) {
   refreshPreviewColumns_(ss);
   writeRefactorReport_(ss, changes, unresolved);
 
-  return `Normalized ${changes.length} reference cell(s) to bare PIDs. ` +
+  return `Normalized ${changes.length} reference cell(s) to current REF_NAME. ` +
          `Added ${added} preview column(s) and refreshed the rest. ` +
          `${unresolved.length} unknown id(s) left untouched; see '${CFG.REFACTOR}'.`;
 }
 
 /**
- * Reduces one reference (or a separated list of them) to bare PIDs.
+ * Rewrites one reference (or a separated list of them) to the current
+ * REF_NAME from the Persons tab. Bare PIDs become "P-101-Name", and stale
+ * composite refs are refreshed.
  *
  * @param {string} text Cell contents.
  * @param {Set<string>} knownPids Uppercased PIDs that exist in Persons.
+ * @param {Object<string,string>} pidToRefName Uppercased PID -> current REF_NAME.
  * @param {boolean} split When true, commas and semicolons separate entries.
  * @return {{text: string, unresolved: string[]}} Rewritten text, and entries
  *     that could not be resolved against Persons.
  */
-function normalizeRefText_(text, knownPids, split) {
+function normalizeRefText_(text, knownPids, pidToRefName, split) {
   const unresolved = [];
   let changed = false;
 
@@ -667,10 +675,11 @@ function normalizeRefText_(text, knownPids, split) {
       return token;
     }
 
-    if (trimmed === pid) return token;
+    const refName = pidToRefName[pid] || pid;
+    if (trimmed === refName) return token;
 
     changed = true;
-    return token.replace(trimmed, pid);
+    return token.replace(trimmed, refName);
   };
 
   const next = split
@@ -826,12 +835,12 @@ function refreshPreviewColumns_(ss) {
 function previewFormula_(refLetter, row, source, list) {
   const ref = `$${refLetter}${row}`;
   if (!list) {
-    return `=IF(${ref}="","",IFERROR(VLOOKUP(${ref},${source},2,FALSE),"?"))`;
+    return `=IF(${ref}="","",IFERROR(VLOOKUP(REGEXEXTRACT(${ref},"^([A-Z]-?\\d+)"),${source},2,FALSE),"?"))`;
   }
 
   return `=IF(${ref}="","",TEXTJOIN(", ",TRUE,MAP(` +
          `SPLIT(REGEXREPLACE(${ref},";",","),",",TRUE,TRUE),` +
-         `LAMBDA(id,IFERROR(VLOOKUP(id,${source},2,FALSE),"?")))))`;
+         `LAMBDA(id,IFERROR(VLOOKUP(REGEXEXTRACT(id,"^([A-Z]-?\\d+)"),${source},2,FALSE),"?")))))`;
 }
 
 /**
@@ -887,11 +896,11 @@ function populateInstructionsSheet_(sheet) {
     ["• Generational PIDs", "Running 'Person Numbering > Apply Generational PIDs' assigns Axxx, Bxxx, Cxxx by distance from the patriarch."],
     ["• Derived REF_NAME", "REF_NAME is a formula, PID and KNOWN_NAME joined by a hyphen. Never type into it."],
     ["• PID-only relationships", "KG, Vedic and Stories store bare PIDs. SUBJECT_NAME, OBJECT_NAME, PERSON_NAME and TAGGED_NAMES are read-only formulas that render the names."],
-    ["• Older composite refs", "Cells like 'A001-John' still resolve, but they can go stale. Use 'Normalize References (PID only)' to strip them to PIDs and refresh the previews."],
+    ["• Older composite refs", "Cells like 'P-101-Himavan' still resolve, but the name half can go stale. Use 'Normalize References (REF_NAME)' to refresh them to the current REF_NAME."],
     [""],
     ["⚙️ QUICK START MENU COMMANDS"],
     ["• Setup / Reset Workspace Tabs", "Creates the five core tabs, REF_NAME formulas and dropdowns."],
-    ["• Normalize References (PID only)", "Strips 'PID-KNOWN_NAME' relationship cells down to bare PIDs and adds name-preview columns."],
+    ["• Normalize References (REF_NAME)", "Refreshes relationship cells to the current REF_NAME (e.g. 'P-101-Himavan') and adds name-preview columns."]
     ["• Flatten Knowledge Graph", "Compiles graph edges into the 'KG_FLAT' tab."],
     ["• Person Numbering", "Previews or applies generational renumbering and rewrites every reference."],
     ["• Validate Reference Integrity", "Reports orphan references, duplicate PIDs, unknown predicates and stale composite references."]
@@ -1145,8 +1154,12 @@ function applyValidations_(ss) {
 
   const header = persons.getRange(1, 1, 1, persons.getLastColumn() || 10).getValues()[0];
   const pidCol = columnOf_(header, 'PID');
+  const refNameCol = columnOf_(header, 'REF_NAME');
 
   const pidRange = pidCol === -1 ? null : persons.getRange(2, pidCol, setupCoverage_(persons) - 1, 1);
+  const refNameRange = refNameCol === -1 ? null : persons.getRange(2, refNameCol, setupCoverage_(persons) - 1, 1);
+  // Prefer REF_NAME for dropdowns so humans see "P-101-Himavan" instead of a bare PID.
+  const personRefRange = refNameRange || pidRange;
 
   if (kg) {
     const kgHeader = kg.getRange(1, 1, 1, kg.getLastColumn() || 3).getValues()[0];
@@ -1155,11 +1168,11 @@ function applyValidations_(ss) {
     const relCol = firstColumnOf_(kgHeader, ['PREDICATE', 'Predicate']);
     const objCol = firstColumnOf_(kgHeader, ['OBJECT', 'Object (Node 2)']);
 
-    if (pidRange) {
+    if (personRefRange) {
       const refRule = SpreadsheetApp.newDataValidation()
-        .requireValueInRange(pidRange, true)
+        .requireValueInRange(personRefRange, true)
         .setAllowInvalid(true)
-        .setHelpText('Pick a PID from the Persons tab.')
+        .setHelpText('Pick a REF_NAME from the Persons tab.')
         .build();
       if (subCol !== -1) kg.getRange(2, subCol, kgRows, 1).setDataValidation(refRule);
       if (objCol !== -1) kg.getRange(2, objCol, kgRows, 1).setDataValidation(refRule);
@@ -1175,8 +1188,8 @@ function applyValidations_(ss) {
     }
   }
 
-  // Person-referencing columns in the other tabs hold bare PIDs.
-  if (pidRange) {
+  // Person-referencing columns in the other tabs should also use REF_NAME where available.
+  if (personRefRange) {
     const personColumns = [
       { tab: CFG.VEDIC, header: 'PERSON' },
       { tab: CFG.STORIES, header: 'TAGGED_PEOPLE' }
@@ -1191,9 +1204,9 @@ function applyValidations_(ss) {
       if (col === -1) return;
 
       const rule = SpreadsheetApp.newDataValidation()
-        .requireValueInRange(pidRange, true)
+        .requireValueInRange(personRefRange, true)
         .setAllowInvalid(true)
-        .setHelpText(`Pick a PID from the Persons tab.`)
+        .setHelpText(`Pick a REF_NAME from the Persons tab.`)
         .build();
       sheet.getRange(2, col, setupCoverage_(sheet) - 1, 1).setDataValidation(rule);
     });
@@ -2086,7 +2099,7 @@ function validateDataCore_() {
  */
 function compositeNote(count) {
   if (!count) return '';
-  return `\n\n${count} reference(s) still store "PID-KNOWN_NAME" instead of a bare PID. ` +
+  return `\n\n${count} reference(s) still store an old REF_NAME. ` +
          `They resolve, but the name half is a copy that can go stale. ` +
-         `Run 'Normalize References (PID only)' to reduce them to PIDs.`;
+         `Run 'Normalize References (REF_NAME)' to refresh them.`;
 }
