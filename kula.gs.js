@@ -66,17 +66,6 @@ const SCHEMA = {
 };
 
 /**
- * Columns for the generated $Config tab. Deliberately outside SCHEMA: setup
- * does not create it, it is produced on demand from the Vedic tab. These are
- * the same eight lineage columns as Vedic (minus PERSON), matching the
- * existing Kula-Data $Config tab.
- */
-const CONFIG_HEADERS = [
-  'GOTRA', 'VEDA', 'SHAKHA', 'SUTRA', 'NAKSHATRA',
-  'SAMPRADAYA', 'ACHARYA_THIRUMALIGAI', 'KULA_DEVATHA'
-];
-
-/**
  * Alternate spellings for canonical headers. Setup writes the key; a
  * workbook that already uses the alias is not reported as missing a column.
  */
@@ -173,7 +162,6 @@ function onOpen(e) {
 
   const setupMenu = ui.createMenu('🚀 Plugin Setup')
     .addItem('Setup / Reset Workspace Tabs', 'setupDatabaseTabs')
-    .addItem('Generate $Config (gotra defaults)', 'generateConfig')
     .addItem('Normalize References (PID only)', 'normalizeReferences');
 
   const flattenSubMenu = ui.createMenu('🕸 Flatten Knowledge Graph')
@@ -235,11 +223,6 @@ function onHomepage(e) {
     CardService.newTextButton()
       .setText('Setup / reset workspace tabs')
       .setOnClickAction(CardService.newAction().setFunctionName('cardSetup'))
-  );
-  setup.addWidget(
-    CardService.newTextButton()
-      .setText('Generate $Config')
-      .setOnClickAction(CardService.newAction().setFunctionName('cardGenerateConfig'))
   );
   setup.addWidget(
     CardService.newTextButton()
@@ -316,9 +299,6 @@ function describeWorkspace_() {
 
 /** @return {CardService.ActionResponse} Notification with setup result. */
 function cardSetup() { return cardResponse_(setupDatabaseTabsCore_); }
-
-/** @return {CardService.ActionResponse} Notification with $Config generation. */
-function cardGenerateConfig() { return cardResponse_(generateConfigCore_); }
 
 /** @return {CardService.ActionResponse} Notification with normalization result. */
 function cardNormalizeReferences() { return cardResponse_(normalizeReferencesCore_); }
@@ -416,6 +396,10 @@ function setupDatabaseTabsCore_() {
     }
   });
 
+  // $Config is a backend reference sheet: create it from the hardcoded
+  // defaults and keep it hidden. It must exist before validations run.
+  createConfigSheet_(ss).hideSheet();
+
   const refs = applyLinkedFormulas_(ss);
   applyValidations_(ss);
   refreshPreviewColumns_(ss);
@@ -434,89 +418,68 @@ function setupDatabaseTabsCore_() {
 }
 
 /**
- * Menu entry point for generating the $Config tab.
- */
-function generateConfig() {
-  alert_(generateConfigCore_());
-}
-
-/**
- * Generates the $Config tab on demand and seeds it with one row per gotra
- * already recorded in the Vedic tab, so the reference list reflects the
- * family's actual data instead of a placeholder. An existing $Config is left
- * untouched rather than overwritten.
+ * Creates the hidden $Config reference sheet from the hardcoded defaults in
+ * config_data.gs. Setup writes this once; the values rarely change, so they
+ * are maintained in code rather than a user-editable tab.
  *
- * @return {string} Summary of what was created, or why nothing changed.
+ * @param {SpreadsheetApp.Spreadsheet} ss Spreadsheet to write into.
+ * @return {SpreadsheetApp.Sheet} The $Config sheet.
  */
-function generateConfigCore_() {
-  const ss = requireSpreadsheet_();
-
-  if (ss.getSheetByName(CFG.CONFIG)) {
-    return `'${CFG.CONFIG}' already exists; left unchanged. Delete the tab first to regenerate.`;
+function createConfigSheet_(ss) {
+  let sheet = ss.getSheetByName(CFG.CONFIG);
+  if (!sheet) {
+    sheet = ss.insertSheet(CFG.CONFIG);
+  } else {
+    sheet.clear();
   }
 
-  const sheet = ss.insertSheet(CFG.CONFIG);
+  const allRows = [CONFIG_HEADERS].concat(CONFIG_ROWS);
+  const range = sheet.getRange(1, 1, allRows.length, CONFIG_HEADERS.length);
+  range.setValues(allRows);
 
   const headerRange = sheet.getRange(1, 1, 1, CONFIG_HEADERS.length);
-  headerRange.setValues([CONFIG_HEADERS]);
   headerRange.setFontWeight("bold")
              .setBackground("#1c4587")
              .setFontColor("#ffffff")
              .setVerticalAlignment("middle");
   sheet.setFrozenRows(1);
 
-  const gotras = collectGotras_();
-
-  if (gotras.length > 0) {
-    sheet.getRange(2, 1, gotras.length, CONFIG_HEADERS.length)
-         .setValues(gotras.map(gotra => {
-           const row = new Array(CONFIG_HEADERS.length).fill("");
-           row[0] = gotra;
-           return row;
-         }));
-  }
-
   for (let col = 1; col <= CONFIG_HEADERS.length; col++) {
     sheet.autoResizeColumn(col);
   }
 
-  return gotras.length > 0
-    ? `Generated '${CFG.CONFIG}' with ${gotras.length} gotra(s) collected from the Vedic tab.`
-    : `Generated '${CFG.CONFIG}' with headers only; add gotras as you enter Vedic data.`;
+  return sheet;
 }
 
 /**
- * Collects the distinct, case-insensitive GOTRA values recorded in Vedic,
- * preserving the spelling of the first occurrence.
+ * Reads the distinct, non-empty values from one column of the $Config sheet.
+ * Used to build data-validation dropdowns for the matching Vedic columns.
  *
- * @return {string[]} Unique gotra names, in sheet order.
+ * @param {SpreadsheetApp.Spreadsheet} ss Spreadsheet to read from.
+ * @param {string} header Column header in $Config (e.g. 'GOTRA').
+ * @return {string[]} Unique values, in sheet order.
  */
-function collectGotras_() {
-  const ss = requireSpreadsheet_();
-  const vedic = ss.getSheetByName(CFG.VEDIC);
-  if (!vedic) return [];
+function configValues_(ss, header) {
+  const sheet = ss.getSheetByName(CFG.CONFIG);
+  if (!sheet) return [];
 
-  const lastCol = vedic.getLastColumn();
-  if (!lastCol) return [];
+  const rows = sheet.getDataRange().getValues();
+  if (rows.length === 0) return [];
 
-  const rows = vedic.getDataRange().getValues();
-  if (rows.length <= 1) return [];
-
-  const gotraCol = columnOf_(rows[0], 'GOTRA') - 1;
-  if (gotraCol < 0) return [];
+  const col = columnOf_(rows[0], header) - 1;
+  if (col < 0) return [];
 
   const seen = {};
-  const gotras = [];
+  const values = [];
   for (let r = 1; r < rows.length; r++) {
-    const value = String(rows[r][gotraCol] || '').trim();
+    const value = String(rows[r][col] || '').trim();
     if (!value) continue;
-
     const key = value.toLowerCase();
     if (seen[key]) continue;
     seen[key] = true;
-    gotras.push(value);
+    values.push(value);
   }
-  return gotras;
+  return values;
 }
 
 /* ====================================================================
@@ -863,7 +826,6 @@ function populateInstructionsSheet_(sheet) {
     [""],
     ["⚙️ QUICK START MENU COMMANDS"],
     ["• Setup / Reset Workspace Tabs", "Creates the five core tabs, REF_NAME formulas and dropdowns."],
-    ["• Generate $Config", "Builds the gotra reference tab from the Vedic data."],
     ["• Normalize References (PID only)", "Strips 'PID-KNOWN_NAME' relationship cells down to bare PIDs and adds name-preview columns."],
     ["• Flatten Knowledge Graph", "Compiles graph edges into the 'KG_FLAT' tab."],
     ["• Person Numbering", "Previews or applies generational renumbering and rewrites every reference."],
@@ -1167,6 +1129,29 @@ function applyValidations_(ss) {
         .setHelpText(`Pick a PID from the Persons tab.`)
         .build();
       sheet.getRange(2, col, setupCoverage_(sheet) - 1, 1).setDataValidation(rule);
+    });
+  }
+
+  // Vedic lineage columns get dropdowns from the hardcoded $Config reference.
+  const vedic = ss.getSheetByName(CFG.VEDIC);
+  if (vedic) {
+    const vedicHeader = vedic.getRange(1, 1, 1, vedic.getLastColumn() || 1).getValues()[0];
+    const vedicRows = setupCoverage_(vedic) - 1;
+    const configColumns = ['GOTRA', 'VEDA', 'SHAKHA', 'SUTRA', 'NAKSHATRA', 'SAMPRADAYA', 'ACHARYA_THIRUMALIGAI', 'KULA_DEVATHA'];
+
+    configColumns.forEach(name => {
+      const values = configValues_(ss, name);
+      if (values.length === 0) return;
+
+      const col = columnOf_(vedicHeader, name);
+      if (col === -1) return;
+
+      const rule = SpreadsheetApp.newDataValidation()
+        .requireValueInList(values, true)
+        .setAllowInvalid(true)
+        .setHelpText(`Pick from the ${name} reference list.`)
+        .build();
+      vedic.getRange(2, col, vedicRows, 1).setDataValidation(rule);
     });
   }
 }
@@ -1779,11 +1764,7 @@ function checkSheetSetupCore_() {
   });
 
   if (findings.length === 0) {
-    const config = ss.getSheetByName(CFG.CONFIG)
-      ? ''
-      : `\n\n'${CFG.CONFIG}' has not been generated yet. Use 'Generate $Config' ` +
-        `when you start entering Vedic lineage data.`;
-    return `Sheet setup is complete! All ${required.length} plugin tabs have the expected columns.` + config;
+    return `Sheet setup is complete! All ${required.length} plugin tabs have the expected columns.`;
   }
 
   return findings.join('\n') +
