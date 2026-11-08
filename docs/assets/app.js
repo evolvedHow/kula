@@ -1,5 +1,4 @@
 import { layoutTree } from "./layout.js";
-import { layoutGraph } from "./graph.js";
 import { layoutOutline, outlineHTML } from "./list.js";
 import { relationship, sentenceFor } from "./relate.js";
 import { pravaraFor } from "./vedic.js";
@@ -11,7 +10,7 @@ const DEFAULTS = {
   theme: { preset: "", mode: "auto", colors: { light: {}, dark: {} } },
   fonts: { heading: "Roboto", body: "Roboto", load_from_google: false },
   layout: {
-    default_view: "hourglass", orientation: "vertical", generations_up: 4, generations_down: 4,
+    default_view: "tree", orientation: "vertical", generations_up: 4, generations_down: 4,
     card_width: 188, card_height: 84, gap_x: 26, gap_y: 92, corner_radius: 16,
     connector_style: "angular", show_years: true, show_places: true, show_child_counts: true,
   },
@@ -21,9 +20,8 @@ const DEFAULTS = {
   },
   text: {
     search_placeholder: "Find a family member…", tree_tab: "Tree", people_tab: "Everyone",
-    stories_tab: "Stories", set_me: "This is me", view_hourglass: "Both",
-    view_ancestors: "Ancestors", view_descendants: "Descendants",
-    view_graph: "Relatives", panchang_tab: "Tithis",
+    stories_tab: "Stories", set_me: "This is me", view_tree: "Tree",
+    panchang_tab: "Tithis",
     view_vertical: "Vertical", view_horizontal: "Horizontal", view_list: "List", tagged_people: "Tagged relatives",
     read_story: "Read story", back: "Back",
   },
@@ -56,7 +54,7 @@ let IDX = null;
 let VEDIC = { gotras: {} };
 let PANCHANG = null;
 const state = {
-  focus: null, view: "hourglass", orientation: "vertical", selected: null, layout: null,
+  focus: null, view: "tree", orientation: "vertical", selected: null, layout: null,
   k: 1, x: 0, y: 0, meId: null, auth: null, authError: null, authMe: false,
   tree: null, trees: [],
   // List view: collapsed person ids and the generation last jumped to.
@@ -297,8 +295,8 @@ function finishBoot() {
     }
   }
   const narrow = window.innerWidth <= 640;
-  state.view = narrow ? "list" : (CFG.layout.default_view || "hourglass");
-  if (state.view === "graph" && !DATA.graph) state.view = narrow ? "list" : "hourglass";
+  state.view = narrow ? "list" : (CFG.layout.default_view || "tree");
+  if (state.view !== "tree" && state.view !== "list") state.view = "tree";
   state.orientation = CFG.layout.orientation === "horizontal" ? "horizontal" : "vertical";
 
   renderTreeSelector();
@@ -429,16 +427,8 @@ function applyText() {
   $("#panchang-heading").textContent = CFG.panchang?.name || text.panchang_tab || "Tithis";
   $("#stories-heading").textContent = narratives.section_title || text.stories_tab;
   const views = $$("#view-switch button");
-  views[0].textContent = text.view_hourglass;
-  views[1].textContent = text.view_ancestors;
-  views[2].textContent = text.view_descendants;
-  if (views[3]) {
-    views[3].textContent = text.view_graph || "Relatives";
-    views[3].hidden = !DATA.graph;
-  }
-  if (views[4]) {
-    views[4].textContent = text.view_list || "List";
-  }
+  views[0].textContent = text.view_tree || "Tree";
+  views[1].textContent = text.view_list || "List";
   const orientations = $$("#orientation-switch button");
   orientations[0].textContent = text.view_vertical;
   orientations[1].textContent = text.view_horizontal;
@@ -724,13 +714,11 @@ function route() {
   } else {
     showView("tree");
     const focus = arg && IDX.people[arg] ? arg : defaultFocus();
-    const view = ["hourglass", "ancestors", "descendants", "graph", "list"].includes(params.v) ? params.v : state.view;
+    const view = ["tree", "list"].includes(params.v) ? params.v : state.view;
     const orientation = ["vertical", "horizontal"].includes(params.o) ? params.o : state.orientation;
-    let safeView = view;
-    if (safeView === "graph" && !DATA.graph) safeView = "hourglass";
-    const changed = focus !== state.focus || safeView !== state.view
+    const changed = focus !== state.focus || view !== state.view
       || orientation !== state.orientation;
-    state.view = safeView;
+    state.view = view;
     state.orientation = orientation;
     if (focus !== state.focus) {
       // A new focus re-roots the list; start that view fully expanded.
@@ -762,18 +750,7 @@ function layoutOptions(view) {
     cardH: L.card_height,
     gapX: L.gap_x,
     gapY: L.gap_y,
-  };
-}
-
-function graphOptions(focusId) {
-  const L = CFG.layout;
-  return {
-    focus: focusId,
-    orientation: state.orientation,
-    cardW: L.card_width,
-    cardH: L.card_height,
-    gapX: Math.max(34, L.gap_x),
-    gapY: L.gap_y,
+    unionSize: 44,
   };
 }
 
@@ -823,9 +800,7 @@ function renderTree(focusId) {
   }
 
   $("#viewport").hidden = false;
-  const L = state.view === "graph" && DATA.graph
-    ? layoutGraph(DATA.graph, focusId, graphOptions(focusId))
-    : layoutTree(IDX, focusId, layoutOptions(state.view));
+  const L = layoutTree(IDX, focusId, layoutOptions(state.view === "tree" ? "hourglass" : state.view));
   if (!L) {
     $("#tree-empty").hidden = false;
     return;
@@ -843,7 +818,7 @@ function renderTree(focusId) {
   svg.setAttribute("viewBox", `0 0 ${L.width} ${L.height}`);
   svg.style.width = `${L.width}px`;
   svg.style.height = `${L.height}px`;
-  svg.innerHTML = L.graph ? graphLinksSVG(L) : linksSVG(L);
+  svg.innerHTML = linksSVG(L);
 
   for (const b of $$("#view-switch button")) {
     const on = b.dataset.view === state.view;
@@ -894,25 +869,6 @@ function unionCardHTML(c) {
     <span class="union-dot"></span>
     ${marriage ? `<span class="union-label">${esc(marriage)}</span>` : ""}
   </div>`;
-}
-
-function graphLinksSVG(L) {
-  let d = "";
-  const f = (n) => Math.round(n * 10) / 10;
-  for (const l of L.links) {
-    const sx = l.sx, sy = l.sy, tx = l.tx, ty = l.ty;
-    if (l.kind === "partner") {
-      d += `M${f(sx)} ${f(sy)}L${f(tx)} ${f(ty)}`;
-    } else if (l.horizontal) {
-      const mx = sx + (tx - sx) * 0.4;
-      d += `M${f(sx)} ${f(sy)}H${f(mx)}V${f(ty)}H${f(tx)}`;
-    } else {
-      // offspring: union down to child
-      const my = sy + (ty - sy) * 0.4;
-      d += `M${f(sx)} ${f(sy)}V${f(my)}H${f(tx)}V${f(ty)}`;
-    }
-  }
-  return `<path d="${d}"></path>`;
 }
 
 const f = (n) => Math.round(n * 10) / 10;

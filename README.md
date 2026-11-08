@@ -135,21 +135,20 @@ To rebuild from a Gramps export instead:
 python3 scripts/build_site.py private/export.gramps
 ```
 
-The Gramps path does not create graph data, so the Relatives view is hidden
-until the sheet importer is used again.
+The Gramps path does not create graph data, but the tree view still renders
+unions from the family records.
 
-## Relatives view
+## Tree view
 
-The tree toolbar has five views: **Both**, **Ancestors**, **Descendants**,
-**Relatives** and **List**. Relatives is a two-kind graph layout: people are
-cards, unions are small round nodes, and the connector lines are the partner
-and offspring edges from the sheet. It opens on the connected branch around the
-current focus, so unrelated branches do not make one enormous row. Click a
-union node to see its partners, offsprings, relationship date and original
-sheet fields.
+The tree toolbar has two modes: **Tree** and **List**. Tree shows ancestors
+above the focus person and descendants below. Every marriage or union is drawn
+as a circle between the two spouses and slightly below them; children connect
+to the bottom of the circle. Click a union circle to see its partners,
+offsprings, relationship date and any future union attributes stored in the
+sheet.
 
 `layout.orientation` switches vertical (generations top-to-bottom) and
-horizontal (left-to-right). `layout.default_view: graph` makes Relatives the
+horizontal (left-to-right). `layout.default_view: tree` makes the Tree view the
 opening view. Panning and zooming are yours: opening a card's details and
 closing the panel again never moves or re-fits the chart — it stays exactly
 where you left it.

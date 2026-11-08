@@ -103,6 +103,31 @@ test("links match the requested orientation and are all finite", () => {
   }
 });
 
+test("tree layouts include a union circle between every spouse pair", () => {
+  for (const orientation of orientations) {
+    const layout = layoutTree(index, focus, {
+      view: "hourglass",
+      orientation,
+      up: 2,
+      down: 2,
+      cardW: 188,
+      cardH: 84,
+      gapX: 26,
+      gapY: 92,
+    });
+    const unions = layout.cards.filter((c) => c.kind === "union");
+    assert.ok(unions.length > 0, `${orientation} hourglass should emit union cards`);
+    for (const u of unions) {
+      assert.equal(u.w, u.h, `${orientation} union ${u.id} should be a square (renders as a circle)`);
+      assert.ok(u.w >= 30 && u.w <= 60, `${orientation} union ${u.id} should be a reasonable size`);
+    }
+    const partnerLinks = layout.links.filter((l) => l.kind === "partner");
+    const offspringLinks = layout.links.filter((l) => l.kind === "offspring");
+    assert.ok(partnerLinks.length > 0, `${orientation} should have spouse-to-union links`);
+    assert.ok(offspringLinks.length > 0, `${orientation} should have union-to-child links`);
+  }
+});
+
 // A tiny synthetic tree keeps relationship tests independent of any one
 // family's data, so the app stays reusable.
 const samplePeople = {

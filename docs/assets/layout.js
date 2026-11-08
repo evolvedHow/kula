@@ -1,4 +1,5 @@
-// Pure tree geometry. No DOM access, so it can be tested outside the browser.
+// Pure tree geometry with explicit union nodes. No DOM access, so it can be
+// tested outside the browser.
 //
 // A "block" is a sub-tree laid out in its own coordinate space, with its
 // cards at (x, y) top-left and its connector links at absolute points inside
@@ -8,7 +9,13 @@ const min = Math.min;
 const max = Math.max;
 
 function leaf(id, cw, ch, more) {
-  return { w: cw, h: ch, rootCx: cw / 2, cards: [{ id, x: 0, y: 0, more }], links: [] };
+  return {
+    w: cw,
+    h: ch,
+    rootCx: cw / 2,
+    cards: [{ id, x: 0, y: 0, kind: "person", ...(more ? { more } : {}) }],
+    links: [],
+  };
 }
 
 function translateInto(block, dx, dy, out) {
@@ -32,10 +39,34 @@ function shiftOut(out, dx) {
   }
 }
 
-// ---- Ancestors: parents above, child below --------------------------------
+// Turn a top-to-bottom layout into a left-to-right one. The layout is first
+// computed with the card dimensions and gaps transposed, so cards keep their
+// real width/height after the swap.
+function transposeLayout(layout) {
+  return {
+    width: layout.height,
+    height: layout.width,
+    focus: { x: layout.focus.y, y: layout.focus.x },
+    cards: layout.cards.map((c) => ({ ...c, x: c.y, y: c.x, w: c.h, h: c.w })),
+    links: layout.links.map((l) => ({
+      ...l,
+      horizontal: true,
+      sx: l.sy,
+      sy: l.sx,
+      tx: l.ty,
+      ty: l.tx,
+    })),
+  };
+}
+
+function uniqueValues(arr) {
+  return [...new Set(arr)];
+}
+
+// ---- Ancestors: parents above, union between parents and child ------------
 
 function ancestorBlock(pid, depth, ctx) {
-  const { cw, ch, gx, gy, idx } = ctx;
+  const { cw, ch, gx, gy, uSize, idx } = ctx;
   const person = idx.people[pid];
   const fam = person && person.parent_family ? idx.families[person.parent_family] : null;
   const parentIds = fam ? [fam.father, fam.mother].filter((id) => id && idx.people[id]) : [];
@@ -61,14 +92,37 @@ function ancestorBlock(pid, depth, ctx) {
     minX = min(minX, p.x);
     maxX = max(maxX, p.x + p.b.w);
   }
-  out.cards.push({ id: pid, x: rootCx - cw / 2, y: hp + gy });
-  out.links.push({ kind: "parents", sx: parentCx, sy: hp, tx: [rootCx], ty: hp + gy });
+
+  const unionY = hp + gy * 0.25;
+  out.cards.push({
+    id: fam.id,
+    kind: "union",
+    x: rootCx - uSize / 2,
+    y: unionY,
+    w: uSize,
+    h: uSize,
+  });
+  out.cards.push({ id: pid, kind: "person", x: rootCx - cw / 2, y: hp + gy });
+  out.links.push({
+    kind: "partner",
+    sx: uniqueValues(parentCx),
+    sy: hp,
+    tx: [rootCx],
+    ty: unionY + uSize / 2,
+  });
+  out.links.push({
+    kind: "offspring",
+    sx: [rootCx],
+    sy: unionY + uSize,
+    tx: [rootCx],
+    ty: hp + gy,
+  });
 
   shiftOut(out, -minX);
   return { w: maxX - minX, h: hp + gy + ch, rootCx: rootCx - minX, cards: out.cards, links: out.links };
 }
 
-// ---- Descendants: partners beside the person, children below -------------
+// ---- Descendants: partners beside the person, union node below, children below ----
 
 function familySlots(personId, ctx, slots) {
   const { idx } = ctx;
@@ -86,7 +140,7 @@ function familySlots(personId, ctx, slots) {
 }
 
 function descendantBlock(pid, depth, ctx) {
-  const { cw, ch, gx, gy, idx } = ctx;
+  const { cw, ch, gx, gy, uSize, idx } = ctx;
   const person = idx.people[pid];
   ctx.seenPeople.add(pid);
 
@@ -101,7 +155,7 @@ function descendantBlock(pid, depth, ctx) {
     const kidIds = s.fam.children.filter((c) => idx.people[c] && !ctx.seenPeople.has(c));
     const blocks = kidIds.map((c) => descendantBlock(c, depth - 1, ctx));
     const childrenW = blocks.reduce((a, b) => a + b.w, 0) + gx * Math.max(0, blocks.length - 1);
-    const w = Math.max(childrenW, cw);
+    const w = Math.max(childrenW, cw, uSize);
     regions.set(i, { left: cursor, w, center: cursor + w / 2, blocks, childrenW });
     cursor += w + gx;
   });
@@ -120,7 +174,7 @@ function descendantBlock(pid, depth, ctx) {
   let minX = Infinity;
   let maxX = -Infinity;
   const addCard = (id, center, extra) => {
-    out.cards.push({ id, x: center - cw / 2, y: 0, ...extra });
+    out.cards.push({ id, kind: "person", x: center - cw / 2, y: 0, ...extra });
     minX = min(minX, center - cw / 2);
     maxX = max(maxX, center + cw / 2);
   };
@@ -143,6 +197,16 @@ function descendantBlock(pid, depth, ctx) {
     minX = min(minX, r.left);
     maxX = max(maxX, r.left + r.w);
 
+    const unionY = ch + gy * 0.25;
+    out.cards.push({
+      id: s.fam.id,
+      kind: "union",
+      x: sx - uSize / 2,
+      y: unionY,
+      w: uSize,
+      h: uSize,
+    });
+
     const tx = [];
     if (r.blocks.length) {
       hasKids = true;
@@ -156,10 +220,10 @@ function descendantBlock(pid, depth, ctx) {
         maxChildH = max(maxChildH, b.h);
       }
     }
-    if (r.blocks.length || s.id) {
-      const marriage = s.fam.marriage && s.fam.marriage.year ? `m. ${s.fam.marriage.year}` : null;
-      out.links.push({ kind: "family", sx: [sx], sy: ch, tx, ty: ch + gy, label: marriage });
-    }
+
+    const spouseCx = uniqueValues([ownerCx, partnerCx].filter((v) => v != null));
+    out.links.push({ kind: "partner", sx: spouseCx, sy: ch, tx: [sx], ty: unionY + uSize / 2 });
+    out.links.push({ kind: "offspring", sx: [sx], sy: unionY + uSize, tx, ty: ch + gy });
   }
 
   const h = ch + (hasKids ? gy + maxChildH : 0);
@@ -167,26 +231,6 @@ function descendantBlock(pid, depth, ctx) {
   const dx = -minX;
   shiftOut(out, dx);
   return { w: maxX - minX, h, rootCx: rootCx + dx, cards: out.cards, links: out.links };
-}
-
-// Turn a top-to-bottom layout into a left-to-right one. The layout is first
-// computed with the card dimensions and gaps transposed, so cards keep their
-// real width/height after the swap.
-function transposeLayout(layout) {
-  return {
-    width: layout.height,
-    height: layout.width,
-    focus: { x: layout.focus.y, y: layout.focus.x },
-    cards: layout.cards.map((c) => ({ ...c, x: c.y, y: c.x })),
-    links: layout.links.map((l) => ({
-      ...l,
-      horizontal: true,
-      sx: l.sy,
-      sy: l.sx,
-      tx: l.ty,
-      ty: l.tx,
-    })),
-  };
 }
 
 // ---- Public API --------------------------------------------------------
@@ -200,11 +244,14 @@ export function layoutTree(index, focusId, options = {}) {
   const ch = horizontal ? cardW : cardH;
   const gx = options.gapX ?? 26;
   const gy = options.gapY ?? 92;
+  const uSize = options.unionSize ?? 44;
   const view = options.view ?? "hourglass";
   const up = options.up ?? 4;
   const down = options.down ?? 4;
 
-  const ctx = (extra) => ({ cw, ch, gx, gy, idx: index, seenFam: new Set(), seenPeople: new Set(), ...extra });
+  const ctx = (extra) => ({
+    cw, ch, gx, gy, uSize, idx: index, seenFam: new Set(), seenPeople: new Set(), ...extra,
+  });
   const done = (layout) => (horizontal ? transposeLayout(layout) : layout);
 
   if (view === "ancestors") {
@@ -231,8 +278,9 @@ export function layoutTree(index, focusId, options = {}) {
   let minX = Infinity;
   let maxX = -Infinity;
   for (const c of cards) {
+    const right = c.x + (c.kind === "union" ? c.w : cw);
     minX = min(minX, c.x);
-    maxX = max(maxX, c.x + cw);
+    maxX = max(maxX, right);
   }
   for (const c of cards) c.x -= minX;
   for (const l of links) {
