@@ -116,6 +116,7 @@ function onOpen(e) {
     .addSubMenu(renumSubMenu)
     .addSeparator()
     .addItem('Check Sheet Setup', 'checkSheetSetup')
+    .addItem('Validate Reference Integrity', 'validateData')
     .addToUi();
 }
 
@@ -163,6 +164,11 @@ function onHomepage(e) {
     CardService.newTextButton()
       .setText('Check sheet setup')
       .setOnClickAction(CardService.newAction().setFunctionName('cardCheckSetup'))
+  );
+  setup.addWidget(
+    CardService.newTextButton()
+      .setText('Validate references')
+      .setOnClickAction(CardService.newAction().setFunctionName('cardValidateData'))
   );
   card.addSection(setup);
 
@@ -227,6 +233,9 @@ function cardSetup() { return cardResponse_(setupDatabaseTabsCore_); }
 
 /** @return {CardService.ActionResponse} Notification with setup status. */
 function cardCheckSetup() { return cardResponse_(checkSheetSetupCore_); }
+
+/** @return {CardService.ActionResponse} Notification with validation result. */
+function cardValidateData() { return cardResponse_(validateDataCore_); }
 
 /** @return {CardService.ActionResponse} Notification with flatten result. */
 function cardFlattenAll() { return cardResponse_(function () { return flattenGraphCore_('flatten-all'); }); }
@@ -334,7 +343,11 @@ function setupDatabaseTabsCore_() {
     }
   });
 
-  return `Workspace initialized! Created/verified ${Object.keys(schemas).length} required tabs.`;
+  applyLinkedFormulas_(ss);
+  applyValidations_(ss);
+
+  return `Workspace initialized! Created/verified ${Object.keys(schemas).length} required tabs, ` +
+         `with REF_NAME formulas and data validation applied.`;
 }
 
 /**
@@ -392,6 +405,128 @@ function populateInstructionsSheet_(sheet) {
   sheet.autoResizeColumn(1);
   sheet.autoResizeColumn(2);
   sheet.autoResizeColumn(3);
+}
+
+/* ====================================================================
+ * 2b. DERIVED COLUMNS AND DATA VALIDATION
+ * ==================================================================== */
+
+/** Number of rows the setup formulas and validations cover. */
+const SETUP_ROWS = 1000;
+
+/** Canonical relationship predicates offered in the KG dropdown. */
+const PREDICATES = ['spouseOf', 'parentOf', 'childOf'];
+
+/**
+ * Converts a 1-based column index into a spreadsheet column letter.
+ *
+ * @param {number} index 1-based column number.
+ * @return {string} Column letter, for example 1 -> "A", 27 -> "AA".
+ */
+function columnLetter_(index) {
+  let n = index;
+  let letters = '';
+  while (n > 0) {
+    const rem = (n - 1) % 26;
+    letters = String.fromCharCode(65 + rem) + letters;
+    n = Math.floor((n - 1) / 26);
+  }
+  return letters;
+}
+
+/**
+ * Finds a column by header name, case-insensitively.
+ *
+ * @param {string[]} header Header row values.
+ * @param {string} name Header to look for.
+ * @return {number} 1-based column index, or -1 when absent.
+ */
+function columnOf_(header, name) {
+  const wanted = name.toLowerCase();
+  for (let i = 0; i < header.length; i++) {
+    if (String(header[i]).trim().toLowerCase() === wanted) {
+      return i + 1;
+    }
+  }
+  return -1;
+}
+
+/**
+ * Makes REF_NAME a formula rather than a typed field, so it can never drift
+ * out of sync with PID or KNOWN_NAME. This is what makes generational
+ * renumbering safe: the reference text follows the PID automatically.
+ *
+ * @param {SpreadsheetApp.Spreadsheet} ss Spreadsheet being set up.
+ */
+function applyLinkedFormulas_(ss) {
+  const persons = ss.getSheetByName(CFG.PERSONS);
+  if (!persons) return;
+
+  const header = persons.getRange(1, 1, 1, persons.getLastColumn() || 10).getValues()[0];
+  const pidCol = columnOf_(header, 'PID');
+  const nameCol = columnOf_(header, 'KNOWN_NAME');
+  const refCol = columnOf_(header, 'REF_NAME');
+  if (pidCol === -1 || nameCol === -1 || refCol === -1) return;
+
+  const pidRef = columnLetter_(pidCol);
+  const nameRef = columnLetter_(nameCol);
+
+  const formulas = [];
+  for (let r = 2; r <= SETUP_ROWS; r++) {
+    formulas.push([`=IF(OR($${pidRef}${r}="",$${nameRef}${r}=""),"",$${pidRef}${r}&"-"&$${nameRef}${r})`]);
+  }
+  persons.getRange(2, refCol, SETUP_ROWS - 1, 1).setFormulas(formulas);
+}
+
+/**
+ * Applies dropdowns to the columns where a typo would silently break a
+ * relationship: the KG predicate, and every cell that must name a person.
+ * Person pickers allow free text so half-entered rows are not blocked; the
+ * predicate list is strict because an unknown predicate is simply ignored.
+ *
+ * @param {SpreadsheetApp.Spreadsheet} ss Spreadsheet being set up.
+ */
+function applyValidations_(ss) {
+  const persons = ss.getSheetByName(CFG.PERSONS);
+  const kg = ss.getSheetByName(CFG.KG);
+  if (!persons) return;
+
+  const header = persons.getRange(1, 1, 1, persons.getLastColumn() || 10).getValues()[0];
+  const pidCol = columnOf_(header, 'PID');
+  const refCol = columnOf_(header, 'REF_NAME');
+
+  const pidRange = pidCol === -1 ? null : persons.getRange(2, pidCol, SETUP_ROWS - 1, 1);
+  const refRange = refCol === -1 ? null : persons.getRange(2, refCol, SETUP_ROWS - 1, 1);
+
+  if (kg) {
+    if (refRange) {
+      const refRule = SpreadsheetApp.newDataValidation()
+        .requireValueInRange(refRange, true)
+        .setAllowInvalid(true)
+        .setHelpText('Pick a person from the Persons tab (PID-KNOWN_NAME).')
+        .build();
+      kg.getRange(2, 1, SETUP_ROWS - 1, 1).setDataValidation(refRule);
+      kg.getRange(2, 3, SETUP_ROWS - 1, 1).setDataValidation(refRule);
+    }
+
+    const predicateRule = SpreadsheetApp.newDataValidation()
+      .requireValueInList(PREDICATES, true)
+      .setAllowInvalid(false)
+      .setHelpText('Use one of: ' + PREDICATES.join(', '))
+      .build();
+    kg.getRange(2, 2, SETUP_ROWS - 1, 1).setDataValidation(predicateRule);
+  }
+
+  [CFG.VEDIC, CFG.STORIES].forEach(name => {
+    const sheet = ss.getSheetByName(name);
+    if (!sheet || !pidRange) return;
+    const rule = SpreadsheetApp.newDataValidation()
+      .requireValueInRange(pidRange, true)
+      .setAllowInvalid(true)
+      .setHelpText('Pick a PID from the Persons tab.')
+      .build();
+    sheet.getRange(2, 1, SETUP_ROWS - 1, 1).setDataValidation(rule);
+  });
 }
 
 /* ====================================================================
@@ -699,6 +834,7 @@ function renumberCore_(dryRun) {
   }
 
   const newPidMap = new Map();
+  const pidLookup = {};
   const counters = {};
 
   persons.forEach(p => {
@@ -708,10 +844,24 @@ function renumberCore_(dryRun) {
     if (!counters[prefix]) counters[prefix] = 1;
     const newId = `${prefix}${String(counters[prefix]++).padStart(3, "0")}`;
     newPidMap.set(p.pid, newId);
+    pidLookup[String(p.pid).toUpperCase()] = newId;
   });
 
+  const vedicSheet = ss.getSheetByName(CFG.VEDIC);
+  const storiesSheet = ss.getSheetByName(CFG.STORIES);
+
+  // Column positions follow the schema setupDatabaseTabsCore_ writes:
+  // KG = [Subject, Predicate, Object]; Vedic/Stories = [PID, REF_NAME, ...].
+  const KG_REF_COLS = [0, 2];
+  const PID_REF_COLS = [0, 1];
+
   if (dryRun) {
-    return `Preview Complete! Processed ${persons.length} members across ${Object.keys(counters).length} generational tiers.`;
+    const pending = rewritePidRefs_(kgSheet, KG_REF_COLS, pidLookup, false) +
+                    rewritePidRefs_(vedicSheet, PID_REF_COLS, pidLookup, false) +
+                    rewritePidRefs_(storiesSheet, PID_REF_COLS, pidLookup, false);
+    return `Preview Complete! ${persons.length} members across ` +
+           `${Object.keys(counters).length} generational tiers. ` +
+           `${pending} references in KG/Vedic/Stories would be rewritten. Nothing was changed.`;
   }
 
   for (let i = 0; i < persons.length; i++) {
@@ -720,8 +870,113 @@ function renumberCore_(dryRun) {
     pSheet.getRange(p.rowIdx, pPidCol + 1).setValue(newId);
   }
 
-  return `Renumbering Applied Successfully! Assigned generational PIDs to ${persons.length} members. ` +
-         `KG, Vedic and Stories still reference the old PIDs.`;
+  const rewritten = rewritePidRefs_(kgSheet, KG_REF_COLS, pidLookup, true) +
+                    rewritePidRefs_(vedicSheet, PID_REF_COLS, pidLookup, true) +
+                    rewritePidRefs_(storiesSheet, PID_REF_COLS, pidLookup, true);
+
+  writeRenumberReport_(ss, persons, newPidMap, rewritten);
+
+  return `Renumbering Applied Successfully! ${persons.length} members renumbered ` +
+         `and ${rewritten} references rewritten across KG, Vedic and Stories. ` +
+         `Full old-to-new list is in the '${CFG.REPORT}' tab.`;
+}
+
+/**
+ * Rewrites PID-prefixed references in place. Handles both bare PIDs
+ * ("A001") and composite refs ("A001-Venkiteswara Iyer"), preserving the
+ * suffix so display names survive the change.
+ *
+ * @param {SpreadsheetApp.Sheet|null} sheet Sheet to scan; null is skipped.
+ * @param {number[]} colIdxs Zero-based columns that may hold references.
+ * @param {Object<string,string>} lookup Uppercased old PID -> new PID.
+ * @param {boolean} apply When false, only counts the changes.
+ * @return {number} Number of cells whose value would change.
+ */
+function rewritePidRefs_(sheet, colIdxs, lookup, apply) {
+  if (!sheet) return 0;
+
+  const range = sheet.getDataRange();
+  const data = range.getValues();
+  if (data.length <= 1) return 0;
+
+  let changed = 0;
+  for (let r = 1; r < data.length; r++) {
+    colIdxs.forEach(c => {
+      if (c >= data[r].length) return;
+      const before = data[r][c];
+      const after = remapRef_(before, lookup);
+      if (after !== before) {
+        data[r][c] = after;
+        changed++;
+      }
+    });
+  }
+
+  if (apply && changed > 0) {
+    range.setValues(data);
+  }
+  return changed;
+}
+
+/**
+ * Maps one reference through the PID lookup.
+ *
+ * @param {*} value Cell value; anything non-string is returned untouched.
+ * @param {Object<string,string>} lookup Uppercased old PID -> new PID.
+ * @return {*} The rewritten reference, or the original value unchanged.
+ */
+function remapRef_(value, lookup) {
+  if (value === null || value === undefined) return value;
+
+  const text = String(value).trim();
+  if (!text) return value;
+
+  const m = text.match(/^([A-Z]\d+)(-[\s\S]*)?$/i);
+  if (!m) return value;
+
+  const next = lookup[m[1].toUpperCase()];
+  if (!next) return value;
+
+  return next + (m[2] || '');
+}
+
+/**
+ * Writes the old-to-new PID mapping so a renumbering can be audited or
+ * replayed by hand.
+ *
+ * @param {SpreadsheetApp.Spreadsheet} ss Spreadsheet to write into.
+ * @param {Array<Object>} persons Collected person records.
+ * @param {Map<string,string>} newPidMap Old PID -> new PID.
+ * @param {number} rewritten Count of references rewritten, for context.
+ */
+function writeRenumberReport_(ss, persons, newPidMap, rewritten) {
+  let sheet = ss.getSheetByName(CFG.REPORT);
+  if (!sheet) {
+    sheet = ss.insertSheet(CFG.REPORT);
+  } else {
+    sheet.clear();
+  }
+
+  const rows = [['OLD_PID', 'NEW_PID', 'KNOWN_NAME', 'NOTES']];
+  persons.forEach(p => {
+    rows.push([p.pid, newPidMap.get(p.pid) || '', p.known, p.notes]);
+  });
+  rows.push([]);
+  rows.push(['References rewritten', rewritten]);
+
+  sheet.getRange(1, 1, rows.length, 4).setValues(
+    rows.map(r => [r[0] === undefined ? '' : r[0],
+                   r[1] === undefined ? '' : r[1],
+                   r[2] === undefined ? '' : r[2],
+                   r[3] === undefined ? '' : r[3]])
+  );
+
+  const headerRange = sheet.getRange(1, 1, 1, 4);
+  headerRange.setFontWeight("bold").setBackground("#1c4587").setFontColor("#ffffff");
+  sheet.setFrozenRows(1);
+  for (let col = 1; col <= 4; col++) {
+    sheet.autoResizeColumn(col);
+  }
 }
 
 /* ====================================================================
@@ -746,4 +1001,120 @@ function checkSheetSetupCore_() {
            `Run 'Kula Genealogy > 🚀 Plugin Setup > Setup / Reset Workspace Tabs' to build them.`;
   }
   return "Sheet setup is complete! All 5 plugin tabs are active.";
+}
+
+/* ====================================================================
+ * 6. REFERENCE INTEGRITY CHECK
+ * ==================================================================== */
+
+/** Menu entry point: report broken or inconsistent references. */
+function validateData() {
+  alert_(validateDataCore_());
+}
+
+/**
+ * Cross-checks every tab against the Persons roster. Catches the failures
+ * that are silent at data-entry time but fatal on import: a KG edge naming
+ * a person who is not in Persons, a PID typed into Vedic or Stories that no
+ * longer exists, a duplicate PID, or an unrecognised predicate.
+ *
+ * @return {string} Human-readable findings, or a clean bill of health.
+ * @throws {Error} If the Persons tab is missing.
+ */
+function validateDataCore_() {
+  const ss = requireSpreadsheet_();
+  const personsSheet = ss.getSheetByName(CFG.PERSONS);
+  if (!personsSheet) throw new Error("Missing 'Persons' sheet. Run 'Plugin Setup' first.");
+
+  const pRows = personsSheet.getDataRange().getValues();
+  const pHeader = pRows[0].map(h => String(h).trim());
+  const pidCol = columnOf_(pHeader, 'PID') - 1;
+  const nameCol = columnOf_(pHeader, 'KNOWN_NAME') - 1;
+  const refCol = columnOf_(pHeader, 'REF_NAME') - 1;
+  if (pidCol < 0 || refCol < 0) {
+    throw new Error("Persons must have PID and REF_NAME columns. Run 'Plugin Setup' first.");
+  }
+
+  const pids = new Set();
+  const refs = new Set();
+  const problems = [];
+  const seen = new Set();
+
+  for (let r = 1; r < pRows.length; r++) {
+    const row = pRows[r];
+    const pid = String(row[pidCol] || '').trim().toUpperCase();
+    const known = nameCol >= 0 ? String(row[nameCol] || '').trim() : '';
+    const ref = String(row[refCol] || '').trim();
+    const sheetRow = r + 1;
+
+    if (!pid && known) {
+      problems.push(`Persons row ${sheetRow}: "${known}" has a name but no PID.`);
+      continue;
+    }
+    if (!pid) continue;
+
+    if (seen.has(pid)) {
+      problems.push(`Persons row ${sheetRow}: duplicate PID ${pid}.`);
+    }
+    seen.add(pid);
+    pids.add(pid);
+    if (ref) refs.add(ref.toUpperCase());
+  }
+
+  /**
+   * True when a relationship cell names a known person, by PID or full ref.
+   * @param {string} value Cell contents.
+   * @return {boolean} Whether it resolves.
+   */
+  const resolves = value => {
+    const text = String(value || '').trim();
+    if (!text) return true;
+    const upper = text.toUpperCase();
+    return refs.has(upper) || pids.has(upper);
+  };
+
+  const kgSheet = ss.getSheetByName(CFG.KG);
+  if (kgSheet) {
+    const rows = kgSheet.getDataRange().getValues();
+    const allowed = PREDICATES.map(p => p.toLowerCase());
+    for (let r = 1; r < rows.length; r++) {
+      const sub = rows[r][0];
+      const rel = String(rows[r][1] || '').trim();
+      const obj = rows[r][2];
+      if (!sub && !rel && !obj) continue;
+
+      if (!resolves(sub)) {
+        problems.push(`KG row ${r + 1}: subject "${sub}" is not in Persons.`);
+      }
+      if (!resolves(obj)) {
+        problems.push(`KG row ${r + 1}: object "${obj}" is not in Persons.`);
+      }
+      if (rel && allowed.indexOf(rel.toLowerCase()) === -1) {
+        problems.push(`KG row ${r + 1}: predicate "${rel}" is not one of ${PREDICATES.join(', ')}.`);
+      }
+    }
+  }
+
+  [CFG.VEDIC, CFG.STORIES].forEach(name => {
+    const sheet = ss.getSheetByName(name);
+    if (!sheet) return;
+    const rows = sheet.getDataRange().getValues();
+    for (let r = 1; r < rows.length; r++) {
+      const pid = String(rows[r][0] || '').trim();
+      if (!pid) continue;
+      if (!pids.has(pid.replace(/^([A-Z]\d+).*$/i, '$1').toUpperCase())) {
+        problems.push(`${name} row ${r + 1}: PID "${pid}" is not in Persons.`);
+      }
+    }
+  });
+
+  if (problems.length === 0) {
+    return `No problems found. ${pids.size} people, all references resolve.`;
+  }
+
+  const shown = problems.slice(0, 15);
+  const more = problems.length - shown.length;
+  return `Found ${problems.length} problem(s):\n\n` +
+         shown.join('\n') +
+         (more > 0 ? `\n…and ${more} more.` : '');
 }
