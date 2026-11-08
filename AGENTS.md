@@ -11,7 +11,12 @@ gitignored).
 
 - Source of truth: a Google Sheet → `scripts/import_sheet.py` →
   `docs/data/tree.json`. Never edit `tree.json` by hand; regenerate it.
-- Config: `docs/config.yml` (site, theme, auth, `panchang:` block).
+- Relationships are entered in the sheet's `KG` tab as readable triples
+  (`SUBJECT`, `PREDICATE`, `OBJECT`), e.g. `P-101-Himavan spouseOf P-102-Mena`.
+  `import_sheet.py` extracts the PID prefix and builds the union/children model.
+  If `KG` is empty, the importer falls back to the legacy `Unions`/`Offsprings` tabs.
+- Config: `docs/config.yml` (site, theme, auth, `panchang:` block, plus
+  `source.tabs` for sheet tab names).
 - Python work always uses the venv: `.venv/bin/python`.
 - Frontend is ES modules in `docs/assets/`, no build step. Modules are pure
   string/DOM-free where possible so they can be tested in Node via
