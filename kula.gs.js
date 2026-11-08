@@ -163,15 +163,12 @@ function cardResponse_(coreFn) {
  * Builds the spreadsheet menu. Also serves as the onInstall handler so an
  * add-on that was just installed shows its menu without a reload.
  *
+ * The menu is created even before authorization; clicking any item will
+ * trigger the OAuth prompt, after which the item runs.
+ *
  * @param {Object=} e Open event; absent when called from onInstall.
  */
 function onOpen(e) {
-  // Fires before authorization during a fresh install; the Ui is not
-  // callable in that mode, so leave the menu for the next open.
-  if (e && e.authMode === ScriptApp.AuthMode.NONE) {
-    return;
-  }
-
   const ui = SpreadsheetApp.getUi();
 
   const setupMenu = ui.createMenu('🚀 Plugin Setup')
