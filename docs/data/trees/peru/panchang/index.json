@@ -1,6 +1,6 @@
 {
   "schema": "kula-panchang-index/v1",
-  "generated_at": "2026-11-08T22:33:05.627598+00:00",
+  "generated_at": "2026-11-08T22:46:48.177016+00:00",
   "calendar": "Kula Family Panchangam",
   "description": "Family shraddha, janma nakshatra and panchangam events",
   "location": {
@@ -60,7 +60,7 @@
   },
   "warnings": [
     "23 people had no usable birth/death date or astro metadata and were skipped.",
-    "Loaded 128 family members from docs/data/tree.json.",
+    "Loaded 128 family members from docs/data/trees/peru/tree.json.",
     "V.V. Viswanatha Iyer (B001): Death time is unknown. The tithi is computed at aparahna, the ritual reference, not at sunrise. Set death_time in the sidecar to make this exact.",
     "V.V. Viswanatha Iyer (B001): Birth time is unknown. Janma nakshatra is computed at sunrise; set birth_time in the sidecar for an exact result.",
     "V.V. Viswanatha Iyer (B001): 2 Mesha (Chithirai) days carried Krishna Ekadasi; the closest to the death anniversary in Adhika Vaisakha (Vaikasi) is used.",
