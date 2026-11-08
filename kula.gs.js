@@ -1,6 +1,16 @@
-
 /**********************************************************************
  *  KULA GENEALOGY PLUGIN — KNOWLEDGE GRAPH EDITION
+ *
+ *  Entry points, in the order Google calls them:
+ *    onInstall  - first install; delegates to onOpen so menus appear.
+ *    onOpen     - simple trigger on every spreadsheet open (menu build).
+ *    onHomepage - add-on homepage trigger; MUST return Card objects.
+ *
+ *  Every action is written twice on purpose: a `*Core_` function that
+ *  returns a human-readable summary string and never touches the UI,
+ *  plus thin callers for the two surfaces that can display it. Alerts
+ *  (SpreadsheetApp.getUi) are unavailable in the add-on card context,
+ *  so card callbacks turn the same string into a notification instead.
  *********************************************************************/
 
 const CFG = {
@@ -15,9 +25,76 @@ const CFG = {
 };
 
 /* ====================================================================
+ * 0. UI BRIDGE
+ * ==================================================================== */
+
+/**
+ * Returns the active spreadsheet or throws a message a user can act on.
+ * The add-on homepage can be opened with no sheet in context, in which
+ * case getActiveSpreadsheet() is null rather than an error.
+ *
+ * @return {SpreadsheetApp.Spreadsheet} The spreadsheet to operate on.
+ * @throws {Error} When no spreadsheet is available in this invocation.
+ */
+function requireSpreadsheet_() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss) {
+    throw new Error('Open a spreadsheet in Kula format, then reopen this add-on.');
+  }
+  return ss;
+}
+
+/**
+ * Shows a message through the classic spreadsheet UI. Used only from menu
+ * items, where a Ui object exists.
+ *
+ * @param {string} message Text to display.
+ */
+function alert_(message) {
+  try {
+    SpreadsheetApp.getUi().alert(message);
+  } catch (err) {
+    Logger.log(message);
+  }
+}
+
+/**
+ * Wraps a core function for a Card Service callback, converting its
+ * returned summary (or thrown error) into an add-on notification.
+ *
+ * @param {function(): string} coreFn Zero-argument function returning text.
+ * @return {CardService.ActionResponse} Response carrying the notification.
+ */
+function cardResponse_(coreFn) {
+  let text;
+  try {
+    text = coreFn();
+  } catch (err) {
+    text = 'Error: ' + (err && err.message ? err.message : String(err));
+    Logger.log(text);
+  }
+  return CardService.newActionResponseBuilder()
+    .setNotification(CardService.newNotification().setText(text))
+    .build();
+}
+
+/* ====================================================================
  * 1. CUSTOM MENU (ON OPEN)
  * ==================================================================== */
-function onOpen() {
+
+/**
+ * Builds the spreadsheet menu. Also serves as the onInstall handler so an
+ * add-on that was just installed shows its menu without a reload.
+ *
+ * @param {Object=} e Open event; absent when called from onInstall.
+ */
+function onOpen(e) {
+  // Fires before authorization during a fresh install; the Ui is not
+  // callable in that mode, so leave the menu for the next open.
+  if (e && e.authMode === ScriptApp.AuthMode.NONE) {
+    return;
+  }
+
   const ui = SpreadsheetApp.getUi();
 
   const setupMenu = ui.createMenu('🚀 Plugin Setup')
@@ -42,11 +119,150 @@ function onOpen() {
     .addToUi();
 }
 
+/**
+ * Install handler. Delegates to onOpen so menu items exist immediately
+ * after the add-on is granted access.
+ *
+ * @param {Object} e Install event.
+ */
+function onInstall(e) {
+  onOpen(e);
+}
+
+/* ====================================================================
+ * 1b. ADD-ON HOMEPAGE (CARD SERVICE)
+ * ==================================================================== */
+
+/**
+ * Builds the add-on homepage card. This is the function named by
+ * addOns.sheets.homepageTrigger and it must return Card objects - an
+ * alert or a spreadsheet menu cannot be rendered here.
+ *
+ * @param {Object=} e Homepage event object.
+ * @return {Card[]} A single-element array holding the homepage card.
+ */
+function onHomepage(e) {
+  const card = CardService.newCardBuilder()
+    .setHeader(
+      CardService.newCardHeader()
+        .setTitle('Kula Genealogy System')
+        .setSubtitle('Knowledge-graph workspace')
+    );
+
+  const status = CardService.newCardSection().setHeader('Workspace');
+  status.addWidget(CardService.newTextParagraph().setText(describeWorkspace_()));
+  card.addSection(status);
+
+  const setup = CardService.newCardSection().setHeader('Setup');
+  setup.addWidget(
+    CardService.newTextButton()
+      .setText('Setup / reset workspace tabs')
+      .setOnClickAction(CardService.newAction().setFunctionName('cardSetup'))
+  );
+  setup.addWidget(
+    CardService.newTextButton()
+      .setText('Check sheet setup')
+      .setOnClickAction(CardService.newAction().setFunctionName('cardCheckSetup'))
+  );
+  card.addSection(setup);
+
+  const flatten = CardService.newCardSection().setHeader('Flatten knowledge graph');
+  flatten.addWidget(
+    CardService.newTextButton()
+      .setText('All relationships')
+      .setOnClickAction(CardService.newAction().setFunctionName('cardFlattenAll'))
+  );
+  flatten.addWidget(
+    CardService.newTextButton()
+      .setText('Parents only')
+      .setOnClickAction(CardService.newAction().setFunctionName('cardFlattenParents'))
+  );
+  flatten.addWidget(
+    CardService.newTextButton()
+      .setText('Offsprings only')
+      .setOnClickAction(CardService.newAction().setFunctionName('cardFlattenOffsprings'))
+  );
+  card.addSection(flatten);
+
+  const numbering = CardService.newCardSection().setHeader('Person numbering');
+  numbering.addWidget(
+    CardService.newTextButton()
+      .setText('Preview numbering tiers')
+      .setOnClickAction(CardService.newAction().setFunctionName('cardPreviewRenumber'))
+  );
+  numbering.addWidget(
+    CardService.newTextButton()
+      .setText('Apply generational PIDs')
+      .setOnClickAction(CardService.newAction().setFunctionName('cardApplyRenumber'))
+  );
+  card.addSection(numbering);
+
+  return [card.build()];
+}
+
+/**
+ * Summarises the active spreadsheet: its name and which tabs exist.
+ *
+ * @return {string} Plain-text status block for the homepage card.
+ */
+function describeWorkspace_() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss) {
+    return 'No spreadsheet is open. Open your Kula workbook, then reopen this add-on.';
+  }
+
+  const required = [CFG.INSTRUCTIONS, CFG.PERSONS, CFG.KG, CFG.VEDIC, CFG.STORIES];
+  const missing = required.filter(name => !ss.getSheetByName(name));
+
+  if (missing.length === 0) {
+    return `Working on "${ss.getName()}".\nAll required tabs are present.`;
+  }
+  return `Working on "${ss.getName()}".\nMissing tabs: ${missing.join(', ')}.`;
+}
+
+/* --- Card callbacks ------------------------------------------------- */
+
+/** @return {CardService.ActionResponse} Notification with setup result. */
+function cardSetup() { return cardResponse_(setupDatabaseTabsCore_); }
+
+/** @return {CardService.ActionResponse} Notification with setup status. */
+function cardCheckSetup() { return cardResponse_(checkSheetSetupCore_); }
+
+/** @return {CardService.ActionResponse} Notification with flatten result. */
+function cardFlattenAll() { return cardResponse_(function () { return flattenGraphCore_('flatten-all'); }); }
+
+/** @return {CardService.ActionResponse} Notification with flatten result. */
+function cardFlattenParents() { return cardResponse_(function () { return flattenGraphCore_('flatten-parents'); }); }
+
+/** @return {CardService.ActionResponse} Notification with flatten result. */
+function cardFlattenOffsprings() { return cardResponse_(function () { return flattenGraphCore_('flatten-offsprings'); }); }
+
+/** @return {CardService.ActionResponse} Notification with preview result. */
+function cardPreviewRenumber() { return cardResponse_(function () { return renumberCore_(true); }); }
+
+/** @return {CardService.ActionResponse} Notification with apply result. */
+function cardApplyRenumber() { return cardResponse_(function () { return renumberCore_(false); }); }
+
 /* ====================================================================
  * 2. AUTOMATED TAB INITIALIZER & INSTRUCTION CREATOR
  * ==================================================================== */
+
+/**
+ * Menu entry point for workspace setup.
+ */
 function setupDatabaseTabs() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  alert_(setupDatabaseTabsCore_());
+}
+
+/**
+ * Creates or verifies every tab the plugin needs, and writes the user
+ * guide. Output is returned rather than alerted so both the menu and the
+ * add-on card can display it.
+ *
+ * @return {string} Summary of what was created or verified.
+ */
+function setupDatabaseTabsCore_() {
+  const ss = requireSpreadsheet_();
 
   // Define Tab Schemas (Headers and Styles)
   const schemas = {
@@ -79,7 +295,7 @@ function setupDatabaseTabs() {
   Object.keys(schemas).forEach(sheetName => {
     let sheet = ss.getSheetByName(sheetName);
     const isNew = !sheet;
-    
+
     if (isNew) {
       sheet = ss.insertSheet(sheetName);
       createdCount++;
@@ -92,7 +308,7 @@ function setupDatabaseTabs() {
       if (sheet.getLastRow() === 0) {
         const headers = schemas[sheetName].headers;
         sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
-        
+
         // Header Styling
         const headerRange = sheet.getRange(1, 1, 1, headers.length);
         headerRange.setFontWeight("bold")
@@ -118,11 +334,13 @@ function setupDatabaseTabs() {
     }
   });
 
-  SpreadsheetApp.getUi().alert(`Workspace initialized! Created/verified ${Object.keys(schemas).length} required tabs.`);
+  return `Workspace initialized! Created/verified ${Object.keys(schemas).length} required tabs.`;
 }
 
 /**
  * Populates clean Markdown-styled instructions into the 'Instructions' tab.
+ *
+ * @param {SpreadsheetApp.Sheet} sheet The Instructions sheet to rewrite.
  */
 function populateInstructionsSheet_(sheet) {
   sheet.clear();
@@ -157,8 +375,10 @@ function populateInstructionsSheet_(sheet) {
     ["• Kula Genealogy > Person Numbering", "Previews or applies generational renumbering (A001, B001, C001...)."]
   ];
 
-  sheet.getRange(1, 1, instructionsContent.length, 2).setValues(
-    instructionsContent.map(row => [row[0] || "", row[1] || ""])
+  // Pad every row to three columns so the triple example keeps its
+  // Object column instead of being truncated to Subject + Predicate.
+  sheet.getRange(1, 1, instructionsContent.length, 3).setValues(
+    instructionsContent.map(row => [row[0] || "", row[1] || "", row[2] || ""])
   );
 
   // Styling Instructions Tab
@@ -171,29 +391,49 @@ function populateInstructionsSheet_(sheet) {
 
   sheet.autoResizeColumn(1);
   sheet.autoResizeColumn(2);
+  sheet.autoResizeColumn(3);
 }
 
 /* ====================================================================
  * 3. KNOWLEDGE GRAPH FLATTENER (CANONICAL PREDICATES)
  * ==================================================================== */
-function runFlattenAll() { flattenGraphDB("flatten-all"); }
-function runFlattenParents() { flattenGraphDB("flatten-parents"); }
-function runFlattenOffsprings() { flattenGraphDB("flatten-offsprings"); }
 
-function flattenGraphDB(mode) {
+/** Menu entry point: flatten every relationship type. */
+function runFlattenAll() {
+  alert_(flattenGraphCore_("flatten-all"));
+}
+
+/** Menu entry point: emit parentOf edges only. */
+function runFlattenParents() {
+  alert_(flattenGraphCore_("flatten-parents"));
+}
+
+/** Menu entry point: emit childOf edges only. */
+function runFlattenOffsprings() {
+  alert_(flattenGraphCore_("flatten-offsprings"));
+}
+
+/**
+ * Reads the KG tab, infers co-parenting through spouses, and writes
+ * canonical triples into KG_FLAT.
+ *
+ * @param {string} mode One of "flatten-all", "flatten-parents",
+ *     "flatten-offsprings".
+ * @return {string} Summary including how many triples were generated.
+ * @throws {Error} If the KG tab is missing or empty.
+ */
+function flattenGraphCore_(mode) {
   mode = (mode || "flatten-all").toLowerCase().trim();
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = requireSpreadsheet_();
   const graphSheet = ss.getSheetByName(CFG.KG);
 
   if (!graphSheet) {
-    SpreadsheetApp.getUi().alert(`Error: Sheet '${CFG.KG}' not found. Run 'Plugin Setup' first.`);
-    return;
+    throw new Error(`Sheet '${CFG.KG}' not found. Run 'Plugin Setup' first.`);
   }
 
   const graphData = graphSheet.getDataRange().getValues();
   if (graphData.length === 0) {
-    SpreadsheetApp.getUi().alert(`Error: '${CFG.KG}' sheet is empty.`);
-    return;
+    throw new Error(`'${CFG.KG}' sheet is empty.`);
   }
 
   const gHeaders = graphData[0].map(h => String(h).toLowerCase().trim());
@@ -210,9 +450,9 @@ function flattenGraphDB(mode) {
     startRow = 1;
   }
 
-  const spouseMap = {};   
-  const childrenMap = {}; 
-  const parentMap = {};   
+  const spouseMap = {};
+  const childrenMap = {};
+  const parentMap = {};
 
   for (let i = startRow; i < graphData.length; i++) {
     const row = graphData[i];
@@ -305,35 +545,52 @@ function flattenGraphDB(mode) {
   outSheet.autoResizeColumn(2);
   outSheet.autoResizeColumn(3);
 
-  SpreadsheetApp.getUi().alert(`Flattening complete! Mode: '${mode}'. Generated ${outputRows.length} canonical graph triples.`);
+  return `Flattening complete! Mode: '${mode}'. Generated ${outputRows.length} canonical graph triples.`;
 }
 
 /* ====================================================================
  * 4. GENERATIONAL RENUMBERING (BFS GRAPH-TRAVERSAL)
  * ==================================================================== */
-function previewRenumber() { safeRun_(true); }
+
+/** Menu entry point: preview tiers without writing. */
+function previewRenumber() {
+  alert_(renumberCore_(true));
+}
+
+/** Menu entry point: confirm, then write new PIDs. */
 function applyRenumber() {
   const ui = SpreadsheetApp.getUi();
   const answer = ui.alert(
     'Apply Renumbering?',
-    'This will assign new generational PIDs (A001, B001, C001...) in Persons and update KG references.\n\nContinue?',
+    'This assigns new generational PIDs (A001, B001, C001...) in the Persons tab.\n\n' +
+    'IMPORTANT: references inside KG, Vedic and Stories are NOT rewritten, ' +
+    'so those tabs will keep pointing at the old PIDs after this runs.\n\n' +
+    'Continue?',
     ui.ButtonSet.YES_NO
   );
-  if (answer === ui.Button.YES) safeRun_(false);
-}
+  if (answer !== ui.Button.YES) {
+    return;
+  }
 
-function safeRun_(dryRun) {
   try {
-    runRenumber_(dryRun);
-  } catch (e) {
-    const msg = e && e.message ? e.message : String(e);
+    alert_(renumberCore_(false));
+  } catch (err) {
+    const msg = err && err.message ? err.message : String(err);
     Logger.log('Renumber failed: ' + msg);
-    SpreadsheetApp.getUi().alert('Renumbering stopped:\n\n' + msg);
+    alert_('Renumbering stopped:\n\n' + msg);
   }
 }
 
-function runRenumber_(dryRun) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+/**
+ * Computes generational tiers from the KG and optionally writes the new
+ * PIDs into the Persons tab.
+ *
+ * @param {boolean} dryRun When true, nothing is written.
+ * @return {string} Summary of tiers and members processed.
+ * @throws {Error} If Persons or KG is missing, or Persons has no data.
+ */
+function renumberCore_(dryRun) {
+  const ss = requireSpreadsheet_();
   const pSheet = ss.getSheetByName(CFG.PERSONS);
   const kgSheet = ss.getSheetByName(CFG.KG);
 
@@ -371,12 +628,13 @@ function runRenumber_(dryRun) {
 
   if (!headPid && persons.length > 0) headPid = persons[0].pid;
 
-  const parentGraph = {}; 
-  const spouseGraph = {}; 
+  const parentGraph = {};
+  const spouseGraph = {};
 
   function extractPid(str) {
+    // match() returns an array or null; read the captured group, not the array.
     const m = String(str).match(/([A-Z]\d+)/i);
-    return m ? m.toUpperCase() : String(str).trim().toUpperCase();
+    return m ? m[1].toUpperCase() : String(str).trim().toUpperCase();
   }
 
   for (let i = 1; i < kgData.length; i++) {
@@ -389,6 +647,11 @@ function runRenumber_(dryRun) {
     if (rel.includes("parent") || rel.includes("father") || rel.includes("mother")) {
       if (!parentGraph[sub]) parentGraph[sub] = new Set();
       parentGraph[sub].add(obj);
+    } else if (rel.includes("childof") || rel.includes("child_of") ||
+               rel.includes("offspring") || rel.includes("son of") || rel.includes("daughter of")) {
+      // Reversed edge: the child is the subject, so obj is the parent.
+      if (!parentGraph[obj]) parentGraph[obj] = new Set();
+      parentGraph[obj].add(sub);
     } else if (rel.includes("spouse") || rel.includes("husband") || rel.includes("wife")) {
       if (!spouseGraph[sub]) spouseGraph[sub] = new Set();
       if (!spouseGraph[obj]) spouseGraph[obj] = new Set();
@@ -440,7 +703,7 @@ function runRenumber_(dryRun) {
 
   persons.forEach(p => {
     const lvl = genLevel.has(p.pid) ? genLevel.get(p.pid) : null;
-    let prefix = lvl !== null ? genLetter(lvl) : "Z";
+    const prefix = lvl !== null ? genLetter(lvl) : "Z";
 
     if (!counters[prefix]) counters[prefix] = 1;
     const newId = `${prefix}${String(counters[prefix]++).padStart(3, "0")}`;
@@ -448,8 +711,7 @@ function runRenumber_(dryRun) {
   });
 
   if (dryRun) {
-    SpreadsheetApp.getUi().alert(`Preview Complete! Processed ${persons.length} members across ${Object.keys(counters).length} generational tiers.`);
-    return;
+    return `Preview Complete! Processed ${persons.length} members across ${Object.keys(counters).length} generational tiers.`;
   }
 
   for (let i = 0; i < persons.length; i++) {
@@ -458,17 +720,30 @@ function runRenumber_(dryRun) {
     pSheet.getRange(p.rowIdx, pPidCol + 1).setValue(newId);
   }
 
-  SpreadsheetApp.getUi().alert(`Renumbering Applied Successfully! Assigned generational PIDs to ${persons.length} members.`);
+  return `Renumbering Applied Successfully! Assigned generational PIDs to ${persons.length} members. ` +
+         `KG, Vedic and Stories still reference the old PIDs.`;
 }
 
+/* ====================================================================
+ * 5. SETUP CHECK
+ * ==================================================================== */
+
+/** Menu entry point: report which required tabs are missing. */
 function checkSheetSetup() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  alert_(checkSheetSetupCore_());
+}
+
+/**
+ * @return {string} Either the missing tabs or a confirmation.
+ */
+function checkSheetSetupCore_() {
+  const ss = requireSpreadsheet_();
   const required = [CFG.INSTRUCTIONS, CFG.PERSONS, CFG.KG, CFG.VEDIC, CFG.STORIES];
   const missing = required.filter(name => !ss.getSheetByName(name));
 
   if (missing.length > 0) {
-    SpreadsheetApp.getUi().alert(`Missing Sheet Tabs: ${missing.join(", ")}.\n\nRun 'Kula Genealogy > 🚀 Plugin Setup > Setup / Reset Workspace Tabs' to build them.`);
-  } else {
-    SpreadsheetApp.getUi().alert("Sheet setup is complete! All 5 plugin tabs are active.");
+    return `Missing Sheet Tabs: ${missing.join(", ")}.\n\n` +
+           `Run 'Kula Genealogy > 🚀 Plugin Setup > Setup / Reset Workspace Tabs' to build them.`;
   }
+  return "Sheet setup is complete! All 5 plugin tabs are active.";
 }
