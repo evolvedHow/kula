@@ -40,15 +40,19 @@ const SCHEMA = {
     sample: ["A001", "Venkiteswara Iyer", "Venkiteswara Iyer", "", "", "M", "1900", "Perumbavoor", "", "Deceased", "1965", "Kolkatta", "Head Patriarch", "A"]
   },
   [CFG.KG]: {
-    headers: ["Subject (Node 1)", "Predicate", "Object (Node 2)"],
+    // Matches the live KG tab, including the optional DATE/NOTES columns.
+    headers: ["SUBJECT", "PREDICATE", "OBJECT", "DATE", "NOTES"],
     sample: [
-      ["A001-Venkiteswara Iyer", "spouseOf", "A002-Rajammal"],
-      ["A001-Venkiteswara Iyer", "parentOf", "B001-Viswanatha Tatha"]
+      ["A001-Venkiteswara Iyer", "spouseOf", "A002-Rajammal", "", ""],
+      ["A001-Venkiteswara Iyer", "parentOf", "B001-Viswanatha Tatha", "", ""]
     ]
   },
   [CFG.VEDIC]: {
-    headers: ["PERSON", "GOTRA", "VEDA", "SHAKHA", "SUTRA", "NAKSHATRA", "KULA_DEVATHA", "SAMPRADAYA", "ACHARYA_THIRUMALIGAI", "PURVIKAM", "PARVATA"],
-    sample: ["A001-Venkiteswara Iyer", "Bharadwaja", "Yajurveda", "Apastamba", "Bodhayana", "Rohini", "", "", "", "", ""]
+    // Matches the columns the live Kula-Data sheet already uses. PARVATA was
+    // dropped: the sheet never carried it, so demanding it made every Vedic
+    // tab look incomplete.
+    headers: ["PERSON", "GOTRA", "VEDA", "SHAKHA", "SUTRA", "NAKSHATRA", "KULA_DEVATHA", "SAMPRADAYA", "ACHARYA_THIRUMALIGAI", "PURVIKAM"],
+    sample: ["A001-Venkiteswara Iyer", "Bharadwaja", "Yajurveda", "Apastamba", "Bodhayana", "Rohini", "", "", "", ""]
   },
   [CFG.STORIES]: {
     headers: ["NOTE_ID", "TYPE", "TITLE", "IS_STORY", "TAGGED_PEOPLE", "TEXT", "UPDATED"],
@@ -58,9 +62,23 @@ const SCHEMA = {
 
 /**
  * Columns for the generated $Config tab. Deliberately outside SCHEMA: setup
- * does not create it, it is produced on demand from the Vedic tab.
+ * does not create it, it is produced on demand from the Vedic tab. These are
+ * the same eight lineage columns as Vedic (minus PERSON), matching the
+ * existing Kula-Data $Config tab.
  */
-const CONFIG_HEADERS = ['GOTRA', 'VEDA', 'SHAKHA', 'SUTRA', 'NAKSHATRA'];
+const CONFIG_HEADERS = [
+  'GOTRA', 'VEDA', 'SHAKHA', 'SUTRA', 'NAKSHATRA',
+  'SAMPRADAYA', 'ACHARYA_THIRUMALIGAI', 'KULA_DEVATA'
+];
+
+/**
+ * Alternate spellings for canonical headers. Setup writes the key; a
+ * workbook that already uses the alias is not reported as missing a column.
+ */
+const HEADER_ALIASES = {
+  'SUBJECT': ['Subject (Node 1)'],
+  'OBJECT': ['Object (Node 2)']
+};
 
 /* ====================================================================
  * 0. UI BRIDGE
@@ -335,7 +353,11 @@ function setupDatabaseTabsCore_() {
     }
 
     if (schemas[sheetName].isInstructions) {
-      populateInstructionsSheet_(sheet);
+      // Only seed a new or empty Instructions tab. The live workbook already
+      // carries a 1000-row guide, and setup must not wipe the user's copy.
+      if (isNew || sheet.getLastRow() === 0) {
+        populateInstructionsSheet_(sheet);
+      }
     } else {
       // Setup Table Headers if empty or newly created
       if (sheet.getLastRow() === 0) {
@@ -367,11 +389,20 @@ function setupDatabaseTabsCore_() {
     }
   });
 
-  applyLinkedFormulas_(ss);
+  const refs = applyLinkedFormulas_(ss);
   applyValidations_(ss);
 
+  let note = '';
+  if (refs.repaired > 0) {
+    note = ` ${refs.repaired} reference(s) in KG/Vedic/Stories were re-spelled ` +
+           `to match the rebuilt REF_NAME, so no relationship was orphaned.`;
+  } else if (refs.drifted > 0) {
+    note = ` ${refs.drifted} stored REF_NAME value(s) differed from PID-KNOWN_NAME ` +
+           `and were rebuilt; run 'Validate Reference Integrity' to check the edges.`;
+  }
+
   return `Workspace initialized! Created/verified ${Object.keys(schemas).length} required tabs, ` +
-         `with REF_NAME formulas and data validation applied.`;
+         `with REF_NAME formulas and data validation applied.` + note;
 }
 
 /**
@@ -410,7 +441,11 @@ function generateConfigCore_() {
 
   if (gotras.length > 0) {
     sheet.getRange(2, 1, gotras.length, CONFIG_HEADERS.length)
-         .setValues(gotras.map(gotra => [gotra, "", "", "", ""]));
+         .setValues(gotras.map(gotra => {
+           const row = new Array(CONFIG_HEADERS.length).fill("");
+           row[0] = gotra;
+           return row;
+         }));
   }
 
   for (let col = 1; col <= CONFIG_HEADERS.length; col++) {
@@ -483,7 +518,7 @@ function populateInstructionsSheet_(sheet) {
     ["🕸️ HOW TO WRITE RELATIONSHIPS IN 'KG'"],
     ["Define simple direct edges in the 'KG' tab instead of a separate relationship table:"],
     [""],
-    ["  Subject (Node 1)", "Predicate", "Object (Node 2)"],
+    ["  SUBJECT", "PREDICATE", "OBJECT"],
     ["  A001-John", "spouseOf", "A002-Jane"],
     ["  A002-Jane", "parentOf", "B001-Jack"],
     [""],
@@ -492,6 +527,7 @@ function populateInstructionsSheet_(sheet) {
     ["• Bidirectional Links", "Running 'Flatten All' generates reciprocal spouseOf edges and reverse childOf edges."],
     ["• Generational PIDs", "Running 'Person Numbering > Apply Generational PIDs' assigns Axxx, Bxxx, Cxxx by distance from the patriarch."],
     ["• Derived REF_NAME", "REF_NAME is a formula, PID and KNOWN_NAME joined by a hyphen. Never type into it."],
+    ["• Why the name is kept", "KG stores the same PID-KNOWN_NAME string so relationships are readable while you type. A consumer only needs the part before the first hyphen; that is the PID."],
     [""],
     ["⚙️ QUICK START MENU COMMANDS"],
     ["• Setup / Reset Workspace Tabs", "Creates the five core tabs, REF_NAME formulas and dropdowns."],
@@ -514,7 +550,7 @@ function populateInstructionsSheet_(sheet) {
   sheet.getRange("A15:B15").setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
   sheet.getRange("A18:C18").setFontWeight("bold").setBackground("#d9ead3");
   sheet.getRange("A22:B22").setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
-  sheet.getRange("A28:B28").setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
+  sheet.getRange("A29:B29").setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
 
   sheet.autoResizeColumn(1);
   sheet.autoResizeColumn(2);
@@ -563,30 +599,173 @@ function columnOf_(header, name) {
 }
 
 /**
+ * Finds the first column matching any of several acceptable header names,
+ * so a tab written by an older version of the plugin still resolves.
+ *
+ * @param {string[]} header Header row values.
+ * @param {string[]} names Acceptable headers, preferred spelling first.
+ * @return {number} 1-based column index, or -1 when none are present.
+ */
+function firstColumnOf_(header, names) {
+  for (let i = 0; i < names.length; i++) {
+    const col = columnOf_(header, names[i]);
+    if (col !== -1) return col;
+  }
+  return -1;
+}
+
+/**
+ * Number of rows setup should cover on a sheet: at least the default, and
+ * never fewer than the rows the sheet already uses. Without this, a roster
+ * longer than SETUP_ROWS would leave its last people without an REF_NAME
+ * formula or any dropdown.
+ *
+ * @param {SpreadsheetApp.Sheet} sheet Sheet being covered.
+ * @return {number} Row count to write through.
+ */
+function setupCoverage_(sheet) {
+  return Math.max(SETUP_ROWS, sheet.getLastRow());
+}
+
+/**
  * Makes REF_NAME a formula rather than a typed field, so it can never drift
  * out of sync with PID or KNOWN_NAME. This is what makes generational
  * renumbering safe: the reference text follows the PID automatically.
  *
+ * Rows whose stored REF_NAME differed from `PID-KNOWN_NAME` are counted. Where
+ * the difference is only spacing around the hyphen, the matching references
+ * in KG, Vedic and Stories are re-spelled too, so the rewrite cannot orphan a
+ * relationship that was previously valid.
+ *
  * @param {SpreadsheetApp.Spreadsheet} ss Spreadsheet being set up.
+ * @return {{drifted: number, repaired: number}} How many stored refs differed
+ *     and how many reference cells in other tabs were re-spelled.
  */
 function applyLinkedFormulas_(ss) {
   const persons = ss.getSheetByName(CFG.PERSONS);
-  if (!persons) return;
+  if (!persons) return { drifted: 0, repaired: 0 };
 
-  const header = persons.getRange(1, 1, 1, persons.getLastColumn() || 10).getValues()[0];
+  const lastCol = persons.getLastColumn();
+  if (!lastCol) return { drifted: 0, repaired: 0 };
+
+  const header = persons.getRange(1, 1, 1, lastCol).getValues()[0];
   const pidCol = columnOf_(header, 'PID');
   const nameCol = columnOf_(header, 'KNOWN_NAME');
   const refCol = columnOf_(header, 'REF_NAME');
-  if (pidCol === -1 || nameCol === -1 || refCol === -1) return;
+  if (pidCol === -1 || nameCol === -1 || refCol === -1) return { drifted: 0, repaired: 0 };
 
   const pidRef = columnLetter_(pidCol);
   const nameRef = columnLetter_(nameCol);
 
+  // Inspect the stored refs before overwriting them, so spacing-only drift can
+  // be propagated to the tabs that reference people by that exact string.
+  const stored = persons.getRange(2, 1, setupCoverage_(persons) - 1, lastCol).getValues();
+  const respellings = {};
+  let drifted = 0;
+
+  stored.forEach(row => {
+    const pid = String(row[pidCol - 1] || '').trim();
+    const known = String(row[nameCol - 1] || '').trim();
+    const old = String(row[refCol - 1] || '').trim();
+    if (!pid || !known || !old) return;
+
+    const canonical = `${pid}-${known}`;
+    if (old === canonical) return;
+
+    drifted++;
+    if (old.replace(/\s*-\s*/, '-') === canonical) {
+      respellings[old.toUpperCase()] = canonical;
+    }
+  });
+
+  const coverage = setupCoverage_(persons);
   const formulas = [];
-  for (let r = 2; r <= SETUP_ROWS; r++) {
+  for (let r = 2; r <= coverage; r++) {
     formulas.push([`=IF(OR($${pidRef}${r}="",$${nameRef}${r}=""),"",$${pidRef}${r}&"-"&$${nameRef}${r})`]);
   }
-  persons.getRange(2, refCol, SETUP_ROWS - 1, 1).setFormulas(formulas);
+  persons.getRange(2, refCol, coverage - 1, 1).setFormulas(formulas);
+
+  const repaired = repairReferenceSpelling_(ss, respellings);
+  return { drifted, repaired };
+}
+
+/**
+ * Rewrites exact reference strings across every tab that names a person,
+ * leaving comma-separated tag lists intact.
+ *
+ * @param {SpreadsheetApp.Spreadsheet} ss Spreadsheet being repaired.
+ * @param {Object<string,string>} replacements Uppercased old ref -> new ref.
+ * @return {number} Number of cells changed.
+ */
+function repairReferenceSpelling_(ss, replacements) {
+  if (!replacements || Object.keys(replacements).length === 0) return 0;
+
+  let repaired = 0;
+  referenceTargets_(ss).forEach(target => {
+    if (!target.sheet || target.cols.length === 0) return;
+
+    const range = target.sheet.getDataRange();
+    const data = range.getValues();
+    let touched = false;
+
+    for (let r = 1; r < data.length; r++) {
+      target.cols.forEach(c => {
+        if (c >= data[r].length) return;
+        const before = data[r][c];
+        const after = target.split
+          ? remapExactList_(before, replacements)
+          : remapExact_(before, replacements);
+        if (after !== before) {
+          data[r][c] = after;
+          touched = true;
+          repaired++;
+        }
+      });
+    }
+
+    if (touched) range.setValues(data);
+  });
+
+  return repaired;
+}
+
+/**
+ * Replaces a whole-cell reference when it matches, preserving the original
+ * value when it does not.
+ *
+ * @param {*} value Cell value.
+ * @param {Object<string,string>} lookup Uppercased old ref -> new ref.
+ * @return {*} The replacement, or the original value.
+ */
+function remapExact_(value, lookup) {
+  if (value === null || value === undefined) return value;
+  const key = String(value).trim().toUpperCase();
+  const next = lookup[key];
+  return next === undefined ? value : next;
+}
+
+/**
+ * Replaces references inside a comma- or semicolon-separated list, preserving
+ * the cell's separators and spacing. Returns the original value when no entry
+ * matches, so untouched cells are never reformatted.
+ *
+ * @param {*} value Cell value, possibly a list.
+ * @param {Object<string,string>} lookup Uppercased old ref -> new ref.
+ * @return {*} The rewritten list, or the original value.
+ */
+function remapExactList_(value, lookup) {
+  if (value === null || value === undefined) return value;
+  const text = String(value).trim();
+  if (!text) return value;
+  if (!/[;,]/.test(text)) return remapExact_(value, lookup);
+
+  const next = text.replace(/[^;,]+/g, token => {
+    const trimmed = token.trim();
+    const hit = lookup[trimmed.toUpperCase()];
+    return hit === undefined ? token : token.replace(trimmed, hit);
+  });
+
+  return next === text ? value : next;
 }
 
 /**
@@ -606,25 +785,33 @@ function applyValidations_(ss) {
   const pidCol = columnOf_(header, 'PID');
   const refCol = columnOf_(header, 'REF_NAME');
 
-  const refRange = refCol === -1 ? null : persons.getRange(2, refCol, SETUP_ROWS - 1, 1);
+  const refRange = refCol === -1 ? null : persons.getRange(2, refCol, setupCoverage_(persons) - 1, 1);
 
   if (kg) {
+    const kgHeader = kg.getRange(1, 1, 1, kg.getLastColumn() || 3).getValues()[0];
+    const kgRows = setupCoverage_(kg) - 1;
+    const subCol = firstColumnOf_(kgHeader, ['SUBJECT', 'Subject (Node 1)']);
+    const relCol = firstColumnOf_(kgHeader, ['PREDICATE', 'Predicate']);
+    const objCol = firstColumnOf_(kgHeader, ['OBJECT', 'Object (Node 2)']);
+
     if (refRange) {
       const refRule = SpreadsheetApp.newDataValidation()
         .requireValueInRange(refRange, true)
         .setAllowInvalid(true)
         .setHelpText('Pick a person from the Persons tab (PID-KNOWN_NAME).')
         .build();
-      kg.getRange(2, 1, SETUP_ROWS - 1, 1).setDataValidation(refRule);
-      kg.getRange(2, 3, SETUP_ROWS - 1, 1).setDataValidation(refRule);
+      if (subCol !== -1) kg.getRange(2, subCol, kgRows, 1).setDataValidation(refRule);
+      if (objCol !== -1) kg.getRange(2, objCol, kgRows, 1).setDataValidation(refRule);
     }
 
-    const predicateRule = SpreadsheetApp.newDataValidation()
-      .requireValueInList(PREDICATES, true)
-      .setAllowInvalid(false)
-      .setHelpText('Use one of: ' + PREDICATES.join(', '))
-      .build();
-    kg.getRange(2, 2, SETUP_ROWS - 1, 1).setDataValidation(predicateRule);
+    if (relCol !== -1) {
+      const predicateRule = SpreadsheetApp.newDataValidation()
+        .requireValueInList(PREDICATES, true)
+        .setAllowInvalid(false)
+        .setHelpText('Use one of: ' + PREDICATES.join(', '))
+        .build();
+      kg.getRange(2, relCol, kgRows, 1).setDataValidation(predicateRule);
+    }
   }
 
   // Person-referencing columns in the other tabs. Both hold
@@ -648,7 +835,7 @@ function applyValidations_(ss) {
         .setAllowInvalid(true)
         .setHelpText(`Pick a person from the Persons tab (PID-KNOWN_NAME).`)
         .build();
-      sheet.getRange(2, col, SETUP_ROWS - 1, 1).setDataValidation(rule);
+      sheet.getRange(2, col, setupCoverage_(sheet) - 1, 1).setDataValidation(rule);
     });
   }
 }
@@ -735,6 +922,16 @@ function flattenGraphCore_(mode) {
 
       if (!parentMap[obj]) parentMap[obj] = new Set();
       parentMap[obj].add(sub);
+    }
+
+    // childOf is the mirror of parentOf: the subject is the child, so the
+    // edge has to be recorded against the object as the parent.
+    if (rLower.includes("child") || rLower.includes("son") || rLower.includes("daughter")) {
+      if (!childrenMap[obj]) childrenMap[obj] = new Set();
+      childrenMap[obj].add(sub);
+
+      if (!parentMap[sub]) parentMap[sub] = new Set();
+      parentMap[sub].add(obj);
     }
   }
 
@@ -959,6 +1156,7 @@ function renumberCore_(dryRun) {
 
   const newPidMap = new Map();
   const pidLookup = {};
+  const nameLookup = {};
   const counters = {};
 
   persons.forEach(p => {
@@ -969,24 +1167,17 @@ function renumberCore_(dryRun) {
     const newId = `${prefix}${String(counters[prefix]++).padStart(3, "0")}`;
     newPidMap.set(p.pid, newId);
     pidLookup[String(p.pid).toUpperCase()] = newId;
+    nameLookup[String(p.pid).toUpperCase()] = p.known;
   });
 
-  const vedicSheet = ss.getSheetByName(CFG.VEDIC);
-  const storiesSheet = ss.getSheetByName(CFG.STORIES);
-
-  // Columns holding person references, located by header so a reordered tab
-  // still works. Stories can tag several people in one cell, so that column
-  // is treated as a list; the others hold a single reference.
-  const refTargets = [
-    { sheet: kgSheet, cols: refColumnIndexes_(kgSheet, ['Subject (Node 1)', 'Object (Node 2)']), split: false },
-    { sheet: vedicSheet, cols: refColumnIndexes_(vedicSheet, ['PERSON']), split: false },
-    { sheet: storiesSheet, cols: refColumnIndexes_(storiesSheet, ['TAGGED_PEOPLE']), split: true }
-  ];
+  // Stories can tag several people in one cell, so that column is treated as
+  // a list; the others hold a single reference.
+  const refTargets = referenceTargets_(ss);
 
   if (dryRun) {
     let pending = 0;
     refTargets.forEach(target => {
-      pending += rewritePidRefs_(target.sheet, target.cols, pidLookup, false, target.split);
+      pending += rewritePidRefs_(target.sheet, target.cols, pidLookup, false, target.split, nameLookup);
     });
     return `Preview Complete! ${persons.length} members across ` +
            `${Object.keys(counters).length} generational tiers. ` +
@@ -1001,7 +1192,7 @@ function renumberCore_(dryRun) {
 
   let rewritten = 0;
   refTargets.forEach(target => {
-    rewritten += rewritePidRefs_(target.sheet, target.cols, pidLookup, true, target.split);
+    rewritten += rewritePidRefs_(target.sheet, target.cols, pidLookup, true, target.split, nameLookup);
   });
 
   writeRenumberReport_(ss, persons, newPidMap, rewritten);
@@ -1012,11 +1203,44 @@ function renumberCore_(dryRun) {
 }
 
 /**
- * Resolves header names into zero-based column indexes on a sheet.
+ * Locates the person-reference columns on every tab that stores one.
+ *
+ * @param {SpreadsheetApp.Spreadsheet} ss Spreadsheet to inspect.
+ * @return {Array<{sheet: SpreadsheetApp.Sheet|null, cols: number[], split: boolean}>}
+ *     Targets in KG, Vedic, Stories order; `split` marks a comma-list column.
+ */
+function referenceTargets_(ss) {
+  const kgSheet = ss.getSheetByName(CFG.KG);
+  const vedicSheet = ss.getSheetByName(CFG.VEDIC);
+  const storiesSheet = ss.getSheetByName(CFG.STORIES);
+
+  return [
+    {
+      sheet: kgSheet,
+      cols: refColumnIndexes_(kgSheet, [['SUBJECT', 'Subject (Node 1)'], ['OBJECT', 'Object (Node 2)']]),
+      split: false
+    },
+    {
+      sheet: vedicSheet,
+      cols: refColumnIndexes_(vedicSheet, [['PERSON']]),
+      split: false
+    },
+    {
+      sheet: storiesSheet,
+      cols: refColumnIndexes_(storiesSheet, [['TAGGED_PEOPLE']]),
+      split: true
+    }
+  ];
+}
+
+/**
+ * Resolves reference columns by header, accepting alternative spellings for
+ * each one.
  *
  * @param {SpreadsheetApp.Sheet|null} sheet Sheet to inspect.
- * @param {string[]} headerNames Headers to locate, in order.
- * @return {number[]} Zero-based indexes of the headers that exist.
+ * @param {string[][]} headerNames Acceptable header spellings, one array per
+ *     column to locate (preferred spelling first).
+ * @return {number[]} Zero-based indexes of the columns that exist.
  */
 function refColumnIndexes_(sheet, headerNames) {
   if (!sheet) return [];
@@ -1025,7 +1249,7 @@ function refColumnIndexes_(sheet, headerNames) {
 
   const header = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
   return headerNames
-    .map(name => columnOf_(header, name) - 1)
+    .map(names => firstColumnOf_(header, names) - 1)
     .filter(index => index >= 0);
 }
 
@@ -1038,11 +1262,13 @@ function refColumnIndexes_(sheet, headerNames) {
  * @param {number[]} colIdxs Zero-based columns that may hold references.
  * @param {Object<string,string>} lookup Uppercased old PID -> new PID.
  * @param {boolean} apply When false, only counts the changes.
- * @param {boolean} splitList When true, the cell may hold a comma-separated
- *     list of references and each entry is remapped.
+ * @param {boolean} splitList When true, the cell may hold a comma- or
+ *     semicolon-separated list of references and each entry is remapped.
+ * @param {Object<string,string>=} names Uppercased old PID -> current
+ *     KNOWN_NAME, used to refresh the readable half of a full reference.
  * @return {number} Number of cells whose value would change.
  */
-function rewritePidRefs_(sheet, colIdxs, lookup, apply, splitList) {
+function rewritePidRefs_(sheet, colIdxs, lookup, apply, splitList, names) {
   if (!sheet || !colIdxs || colIdxs.length === 0) return 0;
 
   const range = sheet.getDataRange();
@@ -1054,7 +1280,9 @@ function rewritePidRefs_(sheet, colIdxs, lookup, apply, splitList) {
     colIdxs.forEach(c => {
       if (c >= data[r].length) return;
       const before = data[r][c];
-      const after = splitList ? remapRefList_(before, lookup) : remapRef_(before, lookup);
+      const after = splitList
+        ? remapRefList_(before, lookup, names)
+        : remapRef_(before, lookup, names);
       if (after !== before) {
         data[r][c] = after;
         changed++;
@@ -1069,13 +1297,16 @@ function rewritePidRefs_(sheet, colIdxs, lookup, apply, splitList) {
 }
 
 /**
- * Maps one reference through the PID lookup.
+ * Maps one reference through the PID lookup. A bare PID stays bare; a full
+ * "PID-KNOWN_NAME" reference keeps its readable half, refreshed from the
+ * current roster so a renamed person does not leave a stale suffix behind.
  *
  * @param {*} value Cell value; anything non-string is returned untouched.
  * @param {Object<string,string>} lookup Uppercased old PID -> new PID.
+ * @param {Object<string,string>=} names Uppercased old PID -> KNOWN_NAME.
  * @return {*} The rewritten reference, or the original value unchanged.
  */
-function remapRef_(value, lookup) {
+function remapRef_(value, lookup, names) {
   if (value === null || value === undefined) return value;
 
   const text = String(value).trim();
@@ -1084,31 +1315,39 @@ function remapRef_(value, lookup) {
   const m = text.match(/^([A-Z]\d+)(-[\s\S]*)?$/i);
   if (!m) return value;
 
-  const next = lookup[m[1].toUpperCase()];
+  const key = m[1].toUpperCase();
+  const next = lookup[key];
   if (!next) return value;
+
+  if (m[2] && names && names[key]) {
+    return `${next}-${names[key]}`;
+  }
 
   return next + (m[2] || '');
 }
 
 /**
- * Remaps a comma-separated list of references, such as a Stories row that
- * tags several people. Each entry is remapped independently and entries
- * that are not references are left alone.
+ * Remaps a reference list, such as a Stories row that tags several people.
+ * Both commas and semicolons separate entries; the cell's own separators and
+ * spacing are preserved, and entries that are not references are left alone.
  *
  * @param {*} value Cell value, possibly a list.
  * @param {Object<string,string>} lookup Uppercased old PID -> new PID.
+ * @param {Object<string,string>=} names Uppercased old PID -> KNOWN_NAME.
  * @return {*} The rewritten list, or the original value unchanged.
  */
-function remapRefList_(value, lookup) {
+function remapRefList_(value, lookup, names) {
   if (value === null || value === undefined) return value;
 
   const text = String(value).trim();
   if (!text) return value;
+  if (!/[;,]/.test(text)) return remapRef_(value, lookup, names);
 
-  const parts = text.split(',');
-  if (parts.length === 1) return remapRef_(value, lookup);
-
-  return parts.map(part => remapRef_(part.trim(), lookup)).join(', ');
+  return text.replace(/[^;,]+/g, token => {
+    const trimmed = token.trim();
+    const next = remapRef_(trimmed, lookup, names);
+    return next === trimmed ? token : token.replace(trimmed, String(next));
+  });
 }
 
 /**
@@ -1180,7 +1419,10 @@ function checkSheetSetupCore_() {
       ? sheet.getRange(1, 1, 1, lastCol).getValues()[0].map(v => String(v).trim().toUpperCase())
       : [];
 
-    const absent = SCHEMA[name].headers.filter(h => actual.indexOf(h.toUpperCase()) === -1);
+    const absent = SCHEMA[name].headers.filter(h => {
+      const accepted = [h].concat(HEADER_ALIASES[h] || []).map(v => v.toUpperCase());
+      return !accepted.some(candidate => actual.indexOf(candidate) !== -1);
+    });
     if (absent.length > 0) {
       findings.push(`${name}: missing column(s) ${absent.join(', ')}.`);
     }
@@ -1272,21 +1514,30 @@ function validateDataCore_() {
   const kgSheet = ss.getSheetByName(CFG.KG);
   if (kgSheet) {
     const rows = kgSheet.getDataRange().getValues();
+    const header = rows.length ? rows[0] : [];
+    const subCol = firstColumnOf_(header, ['SUBJECT', 'Subject (Node 1)']) - 1;
+    const relCol = firstColumnOf_(header, ['PREDICATE', 'Predicate']) - 1;
+    const objCol = firstColumnOf_(header, ['OBJECT', 'Object (Node 2)']) - 1;
     const allowed = PREDICATES.map(p => p.toLowerCase());
-    for (let r = 1; r < rows.length; r++) {
-      const sub = rows[r][0];
-      const rel = String(rows[r][1] || '').trim();
-      const obj = rows[r][2];
-      if (!sub && !rel && !obj) continue;
 
-      if (!resolves(sub)) {
-        problems.push(`KG row ${r + 1}: subject "${sub}" is not in Persons.`);
-      }
-      if (!resolves(obj)) {
-        problems.push(`KG row ${r + 1}: object "${obj}" is not in Persons.`);
-      }
-      if (rel && allowed.indexOf(rel.toLowerCase()) === -1) {
-        problems.push(`KG row ${r + 1}: predicate "${rel}" is not one of ${PREDICATES.join(', ')}.`);
+    if (subCol < 0 || relCol < 0 || objCol < 0) {
+      problems.push(`KG: header must name SUBJECT, PREDICATE and OBJECT columns.`);
+    } else {
+      for (let r = 1; r < rows.length; r++) {
+        const sub = rows[r][subCol];
+        const rel = String(rows[r][relCol] || '').trim();
+        const obj = rows[r][objCol];
+        if (!sub && !rel && !obj) continue;
+
+        if (sub && !resolves(sub)) {
+          problems.push(`KG row ${r + 1}: subject "${sub}" is not in Persons.`);
+        }
+        if (obj && !resolves(obj)) {
+          problems.push(`KG row ${r + 1}: object "${obj}" is not in Persons.`);
+        }
+        if (rel && allowed.indexOf(rel.toLowerCase()) === -1) {
+          problems.push(`KG row ${r + 1}: predicate "${rel}" is not one of ${PREDICATES.join(', ')}.`);
+        }
       }
     }
   }
@@ -1311,7 +1562,8 @@ function validateDataCore_() {
       const raw = String(rows[r][col] || '').trim();
       if (!raw) continue;
 
-      const entries = target.split ? raw.split(',') : [raw];
+      // Tag lists use either comma or semicolon in the wild; both split.
+      const entries = target.split ? raw.split(/[;,]/) : [raw];
       entries.forEach(entry => {
         const text = entry.trim();
         if (!text || resolves(text)) return;
