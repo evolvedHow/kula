@@ -20,9 +20,47 @@ const CFG = {
   FLATGRAPH: 'KG_FLAT',   // Output tab for flattened graph triples
   VEDIC: 'Vedic',
   STORIES: 'Stories',
+  CONFIG: '$Config',      // Gotra defaults for veda, shakha, sutra, nakshatra
   MAPPING: 'ID_Mapping_Key',
   REPORT: 'Renumber_Report'
 };
+
+/** Canonical relationship predicates offered in the KG dropdown. */
+const PREDICATES = ['spouseOf', 'parentOf', 'childOf'];
+
+/**
+ * The data-entry contract for every tab the plugin owns. Setup writes these
+ * headers into empty tabs, and Check Sheet Setup compares existing tabs
+ * against them, so a workbook created by an older version is reported as
+ * mismatched instead of silently ignored.
+ */
+const SCHEMA = {
+  [CFG.PERSONS]: {
+    headers: ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "EMAIL", "GENDER", "DOB", "POB", "CUR_LOC", "STATUS", "DOD", "POD", "NOTES", "GEN"],
+    sample: ["A001", "Venkiteswara Iyer", "Venkiteswara Iyer", "", "", "M", "1900", "Perumbavoor", "", "Deceased", "1965", "Kolkatta", "Head Patriarch", "A"]
+  },
+  [CFG.KG]: {
+    headers: ["Subject (Node 1)", "Predicate", "Object (Node 2)"],
+    sample: [
+      ["A001-Venkiteswara Iyer", "spouseOf", "A002-Rajammal"],
+      ["A001-Venkiteswara Iyer", "parentOf", "B001-Viswanatha Tatha"]
+    ]
+  },
+  [CFG.VEDIC]: {
+    headers: ["PERSON", "GOTRA", "VEDA", "SHAKHA", "SUTRA", "NAKSHATRA", "KULA_DEVATHA", "SAMPRADAYA", "ACHARYA_THIRUMALIGAI", "PURVIKAM", "PARVATA"],
+    sample: ["A001-Venkiteswara Iyer", "Bharadwaja", "Yajurveda", "Apastamba", "Bodhayana", "Rohini", "", "", "", "", ""]
+  },
+  [CFG.STORIES]: {
+    headers: ["NOTE_ID", "TYPE", "TITLE", "IS_STORY", "TAGGED_PEOPLE", "TEXT", "UPDATED"],
+    sample: ["N001", "Story", "Family Migration", "TRUE", "A001-Venkiteswara Iyer", "Moved to Kolkata in 1925.", ""]
+  }
+};
+
+/**
+ * Columns for the generated $Config tab. Deliberately outside SCHEMA: setup
+ * does not create it, it is produced on demand from the Vedic tab.
+ */
+const CONFIG_HEADERS = ['GOTRA', 'VEDA', 'SHAKHA', 'SUTRA', 'NAKSHATRA'];
 
 /* ====================================================================
  * 0. UI BRIDGE
@@ -98,7 +136,8 @@ function onOpen(e) {
   const ui = SpreadsheetApp.getUi();
 
   const setupMenu = ui.createMenu('🚀 Plugin Setup')
-    .addItem('Setup / Reset Workspace Tabs', 'setupDatabaseTabs');
+    .addItem('Setup / Reset Workspace Tabs', 'setupDatabaseTabs')
+    .addItem('Generate $Config (gotra defaults)', 'generateConfig');
 
   const flattenSubMenu = ui.createMenu('🕸 Flatten Knowledge Graph')
     .addItem('All (Spouses, Parents & Offsprings)', 'runFlattenAll')
@@ -159,6 +198,11 @@ function onHomepage(e) {
     CardService.newTextButton()
       .setText('Setup / reset workspace tabs')
       .setOnClickAction(CardService.newAction().setFunctionName('cardSetup'))
+  );
+  setup.addWidget(
+    CardService.newTextButton()
+      .setText('Generate $Config')
+      .setOnClickAction(CardService.newAction().setFunctionName('cardGenerateConfig'))
   );
   setup.addWidget(
     CardService.newTextButton()
@@ -231,6 +275,9 @@ function describeWorkspace_() {
 /** @return {CardService.ActionResponse} Notification with setup result. */
 function cardSetup() { return cardResponse_(setupDatabaseTabsCore_); }
 
+/** @return {CardService.ActionResponse} Notification with $Config generation. */
+function cardGenerateConfig() { return cardResponse_(generateConfigCore_); }
+
 /** @return {CardService.ActionResponse} Notification with setup status. */
 function cardCheckSetup() { return cardResponse_(checkSheetSetupCore_); }
 
@@ -273,31 +320,8 @@ function setupDatabaseTabs() {
 function setupDatabaseTabsCore_() {
   const ss = requireSpreadsheet_();
 
-  // Define Tab Schemas (Headers and Styles)
-  const schemas = {
-    [CFG.INSTRUCTIONS]: {
-      isInstructions: true
-    },
-    [CFG.PERSONS]: {
-      headers: ["PID", "KNOWN_NAME", "GENDER", "REF_NAME", "DOB", "POB", "DOD", "POD", "STATUS", "NOTES"],
-      sample: ["A001", "Venkiteswara Iyer", "M", "A001-Venkiteswara Iyer", "1900", "Perumbavoor", "1965", "Kolkatta", "Deceased", "Head Patriarch"]
-    },
-    [CFG.KG]: {
-      headers: ["Subject (Node 1)", "Predicate", "Object (Node 2)"],
-      sample: [
-        ["A001-Venkiteswara Iyer", "spouseOf", "A002-Rajammal"],
-        ["A001-Venkiteswara Iyer", "parentOf", "B001-Viswanatha Tatha"]
-      ]
-    },
-    [CFG.VEDIC]: {
-      headers: ["PID", "REF_NAME", "GOTRA", "BIRTH_NAKSHATRA", "BIRTH_RASHI", "DEATH_MASA", "DEATH_PAKSHA", "DEATH_TITHI"],
-      sample: ["A001", "A001-Venkiteswara Iyer", "Bharadwaja", "Rohini", "Vrishabha", "Kanya", "Krishna", "Ekadasi"]
-    },
-    [CFG.STORIES]: {
-      headers: ["PID", "REF_NAME", "TITLE", "TAGS", "NOTES_AND_MEMORIES"],
-      sample: ["A001", "A001-Venkiteswara Iyer", "Family Migration", "History, Kolkatta", "Moved to Kolkata in 1925."]
-    }
-  };
+  // Instructions is generated, the rest come from the shared SCHEMA contract.
+  const schemas = Object.assign({ [CFG.INSTRUCTIONS]: { isInstructions: true } }, SCHEMA);
 
   let createdCount = 0;
 
@@ -351,6 +375,88 @@ function setupDatabaseTabsCore_() {
 }
 
 /**
+ * Menu entry point for generating the $Config tab.
+ */
+function generateConfig() {
+  alert_(generateConfigCore_());
+}
+
+/**
+ * Generates the $Config tab on demand and seeds it with one row per gotra
+ * already recorded in the Vedic tab, so the reference list reflects the
+ * family's actual data instead of a placeholder. An existing $Config is left
+ * untouched rather than overwritten.
+ *
+ * @return {string} Summary of what was created, or why nothing changed.
+ */
+function generateConfigCore_() {
+  const ss = requireSpreadsheet_();
+
+  if (ss.getSheetByName(CFG.CONFIG)) {
+    return `'${CFG.CONFIG}' already exists; left unchanged. Delete the tab first to regenerate.`;
+  }
+
+  const sheet = ss.insertSheet(CFG.CONFIG);
+
+  const headerRange = sheet.getRange(1, 1, 1, CONFIG_HEADERS.length);
+  headerRange.setValues([CONFIG_HEADERS]);
+  headerRange.setFontWeight("bold")
+             .setBackground("#1c4587")
+             .setFontColor("#ffffff")
+             .setVerticalAlignment("middle");
+  sheet.setFrozenRows(1);
+
+  const gotras = collectGotras_();
+
+  if (gotras.length > 0) {
+    sheet.getRange(2, 1, gotras.length, CONFIG_HEADERS.length)
+         .setValues(gotras.map(gotra => [gotra, "", "", "", ""]));
+  }
+
+  for (let col = 1; col <= CONFIG_HEADERS.length; col++) {
+    sheet.autoResizeColumn(col);
+  }
+
+  return gotras.length > 0
+    ? `Generated '${CFG.CONFIG}' with ${gotras.length} gotra(s) collected from the Vedic tab.`
+    : `Generated '${CFG.CONFIG}' with headers only; add gotras as you enter Vedic data.`;
+}
+
+/**
+ * Collects the distinct, case-insensitive GOTRA values recorded in Vedic,
+ * preserving the spelling of the first occurrence.
+ *
+ * @return {string[]} Unique gotra names, in sheet order.
+ */
+function collectGotras_() {
+  const ss = requireSpreadsheet_();
+  const vedic = ss.getSheetByName(CFG.VEDIC);
+  if (!vedic) return [];
+
+  const lastCol = vedic.getLastColumn();
+  if (!lastCol) return [];
+
+  const rows = vedic.getDataRange().getValues();
+  if (rows.length <= 1) return [];
+
+  const gotraCol = columnOf_(rows[0], 'GOTRA') - 1;
+  if (gotraCol < 0) return [];
+
+  const seen = {};
+  const gotras = [];
+  for (let r = 1; r < rows.length; r++) {
+    const value = String(rows[r][gotraCol] || '').trim();
+    if (!value) continue;
+
+    const key = value.toLowerCase();
+    if (seen[key]) continue;
+    seen[key] = true;
+    gotras.push(value);
+  }
+  return gotras;
+}
+
+/**
  * Populates clean Markdown-styled instructions into the 'Instructions' tab.
  *
  * @param {SpreadsheetApp.Sheet} sheet The Instructions sheet to rewrite.
@@ -363,29 +469,36 @@ function populateInstructionsSheet_(sheet) {
     ["🌳 KULA GENEALOGY SYSTEM — USER GUIDE"],
     ["Welcome to the Kula Genealogy Knowledge Graph plugin! This system turns your family database into an inferred relational graph."],
     [""],
-    ["📌 SHEET TAB OVERVIEW"],
-    ["1. Persons", "Stores core individual metadata (PID, Name, Gender, DOB, DOD, Places)."],
-    ["2. KG (Knowledge Graph)", "The single edge repository storing relationships using direct triples: Node 1 | Predicate | Node 2."],
-    ["3. Vedic", "Tracks astrological & ritual details (Gotra, Birth Star, Death Tithi & Masa for Tarpanam)."],
-    ["4. Stories", "Records family narratives, bio notes, and historical tags linked by Person PID."],
-    ["5. KG_FLAT", "Auto-generated tab created when running graph flattener algorithms."],
+    ["📌 CORE TABS (CREATED BY SETUP)"],
+    ["1. Persons", "Core individual metadata: PID, names, contact, gender, birth, death, places, generation."],
+    ["2. KG (Knowledge Graph)", "The single edge repository: Subject | Predicate | Object. Write relationships only here."],
+    ["3. Vedic", "Per-person lineage: gotra, veda, shakha, sutra, nakshatra, kula devatha, sampradaya, acharya thirumaligai, purvikam, parvata."],
+    ["4. Stories", "Narratives and notes. TAGGED_PEOPLE links a note to one or more people."],
+    [""],
+    ["📦 GENERATED TABS (MENU OPTIONS)"],
+    ["• $Config", "Gotra defaults, generated from the GOTRA values already in the Vedic tab."],
+    ["• KG_FLAT", "Flattened graph triples, written by the flattener. Do not edit."],
+    ["• Renumber_Report", "Audit of the last numbering run. Do not edit."],
     [""],
     ["🕸️ HOW TO WRITE RELATIONSHIPS IN 'KG'"],
-    ["Instead of maintaining complex union or offspring sheets, define simple direct edges in the 'KG' tab:"],
+    ["Define simple direct edges in the 'KG' tab instead of a separate relationship table:"],
     [""],
     ["  Subject (Node 1)", "Predicate", "Object (Node 2)"],
     ["  A001-John", "spouseOf", "A002-Jane"],
     ["  A002-Jane", "parentOf", "B001-Jack"],
     [""],
     ["💡 KEY FEATURES & INFERENCES"],
-    ["• Automatic Co-Parenting", "If A001 spouseOf A002, and A002 parentOf B001, the system automatically infers A001 parentOf B001."],
-    ["• Bidirectional Links", "Running 'Flatten All' generates reciprocal spouseOf edges and reverse childOf edges automatically."],
-    ["• Generational PIDs", "Running 'Person Numbering > Apply Generational PIDs' recalculates distance from Patriarch A001 to assign Axxx, Bxxx, Cxxx numbers."],
+    ["• Automatic Co-Parenting", "If A001 spouseOf A002, and A002 parentOf B001, the system infers A001 parentOf B001."],
+    ["• Bidirectional Links", "Running 'Flatten All' generates reciprocal spouseOf edges and reverse childOf edges."],
+    ["• Generational PIDs", "Running 'Person Numbering > Apply Generational PIDs' assigns Axxx, Bxxx, Cxxx by distance from the patriarch."],
+    ["• Derived REF_NAME", "REF_NAME is a formula, PID and KNOWN_NAME joined by a hyphen. Never type into it."],
     [""],
     ["⚙️ QUICK START MENU COMMANDS"],
-    ["• Kula Genealogy > Plugin Setup", "Re-initializes or checks required tab schemas."],
-    ["• Kula Genealogy > Flatten Knowledge Graph", "Compiles full graph edges into the 'KG_FLAT' tab."],
-    ["• Kula Genealogy > Person Numbering", "Previews or applies generational renumbering (A001, B001, C001...)."]
+    ["• Setup / Reset Workspace Tabs", "Creates the five core tabs, REF_NAME formulas and dropdowns."],
+    ["• Generate $Config", "Builds the gotra reference tab from the Vedic data."],
+    ["• Flatten Knowledge Graph", "Compiles graph edges into the 'KG_FLAT' tab."],
+    ["• Person Numbering", "Previews or applies generational renumbering and rewrites every reference."],
+    ["• Validate Reference Integrity", "Reports orphan references, duplicate PIDs and unknown predicates."]
   ];
 
   // Pad every row to three columns so the triple example keeps its
@@ -397,10 +510,11 @@ function populateInstructionsSheet_(sheet) {
   // Styling Instructions Tab
   sheet.getRange("A1:B1").merge().setFontWeight("bold").setFontSize(14).setBackground("#1c4587").setFontColor("#ffffff");
   sheet.getRange("A4:B4").setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
-  sheet.getRange("A11:B11").setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
-  sheet.getRange("A14:C14").setFontWeight("bold").setBackground("#d9ead3");
-  sheet.getRange("A18:B18").setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
-  sheet.getRange("A23:B23").setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
+  sheet.getRange("A10:B10").setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
+  sheet.getRange("A15:B15").setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
+  sheet.getRange("A18:C18").setFontWeight("bold").setBackground("#d9ead3");
+  sheet.getRange("A22:B22").setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
+  sheet.getRange("A28:B28").setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
 
   sheet.autoResizeColumn(1);
   sheet.autoResizeColumn(2);
@@ -413,9 +527,6 @@ function populateInstructionsSheet_(sheet) {
 
 /** Number of rows the setup formulas and validations cover. */
 const SETUP_ROWS = 1000;
-
-/** Canonical relationship predicates offered in the KG dropdown. */
-const PREDICATES = ['spouseOf', 'parentOf', 'childOf'];
 
 /**
  * Converts a 1-based column index into a spreadsheet column letter.
@@ -495,7 +606,6 @@ function applyValidations_(ss) {
   const pidCol = columnOf_(header, 'PID');
   const refCol = columnOf_(header, 'REF_NAME');
 
-  const pidRange = pidCol === -1 ? null : persons.getRange(2, pidCol, SETUP_ROWS - 1, 1);
   const refRange = refCol === -1 ? null : persons.getRange(2, refCol, SETUP_ROWS - 1, 1);
 
   if (kg) {
@@ -517,16 +627,30 @@ function applyValidations_(ss) {
     kg.getRange(2, 2, SETUP_ROWS - 1, 1).setDataValidation(predicateRule);
   }
 
-  [CFG.VEDIC, CFG.STORIES].forEach(name => {
-    const sheet = ss.getSheetByName(name);
-    if (!sheet || !pidRange) return;
-    const rule = SpreadsheetApp.newDataValidation()
-      .requireValueInRange(pidRange, true)
-      .setAllowInvalid(true)
-      .setHelpText('Pick a PID from the Persons tab.')
-      .build();
-    sheet.getRange(2, 1, SETUP_ROWS - 1, 1).setDataValidation(rule);
-  });
+  // Person-referencing columns in the other tabs. Both hold
+  // "<PID>-<KNOWN_NAME>" refs, so they validate against REF_NAME.
+  if (refRange) {
+    const personColumns = [
+      { tab: CFG.VEDIC, header: 'PERSON' },
+      { tab: CFG.STORIES, header: 'TAGGED_PEOPLE' }
+    ];
+
+    personColumns.forEach(target => {
+      const sheet = ss.getSheetByName(target.tab);
+      if (!sheet) return;
+
+      const header = sheet.getRange(1, 1, 1, sheet.getLastColumn() || 1).getValues()[0];
+      const col = columnOf_(header, target.header);
+      if (col === -1) return;
+
+      const rule = SpreadsheetApp.newDataValidation()
+        .requireValueInRange(refRange, true)
+        .setAllowInvalid(true)
+        .setHelpText(`Pick a person from the Persons tab (PID-KNOWN_NAME).`)
+        .build();
+      sheet.getRange(2, col, SETUP_ROWS - 1, 1).setDataValidation(rule);
+    });
+  }
 }
 
 /* ====================================================================
@@ -850,15 +974,20 @@ function renumberCore_(dryRun) {
   const vedicSheet = ss.getSheetByName(CFG.VEDIC);
   const storiesSheet = ss.getSheetByName(CFG.STORIES);
 
-  // Column positions follow the schema setupDatabaseTabsCore_ writes:
-  // KG = [Subject, Predicate, Object]; Vedic/Stories = [PID, REF_NAME, ...].
-  const KG_REF_COLS = [0, 2];
-  const PID_REF_COLS = [0, 1];
+  // Columns holding person references, located by header so a reordered tab
+  // still works. Stories can tag several people in one cell, so that column
+  // is treated as a list; the others hold a single reference.
+  const refTargets = [
+    { sheet: kgSheet, cols: refColumnIndexes_(kgSheet, ['Subject (Node 1)', 'Object (Node 2)']), split: false },
+    { sheet: vedicSheet, cols: refColumnIndexes_(vedicSheet, ['PERSON']), split: false },
+    { sheet: storiesSheet, cols: refColumnIndexes_(storiesSheet, ['TAGGED_PEOPLE']), split: true }
+  ];
 
   if (dryRun) {
-    const pending = rewritePidRefs_(kgSheet, KG_REF_COLS, pidLookup, false) +
-                    rewritePidRefs_(vedicSheet, PID_REF_COLS, pidLookup, false) +
-                    rewritePidRefs_(storiesSheet, PID_REF_COLS, pidLookup, false);
+    let pending = 0;
+    refTargets.forEach(target => {
+      pending += rewritePidRefs_(target.sheet, target.cols, pidLookup, false, target.split);
+    });
     return `Preview Complete! ${persons.length} members across ` +
            `${Object.keys(counters).length} generational tiers. ` +
            `${pending} references in KG/Vedic/Stories would be rewritten. Nothing was changed.`;
@@ -870,15 +999,34 @@ function renumberCore_(dryRun) {
     pSheet.getRange(p.rowIdx, pPidCol + 1).setValue(newId);
   }
 
-  const rewritten = rewritePidRefs_(kgSheet, KG_REF_COLS, pidLookup, true) +
-                    rewritePidRefs_(vedicSheet, PID_REF_COLS, pidLookup, true) +
-                    rewritePidRefs_(storiesSheet, PID_REF_COLS, pidLookup, true);
+  let rewritten = 0;
+  refTargets.forEach(target => {
+    rewritten += rewritePidRefs_(target.sheet, target.cols, pidLookup, true, target.split);
+  });
 
   writeRenumberReport_(ss, persons, newPidMap, rewritten);
 
   return `Renumbering Applied Successfully! ${persons.length} members renumbered ` +
          `and ${rewritten} references rewritten across KG, Vedic and Stories. ` +
          `Full old-to-new list is in the '${CFG.REPORT}' tab.`;
+}
+
+/**
+ * Resolves header names into zero-based column indexes on a sheet.
+ *
+ * @param {SpreadsheetApp.Sheet|null} sheet Sheet to inspect.
+ * @param {string[]} headerNames Headers to locate, in order.
+ * @return {number[]} Zero-based indexes of the headers that exist.
+ */
+function refColumnIndexes_(sheet, headerNames) {
+  if (!sheet) return [];
+  const lastCol = sheet.getLastColumn();
+  if (!lastCol) return [];
+
+  const header = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
+  return headerNames
+    .map(name => columnOf_(header, name) - 1)
+    .filter(index => index >= 0);
 }
 
 /**
@@ -890,10 +1038,12 @@ function renumberCore_(dryRun) {
  * @param {number[]} colIdxs Zero-based columns that may hold references.
  * @param {Object<string,string>} lookup Uppercased old PID -> new PID.
  * @param {boolean} apply When false, only counts the changes.
+ * @param {boolean} splitList When true, the cell may hold a comma-separated
+ *     list of references and each entry is remapped.
  * @return {number} Number of cells whose value would change.
  */
-function rewritePidRefs_(sheet, colIdxs, lookup, apply) {
-  if (!sheet) return 0;
+function rewritePidRefs_(sheet, colIdxs, lookup, apply, splitList) {
+  if (!sheet || !colIdxs || colIdxs.length === 0) return 0;
 
   const range = sheet.getDataRange();
   const data = range.getValues();
@@ -904,7 +1054,7 @@ function rewritePidRefs_(sheet, colIdxs, lookup, apply) {
     colIdxs.forEach(c => {
       if (c >= data[r].length) return;
       const before = data[r][c];
-      const after = remapRef_(before, lookup);
+      const after = splitList ? remapRefList_(before, lookup) : remapRef_(before, lookup);
       if (after !== before) {
         data[r][c] = after;
         changed++;
@@ -938,6 +1088,27 @@ function remapRef_(value, lookup) {
   if (!next) return value;
 
   return next + (m[2] || '');
+}
+
+/**
+ * Remaps a comma-separated list of references, such as a Stories row that
+ * tags several people. Each entry is remapped independently and entries
+ * that are not references are left alone.
+ *
+ * @param {*} value Cell value, possibly a list.
+ * @param {Object<string,string>} lookup Uppercased old PID -> new PID.
+ * @return {*} The rewritten list, or the original value unchanged.
+ */
+function remapRefList_(value, lookup) {
+  if (value === null || value === undefined) return value;
+
+  const text = String(value).trim();
+  if (!text) return value;
+
+  const parts = text.split(',');
+  if (parts.length === 1) return remapRef_(value, lookup);
+
+  return parts.map(part => remapRef_(part.trim(), lookup)).join(', ');
 }
 
 /**
@@ -994,13 +1165,38 @@ function checkSheetSetup() {
 function checkSheetSetupCore_() {
   const ss = requireSpreadsheet_();
   const required = [CFG.INSTRUCTIONS, CFG.PERSONS, CFG.KG, CFG.VEDIC, CFG.STORIES];
-  const missing = required.filter(name => !ss.getSheetByName(name));
+  const findings = [];
 
-  if (missing.length > 0) {
-    return `Missing Sheet Tabs: ${missing.join(", ")}.\n\n` +
-           `Run 'Kula Genealogy > 🚀 Plugin Setup > Setup / Reset Workspace Tabs' to build them.`;
+  required
+    .filter(name => !ss.getSheetByName(name))
+    .forEach(name => findings.push(`Missing tab: ${name}.`));
+
+  Object.keys(SCHEMA).forEach(name => {
+    const sheet = ss.getSheetByName(name);
+    if (!sheet) return;
+
+    const lastCol = sheet.getLastColumn();
+    const actual = lastCol
+      ? sheet.getRange(1, 1, 1, lastCol).getValues()[0].map(v => String(v).trim().toUpperCase())
+      : [];
+
+    const absent = SCHEMA[name].headers.filter(h => actual.indexOf(h.toUpperCase()) === -1);
+    if (absent.length > 0) {
+      findings.push(`${name}: missing column(s) ${absent.join(', ')}.`);
+    }
+  });
+
+  if (findings.length === 0) {
+    const config = ss.getSheetByName(CFG.CONFIG)
+      ? ''
+      : `\n\n'${CFG.CONFIG}' has not been generated yet. Use 'Generate $Config' ` +
+        `when you start entering Vedic lineage data.`;
+    return `Sheet setup is complete! All ${required.length} plugin tabs have the expected columns.` + config;
   }
-  return "Sheet setup is complete! All 5 plugin tabs are active.";
+
+  return findings.join('\n') +
+         `\n\nSetup only writes headers into empty tabs, so an existing tab keeps ` +
+         `its old headers. Rename the columns listed above by hand.`;
 }
 
 /* ====================================================================
@@ -1095,16 +1291,32 @@ function validateDataCore_() {
     }
   }
 
-  [CFG.VEDIC, CFG.STORIES].forEach(name => {
-    const sheet = ss.getSheetByName(name);
+  // Vedic names one person; Stories may tag several in a single cell.
+  [
+    { tab: CFG.VEDIC, header: 'PERSON', split: false },
+    { tab: CFG.STORIES, header: 'TAGGED_PEOPLE', split: true }
+  ].forEach(target => {
+    const sheet = ss.getSheetByName(target.tab);
     if (!sheet) return;
+
+    const lastCol = sheet.getLastColumn();
+    if (!lastCol) return;
+
+    const header = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
+    const col = columnOf_(header, target.header) - 1;
+    if (col < 0) return;
+
     const rows = sheet.getDataRange().getValues();
     for (let r = 1; r < rows.length; r++) {
-      const pid = String(rows[r][0] || '').trim();
-      if (!pid) continue;
-      if (!pids.has(pid.replace(/^([A-Z]\d+).*$/i, '$1').toUpperCase())) {
-        problems.push(`${name} row ${r + 1}: PID "${pid}" is not in Persons.`);
-      }
+      const raw = String(rows[r][col] || '').trim();
+      if (!raw) continue;
+
+      const entries = target.split ? raw.split(',') : [raw];
+      entries.forEach(entry => {
+        const text = entry.trim();
+        if (!text || resolves(text)) return;
+        problems.push(`${target.tab} row ${r + 1}: "${text}" is not in Persons.`);
+      });
     }
   });
 
