@@ -22,7 +22,8 @@ const CFG = {
   STORIES: 'Stories',
   CONFIG: '$Config',      // Gotra defaults for veda, shakha, sutra, nakshatra
   MAPPING: 'ID_Mapping_Key',
-  REPORT: 'Renumber_Report'
+  REPORT: 'Renumber_Report',
+  REFACTOR: 'Refactor_Report'
 };
 
 /** Canonical relationship predicates offered in the KG dropdown. */
@@ -40,23 +41,23 @@ const SCHEMA = {
     sample: ["A001", "Venkiteswara Iyer", "Venkiteswara Iyer", "", "", "M", "1900", "Perumbavoor", "", "Deceased", "1965", "Kolkatta", "Head Patriarch", "A"]
   },
   [CFG.KG]: {
-    // Matches the live KG tab, including the optional DATE/NOTES columns.
-    headers: ["SUBJECT", "PREDICATE", "OBJECT", "DATE", "NOTES"],
+    // PIDs only; SUBJECT_NAME/OBJECT_NAME are read-only previews.
+    headers: ["SUBJECT", "SUBJECT_NAME", "PREDICATE", "OBJECT", "OBJECT_NAME", "DATE", "NOTES"],
     sample: [
-      ["A001-Venkiteswara Iyer", "spouseOf", "A002-Rajammal", "", ""],
-      ["A001-Venkiteswara Iyer", "parentOf", "B001-Viswanatha Tatha", "", ""]
+      ["A001", "", "spouseOf", "A002", "", "", ""],
+      ["A001", "", "parentOf", "B001", "", "", ""]
     ]
   },
   [CFG.VEDIC]: {
     // Matches the columns the live Kula-Data sheet already uses. PARVATA was
     // dropped: the sheet never carried it, so demanding it made every Vedic
     // tab look incomplete.
-    headers: ["PERSON", "GOTRA", "VEDA", "SHAKHA", "SUTRA", "NAKSHATRA", "KULA_DEVATHA", "SAMPRADAYA", "ACHARYA_THIRUMALIGAI", "PURVIKAM"],
-    sample: ["A001-Venkiteswara Iyer", "Bharadwaja", "Yajurveda", "Apastamba", "Bodhayana", "Rohini", "", "", "", ""]
+    headers: ["PERSON", "PERSON_NAME", "GOTRA", "VEDA", "SHAKHA", "SUTRA", "NAKSHATRA", "KULA_DEVATHA", "SAMPRADAYA", "ACHARYA_THIRUMALIGAI", "PURVIKAM"],
+    sample: ["A001", "", "Bharadwaja", "Yajurveda", "Apastamba", "Bodhayana", "Rohini", "", "", "", ""]
   },
   [CFG.STORIES]: {
-    headers: ["NOTE_ID", "TYPE", "TITLE", "IS_STORY", "TAGGED_PEOPLE", "TEXT", "UPDATED"],
-    sample: ["N001", "Story", "Family Migration", "TRUE", "A001-Venkiteswara Iyer", "Moved to Kolkata in 1925.", ""]
+    headers: ["NOTE_ID", "TYPE", "TITLE", "IS_STORY", "TAGGED_PEOPLE", "TAGGED_NAMES", "TEXT", "UPDATED"],
+    sample: ["N001", "Story", "Family Migration", "TRUE", "A001", "", "Moved to Kolkata in 1925.", ""]
   }
 };
 
@@ -68,7 +69,7 @@ const SCHEMA = {
  */
 const CONFIG_HEADERS = [
   'GOTRA', 'VEDA', 'SHAKHA', 'SUTRA', 'NAKSHATRA',
-  'SAMPRADAYA', 'ACHARYA_THIRUMALIGAI', 'KULA_DEVATA'
+  'SAMPRADAYA', 'ACHARYA_THIRUMALIGAI', 'KULA_DEVATHA'
 ];
 
 /**
@@ -79,6 +80,22 @@ const HEADER_ALIASES = {
   'SUBJECT': ['Subject (Node 1)'],
   'OBJECT': ['Object (Node 2)']
 };
+
+/**
+ * Read-only preview columns. Each maps a stored reference column to a formula
+ * column that renders the person's name, so the sheet stays readable while the
+ * stored value remains a PID. `list` marks a column that can hold several
+ * references in one cell.
+ */
+const PREVIEWS = [
+  { tab: CFG.KG, ref: 'SUBJECT', refAliases: ['Subject (Node 1)'], name: 'SUBJECT_NAME', list: false },
+  { tab: CFG.KG, ref: 'OBJECT', refAliases: ['Object (Node 2)'], name: 'OBJECT_NAME', list: false },
+  { tab: CFG.VEDIC, ref: 'PERSON', refAliases: [], name: 'PERSON_NAME', list: false },
+  { tab: CFG.STORIES, ref: 'TAGGED_PEOPLE', refAliases: [], name: 'TAGGED_NAMES', list: true }
+];
+
+/** Headers that setup creates but that an older sheet may lack; not an error. */
+const OPTIONAL_HEADERS = new Set(PREVIEWS.map(p => p.name));
 
 /* ====================================================================
  * 0. UI BRIDGE
@@ -155,7 +172,8 @@ function onOpen(e) {
 
   const setupMenu = ui.createMenu('🚀 Plugin Setup')
     .addItem('Setup / Reset Workspace Tabs', 'setupDatabaseTabs')
-    .addItem('Generate $Config (gotra defaults)', 'generateConfig');
+    .addItem('Generate $Config (gotra defaults)', 'generateConfig')
+    .addItem('Normalize References (PID only)', 'normalizeReferences');
 
   const flattenSubMenu = ui.createMenu('🕸 Flatten Knowledge Graph')
     .addItem('All (Spouses, Parents & Offsprings)', 'runFlattenAll')
@@ -221,6 +239,11 @@ function onHomepage(e) {
     CardService.newTextButton()
       .setText('Generate $Config')
       .setOnClickAction(CardService.newAction().setFunctionName('cardGenerateConfig'))
+  );
+  setup.addWidget(
+    CardService.newTextButton()
+      .setText('Normalize references to PIDs')
+      .setOnClickAction(CardService.newAction().setFunctionName('cardNormalizeReferences'))
   );
   setup.addWidget(
     CardService.newTextButton()
@@ -295,6 +318,9 @@ function cardSetup() { return cardResponse_(setupDatabaseTabsCore_); }
 
 /** @return {CardService.ActionResponse} Notification with $Config generation. */
 function cardGenerateConfig() { return cardResponse_(generateConfigCore_); }
+
+/** @return {CardService.ActionResponse} Notification with normalization result. */
+function cardNormalizeReferences() { return cardResponse_(normalizeReferencesCore_); }
 
 /** @return {CardService.ActionResponse} Notification with setup status. */
 function cardCheckSetup() { return cardResponse_(checkSheetSetupCore_); }
@@ -391,6 +417,7 @@ function setupDatabaseTabsCore_() {
 
   const refs = applyLinkedFormulas_(ss);
   applyValidations_(ss);
+  refreshPreviewColumns_(ss);
 
   let note = '';
   if (refs.repaired > 0) {
@@ -402,7 +429,7 @@ function setupDatabaseTabsCore_() {
   }
 
   return `Workspace initialized! Created/verified ${Object.keys(schemas).length} required tabs, ` +
-         `with REF_NAME formulas and data validation applied.` + note;
+         `with PID references, name previews and data validation applied.` + note;
 }
 
 /**
@@ -491,6 +518,309 @@ function collectGotras_() {
   return gotras;
 }
 
+/* ====================================================================
+ * 2b. REFERENCE NORMALIZATION (PID-ONLY STORAGE)
+ * ==================================================================== */
+
+/**
+ * Menu entry point for normalization. Shows what would change and asks before
+ * rewriting anything, because this touches every relationship cell.
+ */
+function normalizeReferences() {
+  const ui = SpreadsheetApp.getUi();
+  const preview = normalizeReferencesCore_(true);
+  const answer = ui.alert('Normalize References', preview + '\n\nApply now?', ui.ButtonSet.YES_NO);
+  if (answer === ui.Button.YES) {
+    alert_(normalizeReferencesCore_(false));
+  }
+}
+
+/**
+ * Reduces every stored relationship reference to its bare PID and installs
+ * the read-only name preview columns.
+ *
+ * The sheet keeps PIDs as the relational identity; names are rendered by
+ * formula from the Persons roster, so a rename can never leave a stale name
+ * half behind. Composite refs ("A001-John") and bare PIDs are both accepted on
+ * input; only composites are rewritten. Ids that are not in Persons, such as
+ * legacy "I0113" tags, are reported and left untouched.
+ *
+ * @param {boolean} dryRun When true, only counts what would change.
+ * @return {string} Preview or result summary.
+ */
+function normalizeReferencesCore_(dryRun) {
+  const ss = requireSpreadsheet_();
+  const persons = ss.getSheetByName(CFG.PERSONS);
+  if (!persons) throw new Error("Missing 'Persons' sheet. Run 'Plugin Setup' first.");
+
+  const pData = persons.getDataRange().getValues();
+  if (pData.length === 0) throw new Error("'Persons' has no header row.");
+
+  const pidCol = columnOf_(pData[0], 'PID') - 1;
+  if (pidCol < 0) throw new Error("Persons must have a PID column. Run 'Plugin Setup' first.");
+
+  const knownPids = new Set();
+  for (let r = 1; r < pData.length; r++) {
+    const pid = String(pData[r][pidCol] || '').trim().toUpperCase();
+    if (pid) knownPids.add(pid);
+  }
+
+  const changes = [];
+  const unresolved = [];
+
+  referenceTargets_(ss).forEach(target => {
+    if (!target.sheet || target.cols.length === 0) return;
+
+    const rows = target.sheet.getDataRange().getValues();
+    if (rows.length === 0) return;
+
+    const header = rows[0].map(v => String(v).trim());
+
+    for (let r = 1; r < rows.length; r++) {
+      target.cols.forEach(c => {
+        if (c >= rows[r].length) return;
+
+        const before = rows[r][c];
+        const text = String(before === null || before === undefined ? '' : before).trim();
+        if (!text) return;
+
+        const result = normalizeRefText_(text, knownPids, target.split);
+        if (result.text !== text) {
+          changes.push({
+            sheet: target.sheet,
+            row: r + 1,
+            col: c + 1,
+            column: header[c] || columnLetter_(c + 1),
+            before: text,
+            after: result.text
+          });
+        }
+        result.unresolved.forEach(id => {
+          unresolved.push({ sheet: target.sheet, row: r + 1, id: id });
+        });
+      });
+    }
+  });
+
+  if (dryRun) {
+    return `Normalize preview\n\n` +
+           `• ${changes.length} cell(s) would be reduced to bare PIDs\n` +
+           `• ${unresolved.length} unknown id(s) would be left untouched\n` +
+           `• name preview columns would be added or refreshed\n\n` +
+           `Nothing was changed.`;
+  }
+
+  // Rewrite first: the captured column indexes are only valid before the
+  // preview columns are inserted.
+  changes.forEach(change => {
+    change.sheet.getRange(change.row, change.col).setValue(change.after);
+  });
+
+  const added = ensurePreviewColumns_(ss);
+  refreshPreviewColumns_(ss);
+  writeRefactorReport_(ss, changes, unresolved);
+
+  return `Normalized ${changes.length} reference cell(s) to bare PIDs. ` +
+         `Added ${added} preview column(s) and refreshed the rest. ` +
+         `${unresolved.length} unknown id(s) left untouched; see '${CFG.REFACTOR}'.`;
+}
+
+/**
+ * Reduces one reference (or a separated list of them) to bare PIDs.
+ *
+ * @param {string} text Cell contents.
+ * @param {Set<string>} knownPids Uppercased PIDs that exist in Persons.
+ * @param {boolean} split When true, commas and semicolons separate entries.
+ * @return {{text: string, unresolved: string[]}} Rewritten text, and entries
+ *     that could not be resolved against Persons.
+ */
+function normalizeRefText_(text, knownPids, split) {
+  const unresolved = [];
+  let changed = false;
+
+  const convert = token => {
+    const trimmed = token.trim();
+    if (!trimmed) return token;
+
+    const m = trimmed.match(/^([A-Z]\d+)(?:-[\s\S]*)?$/i);
+    if (!m) {
+      unresolved.push(trimmed);
+      return token;
+    }
+
+    const pid = m[1].toUpperCase();
+    if (!knownPids.has(pid)) {
+      unresolved.push(trimmed);
+      return token;
+    }
+
+    if (trimmed === pid) return token;
+
+    changed = true;
+    return token.replace(trimmed, pid);
+  };
+
+  const next = split
+    ? text.replace(/[^;,]+/g, convert)
+    : convert(text);
+
+  return { text: changed ? next : text, unresolved: unresolved };
+}
+
+/**
+ * Writes the audit trail for a normalization run: every rewritten cell, plus
+ * the ids that were left alone because Persons does not contain them.
+ *
+ * @param {SpreadsheetApp.Spreadsheet} ss Spreadsheet to write into.
+ * @param {Array<Object>} changes Rewrites performed.
+ * @param {Array<Object>} unresolved Ids that could not be resolved.
+ */
+function writeRefactorReport_(ss, changes, unresolved) {
+  let sheet = ss.getSheetByName(CFG.REFACTOR);
+  if (!sheet) {
+    sheet = ss.insertSheet(CFG.REFACTOR);
+  } else {
+    sheet.clear();
+  }
+
+  const width = 5;
+  const rows = [['TAB', 'ROW', 'COLUMN', 'BEFORE', 'AFTER']];
+
+  changes.forEach(change => {
+    rows.push([change.sheet.getName(), change.row, change.column, change.before, change.after]);
+  });
+
+  if (unresolved.length > 0) {
+    rows.push([]);
+    rows.push(['UNRESOLVED (left untouched)', '', '', '', '']);
+    unresolved.forEach(item => {
+      rows.push([item.sheet.getName(), item.row, '', item.id, 'not in Persons']);
+    });
+  }
+
+  const padded = rows.map(row => {
+    const out = row.slice(0, width);
+    while (out.length < width) out.push('');
+    return out;
+  });
+
+  sheet.getRange(1, 1, padded.length, width).setValues(padded);
+
+  const header = sheet.getRange(1, 1, 1, width);
+  header.setFontWeight('bold')
+        .setBackground('#1c4587')
+        .setFontColor('#ffffff')
+        .setVerticalAlignment('middle');
+  sheet.setFrozenRows(1);
+
+  for (let col = 1; col <= width; col++) {
+    sheet.autoResizeColumn(col);
+  }
+}
+
+/**
+ * Adds the read-only name preview column beside each reference column, unless
+ * it is already there.
+ *
+ * @param {SpreadsheetApp.Spreadsheet} ss Spreadsheet to modify.
+ * @return {number} Number of preview columns added.
+ */
+function ensurePreviewColumns_(ss) {
+  let added = 0;
+
+  PREVIEWS.forEach(spec => {
+    const sheet = ss.getSheetByName(spec.tab);
+    if (!sheet) return;
+
+    const lastCol = sheet.getLastColumn();
+    if (!lastCol) return;
+
+    const header = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
+    if (columnOf_(header, spec.name) !== -1) return;
+
+    const refCol = firstColumnOf_(header, [spec.ref].concat(spec.refAliases));
+    if (refCol === -1) return;
+
+    sheet.insertColumnAfter(refCol);
+    sheet.getRange(1, refCol + 1)
+      .setValue(spec.name)
+      .setFontWeight('bold')
+      .setBackground('#e8f0fe')
+      .setFontColor('#1c4587')
+      .setVerticalAlignment('middle');
+    added++;
+  });
+
+  return added;
+}
+
+/**
+ * Rewrites the preview formulas on every tab that has them. Safe to run on
+ * every setup: the formulas are idempotent and blank rows render blank.
+ *
+ * @param {SpreadsheetApp.Spreadsheet} ss Spreadsheet to update.
+ * @return {number} Number of preview columns refreshed.
+ */
+function refreshPreviewColumns_(ss) {
+  const persons = ss.getSheetByName(CFG.PERSONS);
+  if (!persons) return 0;
+
+  const pLastCol = persons.getLastColumn();
+  if (!pLastCol) return 0;
+
+  const pHeader = persons.getRange(1, 1, 1, pLastCol).getValues()[0];
+  const pidCol = columnOf_(pHeader, 'PID');
+  const nameCol = columnOf_(pHeader, 'KNOWN_NAME');
+  if (pidCol === -1 || nameCol === -1) return 0;
+
+  const source = `'${CFG.PERSONS}'!$${columnLetter_(pidCol)}:$${columnLetter_(nameCol)}`;
+  let refreshed = 0;
+
+  PREVIEWS.forEach(spec => {
+    const sheet = ss.getSheetByName(spec.tab);
+    if (!sheet) return;
+
+    const lastCol = sheet.getLastColumn();
+    if (!lastCol) return;
+
+    const header = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
+    const refCol = firstColumnOf_(header, [spec.ref].concat(spec.refAliases));
+    const previewCol = columnOf_(header, spec.name);
+    if (refCol === -1 || previewCol === -1) return;
+
+    const refLetter = columnLetter_(refCol);
+    const coverage = setupCoverage_(sheet);
+    const formulas = [];
+    for (let r = 2; r <= coverage; r++) {
+      formulas.push([previewFormula_(refLetter, r, source, spec.list)]);
+    }
+    sheet.getRange(2, previewCol, coverage - 1, 1).setFormulas(formulas);
+    refreshed++;
+  });
+
+  return refreshed;
+}
+
+/**
+ * Builds the preview formula for one row.
+ *
+ * @param {string} refLetter Column letter of the stored reference.
+ * @param {number} row Sheet row the formula sits on.
+ * @param {string} source Absolute PID/KNOWN_NAME range, e.g. 'Persons'!$A:$B.
+ * @param {boolean} list Whether the reference column can hold several entries.
+ * @return {string} An A1 formula.
+ */
+function previewFormula_(refLetter, row, source, list) {
+  const ref = `$${refLetter}${row}`;
+  if (!list) {
+    return `=IF(${ref}="","",IFERROR(VLOOKUP(${ref},${source},2,FALSE),"?"))`;
+  }
+
+  return `=IF(${ref}="","",TEXTJOIN(", ",TRUE,MAP(` +
+         `SPLIT(REGEXREPLACE(${ref},";",","),",",TRUE,TRUE),` +
+         `LAMBDA(id,IFERROR(VLOOKUP(id,${source},2,FALSE),"?")))))`;
+}
+
 /**
  * Populates clean Markdown-styled instructions into the 'Instructions' tab.
  *
@@ -506,9 +836,9 @@ function populateInstructionsSheet_(sheet) {
     [""],
     ["📌 CORE TABS (CREATED BY SETUP)"],
     ["1. Persons", "Core individual metadata: PID, names, contact, gender, birth, death, places, generation."],
-    ["2. KG (Knowledge Graph)", "The single edge repository: Subject | Predicate | Object. Write relationships only here."],
-    ["3. Vedic", "Per-person lineage: gotra, veda, shakha, sutra, nakshatra, kula devatha, sampradaya, acharya thirumaligai, purvikam, parvata."],
-    ["4. Stories", "Narratives and notes. TAGGED_PEOPLE links a note to one or more people."],
+    ["2. KG (Knowledge Graph)", "The single edge repository: SUBJECT | SUBJECT_NAME | PREDICATE | OBJECT | OBJECT_NAME | DATE | NOTES."],
+    ["3. Vedic", "Per-person lineage: PERSON, PERSON_NAME, gotra, veda, shakha, sutra, nakshatra, kula devatha, sampradaya, acharya thirumaligai, purvikam."],
+    ["4. Stories", "Narratives and notes. TAGGED_PEOPLE links a note to one or more people; TAGGED_NAMES shows the names."],
     [""],
     ["📦 GENERATED TABS (MENU OPTIONS)"],
     ["• $Config", "Gotra defaults, generated from the GOTRA values already in the Vedic tab."],
@@ -519,22 +849,24 @@ function populateInstructionsSheet_(sheet) {
     ["Define simple direct edges in the 'KG' tab instead of a separate relationship table:"],
     [""],
     ["  SUBJECT", "PREDICATE", "OBJECT"],
-    ["  A001-John", "spouseOf", "A002-Jane"],
-    ["  A002-Jane", "parentOf", "B001-Jack"],
+    ["  A001", "spouseOf", "A002"],
+    ["  A002", "parentOf", "B001"],
     [""],
     ["💡 KEY FEATURES & INFERENCES"],
     ["• Automatic Co-Parenting", "If A001 spouseOf A002, and A002 parentOf B001, the system infers A001 parentOf B001."],
     ["• Bidirectional Links", "Running 'Flatten All' generates reciprocal spouseOf edges and reverse childOf edges."],
     ["• Generational PIDs", "Running 'Person Numbering > Apply Generational PIDs' assigns Axxx, Bxxx, Cxxx by distance from the patriarch."],
     ["• Derived REF_NAME", "REF_NAME is a formula, PID and KNOWN_NAME joined by a hyphen. Never type into it."],
-    ["• Why the name is kept", "KG stores the same PID-KNOWN_NAME string so relationships are readable while you type. A consumer only needs the part before the first hyphen; that is the PID."],
+    ["• PID-only relationships", "KG, Vedic and Stories store bare PIDs. SUBJECT_NAME, OBJECT_NAME, PERSON_NAME and TAGGED_NAMES are read-only formulas that render the names."],
+    ["• Older composite refs", "Cells like 'A001-John' still resolve, but they can go stale. Use 'Normalize References (PID only)' to strip them to PIDs and refresh the previews."],
     [""],
     ["⚙️ QUICK START MENU COMMANDS"],
     ["• Setup / Reset Workspace Tabs", "Creates the five core tabs, REF_NAME formulas and dropdowns."],
     ["• Generate $Config", "Builds the gotra reference tab from the Vedic data."],
+    ["• Normalize References (PID only)", "Strips 'PID-KNOWN_NAME' relationship cells down to bare PIDs and adds name-preview columns."],
     ["• Flatten Knowledge Graph", "Compiles graph edges into the 'KG_FLAT' tab."],
     ["• Person Numbering", "Previews or applies generational renumbering and rewrites every reference."],
-    ["• Validate Reference Integrity", "Reports orphan references, duplicate PIDs and unknown predicates."]
+    ["• Validate Reference Integrity", "Reports orphan references, duplicate PIDs, unknown predicates and stale composite references."]
   ];
 
   // Pad every row to three columns so the triple example keeps its
@@ -549,7 +881,7 @@ function populateInstructionsSheet_(sheet) {
   sheet.getRange("A10:B10").setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
   sheet.getRange("A15:B15").setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
   sheet.getRange("A18:C18").setFontWeight("bold").setBackground("#d9ead3");
-  sheet.getRange("A22:B22").setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
+  sheet.getRange("A21:B21").setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
   sheet.getRange("A29:B29").setFontWeight("bold").setFontSize(11).setBackground("#e8f0fe");
 
   sheet.autoResizeColumn(1);
@@ -704,9 +1036,8 @@ function repairReferenceSpelling_(ss, replacements) {
   referenceTargets_(ss).forEach(target => {
     if (!target.sheet || target.cols.length === 0) return;
 
-    const range = target.sheet.getDataRange();
-    const data = range.getValues();
-    let touched = false;
+    const data = target.sheet.getDataRange().getValues();
+    const edits = [];
 
     for (let r = 1; r < data.length; r++) {
       target.cols.forEach(c => {
@@ -716,14 +1047,15 @@ function repairReferenceSpelling_(ss, replacements) {
           ? remapExactList_(before, replacements)
           : remapExact_(before, replacements);
         if (after !== before) {
-          data[r][c] = after;
-          touched = true;
+          edits.push({ row: r + 1, col: c + 1, value: after });
           repaired++;
         }
       });
     }
 
-    if (touched) range.setValues(data);
+    edits.forEach(edit => {
+      target.sheet.getRange(edit.row, edit.col).setValue(edit.value);
+    });
   });
 
   return repaired;
@@ -783,9 +1115,8 @@ function applyValidations_(ss) {
 
   const header = persons.getRange(1, 1, 1, persons.getLastColumn() || 10).getValues()[0];
   const pidCol = columnOf_(header, 'PID');
-  const refCol = columnOf_(header, 'REF_NAME');
 
-  const refRange = refCol === -1 ? null : persons.getRange(2, refCol, setupCoverage_(persons) - 1, 1);
+  const pidRange = pidCol === -1 ? null : persons.getRange(2, pidCol, setupCoverage_(persons) - 1, 1);
 
   if (kg) {
     const kgHeader = kg.getRange(1, 1, 1, kg.getLastColumn() || 3).getValues()[0];
@@ -794,11 +1125,11 @@ function applyValidations_(ss) {
     const relCol = firstColumnOf_(kgHeader, ['PREDICATE', 'Predicate']);
     const objCol = firstColumnOf_(kgHeader, ['OBJECT', 'Object (Node 2)']);
 
-    if (refRange) {
+    if (pidRange) {
       const refRule = SpreadsheetApp.newDataValidation()
-        .requireValueInRange(refRange, true)
+        .requireValueInRange(pidRange, true)
         .setAllowInvalid(true)
-        .setHelpText('Pick a person from the Persons tab (PID-KNOWN_NAME).')
+        .setHelpText('Pick a PID from the Persons tab.')
         .build();
       if (subCol !== -1) kg.getRange(2, subCol, kgRows, 1).setDataValidation(refRule);
       if (objCol !== -1) kg.getRange(2, objCol, kgRows, 1).setDataValidation(refRule);
@@ -814,9 +1145,8 @@ function applyValidations_(ss) {
     }
   }
 
-  // Person-referencing columns in the other tabs. Both hold
-  // "<PID>-<KNOWN_NAME>" refs, so they validate against REF_NAME.
-  if (refRange) {
+  // Person-referencing columns in the other tabs hold bare PIDs.
+  if (pidRange) {
     const personColumns = [
       { tab: CFG.VEDIC, header: 'PERSON' },
       { tab: CFG.STORIES, header: 'TAGGED_PEOPLE' }
@@ -831,9 +1161,9 @@ function applyValidations_(ss) {
       if (col === -1) return;
 
       const rule = SpreadsheetApp.newDataValidation()
-        .requireValueInRange(refRange, true)
+        .requireValueInRange(pidRange, true)
         .setAllowInvalid(true)
-        .setHelpText(`Pick a person from the Persons tab (PID-KNOWN_NAME).`)
+        .setHelpText(`Pick a PID from the Persons tab.`)
         .build();
       sheet.getRange(2, col, setupCoverage_(sheet) - 1, 1).setDataValidation(rule);
     });
@@ -1057,12 +1387,24 @@ function renumberCore_(dryRun) {
 
   if (pData.length <= 1) throw new Error("'Persons' sheet has no data rows.");
 
-  const pHeaders = pData[0].map(h => String(h).toLowerCase().trim());
-  let pPidCol = pHeaders.findIndex(h => h.includes("pid") || h === "id");
-  if (pPidCol === -1) pPidCol = 0;
-  let pNameCol = pHeaders.findIndex(h => h.includes("known_name") || h.includes("name"));
-  if (pNameCol === -1) pNameCol = 1;
-  let pNotesCol = pHeaders.findIndex(h => h.includes("note"));
+  const pHeaders = pData[0];
+  const pPidCol = columnOf_(pHeaders, 'PID') - 1;
+  const pNameCol = columnOf_(pHeaders, 'KNOWN_NAME') - 1;
+  const pNotesCol = columnOf_(pHeaders, 'NOTES') - 1;
+  if (pPidCol < 0) {
+    throw new Error("Persons must have a PID column. Run 'Plugin Setup' first.");
+  }
+
+  // KG columns are resolved by header, never by position: the read-only
+  // SUBJECT_NAME/OBJECT_NAME preview columns sit between the data columns, so
+  // indexes 0/1/2 are only correct until the first normalization.
+  const kgHeader = kgData.length ? kgData[0] : [];
+  const kSubCol = firstColumnOf_(kgHeader, ['SUBJECT', 'Subject (Node 1)']) - 1;
+  const kRelCol = firstColumnOf_(kgHeader, ['PREDICATE', 'Predicate']) - 1;
+  const kObjCol = firstColumnOf_(kgHeader, ['OBJECT', 'Object (Node 2)']) - 1;
+  if (kSubCol < 0 || kRelCol < 0 || kObjCol < 0) {
+    throw new Error("KG must have SUBJECT, PREDICATE and OBJECT columns. Run 'Plugin Setup' first.");
+  }
 
   const persons = [];
   let headPid = null;
@@ -1094,9 +1436,9 @@ function renumberCore_(dryRun) {
   }
 
   for (let i = 1; i < kgData.length; i++) {
-    const sub = extractPid(kgData[i][0]);
-    const rel = String(kgData[i][1] || "").toLowerCase().trim();
-    const obj = extractPid(kgData[i][2]);
+    const sub = extractPid(kgData[i][kSubCol]);
+    const rel = String(kgData[i][kRelCol] || "").toLowerCase().trim();
+    const obj = extractPid(kgData[i][kObjCol]);
 
     if (!sub || !rel || !obj) continue;
 
@@ -1275,7 +1617,11 @@ function rewritePidRefs_(sheet, colIdxs, lookup, apply, splitList, names) {
   const data = range.getValues();
   if (data.length <= 1) return 0;
 
-  let changed = 0;
+  // Only the cells that actually change are written. Writing the whole data
+  // range back would flatten every formula in those rows - including the
+  // read-only name preview columns - into its last computed value.
+  const edits = [];
+
   for (let r = 1; r < data.length; r++) {
     colIdxs.forEach(c => {
       if (c >= data[r].length) return;
@@ -1284,16 +1630,18 @@ function rewritePidRefs_(sheet, colIdxs, lookup, apply, splitList, names) {
         ? remapRefList_(before, lookup, names)
         : remapRef_(before, lookup, names);
       if (after !== before) {
-        data[r][c] = after;
-        changed++;
+        edits.push({ row: r + 1, col: c + 1, value: after });
       }
     });
   }
 
-  if (apply && changed > 0) {
-    range.setValues(data);
+  if (apply) {
+    edits.forEach(edit => {
+      sheet.getRange(edit.row, edit.col).setValue(edit.value);
+    });
   }
-  return changed;
+
+  return edits.length;
 }
 
 /**
@@ -1420,6 +1768,7 @@ function checkSheetSetupCore_() {
       : [];
 
     const absent = SCHEMA[name].headers.filter(h => {
+      if (OPTIONAL_HEADERS.has(h)) return false;
       const accepted = [h].concat(HEADER_ALIASES[h] || []).map(v => v.toUpperCase());
       return !accepted.some(candidate => actual.indexOf(candidate) !== -1);
     });
@@ -1468,13 +1817,11 @@ function validateDataCore_() {
   const pHeader = pRows[0].map(h => String(h).trim());
   const pidCol = columnOf_(pHeader, 'PID') - 1;
   const nameCol = columnOf_(pHeader, 'KNOWN_NAME') - 1;
-  const refCol = columnOf_(pHeader, 'REF_NAME') - 1;
-  if (pidCol < 0 || refCol < 0) {
-    throw new Error("Persons must have PID and REF_NAME columns. Run 'Plugin Setup' first.");
+  if (pidCol < 0) {
+    throw new Error("Persons must have a PID column. Run 'Plugin Setup' first.");
   }
 
   const pids = new Set();
-  const refs = new Set();
   const problems = [];
   const seen = new Set();
 
@@ -1482,7 +1829,6 @@ function validateDataCore_() {
     const row = pRows[r];
     const pid = String(row[pidCol] || '').trim().toUpperCase();
     const known = nameCol >= 0 ? String(row[nameCol] || '').trim() : '';
-    const ref = String(row[refCol] || '').trim();
     const sheetRow = r + 1;
 
     if (!pid && known) {
@@ -1496,19 +1842,32 @@ function validateDataCore_() {
     }
     seen.add(pid);
     pids.add(pid);
-    if (ref) refs.add(ref.toUpperCase());
   }
 
+  // A legacy "PID-KNOWN_NAME" reference still resolves, but it duplicates the
+  // label into a cell that only needs the identity. Counted once here so the
+  // report can suggest Normalize instead of listing every row.
+  let composites = 0;
+
   /**
-   * True when a relationship cell names a known person, by PID or full ref.
+   * True when a relationship cell names a known person. Only the PID half is
+   * treated as identity; a trailing name is a label and may be out of date.
+   *
    * @param {string} value Cell contents.
    * @return {boolean} Whether it resolves.
    */
   const resolves = value => {
     const text = String(value || '').trim();
     if (!text) return true;
-    const upper = text.toUpperCase();
-    return refs.has(upper) || pids.has(upper);
+
+    const m = text.match(/^([A-Z]\d+)(?:-[\s\S]*)?$/i);
+    if (!m) return false;
+
+    const pid = m[1].toUpperCase();
+    if (!pids.has(pid)) return false;
+
+    if (text.length > m[1].length) composites++;
+    return true;
   };
 
   const kgSheet = ss.getSheetByName(CFG.KG);
@@ -1573,12 +1932,32 @@ function validateDataCore_() {
   });
 
   if (problems.length === 0) {
-    return `No problems found. ${pids.size} people, all references resolve.`;
+    return `No problems found. ${pids.size} people, all references resolve.` +
+           compositeNote(composites);
   }
 
   const shown = problems.slice(0, 15);
   const more = problems.length - shown.length;
   return `Found ${problems.length} problem(s):\n\n` +
          shown.join('\n') +
-         (more > 0 ? `\n…and ${more} more.` : '');
+         (more > 0 ? `\n…and ${more} more.` : '') +
+         compositeNote(composites);
+}
+
+/**
+ * Builds the advisory appended to a validation report when relationship cells
+ * still carry the legacy "PID-KNOWN_NAME" form.
+ *
+ * These references resolve, because only the PID half is checked, but the name
+ * half is a copy that can drift from Persons. The suggestion is a summary
+ * rather than one line per row so the real problems stay visible.
+ *
+ * @param {number} count Number of composite references seen.
+ * @return {string} A report suffix, or an empty string when there are none.
+ */
+function compositeNote(count) {
+  if (!count) return '';
+  return `\n\n${count} reference(s) still store "PID-KNOWN_NAME" instead of a bare PID. ` +
+         `They resolve, but the name half is a copy that can go stale. ` +
+         `Run 'Normalize References (PID only)' to reduce them to PIDs.`;
 }
