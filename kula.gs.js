@@ -38,7 +38,11 @@ const PREDICATES = ['spouseOf', 'parentOf', 'childOf'];
 const SCHEMA = {
   [CFG.PERSONS]: {
     headers: ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "EMAIL", "GENDER", "DOB", "POB", "CUR_LOC", "STATUS", "DOD", "POD", "NOTES", "GEN"],
-    sample: ["A001", "Venkiteswara Iyer", "Venkiteswara Iyer", "", "", "M", "1900", "Perumbavoor", "", "Deceased", "1965", "Kolkatta", "Head Patriarch", "A"]
+    sample: [
+      ["A001", "Venkiteswara Iyer", "Venkiteswara Iyer", "", "", "M", "1900", "Perumbavoor", "", "Deceased", "1965", "Kolkatta", "Head Patriarch", "A"],
+      ["A002", "Rajammal", "Rajammal Iyer", "", "", "F", "1905", "Perumbavoor", "", "Deceased", "1980", "Chennai", "Spouse", "A"],
+      ["B001", "Viswanatha Iyer", "Viswanatha Iyer", "", "", "M", "1930", "Perumbavoor", "", "Living", "", "", "Child", "B"]
+    ]
   },
   [CFG.KG]: {
     // PIDs only; SUBJECT_NAME/OBJECT_NAME are read-only previews.
