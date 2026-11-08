@@ -655,7 +655,7 @@ function normalizeRefText_(text, knownPids, split) {
     const trimmed = token.trim();
     if (!trimmed) return token;
 
-    const m = trimmed.match(/^([A-Z]\d+)(?:-[\s\S]*)?$/i);
+    const m = trimmed.match(/^([A-Z]-?\d+)(?:-[\s\S]*)?$/i);
     if (!m) {
       unresolved.push(trimmed);
       return token;
@@ -1564,7 +1564,7 @@ function renumberCore_(dryRun) {
 
   function extractPid(str) {
     // match() returns an array or null; read the captured group, not the array.
-    const m = String(str).match(/([A-Z]\d+)/i);
+    const m = String(str).match(/([A-Z]-?\d+)/i);
     return m ? m[1].toUpperCase() : String(str).trim().toUpperCase();
   }
 
@@ -1793,7 +1793,7 @@ function remapRef_(value, lookup, names) {
   const text = String(value).trim();
   if (!text) return value;
 
-  const m = text.match(/^([A-Z]\d+)(-[\s\S]*)?$/i);
+  const m = text.match(/^([A-Z]-?\d+)(-[\s\S]*)?$/i);
   if (!m) return value;
 
   const key = m[1].toUpperCase();
@@ -1989,7 +1989,7 @@ function validateDataCore_() {
     const text = String(value || '').trim();
     if (!text) return true;
 
-    const m = text.match(/^([A-Z]\d+)(?:-[\s\S]*)?$/i);
+    const m = text.match(/^([A-Z]-?\d+)(?:-[\s\S]*)?$/i);
     if (!m) return false;
 
     const pid = m[1].toUpperCase();
