@@ -1,0 +1,19 @@
+{
+  "timeZone": "America/New_York",
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "addOns": {
+    "common": {
+      "logoUrl": "https://evolvedhow.github.io/kula/assets/kula.jpg",
+      "name": "Kula Genealogy System",
+      "layoutProperties": {
+        "primaryColor": "#1c4587"
+      }
+    },
+    "sheets": {
+      "homepageTrigger": {
+        "runFunction": "onOpen"
+      }
+    }
+  }
+}
