@@ -553,16 +553,56 @@ function exportGedcomFileCore_() {
   gedcom.push('0 TRLR');
 
   const fileContent = gedcom.filter(line => line.length > 0).join('\n');
-  const safeName = String(ss.getName() || 'Kula').replace(/[^A-Za-z0-9._-]+/g, '_');
+  const spreadsheetName = ss.getName() || 'Kula';
+  const safeName = String(spreadsheetName).replace(/[^A-Za-z0-9._-]+/g, '_');
   const stamp = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyyMMdd_HHmmss');
   const fileName = `${safeName}_FamilyTree_${stamp}.ged`;
-  const file = DriveApp.createFile(fileName, fileContent, MimeType.PLAIN_TEXT);
+
+  let file;
+  let folderUrl = '';
+  let folderName = 'Google Drive root';
+  try {
+    const folder = ensureKulaExportFolder_(spreadsheetName);
+    file = folder.createFile(fileName, fileContent, MimeType.PLAIN_TEXT);
+    folderUrl = folder.getUrl();
+    folderName = 'Kula Exports / ' + spreadsheetName;
+  } catch (driveErr) {
+    // If drive.file scope cannot manage folders, fall back to the root.
+    file = DriveApp.createFile(fileName, fileContent, MimeType.PLAIN_TEXT);
+  }
 
   return {
     fileName: fileName,
+    fileUrl: file.getUrl(),
     downloadUrl: file.getDownloadUrl(),
+    folderName: folderName,
+    folderUrl: folderUrl,
     skippedCount: skippedEdges.length,
   };
+}
+
+/**
+ * Returns (and creates if necessary) a Drive folder for GEDCOM exports.
+ * The hierarchy is: My Drive / Kula Exports / <Spreadsheet Name>.
+ *
+ * @param {string} spreadsheetName Name of the active spreadsheet.
+ * @return {DriveApp.Folder} Folder where the GEDCOM file should be created.
+ */
+function ensureKulaExportFolder_(spreadsheetName) {
+  const ROOT_FOLDER_NAME = 'Kula Exports';
+  let rootFolder;
+  const rootIter = DriveApp.getFoldersByName(ROOT_FOLDER_NAME);
+  if (rootIter.hasNext()) {
+    rootFolder = rootIter.next();
+  } else {
+    rootFolder = DriveApp.createFolder(ROOT_FOLDER_NAME);
+  }
+
+  const subIter = rootFolder.getFoldersByName(spreadsheetName);
+  if (subIter.hasNext()) {
+    return subIter.next();
+  }
+  return rootFolder.createFolder(spreadsheetName);
 }
 
 /**
@@ -576,17 +616,26 @@ function exportGedcomFile() {
   const skipNote = result.skippedCount
     ? `<p style="color: #b3261e;">${result.skippedCount} relationship row(s) referenced unknown people and were skipped.</p>`
     : '';
+  const folderNote = result.folderUrl
+    ? `<p>Location: <a href="${result.folderUrl}" target="_blank">${result.folderName}</a></p>`
+    : `<p>Location: ${result.folderName}</p>`;
   const htmlOutput = HtmlService.createHtmlOutput(
     `<div style="font-family: sans-serif; padding: 15px;">
        <h3>GEDCOM File Exported Successfully!</h3>
        <p>File saved to Google Drive: <b>${result.fileName}</b></p>
+       ${folderNote}
        ${skipNote}
        <a href="${result.downloadUrl}" target="_blank"
           style="display: inline-block; background-color: #1a73e8; color: white; padding: 10px 18px; text-decoration: none; border-radius: 4px; font-weight: bold;">
           Download GEDCOM File
         </a>
+       &nbsp;
+       <a href="${result.fileUrl}" target="_blank"
+          style="display: inline-block; color: #1a73e8; padding: 10px 18px; text-decoration: none; border-radius: 4px; font-weight: bold;">
+          Open in Drive
+        </a>
       </div>`
-  ).setWidth(420).setHeight(240);
+  ).setWidth(460).setHeight(280);
 
   SpreadsheetApp.getUi().showModalDialog(htmlOutput, 'Export Complete');
 }

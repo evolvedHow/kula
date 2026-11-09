@@ -405,7 +405,8 @@ function cardExportGedcom() {
   }
   const notification = CardService.newNotification()
     .setText(`GEDCOM exported: ${result.fileName}` +
-             (result.skippedCount ? ` (${result.skippedCount} rows skipped)` : ''));
+             (result.skippedCount ? ` (${result.skippedCount} rows skipped)` : '') +
+             ` — saved to ${result.folderName}`);
   return CardService.newActionResponseBuilder()
     .setNotification(notification)
     .setOpenLink(
