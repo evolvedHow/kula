@@ -31,8 +31,6 @@ source:
     vedic: "Vedic"
     config: "$Config"
     kg: "KG"
-    unions: "Unions"
-    offsprings: "Offsprings"
   # The older hierarchical family sheet is the authority for birth, death and
   # living status. It is matched to the Persons tab by name; authority values
   # win, but blank authority cells never erase current data. Remove this block
@@ -117,22 +115,6 @@ narratives:
   enabled: true
   # Shown in navigation and headings
   section_title: "Stories"
-  # Gramps note types always treated as stories
-  note_types: [Blog, Narrative, Story, Biography, Memoir]
-  # Gramps note tags that mark a note as a story (case-insensitive)
-  tags: [blog, story, narrative]
-  # Ordinary Person/Family/Event/Place notes become stories when they are at least min_words long
-  auto_detect_types: [Person Note, Family Note, Event Note, Place Note]
-  min_words: 200
-  # Optional display titles by Gramps note ID. Without an override the first
-  # line of the note is used, or the story is shown as "Untitled story".
-  story_titles:
-    N0047: "The Patriarch and Matriarch"
-  # Attach a story/note to extra relatives (Gramps IDs) without editing the
-  # note in Gramps. It then appears on each listed person's panel and in the
-  # story's "Tagged relatives" section. Rebuild after changing this.
-  story_tags:
-    N0047: [I0000]
 
 # ---------------------------------------------------------------------
 #  Vedic data and birth charts (jatagam)
@@ -195,9 +177,6 @@ panchang:
     overrides: docs/data/panchang-overrides.json
     output_dir: docs/data/trees/peru/panchang
     feed_name: panchang.ics
-    gramps:
-      url: http://localhost:8081
-      token_file: ~/.config/gramps-mcp/token.json
   server:
     host: 127.0.0.1
     port: 8082
@@ -215,29 +194,10 @@ panchang:
 # places:
 #   Valliyur: { lat: 8.3833, lon: 77.6667, tz: "Asia/Kolkata" }
 #   Marietta: { lat: 33.9526, lon: -84.5499, tz: "America/New_York" }
-places: {}
-
-privacy:
-  # Applied by scripts/build_site.py before data is written. Privacy is only
-  # real if it happens at build time: the published JSON contains only what
-  # survives these rules.
-  # Everything in Gramps is published. Set to true to hide living people again.
-  hide_living: false
-  # A person with no death event is treated as living if born within this many years
-  living_years: 100
-  # Shown in place of a living person's name (only when hide_living is true)
-  living_label: "Living"
-  # Gramps IDs to publish even if the rules above would hide them, e.g. ["I0000"].
-  always_public: []
-  # Gramps records marked private are removed completely (false = publish them too)
-  respect_private_flag: false
-  # Notes with any of these tags are never published (empty = publish everything)
-  exclude_tags: []
-  # Stories that name a living person in full: redact = replace the name with living_label
-  # (the story still publishes); drop = leave the story out entirely
-  scan_stories_for_living_names: false
-  living_names_in_stories: redact
-  include_notes: true
+places:
+  # The authority sheet spells this Thiruvattar; Nominatim only resolves the
+  # "Thiruvattar" spelling, so pin the coordinates rather than lose the chart.
+  Tiruvattar: { lat: 8.3305895, lon: 77.2655506, tz: "Asia/Kolkata" }
 
 text:
   search_placeholder: "Find a family member…"

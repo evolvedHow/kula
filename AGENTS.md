@@ -15,7 +15,8 @@ gitignored).
 - Relationships are entered in the sheet's `KG` tab as readable triples
   (`SUBJECT`, `PREDICATE`, `OBJECT`), e.g. `P-101-Himavan spouseOf P-102-Mena`.
   `import_sheet.py` extracts the PID prefix and builds the union/children model.
-  If `KG` is empty, the importer falls back to the legacy `Unions`/`Offsprings` tabs.
+  `KG` is the only relationship store: the old `Unions`/`Offsprings` tabs are
+  gone and are not read.
 - Multiple independent trees can coexist in one site. Configure them in
   `docs/config.yml` under `trees:`; each tree has its own data folder
   (`<folder>/tree.json`, `vedic.json`, optional `panchang/`). Use

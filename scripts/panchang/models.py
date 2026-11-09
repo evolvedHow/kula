@@ -33,7 +33,7 @@ class FamilyMember:
     notes: list[str] = field(default_factory=list)
     private: bool = False
     include: bool = True
-    source: str = "gramps"
+    source: str = "tree"
     raw: dict = field(default_factory=dict)
 
     @property

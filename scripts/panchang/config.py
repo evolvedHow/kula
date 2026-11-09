@@ -220,20 +220,17 @@ class AstroSettings:
 
 @dataclass
 class SourceSettings:
-    # tree = docs/data/tree.json, csv = CSV/Sheets export, gramps = live Gramps Web
+    # tree = docs/data/tree.json, csv = CSV/Sheets export
     kind: str = "tree"
     tree_path: str = "docs/data/tree.json"
     csv: str | None = None
     overrides: str = "docs/data/panchang-overrides.json"
     output_dir: str = "docs/data/panchang"
     feed_name: str = "panchang.ics"
-    gramps_url: str = "http://localhost:8081"
-    gramps_token_file: str = "~/.config/gramps-mcp/token.json"
 
     @classmethod
     def from_dict(cls, data: dict[str, Any] | None) -> "SourceSettings":
         data = data or {}
-        gramps = data.get("gramps") or {}
         return cls(
             kind=str(data.get("kind", "tree")),
             tree_path=str(data.get("tree_path", "docs/data/tree.json")),
@@ -243,10 +240,6 @@ class SourceSettings:
             ),
             output_dir=str(data.get("output_dir", "docs/data/panchang")),
             feed_name=str(data.get("feed_name", "panchang.ics")),
-            gramps_url=str(gramps.get("url", "http://localhost:8081")),
-            gramps_token_file=str(
-                gramps.get("token_file", "~/.config/gramps-mcp/token.json")
-            ),
         )
 
 

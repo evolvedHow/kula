@@ -1039,11 +1039,9 @@ function unionPanelHTML(fam) {
   }
   const facts = [];
   if (attrs.REF_NAME) facts.push(factRow("Sheet reference", esc(attrs.REF_NAME)));
-  if (attrs.REL_START) facts.push(factRow("Relationship start", esc(attrs.REL_START)));
-  if (attrs.REL_END) facts.push(factRow("Relationship end", esc(attrs.REL_END)));
   if (fam.notes) facts.push(factRow("Notes", esc(fam.notes)));
   if (facts.length) parts.push(`<div class="section-title">Union record</div><ul class="facts">${facts.join("")}</ul>`);
-  parts.push(`<p class="relation">Union nodes come from the Unions tab. Children are the Offsprings edges attached to this union.</p>`);
+  parts.push(`<p class="relation">Unions are derived from <code>spouseOf</code> edges in the KG tab; children come from <code>parentOf</code> and <code>childOf</code> edges.</p>`);
   return parts.join("");
 }
 
@@ -1222,7 +1220,8 @@ function refreshMeChip() {
 //
 // Client-side Google Identity Services. This identifies a visitor and can
 // auto-set "This is me"; it is not access control. The published tree data is
-// still public, so keep the privacy rules in build_site.py as the real gate.
+// still public, so the only privacy gate is the importer: living people's
+// places are reduced to city level in scripts/import_sheet.py.
 
 function readStoredAuth() {
   try {

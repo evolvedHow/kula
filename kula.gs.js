@@ -23,7 +23,6 @@ const CFG = {
   VEDIC: 'Vedic',
   STORIES: 'Stories',
   CONFIG: '$Config',      // Gotra defaults for veda, shakha, sutra
-  MAPPING: 'ID_Mapping_Key',
   REPORT: 'Renumber_Report',
   REFACTOR: 'Refactor_Report'
 };
@@ -192,6 +191,7 @@ function onOpen(e) {
 
   const setupMenu = ui.createMenu('🚀 Plugin Setup')
     .addItem('Setup / Reset Workspace Tabs', 'setupDatabaseTabs')
+    .addItem('Rebuild Instructions Tab', 'rebuildInstructions')
     .addItem('Normalize References (REF_NAME)', 'normalizeReferences');
 
   const flattenSubMenu = ui.createMenu('🕸 Flatten Knowledge Graph')
@@ -211,6 +211,8 @@ function onOpen(e) {
     .addSeparator()
     .addItem('Check Sheet Setup', 'checkSheetSetup')
     .addItem('Validate Reference Integrity', 'validateData')
+    .addSeparator()
+    .addItem('Export GEDCOM 5.5.1 File', 'exportGedcomFile')
     .addToUi();
 }
 
@@ -384,6 +386,23 @@ function cardApplyRenumber() { return cardResponse_(function () { return renumbe
  */
 function setupDatabaseTabs() {
   alert_(setupDatabaseTabsCore_());
+}
+
+/**
+ * Menu entry point: rewrites the generated Instructions tab from this code.
+ *
+ * Setup only seeds an Instructions tab that is missing or empty, so a workbook
+ * keeps the guide it was created with. This is the way to refresh that guide
+ * after the add-on is updated.
+ */
+function rebuildInstructions() {
+  const ss = requireSpreadsheet_();
+  let sheet = ss.getSheetByName(CFG.INSTRUCTIONS);
+  if (!sheet) {
+    sheet = ss.insertSheet(CFG.INSTRUCTIONS);
+  }
+  populateInstructionsSheet_(sheet);
+  alert_(`'${CFG.INSTRUCTIONS}' tab rebuilt from the current add-on code.`);
 }
 
 /**
@@ -877,7 +896,7 @@ function populateInstructionsSheet_(sheet) {
     ================================================
     1. Use the plugin option: Setup / reset workspace tabs to generate template
     2. Persons tab - Define every person you want on the family tree.
-    3. KG tab - Define relationships between persons; using TWO keywords: spouseOf and parentOf
+    3. KG tab - Define relationships between persons with the keywords spouseOf, parentOf or childOf
   `;
 
   const easyGuideRows = EASYGUIDE.split('\n')
@@ -888,15 +907,15 @@ function populateInstructionsSheet_(sheet) {
   const instructionsContent = [
     ...easyGuideRows,
     [""],
-    ["குல :: [WELCOME TO KULA GENEALOGY PLUGIN] :: कुल — USER GUIDE"],
+    ["குல :: [ƙüłā🧬 PLUGIN] :: कुल — USER GUIDE"],
     ["Welcome to the Kula Genealogy Knowledge Graph plugin! This system turns your family database into an inferred relational graph."],
     [""],
     ["📌 CORE TABS (CREATED BY SETUP)"],
     ["1. Persons", "Mandatory: Every person in the tree has one entry here."],
     ["2. Vedic", "Optional: Vedic lineage information."],
-    ["3. KG (Knowledge Graph)", "Define relationships between persons using just TWO keywords; spouseOf and parentOf."],
+    ["3. KG (Knowledge Graph)", "Define relationships between persons using three keywords: spouseOf, parentOf and childOf."],
     ["4. Stories", "Narratives and notes. TAGGED_PEOPLE links a note to one or more people; TAGGED_NAMES shows the names."],
-    ["5. $Config", "HIDDEN. Gotra defaults, generated from the GOTRA values already in the Vedic tab."],
+    ["5. $Config", "HIDDEN. Gotra defaults shipped with the plugin, written by Setup."],
     [""],
 
     ["📦 GENERATED TABS (MENU OPTIONS)"],
@@ -916,14 +935,14 @@ function populateInstructionsSheet_(sheet) {
     ["• Generational PIDs", "Running 'Person Numbering > Apply Generational PIDs' assigns Axxx, Bxxx, Cxxx by distance from the patriarch."],
     ["• Derived REF_NAME", "REF_NAME is a formula, PID and KNOWN_NAME joined by a hyphen. Never type into it."],
     ["• REF_NAME relationships", "KG stores REF_NAME (PID-KNOWN_NAME) in SUBJECT and OBJECT so it reads like a graph. Vedic and Stories store bare PIDs; PERSON_NAME and TAGGED_NAMES are read-only formulas that render the names."],
-    ["• Older composite refs", "Cells like 'P-101-Himavan' still resolve, but the name half can go stale. Use 'Normalize References (REF_NAME)' to refresh them to the current REF_NAME."],
+    ["• Stale REF_NAME cells", "If a KNOWN_NAME changes, the name half of a stored reference goes stale. 'Normalize References (REF_NAME)' rewrites every cell to the current REF_NAME."],
     [""],
     ["⚙️ QUICK START MENU COMMANDS"],
     ["• Setup / Reset Workspace Tabs", "Creates the five core tabs, REF_NAME formulas and dropdowns."],
     ["• Normalize References (REF_NAME)", "Refreshes relationship cells to the current REF_NAME (e.g. 'P-101-Himavan') and adds name-preview columns."],
     ["• Flatten Knowledge Graph", "Compiles graph edges into the 'KG_FLAT' tab."],
     ["• Person Numbering", "Previews or applies generational renumbering and rewrites every reference."],
-    ["• Validate Reference Integrity", "Reports orphan references, duplicate PIDs, unknown predicates and stale composite references."]
+    ["• Validate Reference Integrity", "Reports orphan references, duplicate PIDs and unknown predicates."]
   ];
 
   // Pad every row to three columns so the triple example keeps its
@@ -2040,11 +2059,6 @@ function validateDataCore_() {
     pids.add(pid);
   }
 
-  // A legacy "PID-KNOWN_NAME" reference still resolves, but it duplicates the
-  // label into a cell that only needs the identity. Counted once here so the
-  // report can suggest Normalize instead of listing every row.
-  let composites = 0;
-
   /**
    * True when a relationship cell names a known person. Only the PID half is
    * treated as identity; a trailing name is a label and may be out of date.
@@ -2059,11 +2073,7 @@ function validateDataCore_() {
     const m = text.match(/^([A-Z]-?\d+)(?:-[\s\S]*)?$/i);
     if (!m) return false;
 
-    const pid = m[1].toUpperCase();
-    if (!pids.has(pid)) return false;
-
-    if (text.length > m[1].length) composites++;
-    return true;
+    return pids.has(m[1].toUpperCase());
   };
 
   const kgSheet = ss.getSheetByName(CFG.KG);
@@ -2128,32 +2138,12 @@ function validateDataCore_() {
   });
 
   if (problems.length === 0) {
-    return `No problems found. ${pids.size} people, all references resolve.` +
-           compositeNote(composites);
+    return `No problems found. ${pids.size} people, all references resolve.`;
   }
 
   const shown = problems.slice(0, 15);
   const more = problems.length - shown.length;
   return `Found ${problems.length} problem(s):\n\n` +
          shown.join('\n') +
-         (more > 0 ? `\n…and ${more} more.` : '') +
-         compositeNote(composites);
-}
-
-/**
- * Builds the advisory appended to a validation report when relationship cells
- * still carry the legacy "PID-KNOWN_NAME" form.
- *
- * These references resolve, because only the PID half is checked, but the name
- * half is a copy that can drift from Persons. The suggestion is a summary
- * rather than one line per row so the real problems stay visible.
- *
- * @param {number} count Number of composite references seen.
- * @return {string} A report suffix, or an empty string when there are none.
- */
-function compositeNote(count) {
-  if (!count) return '';
-  return `\n\n${count} reference(s) still store an old REF_NAME. ` +
-         `They resolve, but the name half is a copy that can go stale. ` +
-         `Run 'Normalize References (REF_NAME)' to refresh them.`;
+         (more > 0 ? `\n…and ${more} more.` : '');
 }

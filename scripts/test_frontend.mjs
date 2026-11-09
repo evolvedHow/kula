@@ -435,12 +435,12 @@ test("list rows order siblings by birth year and carry the union's children bene
   const years = rootKids.map((r) => r.person.birth?.year ?? 9999);
   assert.deepEqual(years, [...years].sort((a, b) => a - b), "children should read eldest-first");
 
-  const unionIndex = L.rows.findIndex((r) => r.kind === "union" && r.familyId === "U043");
+  const unionIndex = L.rows.findIndex((r) => r.kind === "union" && r.depth === 0);
   assert.ok(unionIndex > 0, "the founding union should be in the list");
   assert.equal(L.rows[unionIndex].depth, 0);
   assert.ok(
     L.rows.slice(unionIndex + 1).some((r) => r.kind === "person" && r.depth === 1),
-    "U043's children should follow the union row",
+    "the founding union's children should follow the union row",
   );
 });
 

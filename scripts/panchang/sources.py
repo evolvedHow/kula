@@ -6,10 +6,7 @@ default and preferred source here: it already contains the dates, the living
 status, the gotra and (when a birth time and place are known) the Moon's
 nakshatra from :mod:`scripts.horoscope`.
 
-Two other sources are supported for ad-hoc work:
-
-* ``csv``    - a CSV or Google-Sheets CSV export.
-* ``gramps`` - the live Kula Gramps Web tree, when the deployment is running.
+A CSV or Google-Sheets CSV export is also supported for ad-hoc work.
 
 A small overrides file (``docs/data/panchang-overrides.json``) can add exact
 birth/death times, an explicitly recorded tithi/masa, or a ritual location.
@@ -22,7 +19,6 @@ import csv
 import io
 import json
 import re
-import sys
 import urllib.request
 from datetime import date, datetime, time, timedelta
 from pathlib import Path
@@ -34,30 +30,6 @@ from .models import FamilyData, FamilyMember
 _EXCEL_EPOCH = datetime(1899, 12, 30)
 _TIME_RE = re.compile(r"(?<!\d)(\d{1,2})[:.](\d{1,2})(?::\d{2})?(?!\d)")
 _SERIAL_RE = re.compile(r"^\d{4,6}(?:\.\d+)?$")
-_METADATA_KEYS = {
-    "gotra": "gotra",
-    "gotram": "gotra",
-    "death tithi": "death_tithi",
-    "death thithi": "death_tithi",
-    "death paksha": "death_paksha",
-    "death masa": "death_masa",
-    "death masam": "death_masa",
-    "death month": "death_masa",
-    "death masa system": "death_masa_system",
-    "birth tithi": "birth_tithi",
-    "birth nakshatra": "birth_nakshatra",
-    "birth nakshathra": "birth_nakshatra",
-    "birth star": "birth_nakshatra",
-    "birth masa": "birth_masa",
-    "birth masam": "birth_masa",
-    "birth month": "birth_masa",
-    "birth masa system": "birth_masa_system",
-    "birth time": "birth_time",
-    "death time": "death_time",
-    "tradition": "tradition",
-    "ritual location": "location",
-    "location": "location",
-}
 
 
 # ---------------------------------------------------------------------------
@@ -529,176 +501,6 @@ def load_from_csv(config: AppConfig, path_or_url: str) -> FamilyData:
 
 
 # ---------------------------------------------------------------------------
-# live Gramps Web (optional)
-# ---------------------------------------------------------------------------
-
-
-def _import_gramps_client():
-    candidates = [
-        Path(__file__).resolve().parents[4] / "apps" / "kula" / "tools",
-        Path(__file__).resolve().parents[3] / "apps" / "kula" / "tools",
-    ]
-    for tools_dir in candidates:
-        if (tools_dir / "gramps_api.py").exists():
-            if str(tools_dir) not in sys.path:
-                sys.path.insert(0, str(tools_dir))
-            from gramps_api import (  # type: ignore
-                GrampsClient,
-                format_date,
-                format_name,
-                gender_label,
-            )
-
-            return GrampsClient, format_date, format_name, gender_label
-    raise RuntimeError(
-        "Live Gramps source requested, but the Kula Gramps tools were not found. "
-        "Set KULA_GRAMPS_TOOLS to the directory containing gramps_api.py, or use "
-        "--source tree."
-    )
-
-
-def load_from_gramps(config: AppConfig) -> FamilyData:
-    GrampsClient, format_date, format_name, gender_label = _import_gramps_client()
-    client = GrampsClient(
-        url=config.sources.gramps_url,
-        token_file=config.sources.gramps_token_file,
-    )
-
-    people = client.request("GET", "/api/people/", params={"pagesize": 2000}).data or []
-    events = client.request("GET", "/api/events/", params={"pagesize": 2000}).data or []
-    places = client.request("GET", "/api/places/", params={"pagesize": 2000}).data or []
-    notes = client.request("GET", "/api/notes/", params={"pagesize": 2000}).data or []
-
-    event_by_handle = {str(e.get("handle")): e for e in events if e.get("handle")}
-    place_by_handle = {
-        str(p.get("handle")): str((p.get("name") or {}).get("value") or "")
-        for p in places
-    }
-    note_by_handle = {str(n.get("handle")): _text(n.get("text")) for n in notes}
-
-    overrides = load_overrides(config.overrides_path)
-    defaults = overrides["defaults"]
-    sidecar_people = overrides["people"]
-    default_location = _location(defaults.get("location"), config.location)
-    default_masa_system = defaults.get("masa_system") or config.calendar.masa_system
-
-    members: list[FamilyMember] = []
-    warnings: list[str] = []
-    skipped = 0
-    for person in people:
-        pid = str(person.get("gramps_id") or person.get("handle") or "")
-        if not pid:
-            continue
-        override = sidecar_people.get(pid) or {}
-        note_texts = [
-            note_by_handle.get(str(handle), "")
-            for handle in (person.get("note_list") or [])
-        ]
-        metadata: dict[str, Any] = {}
-        for attribute in person.get("attribute_list") or []:
-            key = str(attribute.get("type") or "").strip().lower().replace("_", " ")
-            if key in _METADATA_KEYS:
-                metadata[_METADATA_KEYS[key]] = attribute.get("value")
-        for text in note_texts:
-            for line in str(text).splitlines():
-                if ":" not in line:
-                    continue
-                key, value = line.split(":", 1)
-                mapped = _METADATA_KEYS.get(key.strip().lower().replace("_", " "))
-                if mapped and value.strip():
-                    metadata.setdefault(mapped, value.strip())
-
-        birth_event = death_event = None
-        for ref in person.get("event_ref_list") or []:
-            event = event_by_handle.get(str(ref.get("ref")))
-            if not event:
-                continue
-            if event.get("type") == "Birth":
-                birth_event = event
-            elif event.get("type") == "Death":
-                death_event = event
-
-        birth_date, birth_time, birth_has_time = parse_date_time(
-            format_date((birth_event or {}).get("date")) if birth_event else None
-        )
-        death_date, death_time, death_has_time = parse_date_time(
-            format_date((death_event or {}).get("date")) if death_event else None
-        )
-        if not birth_time:
-            birth_time = _parse_time(metadata.get("birth_time") or (birth_event or {}).get("description"))
-            birth_has_time = birth_time is not None
-        if not death_time:
-            death_time = _parse_time(metadata.get("death_time") or (death_event or {}).get("description"))
-            death_has_time = death_time is not None
-
-        member = FamilyMember(
-            pid=pid,
-            name=str(override.get("name") or format_name(person)),
-            status="Deceased" if death_event is not None else "Living",
-            gender=gender_label(person.get("gender")),
-            gotra=override.get("gotra", metadata.get("gotra", defaults.get("gotra"))),
-            birth_date=birth_date,
-            death_date=death_date,
-            birth_time=birth_time if birth_has_time else None,
-            death_time=death_time if death_has_time else None,
-            birth_place=place_by_handle.get(str((birth_event or {}).get("place") or "")) or None,
-            death_place=place_by_handle.get(str((death_event or {}).get("place") or "")) or None,
-            birth_masa=override.get("birth_masa", metadata.get("birth_masa")),
-            birth_nakshatra=override.get("birth_nakshatra", metadata.get("birth_nakshatra")),
-            death_masa=override.get("death_masa", metadata.get("death_masa")),
-            death_paksha=override.get("death_paksha", metadata.get("death_paksha")),
-            death_tithi=override.get("death_tithi", metadata.get("death_tithi")),
-            death_masa_system=override.get(
-                "death_masa_system", metadata.get("death_masa_system", default_masa_system)
-            ),
-            birth_masa_system=override.get(
-                "birth_masa_system", metadata.get("birth_masa_system", default_masa_system)
-            ),
-            location=_location(override.get("location"), default_location),
-            tradition=override.get("tradition", metadata.get("tradition", defaults.get("tradition"))),
-            notes=[n for n in note_texts if n] + list(override.get("notes") or []),
-            private=bool(person.get("private")),
-            include=_bool(override.get("include"), True),
-            source="gramps",
-            raw={
-                "handle": person.get("handle"),
-                "metadata": metadata,
-                "birth_event": (birth_event or {}).get("gramps_id"),
-                "death_event": (death_event or {}).get("gramps_id"),
-            },
-        )
-        _apply_override(member, override)
-        if member.private and not config.calendar.include.private_members:
-            continue
-        if not member.include:
-            continue
-        if member.is_deceased:
-            has_data = bool(
-                member.death_date
-                or member.death_tithi
-                or (member.death_masa and member.death_paksha)
-            )
-        else:
-            has_data = bool(member.birth_date or member.birth_nakshatra)
-        if not has_data:
-            skipped += 1
-            continue
-        members.append(member)
-
-    if skipped:
-        warnings.append(f"{skipped} people had no usable birth/death date or astro metadata.")
-    warnings.append(
-        f"Loaded {len(members)} family members from Gramps Web ({config.sources.gramps_url})."
-    )
-    return FamilyData(
-        members=members,
-        source="gramps",
-        warnings=warnings,
-        metadata={"gramps_url": config.sources.gramps_url, "people_count": len(people)},
-    )
-
-
-# ---------------------------------------------------------------------------
 # entry point
 # ---------------------------------------------------------------------------
 
@@ -709,13 +511,11 @@ def load_family(
     csv_path: str | None = None,
 ) -> FamilyData:
     kind = (source or config.sources.kind or "tree").lower()
-    if kind not in {"tree", "csv", "gramps"}:
-        raise ValueError("source must be tree, csv or gramps")
+    if kind not in {"tree", "csv"}:
+        raise ValueError("source must be tree or csv")
     if kind == "tree":
         return load_from_tree(config)
-    if kind == "csv":
-        path = csv_path or config.sources.csv
-        if not path:
-            raise ValueError("CSV source selected but no --csv path/URL was provided")
-        return load_from_csv(config, path)
-    return load_from_gramps(config)
+    path = csv_path or config.sources.csv
+    if not path:
+        raise ValueError("CSV source selected but no --csv path/URL was provided")
+    return load_from_csv(config, path)

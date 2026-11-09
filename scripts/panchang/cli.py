@@ -471,7 +471,7 @@ def cmd_validate(args, config: AppConfig) -> int:
 def build_parser() -> argparse.ArgumentParser:
     common = argparse.ArgumentParser(add_help=False)
     common.add_argument("--config", help="YAML site config or standalone JSON config")
-    common.add_argument("--source", choices=["tree", "csv", "gramps"], help="family data source")
+    common.add_argument("--source", choices=["tree", "csv"], help="family data source")
     common.add_argument("--csv", help="CSV path or Sheets CSV URL (with --source csv)")
     common.add_argument("--warnings", action="store_true", help="print calculation warnings")
 

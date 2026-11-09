@@ -19,7 +19,7 @@ from import_sheet import (  # noqa: E402
     make_ref,
     person_resolver,
     pid_prefix,
-    union_resolver,
+    split_name,
     validate_person_dates,
 )
 
@@ -40,15 +40,11 @@ def sheet_data():
                  "Mumbai, Maharashtra, India", "Living", ""],
             ],
         ),
-        "Unions": table(
-            ["UID", "PID1", "PID2", "REF_NAME", "REL_START", "REL_END", "NOTES"],
-            [["U001", "P001-Alex", "P002-Alex", "P001-Alex & P002-Alex", "01/01/1965", "", ""]],
-        ),
-        "Offsprings": table(
-            ["OID", "UNION_OF", "OFFSPRING", "NOTES"],
+        "KG": table(
+            ["SUBJECT", "PREDICATE", "OBJECT", "DATE", "NOTES"],
             [
-                # Both halves of the readable names are stale; the PIDs still resolve.
-                ["O001", "P001-Renamed & P002-Renamed", "P003-Casey", ""],
+                ["P001-Alex", "spouseOf", "P002-Alex", "", ""],
+                ["P001-Alex", "parentOf", "P003-Casey", "", ""],
             ],
         ),
         "Vedic": table(
@@ -96,6 +92,11 @@ class PidPrefixTests(unittest.TestCase):
         self.assertIsNone(pid_prefix("Sriram"))
         self.assertIsNone(pid_prefix(""))
 
+    def test_generation_letter_pids_are_recognised(self):
+        self.assertEqual(pid_prefix("A001-Venkiteswara Iyer"), "A001")
+        self.assertEqual(pid_prefix("z031-Thejaswini"), "Z031")
+        self.assertEqual(pid_prefix("D008-Suresh"), "D008")
+
     def test_make_ref_uses_pid_and_known_name(self):
         self.assertEqual(make_ref("P049", "Sriram"), "P049-Sriram")
         self.assertEqual(make_ref("P049", ""), "P049")
@@ -114,6 +115,16 @@ class PersonResolverTests(unittest.TestCase):
         self.assertEqual(self.resolve("P002-Anything"), "P002")
         self.assertEqual(self.resolve("P003-Casey"), "P003")
 
+    def test_resolves_a_bare_generation_letter_pid(self):
+        resolve = person_resolver([
+            {"PID": "A001", "KNOWN_NAME": "Venkiteswara",
+             "REF_NAME": "A001-Venkiteswara"},
+            {"PID": "z031", "KNOWN_NAME": "Thejaswini",
+             "REF_NAME": "z031-Thejaswini"},
+        ])
+        self.assertEqual(resolve("A001"), "A001")
+        self.assertEqual(resolve("z031"), "Z031")
+
     def test_duplicate_known_names_never_resolve_without_the_prefix(self):
         self.assertIsNone(self.resolve("Alex"))
 
@@ -121,25 +132,43 @@ class PersonResolverTests(unittest.TestCase):
         self.assertEqual(self.resolve("Casey"), "P003")
 
 
-class UnionResolverTests(unittest.TestCase):
-    def setUp(self):
-        self.resolve = union_resolver([
-            {"id": "U001", "father": "P001", "mother": "P002",
-             "ref_name": "P001-Alex & P002-Alex"},
-        ])
+class NameSplittingTests(unittest.TestCase):
+    def test_last_word_becomes_surname(self):
+        self.assertEqual(split_name("Venkiteswara Iyer"),
+                         ("Venkiteswara", "Iyer", ""))
 
-    def test_resolves_by_uid(self):
-        self.assertEqual(self.resolve("U001"), "U001")
-        self.assertEqual(self.resolve("u001"), "U001")
+    def test_single_name_has_no_surname(self):
+        self.assertEqual(split_name("Rajammal"), ("Rajammal", "", ""))
+        self.assertEqual(split_name(""), ("", "", ""))
 
-    def test_resolves_by_exact_ref_name(self):
-        self.assertEqual(self.resolve("P001-Alex & P002-Alex"), "U001")
+    def test_parenthetical_suffix_is_a_nickname(self):
+        given, surname, nickname = split_name(
+            "Rajalakshmi Krishnamurthy ( Rajam )")
+        self.assertEqual(given, "Rajalakshmi")
+        self.assertEqual(surname, "Krishnamurthy")
+        self.assertEqual(nickname, "Rajam")
 
-    def test_resolves_by_partner_pids_when_names_are_stale(self):
-        self.assertEqual(self.resolve("P001-Renamed & P002-Renamed"), "U001")
-
-    def test_unknown_partner_does_not_resolve(self):
-        self.assertIsNone(self.resolve("P001-Alex & P999-Missing"))
+    def test_nickname_is_added_to_alternates(self):
+        data, _ = build(
+            {
+                "Persons": table(
+                    ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "GENDER",
+                     "DOB", "POB", "STATUS", "NOTES"],
+                    [["P001", "Raji", "Rajalakshmi Krishnamurthy (Rajam)",
+                      "P001-Rajalakshmi", "Female", "", "", "Living", ""]],
+                ),
+                "KG": table(
+                    ["SUBJECT", "PREDICATE", "OBJECT", "DATE", "NOTES"],
+                    [],
+                ),
+                "Vedic": table(["PERSON"], []),
+                "$Config": table(["GOTRA"], []),
+            },
+            {"site": {"default_person": "P001"}, "vedic": {"charts": False}},
+        )
+        person = data["people"][0]
+        self.assertEqual(person["name"]["surname"], "Krishnamurthy")
+        self.assertEqual(person["name"]["alternates"], ["Raji", "Rajam"])
 
 
 class BuildTests(unittest.TestCase):
@@ -148,7 +177,9 @@ class BuildTests(unittest.TestCase):
         self.people = {p["id"]: p for p in self.data["people"]}
         self.families = {f["id"]: f for f in self.data["families"]}
 
-    def test_offspring_links_resolve_from_the_union_partner_pids(self):
+    def test_kg_edges_build_the_union_and_its_children(self):
+        self.assertEqual(self.families["U001"]["father"], "P001")
+        self.assertEqual(self.families["U001"]["mother"], "P002")
         self.assertEqual(self.families["U001"]["children"], ["P003"])
         self.assertEqual(self.people["P003"]["parent_family"], "U001")
         self.assertIn("U001", self.people["P001"]["families"])
@@ -188,8 +219,7 @@ class BuildTests(unittest.TestCase):
                      "", "Living", "", "B", ""],
                 ],
             ),
-            "Unions": table(["UID", "PID1", "PID2", "REF_NAME", "REL_START", "REL_END", "NOTES"], []),
-            "Offsprings": table(["OID", "UNION_OF", "OFFSPRING", "NOTES"], []),
+            "KG": table(["SUBJECT", "PREDICATE", "OBJECT", "DATE", "NOTES"], []),
             "Vedic": table(["PERSON"], []),
             "$Config": table(["GOTRA"], []),
         }
@@ -201,7 +231,7 @@ class BuildTests(unittest.TestCase):
         self.assertEqual(people["P021"]["generation"], "B",
                          "GEN still wins when both columns are filled")
 
-    def test_a_self_union_is_treated_as_a_single_partner(self):
+    def test_a_self_reference_is_ignored_with_a_warning(self):
         sheets = {
             "Persons": table(
                 ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "GENDER", "DOB",
@@ -209,39 +239,34 @@ class BuildTests(unittest.TestCase):
                 [["P030", "Solo", "Solo Person", "P030-Solo", "Male", "",
                   "", "Living", ""]],
             ),
-            "Unions": table(
-                ["UID", "PID1", "PID2", "REF_NAME", "REL_START", "REL_END", "NOTES"],
-                [["U030", "P030-Solo", "P030-Solo", "P030-Solo", "", "", ""]],
+            "KG": table(
+                ["SUBJECT", "PREDICATE", "OBJECT", "DATE", "NOTES"],
+                [["P030-Solo", "spouseOf", "P030-Solo", "", ""]],
             ),
-            "Offsprings": table(["OID", "UNION_OF", "OFFSPRING", "NOTES"], []),
             "Vedic": table(["PERSON"], []),
             "$Config": table(["GOTRA"], []),
         }
         data, warnings = build(sheets, {"site": {"default_person": "P030"},
                                         "vedic": {"charts": False}})
-        family = data["families"][0]
-        self.assertEqual(family["father"], "P030")
-        self.assertIsNone(family["mother"], "the duplicate partner slot is cleared")
-        self.assertEqual(family["attributes"]["PID2"], "P030",
-                         "the raw sheet value is still recorded")
-        edge_ids = [e["id"] for e in data["graph"]["edges"]]
-        self.assertEqual(len(edge_ids), len(set(edge_ids)),
-                         "a self-union must not emit duplicate partner edges")
-        self.assertTrue(any("both partner slots" in w for w in warnings),
+        self.assertEqual(data["families"], [],
+                         "a self-reference must not create a union")
+        self.assertTrue(any("self-reference" in w for w in warnings),
                         "the typo should be reported as a warning")
 
-    def test_a_single_female_partner_is_recorded_as_the_mother(self):
+    def test_a_single_parent_family_uses_the_persons_gender(self):
         sheets = {
             "Persons": table(
                 ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "GENDER", "DOB",
                  "POB", "STATUS", "NOTES"],
-                [["P010", "Kala", "Kala Iyer", "P010-Kala", "Female", "", "", "Living", ""]],
+                [
+                    ["P010", "Kala", "Kala Iyer", "P010-Kala", "Female", "", "", "Living", ""],
+                    ["P011", "Child", "Child Iyer", "P011-Child", "Male", "", "", "Living", ""],
+                ],
             ),
-            "Unions": table(
-                ["UID", "PID1", "PID2", "REF_NAME", "REL_START", "REL_END", "NOTES"],
-                [["U010", "P010-Kala", "", "P010-Kala", "", "", ""]],
+            "KG": table(
+                ["SUBJECT", "PREDICATE", "OBJECT", "DATE", "NOTES"],
+                [["P010-Kala", "parentOf", "P011-Child", "", ""]],
             ),
-            "Offsprings": table(["OID", "UNION_OF", "OFFSPRING", "NOTES"], []),
             "Vedic": table(["PERSON"], []),
             "$Config": table(["GOTRA"], []),
         }
@@ -250,6 +275,7 @@ class BuildTests(unittest.TestCase):
         family = data["families"][0]
         self.assertIsNone(family["father"])
         self.assertEqual(family["mother"], "P010")
+        self.assertEqual(family["children"], ["P011"])
 
 
 class KgBuildTests(unittest.TestCase):
@@ -313,7 +339,55 @@ class KgBuildTests(unittest.TestCase):
             person = next(p for p in data["people"] if p["id"] == pid)
             self.assertIn(fam["id"], person["families"])
 
-    def test_kg_takes_precedence_over_legacy_unions(self):
+    def test_lowercase_pids_are_normalised(self):
+        # The live sheet mixes z031 with Z031 references. Resolution is
+        # case-insensitive, so the person record must use the same upper-case
+        # id or the graph points at a person that does not exist.
+        sheets = self.kg_sheets([
+            ["z031-Thejaswini", "childOf", "z027-Renganathan", "", ""],
+        ])
+        sheets["Persons"] = table(
+            ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "GENDER", "DOB",
+             "POB", "STATUS", "NOTES"],
+            [
+                ["z027", "Renganathan", "Renganathan", "z027-Renganathan",
+                 "Male", "", "", "Living", ""],
+                ["z031", "Thejaswini", "Thejaswini", "z031-Thejaswini",
+                 "Female", "", "", "Living", ""],
+            ],
+        )
+        data, _ = build(sheets, {"site": {"default_person": "z027"},
+                                 "vedic": {"charts": False}})
+        people = {p["id"]: p for p in data["people"]}
+        self.assertIn("Z031", people)
+        self.assertEqual(people["Z031"]["parent_family"],
+                         data["families"][0]["id"])
+        self.assertEqual(data["families"][0]["children"], ["Z031"])
+
+    def test_union_ids_do_not_collide_with_person_pids(self):
+        # The sheet uses generation-letter PIDs, so a family id such as F001
+        # would shadow the person F001 in the graph.
+        sheets = self.kg_sheets([
+            ["F001-Himavan", "spouseOf", "F002-Mena", "", ""],
+        ])
+        sheets["Persons"] = table(
+            ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "GENDER", "DOB",
+             "POB", "STATUS", "NOTES"],
+            [
+                ["F001", "Himavan", "Himavan", "F001-Himavan", "Male",
+                 "", "", "Living", ""],
+                ["F002", "Mena", "Mena", "F002-Mena", "Female",
+                 "", "", "Living", ""],
+            ],
+        )
+        data, _ = build(sheets, {"site": {"default_person": "F001"},
+                                 "vedic": {"charts": False}})
+        node_ids = [n["id"] for n in data["graph"]["nodes"]]
+        self.assertEqual(len(node_ids), len(set(node_ids)),
+                         "person and union node ids must be unique")
+        self.assertEqual([f["id"] for f in data["families"]], ["U001"])
+
+    def test_legacy_union_tabs_are_ignored(self):
         sheets = self.kg_sheets([
             ["P-201-Shiva", "spouseOf", "P-202-Parvati", "", ""],
         ])
@@ -327,11 +401,15 @@ class KgBuildTests(unittest.TestCase):
         )
         data, _ = build(sheets, {"site": {"default_person": "P-201"},
                                  "vedic": {"charts": False}})
-        family_ids = {f["id"] for f in data["families"]}
         self.assertEqual(len(data["families"]), 1)
-        self.assertNotIn("U001", family_ids)
-        self.assertEqual(data["families"][0]["father"], "P-201")
-        self.assertEqual(data["families"][0]["mother"], "P-202")
+        family = data["families"][0]
+        self.assertEqual(family["father"], "P-201")
+        self.assertEqual(family["mother"], "P-202")
+        # The legacy tab named P-101/P-102 and a different union; neither may
+        # leak into the KG-derived family.
+        partners = {family["father"], family["mother"]}
+        self.assertNotIn("P-101", partners)
+        self.assertNotIn("P-102", partners)
 
 
 class VedicInheritanceTests(unittest.TestCase):

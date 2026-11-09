@@ -3,8 +3,9 @@
 A static, browser-only family tree. The public site is published with GitHub
 Pages from the `docs/` folder.
 
-The **Google Sheet is the source of truth** for people, unions and offsprings.
-The older Gramps importer remains available as a fallback.
+The **Google Sheet is the source of truth** for people and relationships;
+`docs/data/trees/<tree>/tree.json` is generated from it. Gramps desktop is a
+downstream consumer, fed by the add-on's GEDCOM export.
 
 ## Updating the tree
 
@@ -26,8 +27,8 @@ The older Gramps importer remains available as a fallback.
 
    The importer downloads the workbook, caches it in
    `private/relatives-sheet.xlsx`, and writes `docs/data/tree.json`. It reads
-   the `Persons`, `Vedic`, `$Config`, `Unions`, `Offsprings` and `Stories` tabs
-   directly. A local `.xlsx` can be used instead:
+   the `Persons`, `Vedic`, `$Config`, `KG` and `Stories` tabs directly. A local
+   `.xlsx` can be used instead:
 
    ```
    .venv/bin/python scripts/import_sheet.py --url "YOUR_GOOGLE_SHEET_URL" private/relatives.xlsx
@@ -78,22 +79,34 @@ can be overridden in `source.tabs`.
 | `Persons` | `PID`, names, `EMAIL` (for Google sign-in), gender, `DOB`, `POB`, current location, `STATUS`, `DOD` (date of death), optional `POD` (place of death), notes, `GEN` (generation: A, B, C, …) |
 | `Vedic` | Per-person gotra, veda, shakha, sutra, nakshatra, kula devatha, sampradaya (Iyengar), acharya thirumaligai (Iyengar), purvikam, parvata. Lineage fields are inherited down the paternal line; after marriage a woman takes her husband's lineage but keeps her own nakshatra |
 | `$Config` | Gotra defaults for veda, shakha, sutra and nakshatra |
-| `Unions` | `UID`, `PID1`, `PID2`, `REF_NAME`, relationship dates and notes |
-| `Offsprings` | `OID`, `UNION_OF`, `OFFSPRING`, notes |
+| `KG` | The knowledge graph: `SUBJECT`, `PREDICATE`, `OBJECT`, `DATE`, `NOTES`, one relationship per row |
+| `Stories` | `NOTE_ID`, `TYPE`, `TITLE`, `IS_STORY`, `TAGGED_PEOPLE`, `TAGGED_NAMES`, `TEXT`, `UPDATED` |
 
-`PID1`, `PID2`, `UNION_OF` and `OFFSPRING` contain readable keys of the form
-`<PID>-<KNOWN_NAME>`, for example `P049-Sriram`. The known name is only a
-data-entry convenience: the PID prefix is the real key, and it keeps the
-reference unambiguous when two people share a known name. The importer resolves
-every relationship by that PID (falling back to an exact `REF_NAME` or a unique
-known name for hand-edited sheets), and all internal relationships are stored
-by PID. A name edit therefore does not break a union or offspring link.
+All relationships are edges in the `KG` tab. `SUBJECT` and `OBJECT` contain
+readable keys of the form `<PID>-<KNOWN_NAME>`, for example `P049-Sriram`, and
+`PREDICATE` is one of `spouseOf`, `parentOf` or `childOf`:
 
-The generated JSON keeps every original column as an attribute on the person
-or union node and on the offspring edge. The site graph has:
+```
+SUBJECT        PREDICATE  OBJECT
+P-101-Himavan  spouseOf   P-102-Mena
+P-101-Himavan  parentOf   P-202-Parvati
+P-202-Parvati  childOf    P-101-Himavan
+```
+
+The known name is only a data-entry convenience: the PID prefix is the real
+key, and it keeps the reference unambiguous when two people share a known name.
+The importer resolves every relationship by that PID (falling back to an exact
+`REF_NAME` or a unique known name for hand-edited sheets), and all internal
+relationships are stored by PID. A name edit therefore does not break a link.
+
+There are no separate `Unions` or `Offsprings` tabs. The importer derives the
+union/children model from the graph: `spouseOf` edges become union nodes,
+`parentOf`/`childOf` edges become those unions' children, and co-parenting is
+inferred through spouses. The generated JSON keeps every original column as an
+attribute on the person or union node. The site graph has:
 
 * `person` nodes for every `Persons` row;
-* `union` nodes for every `Unions` row;
+* `union` nodes derived from the `spouseOf` and parent edges;
 * `partner` edges from a person to their union;
 * `offspring` edges from a union to each child.
 
@@ -127,16 +140,24 @@ level before publishing (for example `Marietta, Georgia, USA` becomes
 `Marietta`). Birth places are treated the same way. This is a build-time rule
 in `scripts/import_sheet.py`.
 
-### Gramps fallback
+### Gramps desktop export
 
-To rebuild from a Gramps export instead:
+Gramps is fed from the sheet, never the other way round. In the spreadsheet,
+open **Extensions → Kula Genealogy → Export GEDCOM 5.5.1 File**. The add-on
+writes `<workbook>_FamilyTree_<timestamp>.ged` to your Google Drive and shows a
+download link; import it in Gramps with **Family Trees → Import → GEDCOM**.
 
-```
-python3 scripts/build_site.py private/export.gramps
-```
+What survives the trip:
 
-The Gramps path does not create graph data, but the tree view still renders
-unions from the family records.
+* people, families, birth and death events, and the marriage date;
+* notes and stories, attached to each person they are tagged with;
+* `GOTRA`, `VEDA`, `SHAKHA`, `SUTRA`, `NAKSHATRA`, `KULA_DEVATHA`,
+  `SAMPRADAYA` and `PURVIKAM`, as custom `_` attributes;
+* the original sheet PID, as the `_PID` attribute, so records can be traced
+  back to the sheet.
+
+What does not: the sidereal birth chart (no GEDCOM equivalent), the generation
+column, and the site's tree/list layout.
 
 ## Tree view
 
@@ -240,9 +261,9 @@ consistent without re-entering every field for each generation.
 
 Two rules keep the lineage and the birth data separate:
 
-* **Marriage.** Once a woman is recorded in a `Unions` row with a husband,
-  she inherits his lineage fields. Her own nakshatra is not replaced. If the
-  husband has no recorded lineage, her existing values are left in place
+* **Marriage.** Once a woman is linked to a husband with a `spouseOf` edge in
+  `KG`, she inherits his lineage fields. Her own nakshatra is not replaced. If
+  the husband has no recorded lineage, her existing values are left in place
   rather than being erased.
 * **Nakshatra is personal.** It follows the place, date and time of birth and
   is computed from the jatagam. It is never inherited from a parent or a
