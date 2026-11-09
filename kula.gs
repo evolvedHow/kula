@@ -1776,14 +1776,22 @@ function renumberCore_(dryRun) {
   // a list; the others hold a single reference.
   const refTargets = referenceTargets_(ss);
 
+  const zCount = Array.from(newPidMap.values()).filter(id => id.startsWith('Z')).length;
+
   if (dryRun) {
     let pending = 0;
     refTargets.forEach(target => {
       pending += rewritePidRefs_(target.sheet, target.cols, pidLookup, false, target.split, nameLookup);
     });
-    return `Preview Complete! ${persons.length} members across ` +
-           `${Object.keys(counters).length} generational tiers. ` +
-           `${pending} references in KG/Vedic/Stories would be rewritten. Nothing was changed.`;
+    let msg = `Preview Complete! ${persons.length} members across ` +
+              `${Object.keys(counters).length} generational tiers. ` +
+              `${pending} references in KG/Vedic/Stories would be rewritten. Nothing was changed.`;
+    if (zCount > 0) {
+      msg += `\n\n${zCount} member(s) would keep a Z prefix because they are not linked ` +
+             `to the root person (${headPid}) through parent/child relationships in the KG tab. ` +
+             `Add those relationships to place them in a generation.`;
+    }
+    return msg;
   }
 
   for (let i = 0; i < persons.length; i++) {
@@ -1797,11 +1805,16 @@ function renumberCore_(dryRun) {
     rewritten += rewritePidRefs_(target.sheet, target.cols, pidLookup, true, target.split, nameLookup);
   });
 
-  writeRenumberReport_(ss, persons, newPidMap, rewritten);
+  writeRenumberReport_(ss, persons, newPidMap, rewritten, headPid, zCount);
 
-  return `Renumbering Applied Successfully! ${persons.length} members renumbered ` +
-         `and ${rewritten} references rewritten across KG, Vedic and Stories. ` +
-         `Full old-to-new list is in the '${CFG.REPORT}' tab.`;
+  let msg = `Renumbering Applied Successfully! ${persons.length} members renumbered ` +
+            `and ${rewritten} references rewritten across KG, Vedic and Stories. ` +
+            `Full old-to-new list is in the '${CFG.REPORT}' tab.`;
+  if (zCount > 0) {
+    msg += `\n\n${zCount} member(s) kept a Z prefix because they are not linked ` +
+           `to the root person (${headPid}) through parent/child relationships in the KG tab.`;
+  }
+  return msg;
 }
 
 /**
@@ -1966,8 +1979,10 @@ function remapRefList_(value, lookup, names) {
  * @param {Array<Object>} persons Collected person records.
  * @param {Map<string,string>} newPidMap Old PID -> new PID.
  * @param {number} rewritten Count of references rewritten, for context.
+ * @param {string} headPid Root person used for generational tiers.
+ * @param {number} zCount Number of members not linked to the root.
  */
-function writeRenumberReport_(ss, persons, newPidMap, rewritten) {
+function writeRenumberReport_(ss, persons, newPidMap, rewritten, headPid, zCount) {
   let sheet = ss.getSheetByName(CFG.REPORT);
   if (!sheet) {
     sheet = ss.insertSheet(CFG.REPORT);
@@ -1977,9 +1992,15 @@ function writeRenumberReport_(ss, persons, newPidMap, rewritten) {
 
   const rows = [['OLD_PID', 'NEW_PID', 'KNOWN_NAME', 'NOTES']];
   persons.forEach(p => {
-    rows.push([p.pid, newPidMap.get(p.pid) || '', p.known, p.notes]);
+    const newId = newPidMap.get(p.pid) || '';
+    const note = newId.startsWith('Z')
+      ? (p.notes ? p.notes + ' ' : '') + '[Z: not linked to root ' + headPid + ']'
+      : p.notes;
+    rows.push([p.pid, newId, p.known, note]);
   });
   rows.push([]);
+  rows.push(['Root person', headPid]);
+  rows.push(['Z-tier members (not linked to root)', zCount]);
   rows.push(['References rewritten', rewritten]);
 
   sheet.getRange(1, 1, rows.length, 4).setValues(
