@@ -918,7 +918,7 @@ function populateInstructionsSheet_(sheet) {
     [""],
     ["⚙️ QUICK START MENU COMMANDS"],
     ["• Setup / Reset Workspace Tabs", "Creates the five core tabs, REF_NAME formulas and dropdowns."],
-    ["• Normalize References (REF_NAME)", "Refreshes relationship cells to the current REF_NAME (e.g. 'P-101-Himavan') and adds name-preview columns."]
+    ["• Normalize References (REF_NAME)", "Refreshes relationship cells to the current REF_NAME (e.g. 'P-101-Himavan') and adds name-preview columns."],
     ["• Flatten Knowledge Graph", "Compiles graph edges into the 'KG_FLAT' tab."],
     ["• Person Numbering", "Previews or applies generational renumbering and rewrites every reference."],
     ["• Validate Reference Integrity", "Reports orphan references, duplicate PIDs, unknown predicates and stale composite references."]
