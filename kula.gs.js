@@ -58,19 +58,20 @@ const SCHEMA = {
     ]
   },
   [CFG.KG]: {
-    // PIDs only; SUBJECT_NAME/OBJECT_NAME are read-only previews.
-    headers: ["SUBJECT", "SUBJECT_NAME", "PREDICATE", "OBJECT", "OBJECT_NAME", "DATE", "NOTES"],
+    // SUBJECT and OBJECT store REF_NAME (PID-KNOWN_NAME) so the sheet reads
+    // like a simple graph: Node — Predicate — Node.
+    headers: ["SUBJECT", "PREDICATE", "OBJECT", "DATE", "NOTES"],
     sample: [
-      ["P-101", "", "spouseOf", "P-102", "", "", "Himavan married to Menavati"],
-      ["P-101", "", "parentOf", "P-202", "", "", "Himavan parent of Parvati"],
-      ["P-101", "", "parentOf", "P-203", "", "", "Himavan parent of Mainaka"],
-      ["P-101", "", "parentOf", "P-204", "", "", "Himavan parent of Ganga"],
-      ["P-201", "", "spouseOf", "P-202", "", "", "Shiva married to Parvati"],
-      ["P-202", "", "parentOf", "P-301", "", "", "Parvati parent of Murugan"],
-      ["P-202", "", "parentOf", "P-302", "", "", "Parvati parent of Ganesha"],
-      ["P-202", "", "parentOf", "P-303", "", "", "Parvati parent of Ashokasundari"],
-      ["P-301", "", "spouseOf", "P-304", "", "", "Murugan married to Valli"],
-      ["P-301", "", "spouseOf", "P-305", "", "", "Murugan married to Deivayanai"]
+      ["P-101-Himavan", "spouseOf", "P-102-Mena", "", "Himavan married to Menavati"],
+      ["P-101-Himavan", "parentOf", "P-202-Parvati", "", "Himavan parent of Parvati"],
+      ["P-101-Himavan", "parentOf", "P-203-Mainaka", "", "Himavan parent of Mainaka"],
+      ["P-101-Himavan", "parentOf", "P-204-Ganga", "", "Himavan parent of Ganga"],
+      ["P-201-Shiva", "spouseOf", "P-202-Parvati", "", "Shiva married to Parvati"],
+      ["P-202-Parvati", "parentOf", "P-301-Murugan", "", "Parvati parent of Murugan"],
+      ["P-202-Parvati", "parentOf", "P-302-Ganesha", "", "Parvati parent of Ganesha"],
+      ["P-202-Parvati", "parentOf", "P-303-Ashokasundari", "", "Parvati parent of Ashokasundari"],
+      ["P-301-Murugan", "spouseOf", "P-304-Valli", "", "Murugan married to Valli"],
+      ["P-301-Murugan", "spouseOf", "P-305-Deivayanai", "", "Murugan married to Deivayanai"]
     ]
   },
   [CFG.VEDIC]: {
@@ -108,8 +109,9 @@ const HEADER_ALIASES = {
  * references in one cell.
  */
 const PREVIEWS = [
-  { tab: CFG.KG, ref: 'SUBJECT', refAliases: ['Subject (Node 1)'], name: 'SUBJECT_NAME', list: false },
-  { tab: CFG.KG, ref: 'OBJECT', refAliases: ['Object (Node 2)'], name: 'OBJECT_NAME', list: false },
+  // KG SUBJECT/OBJECT store REF_NAME directly, so no name-preview columns are
+  // needed there. Vedic and Stories still need them because those tabs store
+  // bare PIDs in comma-separated lists.
   { tab: CFG.VEDIC, ref: 'PERSON', refAliases: [], name: 'PERSON_NAME', list: false },
   { tab: CFG.STORIES, ref: 'TAGGED_PEOPLE', refAliases: [], name: 'TAGGED_NAMES', list: true }
 ];
@@ -905,15 +907,15 @@ function populateInstructionsSheet_(sheet) {
     ["Define simple direct edges in the 'KG' tab instead of a separate relationship table:"],
     [""],
     ["  SUBJECT", "PREDICATE", "OBJECT"],
-    ["  A001", "spouseOf", "A002"],
-    ["  A002", "parentOf", "B001"],
+    ["  A001-Name", "spouseOf", "A002-Name"],
+    ["  A002-Name", "parentOf", "B001-Name"],
     [""],
     ["💡 KEY FEATURES & INFERENCES"],
     ["• Automatic Co-Parenting", "If A001 spouseOf A002, and A002 parentOf B001, the system infers A001 parentOf B001."],
     ["• Bidirectional Links", "Running 'Flatten All' generates reciprocal spouseOf edges and reverse childOf edges."],
     ["• Generational PIDs", "Running 'Person Numbering > Apply Generational PIDs' assigns Axxx, Bxxx, Cxxx by distance from the patriarch."],
     ["• Derived REF_NAME", "REF_NAME is a formula, PID and KNOWN_NAME joined by a hyphen. Never type into it."],
-    ["• PID-only relationships", "KG, Vedic and Stories store bare PIDs. SUBJECT_NAME, OBJECT_NAME, PERSON_NAME and TAGGED_NAMES are read-only formulas that render the names."],
+    ["• REF_NAME relationships", "KG stores REF_NAME (PID-KNOWN_NAME) in SUBJECT and OBJECT so it reads like a graph. Vedic and Stories store bare PIDs; PERSON_NAME and TAGGED_NAMES are read-only formulas that render the names."],
     ["• Older composite refs", "Cells like 'P-101-Himavan' still resolve, but the name half can go stale. Use 'Normalize References (REF_NAME)' to refresh them to the current REF_NAME."],
     [""],
     ["⚙️ QUICK START MENU COMMANDS"],
@@ -1593,9 +1595,9 @@ function renumberCore_(dryRun) {
     throw new Error("Persons must have a PID column. Run 'Plugin Setup' first.");
   }
 
-  // KG columns are resolved by header, never by position: the read-only
-  // SUBJECT_NAME/OBJECT_NAME preview columns sit between the data columns, so
-  // indexes 0/1/2 are only correct until the first normalization.
+  // KG columns are resolved by header, never by position: legacy sheets may
+  // still have SUBJECT_NAME/OBJECT_NAME preview columns between the data
+  // columns, so hard-coded indexes would be fragile.
   const kgHeader = kgData.length ? kgData[0] : [];
   const kSubCol = firstColumnOf_(kgHeader, ['SUBJECT', 'Subject (Node 1)']) - 1;
   const kRelCol = firstColumnOf_(kgHeader, ['PREDICATE', 'Predicate']) - 1;
