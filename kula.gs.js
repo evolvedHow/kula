@@ -1155,36 +1155,44 @@ function applyValidations_(ss) {
   const kg = ss.getSheetByName(CFG.KG);
   if (!persons) return;
 
-  const header = persons.getRange(1, 1, 1, persons.getLastColumn() || 10).getValues()[0];
+  const personsLastCol = persons.getLastColumn();
+  if (!personsLastCol) return;
+
+  const headerValues = persons.getRange(1, 1, 1, personsLastCol).getValues();
+  if (!headerValues || !headerValues.length) return;
+  const header = headerValues[0];
+
   const pidCol = columnOf_(header, 'PID');
   const refNameCol = columnOf_(header, 'REF_NAME');
   const genderCol = columnOf_(header, 'GENDER');
   const statusCol = columnOf_(header, 'STATUS');
 
-  const pidRange = pidCol === -1 ? null : persons.getRange(2, pidCol, setupCoverage_(persons) - 1, 1);
-  const refNameRange = refNameCol === -1 ? null : persons.getRange(2, refNameCol, setupCoverage_(persons) - 1, 1);
+  const personsRows = setupCoverage_(persons) - 1;
+  const pidRange = pidCol === -1 || personsRows <= 0 ? null : persons.getRange(2, pidCol, personsRows, 1);
+  const refNameRange = refNameCol === -1 || personsRows <= 0 ? null : persons.getRange(2, refNameCol, personsRows, 1);
   // Prefer REF_NAME for dropdowns so humans see "P-101-Himavan" instead of a bare PID.
   const personRefRange = refNameRange || pidRange;
 
   // Persons tab: obvious pick-lists. Invalid values are still allowed so the
   // sheet never blocks a user who needs a non-standard entry.
-  const personsRows = setupCoverage_(persons) - 1;
-  if (genderCol !== -1) {
-    const genderRule = SpreadsheetApp.newDataValidation()
-      .requireValueInList(['Male', 'Female'], true)
-      .setAllowInvalid(true)
-      .setHelpText('Pick Male or Female, or leave blank.')
-      .build();
-    persons.getRange(2, genderCol, personsRows, 1).setDataValidation(genderRule);
-  }
+  if (personsRows > 0) {
+    if (genderCol !== -1) {
+      const genderRule = SpreadsheetApp.newDataValidation()
+        .requireValueInList(['Male', 'Female'], true)
+        .setAllowInvalid(true)
+        .setHelpText('Pick Male or Female, or leave blank.')
+        .build();
+      persons.getRange(2, genderCol, personsRows, 1).setDataValidation(genderRule);
+    }
 
-  if (statusCol !== -1) {
-    const statusRule = SpreadsheetApp.newDataValidation()
-      .requireValueInList(['Living', 'Deceased'], true)
-      .setAllowInvalid(true)
-      .setHelpText('Pick Living or Deceased, or leave blank.')
-      .build();
-    persons.getRange(2, statusCol, personsRows, 1).setDataValidation(statusRule);
+    if (statusCol !== -1) {
+      const statusRule = SpreadsheetApp.newDataValidation()
+        .requireValueInList(['Living', 'Deceased'], true)
+        .setAllowInvalid(true)
+        .setHelpText('Pick Living or Deceased, or leave blank.')
+        .build();
+      persons.getRange(2, statusCol, personsRows, 1).setDataValidation(statusRule);
+    }
   }
 
   if (kg) {
