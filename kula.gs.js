@@ -1141,9 +1141,12 @@ function remapExactList_(value, lookup) {
 
 /**
  * Applies dropdowns to the columns where a typo would silently break a
- * relationship: the KG predicate, and every cell that must name a person.
+ * relationship or a canonical value: the KG predicate, every cell that must
+ * name a person, plus the GENDER and STATUS columns in Persons.
  * Person pickers allow free text so half-entered rows are not blocked; the
  * predicate list is strict because an unknown predicate is simply ignored.
+ * Gender and status lists are suggestions: blanks are allowed and invalid
+ * entries are still permitted so the sheet never blocks custom values.
  *
  * @param {SpreadsheetApp.Spreadsheet} ss Spreadsheet being set up.
  */
@@ -1155,11 +1158,34 @@ function applyValidations_(ss) {
   const header = persons.getRange(1, 1, 1, persons.getLastColumn() || 10).getValues()[0];
   const pidCol = columnOf_(header, 'PID');
   const refNameCol = columnOf_(header, 'REF_NAME');
+  const genderCol = columnOf_(header, 'GENDER');
+  const statusCol = columnOf_(header, 'STATUS');
 
   const pidRange = pidCol === -1 ? null : persons.getRange(2, pidCol, setupCoverage_(persons) - 1, 1);
   const refNameRange = refNameCol === -1 ? null : persons.getRange(2, refNameCol, setupCoverage_(persons) - 1, 1);
   // Prefer REF_NAME for dropdowns so humans see "P-101-Himavan" instead of a bare PID.
   const personRefRange = refNameRange || pidRange;
+
+  // Persons tab: obvious pick-lists. Invalid values are still allowed so the
+  // sheet never blocks a user who needs a non-standard entry.
+  const personsRows = setupCoverage_(persons) - 1;
+  if (genderCol !== -1) {
+    const genderRule = SpreadsheetApp.newDataValidation()
+      .requireValueInList(['Male', 'Female'], true)
+      .setAllowInvalid(true)
+      .setHelpText('Pick Male or Female, or leave blank.')
+      .build();
+    persons.getRange(2, genderCol, personsRows, 1).setDataValidation(genderRule);
+  }
+
+  if (statusCol !== -1) {
+    const statusRule = SpreadsheetApp.newDataValidation()
+      .requireValueInList(['Living', 'Deceased'], true)
+      .setAllowInvalid(true)
+      .setHelpText('Pick Living or Deceased, or leave blank.')
+      .build();
+    persons.getRange(2, statusCol, personsRows, 1).setDataValidation(statusRule);
+  }
 
   if (kg) {
     const kgHeader = kg.getRange(1, 1, 1, kg.getLastColumn() || 3).getValues()[0];
