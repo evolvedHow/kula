@@ -1,6 +1,6 @@
 {
   "schema": "kula-panchang/v1",
-  "generated_at": "2026-11-08T23:00:14.519842+00:00",
+  "generated_at": "2026-11-09T11:22:11.163170+00:00",
   "years": [
     2027
   ],
@@ -46,7 +46,7 @@
   "counts": {
     "amavasya": 13,
     "festival": 7,
-    "janma_nakshatra": 98,
+    "janma_nakshatra": 106,
     "purnima": 12,
     "shraddha": 30
   },
@@ -782,6 +782,67 @@
         "year": 2027,
         "birth_date": "1972-02-01",
         "birth_reference": "1972-02-01T06:35:19.093609+05:30",
+        "birth_source": "derived from birth date at sunrise",
+        "nakshatra_start": null,
+        "nakshatra_end": null,
+        "ritual": "Janma Nakshatra"
+      },
+      "warnings": [
+        "Birth time is unknown. Janma nakshatra is computed at sunrise; set birth_time in the sidecar for an exact result."
+      ],
+      "confidence": "high"
+    },
+    {
+      "uid": "kula-panchang-z031-janma-2027@kula.local",
+      "date": "2027-01-27",
+      "kind": "janma_nakshatra",
+      "summary": "Janma Nakshatra: Thejaswini Renganathan - Hasta",
+      "description": "Janma Nakshatra: Thejaswini Renganathan - Hasta\n\nPerson: Thejaswini Renganathan (Z031)\nRecorded date: 2005-01-31\nTithi: Krishna Shashthi (Shashti)\nMasa: Makara (Thai) [solar]\nNakshatra: Hasta (Hastham), pada 4\nSunrise: 06:35  Sunset: 18:07  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nBirth: 2005-01-31\nBirth nakshatra: Hasta\nBirth masa: Makara (Thai)\nLunar masa at birth: Pausha (Thai)\n\nConfidence: high\nSource: derived from birth date at sunrise",
+      "location": {
+        "name": "Chennai",
+        "latitude": 13.0827,
+        "longitude": 80.2707,
+        "elevation_m": 10.0,
+        "timezone": "Asia/Kolkata"
+      },
+      "all_day": true,
+      "start": "2027-01-27T06:35:34.339593+05:30",
+      "end": "2027-01-27T18:07:38.089784+05:30",
+      "person_id": "Z031",
+      "person_name": "Thejaswini Renganathan",
+      "gotra": null,
+      "tithi": {
+        "index": 21,
+        "name": "Shashthi",
+        "label": "Krishna Shashthi",
+        "tamil_name": "Shashti",
+        "paksha": "Krishna",
+        "fraction": 0.23362,
+        "difference_deg": 242.80341
+      },
+      "masa": {
+        "name": "Makara",
+        "tamil_name": "Thai",
+        "malayalam_name": "Makaram",
+        "index": 9,
+        "system": "solar",
+        "adhika": false,
+        "label": "Makara (Thai)",
+        "start": "2005-01-14T05:41:33.859684+05:30",
+        "end": "2005-02-12T18:42:35.762413+05:30"
+      },
+      "nakshatra": {
+        "index": 13,
+        "name": "Hasta",
+        "tamil_name": "Hastham",
+        "pada": 4,
+        "longitude_deg": 170.12986
+      },
+      "festivals": [],
+      "details": {
+        "year": 2027,
+        "birth_date": "2005-01-31",
+        "birth_reference": "2005-01-31T06:35:14.356157+05:30",
         "birth_source": "derived from birth date at sunrise",
         "nakshatra_start": null,
         "nakshatra_end": null,
@@ -2665,6 +2726,67 @@
       "confidence": "high"
     },
     {
+      "uid": "kula-panchang-z33-janma-2027@kula.local",
+      "date": "2027-04-04",
+      "kind": "janma_nakshatra",
+      "summary": "Janma Nakshatra: Krithika Suresh - Shatabhisha",
+      "description": "Janma Nakshatra: Krithika Suresh - Shatabhisha\n\nPerson: Krithika Suresh (Z33)\nRecorded date: 1974-03-22\nTithi: Krishna Chaturdasi (Chathurdasi)\nMasa: Meena (Panguni) [solar]\nNakshatra: Shatabhisha (Sadayam), pada 3\nSunrise: 06:03  Sunset: 18:20  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nBirth: 1974-03-22\nBirth nakshatra: Shatabhisha\nBirth masa: Meena (Panguni)\nLunar masa at birth: Phalguna (Panguni)\n\nConfidence: high\nSource: derived from birth date at sunrise",
+      "location": {
+        "name": "Chennai",
+        "latitude": 13.0827,
+        "longitude": 80.2707,
+        "elevation_m": 10.0,
+        "timezone": "Asia/Kolkata"
+      },
+      "all_day": true,
+      "start": "2027-04-04T06:03:19.552944+05:30",
+      "end": "2027-04-04T18:20:54.489085+05:30",
+      "person_id": "Z33",
+      "person_name": "Krithika Suresh",
+      "gotra": null,
+      "tithi": {
+        "index": 29,
+        "name": "Chaturdasi",
+        "label": "Krishna Chaturdasi",
+        "tamil_name": "Chathurdasi",
+        "paksha": "Krishna",
+        "fraction": 0.19216,
+        "difference_deg": 338.3059
+      },
+      "masa": {
+        "name": "Meena",
+        "tamil_name": "Panguni",
+        "malayalam_name": "Meenam",
+        "index": 11,
+        "system": "solar",
+        "adhika": false,
+        "label": "Meena (Panguni)",
+        "start": "1974-03-14T16:53:45.874677+05:30",
+        "end": "1974-04-14T01:23:29.328425+05:30"
+      },
+      "nakshatra": {
+        "index": 24,
+        "name": "Shatabhisha",
+        "tamil_name": "Sadayam",
+        "pada": 3,
+        "longitude_deg": 315.82187
+      },
+      "festivals": [],
+      "details": {
+        "year": 2027,
+        "birth_date": "1974-03-22",
+        "birth_reference": "1974-03-22T06:12:05.624563+05:30",
+        "birth_source": "derived from birth date at sunrise",
+        "nakshatra_start": null,
+        "nakshatra_end": null,
+        "ritual": "Janma Nakshatra"
+      },
+      "warnings": [
+        "Birth time is unknown. Janma nakshatra is computed at sunrise; set birth_time in the sidecar for an exact result."
+      ],
+      "confidence": "high"
+    },
+    {
       "uid": "kula-panchang-e045-janma-2027@kula.local",
       "date": "2027-04-04",
       "kind": "janma_nakshatra",
@@ -3298,11 +3420,11 @@
       "confidence": "high"
     },
     {
-      "uid": "kula-panchang-b001-shraddha-2027@kula.local",
-      "date": "2027-05-02",
-      "kind": "shraddha",
-      "summary": "Shraddha / Tarpanam: V.V. Viswanatha Iyer (Harita Gotram)",
-      "description": "Shraddha / Tarpanam: V.V. Viswanatha Iyer (Harita Gotram)\n\nPerson: V.V. Viswanatha Iyer (B001)\nGotram: Harita Gotram\nRecorded date: 1953-05-09\nTithi: Krishna Ekadasi (Ekadasi)\nMasa: Mesha (Chithirai) [solar]\nNakshatra: Uttara Bhadrapada (Uthirattathi), pada 1\nSunrise: 05:47  Sunset: 18:24  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nDeath: 1953-05-09\nDeath tithi: Krishna Ekadasi\nDeath masa: Mesha (Chithirai)\nLunar masa at death: Adhika Vaisakha (Vaikasi)\nGotram: Harita Gotram\nAge at death: 58\n\nConfidence: high\nSource: derived from death date at aparahna",
+      "uid": "kula-panchang-z30-janma-2027@kula.local",
+      "date": "2027-05-01",
+      "kind": "janma_nakshatra",
+      "summary": "Janma Nakshatra: Suresh Renganathan - Shatabhisha",
+      "description": "Janma Nakshatra: Suresh Renganathan - Shatabhisha\n\nPerson: Suresh Renganathan (Z30)\nRecorded date: 1969-05-10\nTithi: Krishna Navami (Navami)\nMasa: Mesha (Chithirai) [solar]\nNakshatra: Shatabhisha (Sadayam), pada 2\nSunrise: 05:48  Sunset: 18:24  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nBirth: 1969-05-10\nBirth nakshatra: Shatabhisha\nBirth masa: Mesha (Chithirai)\nLunar masa at birth: Vaisakha (Vaikasi)\n\nConfidence: high\nSource: derived from birth date at sunrise",
       "location": {
         "name": "Chennai",
         "latitude": 13.0827,
@@ -3311,19 +3433,19 @@
         "timezone": "Asia/Kolkata"
       },
       "all_day": true,
-      "start": "2027-05-02T13:30:00+05:30",
-      "end": "2027-05-02T16:00:00+05:30",
-      "person_id": "B001",
-      "person_name": "V.V. Viswanatha Iyer",
-      "gotra": "Harita",
+      "start": "2027-05-01T05:48:09.038993+05:30",
+      "end": "2027-05-01T18:24:08.965278+05:30",
+      "person_id": "Z30",
+      "person_name": "Suresh Renganathan",
+      "gotra": null,
       "tithi": {
-        "index": 26,
-        "name": "Ekadasi",
-        "label": "Krishna Ekadasi",
-        "tamil_name": "Ekadasi",
+        "index": 24,
+        "name": "Navami",
+        "label": "Krishna Navami",
+        "tamil_name": "Navami",
         "paksha": "Krishna",
-        "fraction": 0.6824,
-        "difference_deg": 308.18878
+        "fraction": 0.74126,
+        "difference_deg": 284.89508
       },
       "masa": {
         "name": "Mesha",
@@ -3333,32 +3455,27 @@
         "system": "solar",
         "adhika": false,
         "label": "Mesha (Chithirai)",
-        "start": "1953-04-13T16:16:06.378263+05:30",
-        "end": "1953-05-14T13:11:54.265126+05:30"
+        "start": "1969-04-13T18:42:19.646789+05:30",
+        "end": "1969-05-14T15:38:57.409383+05:30"
       },
       "nakshatra": {
-        "index": 26,
-        "name": "Uttara Bhadrapada",
-        "tamil_name": "Uthirattathi",
-        "pada": 1,
-        "longitude_deg": 333.42176
+        "index": 24,
+        "name": "Shatabhisha",
+        "tamil_name": "Sadayam",
+        "pada": 2,
+        "longitude_deg": 310.63406
       },
       "festivals": [],
       "details": {
         "year": 2027,
-        "death_date": "1953-05-09",
-        "death_reference": "1953-05-09T14:45:00+05:30",
-        "death_source": "derived from death date at aparahna",
-        "aparahna_start": "2027-05-02T13:30:00+05:30",
-        "aparahna_end": "2027-05-02T16:00:00+05:30",
-        "tithi_window": [
-          "2027-05-02T13:30:00+05:30",
-          "2027-05-02T16:00:00+05:30"
-        ],
-        "ritual": "Shraddha / Tarpanam"
+        "birth_date": "1969-05-10",
+        "birth_reference": "1969-05-10T05:44:39.678592+05:30",
+        "birth_source": "derived from birth date at sunrise",
+        "nakshatra_start": null,
+        "nakshatra_end": null,
+        "ritual": "Janma Nakshatra"
       },
       "warnings": [
-        "Death time is unknown. The tithi is computed at aparahna, the ritual reference, not at sunrise. Set death_time in the sidecar to make this exact.",
         "Birth time is unknown. Janma nakshatra is computed at sunrise; set birth_time in the sidecar for an exact result."
       ],
       "confidence": "high"
@@ -3612,6 +3729,72 @@
         "year": 2027,
         "death_date": "1993-04-29",
         "death_reference": "1993-04-29T14:45:00+05:30",
+        "death_source": "derived from death date at aparahna",
+        "aparahna_start": "2027-05-13T13:30:00+05:30",
+        "aparahna_end": "2027-05-13T16:00:00+05:30",
+        "tithi_window": [
+          "2027-05-13T13:30:00+05:30",
+          "2027-05-13T16:00:00+05:30"
+        ],
+        "ritual": "Shraddha / Tarpanam"
+      },
+      "warnings": [
+        "Death time is unknown. The tithi is computed at aparahna, the ritual reference, not at sunrise. Set death_time in the sidecar to make this exact.",
+        "Birth time is unknown. Janma nakshatra is computed at sunrise; set birth_time in the sidecar for an exact result."
+      ],
+      "confidence": "high"
+    },
+    {
+      "uid": "kula-panchang-b001-shraddha-2027@kula.local",
+      "date": "2027-05-13",
+      "kind": "shraddha",
+      "summary": "Shraddha / Tarpanam: V.V. Viswanatha Iyer (Harita Gotram)",
+      "description": "Shraddha / Tarpanam: V.V. Viswanatha Iyer (Harita Gotram)\n\nPerson: V.V. Viswanatha Iyer (B001)\nGotram: Harita Gotram\nRecorded date: 1953-04-21\nTithi: Sukla Ashtami (Ashtami)\nMasa: Mesha (Chithirai) [solar]\nNakshatra: Pushya (Poosam), pada 3\nSunrise: 05:43  Sunset: 18:26  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nDeath: 1953-04-21\nDeath tithi: Sukla Ashtami\nDeath masa: Mesha (Chithirai)\nLunar masa at death: Adhika Vaisakha (Vaikasi)\nGotram: Harita Gotram\nAge at death: 57\n\nConfidence: high\nSource: derived from death date at aparahna",
+      "location": {
+        "name": "Chennai",
+        "latitude": 13.0827,
+        "longitude": 80.2707,
+        "elevation_m": 10.0,
+        "timezone": "Asia/Kolkata"
+      },
+      "all_day": true,
+      "start": "2027-05-13T13:30:00+05:30",
+      "end": "2027-05-13T16:00:00+05:30",
+      "person_id": "B001",
+      "person_name": "V.V. Viswanatha Iyer",
+      "gotra": "Harita",
+      "tithi": {
+        "index": 8,
+        "name": "Ashtami",
+        "label": "Sukla Ashtami",
+        "tamil_name": "Ashtami",
+        "paksha": "Sukla",
+        "fraction": 0.83046,
+        "difference_deg": 93.96553
+      },
+      "masa": {
+        "name": "Mesha",
+        "tamil_name": "Chithirai",
+        "malayalam_name": "Medam",
+        "index": 0,
+        "system": "solar",
+        "adhika": false,
+        "label": "Mesha (Chithirai)",
+        "start": "1953-04-13T16:16:06.378263+05:30",
+        "end": "1953-05-14T13:11:54.265126+05:30"
+      },
+      "nakshatra": {
+        "index": 8,
+        "name": "Pushya",
+        "tamil_name": "Poosam",
+        "pada": 3,
+        "longitude_deg": 101.72591
+      },
+      "festivals": [],
+      "details": {
+        "year": 2027,
+        "death_date": "1953-04-21",
+        "death_reference": "1953-04-21T14:45:00+05:30",
         "death_source": "derived from death date at aparahna",
         "aparahna_start": "2027-05-13T13:30:00+05:30",
         "aparahna_end": "2027-05-13T16:00:00+05:30",
@@ -4650,8 +4833,8 @@
       "uid": "kula-panchang-z028-janma-2027@kula.local",
       "date": "2027-06-15",
       "kind": "janma_nakshatra",
-      "summary": "Janma Nakshatra: Aruna - Swati",
-      "description": "Janma Nakshatra: Aruna - Swati\n\nPerson: Aruna (Z028)\nRecorded date: 1968-06-08\nTithi: Sukla Dwadasi (Dwadasi)\nMasa: Vrishabha (Vaikasi) [solar]\nNakshatra: Swati (Swathi), pada 3\nSunrise: 05:42  Sunset: 18:36  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nBirth: 1968-06-08\nBirth nakshatra: Swati\nBirth masa: Vrishabha (Vaikasi)\nLunar masa at birth: Jyeshtha (Aani)\n\nConfidence: high\nSource: derived from birth date at sunrise",
+      "summary": "Janma Nakshatra: Aruna Renganathan - Swati",
+      "description": "Janma Nakshatra: Aruna Renganathan - Swati\n\nPerson: Aruna Renganathan (Z028)\nRecorded date: 1968-06-08\nTithi: Sukla Dwadasi (Dwadasi)\nMasa: Vrishabha (Vaikasi) [solar]\nNakshatra: Swati (Swathi), pada 3\nSunrise: 05:42  Sunset: 18:36  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nBirth: 1968-06-08\nBirth nakshatra: Swati\nBirth masa: Vrishabha (Vaikasi)\nLunar masa at birth: Jyeshtha (Aani)\n\nConfidence: high\nSource: derived from birth date at sunrise",
       "location": {
         "name": "Chennai",
         "latitude": 13.0827,
@@ -4663,7 +4846,7 @@
       "start": "2027-06-15T05:42:24.272849+05:30",
       "end": "2027-06-15T18:36:18.568080+05:30",
       "person_id": "Z028",
-      "person_name": "Aruna",
+      "person_name": "Aruna Renganathan",
       "gotra": null,
       "tithi": {
         "index": 12,
@@ -5631,67 +5814,6 @@
       "confidence": "high"
     },
     {
-      "uid": "kula-panchang-c016-janma-2027@kula.local",
-      "date": "2027-07-31",
-      "kind": "janma_nakshatra",
-      "summary": "Janma Nakshatra: Gayathri/Rukmini Ramachandran - Ardra",
-      "description": "Janma Nakshatra: Gayathri/Rukmini Ramachandran - Ardra\n\nPerson: Gayathri/Rukmini Ramachandran (C016)\nGotram: Harita Gotram\nRecorded date: 2026-08-10\nTithi: Krishna Dwadasi (Dwadasi)\nMasa: Karka (Aadi) [solar]\nNakshatra: Ardra (Thiruvathirai), pada 3\nSunrise: 05:53  Sunset: 18:36  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nBirth: 2026-08-10\nBirth nakshatra: Ardra\nBirth masa: Karka (Aadi)\nLunar masa at birth: Ashadha (Aadi)\nGotram: Harita Gotram\n\nConfidence: high\nSource: derived from birth date at sunrise",
-      "location": {
-        "name": "Chennai",
-        "latitude": 13.0827,
-        "longitude": 80.2707,
-        "elevation_m": 10.0,
-        "timezone": "Asia/Kolkata"
-      },
-      "all_day": true,
-      "start": "2027-07-31T05:53:53.002245+05:30",
-      "end": "2027-07-31T18:36:41.229273+05:30",
-      "person_id": "C016",
-      "person_name": "Gayathri/Rukmini Ramachandran",
-      "gotra": "Harita",
-      "tithi": {
-        "index": 27,
-        "name": "Dwadasi",
-        "label": "Krishna Dwadasi",
-        "tamil_name": "Dwadasi",
-        "paksha": "Krishna",
-        "fraction": 0.89979,
-        "difference_deg": 322.79746
-      },
-      "masa": {
-        "name": "Karka",
-        "tamil_name": "Aadi",
-        "malayalam_name": "Karkidakam",
-        "index": 3,
-        "system": "solar",
-        "adhika": false,
-        "label": "Karka (Aadi)",
-        "start": "2026-07-16T23:39:22.962064+05:30",
-        "end": "2026-08-17T07:58:45.761926+05:30"
-      },
-      "nakshatra": {
-        "index": 6,
-        "name": "Ardra",
-        "tamil_name": "Thiruvathirai",
-        "pada": 3,
-        "longitude_deg": 75.99201
-      },
-      "festivals": [],
-      "details": {
-        "year": 2027,
-        "birth_date": "2026-08-10",
-        "birth_reference": "2026-08-10T05:55:45.010690+05:30",
-        "birth_source": "derived from birth date at sunrise",
-        "nakshatra_start": null,
-        "nakshatra_end": null,
-        "ritual": "Janma Nakshatra"
-      },
-      "warnings": [
-        "Birth time is unknown. Janma nakshatra is computed at sunrise; set birth_time in the sidecar for an exact result."
-      ],
-      "confidence": "high"
-    },
-    {
       "uid": "kula-panchang-d004-shraddha-2027@kula.local",
       "date": "2027-08-02",
       "kind": "shraddha",
@@ -5890,6 +6012,67 @@
         "ritual": "Aadi Amavasai"
       },
       "warnings": [],
+      "confidence": "high"
+    },
+    {
+      "uid": "kula-panchang-c016-janma-2027@kula.local",
+      "date": "2027-08-05",
+      "kind": "janma_nakshatra",
+      "summary": "Janma Nakshatra: Gayathri/Rukmini Ramachandran - Purva Phalguni",
+      "description": "Janma Nakshatra: Gayathri/Rukmini Ramachandran - Purva Phalguni\n\nPerson: Gayathri/Rukmini Ramachandran (C016)\nGotram: Harita Gotram\nRecorded date: 1945-08-10\nTithi: Sukla Dwitiya (Thuthiyai)\nMasa: Karka (Aadi) [solar]\nNakshatra: Purva Phalguni (Pooram), pada 2\nSunrise: 05:54  Sunset: 18:34  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nBirth: 1945-08-10\nBirth nakshatra: Purva Phalguni\nBirth masa: Karka (Aadi)\nLunar masa at birth: Shravana (Avani)\nGotram: Harita Gotram\n\nConfidence: high\nSource: derived from birth date at sunrise",
+      "location": {
+        "name": "Chennai",
+        "latitude": 13.0827,
+        "longitude": 80.2707,
+        "elevation_m": 10.0,
+        "timezone": "Asia/Kolkata"
+      },
+      "all_day": true,
+      "start": "2027-08-05T05:54:52.829883+05:30",
+      "end": "2027-08-05T18:34:57.051403+05:30",
+      "person_id": "C016",
+      "person_name": "Gayathri/Rukmini Ramachandran",
+      "gotra": "Harita",
+      "tithi": {
+        "index": 2,
+        "name": "Dwitiya",
+        "label": "Sukla Dwitiya",
+        "tamil_name": "Thuthiyai",
+        "paksha": "Sukla",
+        "fraction": 0.95866,
+        "difference_deg": 23.50392
+      },
+      "masa": {
+        "name": "Karka",
+        "tamil_name": "Aadi",
+        "malayalam_name": "Karkidakam",
+        "index": 3,
+        "system": "solar",
+        "adhika": false,
+        "label": "Karka (Aadi)",
+        "start": "1945-07-16T06:31:24.137061+06:30",
+        "end": "1945-08-16T14:52:08.506628+06:30"
+      },
+      "nakshatra": {
+        "index": 11,
+        "name": "Purva Phalguni",
+        "tamil_name": "Pooram",
+        "pada": 2,
+        "longitude_deg": 137.42315
+      },
+      "festivals": [],
+      "details": {
+        "year": 2027,
+        "birth_date": "1945-08-10",
+        "birth_reference": "1945-08-10T06:55:31.212656+06:30",
+        "birth_source": "derived from birth date at sunrise",
+        "nakshatra_start": null,
+        "nakshatra_end": null,
+        "ritual": "Janma Nakshatra"
+      },
+      "warnings": [
+        "Birth time is unknown. Janma nakshatra is computed at sunrise; set birth_time in the sidecar for an exact result."
+      ],
       "confidence": "high"
     },
     {
@@ -7766,6 +7949,67 @@
       "confidence": "high"
     },
     {
+      "uid": "kula-panchang-e030-janma-2027@kula.local",
+      "date": "2027-10-04",
+      "kind": "janma_nakshatra",
+      "summary": "Janma Nakshatra: Priyal Shah Ganapathy - Anuradha",
+      "description": "Janma Nakshatra: Priyal Shah Ganapathy - Anuradha\n\nPerson: Priyal Shah Ganapathy (E030)\nGotram: Harita Gotram\nRecorded date: 2026-10-14\nTithi: Sukla Chaturthi (Chathurthi)\nMasa: Kanya (Purattasi) [solar]\nNakshatra: Anuradha (Anusham), pada 1\nSunrise: 05:58  Sunset: 17:57  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nBirth: 2026-10-14\nBirth nakshatra: Anuradha\nBirth masa: Kanya (Purattasi)\nLunar masa at birth: Ashwina (Aippasi)\nGotram: Harita Gotram\n\nConfidence: high\nSource: derived from birth date at sunrise",
+      "location": {
+        "name": "Chennai",
+        "latitude": 13.0827,
+        "longitude": 80.2707,
+        "elevation_m": 10.0,
+        "timezone": "Asia/Kolkata"
+      },
+      "all_day": true,
+      "start": "2027-10-04T05:58:08.520634+05:30",
+      "end": "2027-10-04T17:57:13.502989+05:30",
+      "person_id": "E030",
+      "person_name": "Priyal Shah Ganapathy",
+      "gotra": "Harita",
+      "tithi": {
+        "index": 4,
+        "name": "Chaturthi",
+        "label": "Sukla Chaturthi",
+        "tamil_name": "Chathurthi",
+        "paksha": "Sukla",
+        "fraction": 0.25461,
+        "difference_deg": 39.05534
+      },
+      "masa": {
+        "name": "Kanya",
+        "tamil_name": "Purattasi",
+        "malayalam_name": "Kanni",
+        "index": 5,
+        "system": "solar",
+        "adhika": false,
+        "label": "Kanya (Purattasi)",
+        "start": "2026-09-17T07:52:57.431086+05:30",
+        "end": "2026-10-17T19:51:42.179593+05:30"
+      },
+      "nakshatra": {
+        "index": 17,
+        "name": "Anuradha",
+        "tamil_name": "Anusham",
+        "pada": 1,
+        "longitude_deg": 215.50792
+      },
+      "festivals": [],
+      "details": {
+        "year": 2027,
+        "birth_date": "2026-10-14",
+        "birth_reference": "2026-10-14T05:58:57.683634+05:30",
+        "birth_source": "derived from birth date at sunrise",
+        "nakshatra_start": null,
+        "nakshatra_end": null,
+        "ritual": "Janma Nakshatra"
+      },
+      "warnings": [
+        "Birth time is unknown. Janma nakshatra is computed at sunrise; set birth_time in the sidecar for an exact result."
+      ],
+      "confidence": "high"
+    },
+    {
       "uid": "kula-panchang-e044-janma-2027@kula.local",
       "date": "2027-10-05",
       "kind": "janma_nakshatra",
@@ -8391,6 +8635,67 @@
       "confidence": "high"
     },
     {
+      "uid": "kula-panchang-d006-janma-2027@kula.local",
+      "date": "2027-10-31",
+      "kind": "janma_nakshatra",
+      "summary": "Janma Nakshatra: Malathi Narayanan - Vishakha",
+      "description": "Janma Nakshatra: Malathi Narayanan - Vishakha\n\nPerson: Malathi Narayanan (D006)\nRecorded date: 1964-11-05\nTithi: Sukla Pratipada (Pirathamai)\nMasa: Tula (Aippasi) [solar]\nNakshatra: Vishakha (Vishakam), pada 3\nSunrise: 06:02  Sunset: 17:42  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nBirth: 1964-11-05\nBirth nakshatra: Vishakha\nBirth masa: Tula (Aippasi)\nLunar masa at birth: Kartika (Karthigai)\n\nConfidence: high\nSource: derived from birth date at sunrise",
+      "location": {
+        "name": "Chennai",
+        "latitude": 13.0827,
+        "longitude": 80.2707,
+        "elevation_m": 10.0,
+        "timezone": "Asia/Kolkata"
+      },
+      "all_day": true,
+      "start": "2027-10-31T06:02:05.473523+05:30",
+      "end": "2027-10-31T17:42:50.760615+05:30",
+      "person_id": "D006",
+      "person_name": "Malathi Narayanan",
+      "gotra": null,
+      "tithi": {
+        "index": 1,
+        "name": "Pratipada",
+        "label": "Sukla Pratipada",
+        "tamil_name": "Pirathamai",
+        "paksha": "Sukla",
+        "fraction": 0.67972,
+        "difference_deg": 8.1566
+      },
+      "masa": {
+        "name": "Tula",
+        "tamil_name": "Aippasi",
+        "malayalam_name": "Thulam",
+        "index": 6,
+        "system": "solar",
+        "adhika": false,
+        "label": "Tula (Aippasi)",
+        "start": "1964-10-16T22:30:47.146207+05:30",
+        "end": "1964-11-15T22:13:34.381340+05:30"
+      },
+      "nakshatra": {
+        "index": 16,
+        "name": "Vishakha",
+        "tamil_name": "Vishakam",
+        "pada": 3,
+        "longitude_deg": 207.42482
+      },
+      "festivals": [],
+      "details": {
+        "year": 2027,
+        "birth_date": "1964-11-05",
+        "birth_reference": "1964-11-05T06:03:42.458956+05:30",
+        "birth_source": "derived from birth date at sunrise",
+        "nakshatra_start": null,
+        "nakshatra_end": null,
+        "ritual": "Janma Nakshatra"
+      },
+      "warnings": [
+        "Birth time is unknown. Janma nakshatra is computed at sunrise; set birth_time in the sidecar for an exact result."
+      ],
+      "confidence": "high"
+    },
+    {
       "uid": "kula-panchang-d042-janma-2027@kula.local",
       "date": "2027-10-31",
       "kind": "janma_nakshatra",
@@ -8574,6 +8879,67 @@
       "confidence": "high"
     },
     {
+      "uid": "kula-panchang-z34-janma-2027@kula.local",
+      "date": "2027-11-04",
+      "kind": "janma_nakshatra",
+      "summary": "Janma Nakshatra: Shreyathi Suresh - Purva Ashadha",
+      "description": "Janma Nakshatra: Shreyathi Suresh - Purva Ashadha\n\nPerson: Shreyathi Suresh (Z34)\nRecorded date: 2002-11-09\nTithi: Sukla Panchami (Panchami)\nMasa: Tula (Aippasi) [solar]\nNakshatra: Purva Ashadha (Pooradam), pada 2\nSunrise: 06:03  Sunset: 17:41  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nBirth: 2002-11-09\nBirth nakshatra: Purva Ashadha\nBirth masa: Tula (Aippasi)\nLunar masa at birth: Kartika (Karthigai)\n\nConfidence: high\nSource: derived from birth date at sunrise",
+      "location": {
+        "name": "Chennai",
+        "latitude": 13.0827,
+        "longitude": 80.2707,
+        "elevation_m": 10.0,
+        "timezone": "Asia/Kolkata"
+      },
+      "all_day": true,
+      "start": "2027-11-04T06:03:15.167130+05:30",
+      "end": "2027-11-04T17:41:33.429230+05:30",
+      "person_id": "Z34",
+      "person_name": "Shreyathi Suresh",
+      "gotra": null,
+      "tithi": {
+        "index": 5,
+        "name": "Panchami",
+        "label": "Sukla Panchami",
+        "tamil_name": "Panchami",
+        "paksha": "Sukla",
+        "fraction": 0.66297,
+        "difference_deg": 55.95566
+      },
+      "masa": {
+        "name": "Tula",
+        "tamil_name": "Aippasi",
+        "malayalam_name": "Thulam",
+        "index": 6,
+        "system": "solar",
+        "adhika": false,
+        "label": "Tula (Aippasi)",
+        "start": "2002-10-17T16:14:53.448222+05:30",
+        "end": "2002-11-16T16:04:24.813128+05:30"
+      },
+      "nakshatra": {
+        "index": 20,
+        "name": "Purva Ashadha",
+        "tamil_name": "Pooradam",
+        "pada": 2,
+        "longitude_deg": 258.49537
+      },
+      "festivals": [],
+      "details": {
+        "year": 2027,
+        "birth_date": "2002-11-09",
+        "birth_reference": "2002-11-09T06:04:58.742831+05:30",
+        "birth_source": "derived from birth date at sunrise",
+        "nakshatra_start": null,
+        "nakshatra_end": null,
+        "ritual": "Janma Nakshatra"
+      },
+      "warnings": [
+        "Birth time is unknown. Janma nakshatra is computed at sunrise; set birth_time in the sidecar for an exact result."
+      ],
+      "confidence": "high"
+    },
+    {
       "uid": "kula-panchang-f010-janma-2027@kula.local",
       "date": "2027-11-08",
       "kind": "janma_nakshatra",
@@ -8685,6 +9051,67 @@
         "year": 2027,
         "birth_date": "2016-11-12",
         "birth_reference": "2016-11-12T06:06:19.735954+05:30",
+        "birth_source": "derived from birth date at sunrise",
+        "nakshatra_start": null,
+        "nakshatra_end": null,
+        "ritual": "Janma Nakshatra"
+      },
+      "warnings": [
+        "Birth time is unknown. Janma nakshatra is computed at sunrise; set birth_time in the sidecar for an exact result."
+      ],
+      "confidence": "high"
+    },
+    {
+      "uid": "kula-panchang-z029-janma-2027@kula.local",
+      "date": "2027-11-13",
+      "kind": "janma_nakshatra",
+      "summary": "Janma Nakshatra: Harshanth Renganathan - Ashwini",
+      "description": "Janma Nakshatra: Harshanth Renganathan - Ashwini\n\nPerson: Harshanth Renganathan (Z029)\nRecorded date: 1994-10-20\nTithi: Krishna Pratipada (Pirathamai)\nMasa: Tula (Aippasi) [solar]\nNakshatra: Ashwini (Ashwini), pada 3\nSunrise: 06:06  Sunset: 17:39  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nBirth: 1994-10-20\nBirth nakshatra: Ashwini\nBirth masa: Tula (Aippasi)\nLunar masa at birth: Ashwina (Aippasi)\n\nConfidence: high\nSource: derived from birth date at sunrise",
+      "location": {
+        "name": "Chennai",
+        "latitude": 13.0827,
+        "longitude": 80.2707,
+        "elevation_m": 10.0,
+        "timezone": "Asia/Kolkata"
+      },
+      "all_day": true,
+      "start": "2027-11-13T06:06:27.165928+05:30",
+      "end": "2027-11-13T17:39:39.529627+05:30",
+      "person_id": "Z029",
+      "person_name": "Harshanth Renganathan",
+      "gotra": null,
+      "tithi": {
+        "index": 16,
+        "name": "Pratipada",
+        "label": "Krishna Pratipada",
+        "tamil_name": "Pirathamai",
+        "paksha": "Krishna",
+        "fraction": 0.46306,
+        "difference_deg": 185.55668
+      },
+      "masa": {
+        "name": "Tula",
+        "tamil_name": "Aippasi",
+        "malayalam_name": "Thulam",
+        "index": 6,
+        "system": "solar",
+        "adhika": false,
+        "label": "Tula (Aippasi)",
+        "start": "1994-10-17T15:03:45.947249+05:30",
+        "end": "1994-11-16T14:49:24.686662+05:30"
+      },
+      "nakshatra": {
+        "index": 1,
+        "name": "Ashwini",
+        "tamil_name": "Ashwini",
+        "pada": 3,
+        "longitude_deg": 8.15973
+      },
+      "festivals": [],
+      "details": {
+        "year": 2027,
+        "birth_date": "1994-10-20",
+        "birth_reference": "1994-10-20T05:59:45.079917+05:30",
         "birth_source": "derived from birth date at sunrise",
         "nakshatra_start": null,
         "nakshatra_end": null,
@@ -8990,6 +9417,67 @@
         "year": 2027,
         "birth_date": "1968-12-10",
         "birth_reference": "1968-12-10T06:20:13.210572+05:30",
+        "birth_source": "derived from birth date at sunrise",
+        "nakshatra_start": null,
+        "nakshatra_end": null,
+        "ritual": "Janma Nakshatra"
+      },
+      "warnings": [
+        "Birth time is unknown. Janma nakshatra is computed at sunrise; set birth_time in the sidecar for an exact result."
+      ],
+      "confidence": "high"
+    },
+    {
+      "uid": "kula-panchang-d034-janma-2027@kula.local",
+      "date": "2027-11-20",
+      "kind": "janma_nakshatra",
+      "summary": "Janma Nakshatra: Ramnath Rajagopal - Ashlesha",
+      "description": "Janma Nakshatra: Ramnath Rajagopal - Ashlesha\n\nPerson: Ramnath Rajagopal (D034)\nRecorded date: 2026-11-30\nTithi: Krishna Saptami (Sapthami)\nMasa: Vrishchika (Karthigai) [solar]\nNakshatra: Ashlesha (Ayilyam), pada 4\nSunrise: 06:09  Sunset: 17:39  (Asia/Kolkata)\nAparahna: 13:30-16:00  Location: Chennai\nBirth: 2026-11-30\nBirth nakshatra: Ashlesha\nBirth masa: Vrishchika (Karthigai)\nLunar masa at birth: Kartika (Karthigai)\n\nConfidence: high\nSource: derived from birth date at sunrise",
+      "location": {
+        "name": "Chennai",
+        "latitude": 13.0827,
+        "longitude": 80.2707,
+        "elevation_m": 10.0,
+        "timezone": "Asia/Kolkata"
+      },
+      "all_day": true,
+      "start": "2027-11-20T06:09:28.877475+05:30",
+      "end": "2027-11-20T17:39:12.807462+05:30",
+      "person_id": "D034",
+      "person_name": "Ramnath Rajagopal",
+      "gotra": null,
+      "tithi": {
+        "index": 22,
+        "name": "Saptami",
+        "label": "Krishna Saptami",
+        "tamil_name": "Sapthami",
+        "paksha": "Krishna",
+        "fraction": 0.20112,
+        "difference_deg": 254.41338
+      },
+      "masa": {
+        "name": "Vrishchika",
+        "tamil_name": "Karthigai",
+        "malayalam_name": "Vrischikam",
+        "index": 7,
+        "system": "solar",
+        "adhika": false,
+        "label": "Vrishchika (Karthigai)",
+        "start": "2026-11-16T19:43:12.917338+05:30",
+        "end": "2026-12-16T10:25:02.686357+05:30"
+      },
+      "nakshatra": {
+        "index": 9,
+        "name": "Ashlesha",
+        "tamil_name": "Ayilyam",
+        "pada": 4,
+        "longitude_deg": 117.98791
+      },
+      "festivals": [],
+      "details": {
+        "year": 2027,
+        "birth_date": "2026-11-30",
+        "birth_reference": "2026-11-30T06:14:37.035892+05:30",
         "birth_source": "derived from birth date at sunrise",
         "nakshatra_start": null,
         "nakshatra_end": null,
