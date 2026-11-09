@@ -15,11 +15,13 @@
  *********************************************************************/
 
 /**
- * Menu entry point: exports the whole workbook as a GEDCOM 5.5.1 file.
+ * Core export routine. Creates the GEDCOM file in Drive and returns the
+ * file name, download URL and skip count. The UI layer (menu or sidebar)
+ * decides how to present the result.
  *
- * @return {void}
+ * @return {{fileName: string, downloadUrl: string, skippedCount: number}}
  */
-function exportGedcomFile() {
+function exportGedcomFileCore_() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const ui = SpreadsheetApp.getUi();
 
@@ -556,20 +558,35 @@ function exportGedcomFile() {
   const fileName = `${safeName}_FamilyTree_${stamp}.ged`;
   const file = DriveApp.createFile(fileName, fileContent, MimeType.PLAIN_TEXT);
 
-  const skipNote = skippedEdges.length
-    ? `<p style="color: #b3261e;">${skippedEdges.length} relationship row(s) referenced unknown people and were skipped.</p>`
+  return {
+    fileName: fileName,
+    downloadUrl: file.getDownloadUrl(),
+    skippedCount: skippedEdges.length,
+  };
+}
+
+/**
+ * Menu entry point: exports the whole workbook as a GEDCOM 5.5.1 file and
+ * shows a modal download link.
+ *
+ * @return {void}
+ */
+function exportGedcomFile() {
+  const result = exportGedcomFileCore_();
+  const skipNote = result.skippedCount
+    ? `<p style="color: #b3261e;">${result.skippedCount} relationship row(s) referenced unknown people and were skipped.</p>`
     : '';
   const htmlOutput = HtmlService.createHtmlOutput(
     `<div style="font-family: sans-serif; padding: 15px;">
        <h3>GEDCOM File Exported Successfully!</h3>
-       <p>File saved to Google Drive: <b>${fileName}</b></p>
+       <p>File saved to Google Drive: <b>${result.fileName}</b></p>
        ${skipNote}
-       <a href="${file.getDownloadUrl()}" target="_blank"
+       <a href="${result.downloadUrl}" target="_blank"
           style="display: inline-block; background-color: #1a73e8; color: white; padding: 10px 18px; text-decoration: none; border-radius: 4px; font-weight: bold;">
           Download GEDCOM File
         </a>
       </div>`
   ).setWidth(420).setHeight(240);
 
-  ui.showModalDialog(htmlOutput, 'Export Complete');
+  SpreadsheetApp.getUi().showModalDialog(htmlOutput, 'Export Complete');
 }

@@ -392,8 +392,30 @@ function cardPreviewRenumber() { return cardResponse_(function () { return renum
 /** @return {CardService.ActionResponse} Notification with apply result. */
 function cardApplyRenumber() { return cardResponse_(function () { return renumberCore_(false); }); }
 
-/** @return {CardService.ActionResponse} Notification with GEDCOM export result. */
-function cardExportGedcom() { return cardResponse_(exportGedcomFile); }
+/** @return {CardService.ActionResponse} Opens the GEDCOM download and notifies. */
+function cardExportGedcom() {
+  let result;
+  try {
+    result = exportGedcomFileCore_();
+  } catch (err) {
+    const text = 'Error: ' + (err && err.message ? err.message : String(err));
+    return CardService.newActionResponseBuilder()
+      .setNotification(CardService.newNotification().setText(text))
+      .build();
+  }
+  const notification = CardService.newNotification()
+    .setText(`GEDCOM exported: ${result.fileName}` +
+             (result.skippedCount ? ` (${result.skippedCount} rows skipped)` : ''));
+  return CardService.newActionResponseBuilder()
+    .setNotification(notification)
+    .setOpenLink(
+      CardService.newOpenLink()
+        .setUrl(result.downloadUrl)
+        .setOpenAs(CardService.OpenAs.FULL_SIZE)
+        .setOnClose(CardService.OnClose.NOTHING)
+    )
+    .build();
+}
 
 /* ====================================================================
  * 2. AUTOMATED TAB INITIALIZER & INSTRUCTION CREATOR
