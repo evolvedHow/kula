@@ -711,12 +711,44 @@ def build_tree(gedcom_path: Path, config: dict[str, Any], tree_id: str) -> dict[
     return tree
 
 
+def resolve_tree_folder(config: dict[str, Any], tree_id: str, config_path: Path) -> Path:
+    """Return the output folder for a tree id using docs/config.yml.
+
+    Looks up the tree in ``config['trees']`` and uses its ``folder`` value.
+    Falls back to ``docs/data/trees/<tree_id>`` when the id is not configured.
+    The returned path is relative to the config file's parent directory.
+    """
+    trees = config.get("trees") or []
+    for tree_cfg in trees:
+        if tree_cfg.get("id") == tree_id:
+            folder = tree_cfg.get("folder", f"data/trees/{tree_id}")
+            return config_path.parent / folder
+    return config_path.parent / "docs" / "data" / "trees" / tree_id
+
+
 def main(argv=None):
-    parser = argparse.ArgumentParser(description="Convert a GEDCOM file to Kula tree.json")
-    parser.add_argument("--gedcom", required=True, help="Path to the .ged file")
-    parser.add_argument("--config", default="docs/config.yml", help="Site config YAML")
-    parser.add_argument("--tree", default="peru", help="Tree id (determines output folder)")
-    parser.add_argument("--out", help="Override output path")
+    parser = argparse.ArgumentParser(
+        description="Convert a GEDCOM 5.5.1 file into a Kula tree.json file."
+    )
+    parser.add_argument(
+        "--gedcom", required=True,
+        help="Path to the .ged file exported from the Kula add-on."
+    )
+    parser.add_argument(
+        "--config", default="docs/config.yml",
+        help="Site config YAML (default: docs/config.yml)."
+    )
+    parser.add_argument(
+        "--tree", default="peru",
+        help=(
+            "Tree id to write. The output folder is read from docs/config.yml "
+            "'trees:' list when present (default: peru)."
+        )
+    )
+    parser.add_argument(
+        "--out",
+        help="Override the output path entirely, ignoring --tree and config.yml."
+    )
     args = parser.parse_args(argv)
 
     gedcom_path = Path(args.gedcom).resolve()
@@ -725,7 +757,11 @@ def main(argv=None):
 
     tree = build_tree(gedcom_path, config, args.tree)
 
-    out_path = Path(args.out) if args.out else (Path("docs/data/trees") / args.tree / "tree.json")
+    if args.out:
+        out_path = Path(args.out).resolve()
+    else:
+        folder = resolve_tree_folder(config, args.tree, config_path)
+        out_path = folder / "tree.json"
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(tree, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"Wrote {out_path}")
