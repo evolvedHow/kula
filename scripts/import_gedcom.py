@@ -711,22 +711,37 @@ def build_tree(gedcom_path: Path, config: dict[str, Any], tree_id: str) -> dict[
     return tree
 
 
-def resolve_tree_folder(config: dict[str, Any], tree_id: str, config_path: Path) -> Path:
+def repo_root() -> Path:
+    """Return the repository root from the location of this script.
+
+    This script lives at ``<repo>/scripts/import_gedcom.py``, so its parent's
+    parent is the repo root. Using the script location means the importer works
+    no matter what the current working directory is.
+    """
+    return Path(__file__).resolve().parent.parent
+
+
+def resolve_tree_folder(
+    config: dict[str, Any], tree_id: str, repo: Path
+) -> Path:
     """Return the output folder for a tree id using docs/config.yml.
 
     Looks up the tree in ``config['trees']`` and uses its ``folder`` value.
     Falls back to ``docs/data/trees/<tree_id>`` when the id is not configured.
-    The returned path is relative to the config file's parent directory.
+    The returned path is relative to the repository root.
     """
     trees = config.get("trees") or []
     for tree_cfg in trees:
         if tree_cfg.get("id") == tree_id:
             folder = tree_cfg.get("folder", f"data/trees/{tree_id}")
-            return config_path.parent / folder
-    return config_path.parent / "docs" / "data" / "trees" / tree_id
+            return repo / "docs" / folder
+    return repo / "docs" / "data" / "trees" / tree_id
 
 
 def main(argv=None):
+    repo = repo_root()
+    default_config = repo / "docs" / "config.yml"
+
     parser = argparse.ArgumentParser(
         description="Convert a GEDCOM 5.5.1 file into a Kula tree.json file."
     )
@@ -735,8 +750,8 @@ def main(argv=None):
         help="Path to the .ged file exported from the Kula add-on."
     )
     parser.add_argument(
-        "--config", default="docs/config.yml",
-        help="Site config YAML (default: docs/config.yml)."
+        "--config", default=str(default_config),
+        help=f"Site config YAML (default: {default_config})."
     )
     parser.add_argument(
         "--tree", default="celestial",
@@ -761,7 +776,7 @@ def main(argv=None):
     if args.out:
         out_path = Path(args.out).resolve()
     else:
-        folder = resolve_tree_folder(config, args.tree, config_path)
+        folder = resolve_tree_folder(config, args.tree, repo)
         out_path = folder / "tree.json"
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(tree, indent=2, ensure_ascii=False), encoding="utf-8")

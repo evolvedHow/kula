@@ -23,7 +23,7 @@ genealogy tool.
 
    ```
    uv venv
-   uv pip install -e .
+   uv sync
    ```
 
 4. Regenerate the public data:
@@ -438,7 +438,7 @@ For local testing:
 
 `sync-google` is optional. It copies events into a Google calendar through the
 API instead of subscribing; install the optional `gcal` dependency with
-`uv pip install -e '.[gcal]'`, then create an OAuth client at
+`uv pip install -r pyproject.toml --extra gcal`, then create an OAuth client at
 `private/google-credentials.json` (or a service account) and run with
 `--dry-run` first.
 

@@ -27,8 +27,8 @@ gitignored).
   files remain public URLs.
 - Config: `docs/config.yml` (site, theme, auth, `panchang:` block,
   `source.tabs`, and `trees:`).
-- Python work always uses the uv-managed venv: `uv venv && uv pip install -e .`,
-  then `.venv/bin/python`. Dependency declarations live in `pyproject.toml`;
+- Python work always uses the uv-managed venv: `uv venv && uv sync`, then
+  `.venv/bin/python`. Dependency declarations live in `pyproject.toml`;
   `uv.lock` is committed.
 - Frontend is ES modules in `docs/assets/`, no build step. Modules are pure
   string/DOM-free where possible so they can be tested in Node via
