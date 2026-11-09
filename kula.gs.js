@@ -203,7 +203,11 @@ function onOpen(e) {
     .addItem('Preview Numbering Tiers', 'previewRenumber')
     .addItem('Apply Generational PIDs', 'applyRenumber');
 
-  ui.createMenu('Kula Genealogy')
+  // Use createAddonMenu() so the items appear under the add-on's entry in
+  // Extensions for every user of the spreadsheet. createMenu() only adds a
+  // custom menu visible to the current user and is not reliable for published
+  // Workspace add-ons.
+  ui.createAddonMenu()
     .addSubMenu(setupMenu)
     .addSeparator()
     .addSubMenu(flattenSubMenu)
@@ -320,6 +324,16 @@ function onHomepage(e) {
   numberingSection.addWidget(numberingButtons);
   card.addSection(numberingSection);
 
+  // 6. Export Section
+  const exportSection = CardService.newCardSection()
+    .setHeader('Export');
+
+  const exportButtons = CardService.newButtonSet()
+    .addButton(materialButton_('download', 'GEDCOM 5.5.1', 'cardExportGedcom', COLOR_PRIMARY));
+
+  exportSection.addWidget(exportButtons);
+  card.addSection(exportSection);
+
   return [card.build()];
 }
 
@@ -335,7 +349,8 @@ function describeWorkspace_() {
       return 'No spreadsheet is open. Open your Kula workbook, then reopen this add-on.';
     }
 
-    const required = [CFG.INSTRUCTIONS, CFG.PERSONS, CFG.KG, CFG.VEDIC, CFG.STORIES];
+    // Instructions is generated help text; do not require it to be present.
+    const required = [CFG.PERSONS, CFG.KG, CFG.VEDIC, CFG.STORIES];
     const missing = required.filter(name => !ss.getSheetByName(name));
     const name = ss.getName();
 
@@ -376,6 +391,9 @@ function cardPreviewRenumber() { return cardResponse_(function () { return renum
 
 /** @return {CardService.ActionResponse} Notification with apply result. */
 function cardApplyRenumber() { return cardResponse_(function () { return renumberCore_(false); }); }
+
+/** @return {CardService.ActionResponse} Notification with GEDCOM export result. */
+function cardExportGedcom() { return cardResponse_(exportGedcomFile); }
 
 /* ====================================================================
  * 2. AUTOMATED TAB INITIALIZER & INSTRUCTION CREATOR
@@ -1970,7 +1988,8 @@ function checkSheetSetup() {
  */
 function checkSheetSetupCore_() {
   const ss = requireSpreadsheet_();
-  const required = [CFG.INSTRUCTIONS, CFG.PERSONS, CFG.KG, CFG.VEDIC, CFG.STORIES];
+  // Instructions is generated help text; do not require it to be present.
+  const required = [CFG.PERSONS, CFG.KG, CFG.VEDIC, CFG.STORIES];
   const findings = [];
 
   required
