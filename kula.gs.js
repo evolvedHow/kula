@@ -163,7 +163,8 @@ function cardResponse_(coreFn) {
   try {
     text = coreFn();
   } catch (err) {
-    text = 'Error: ' + (err && err.message ? err.message : String(err));
+    const stack = err && err.stack ? '\n' + err.stack : '';
+    text = 'Error: ' + (err && err.message ? err.message : String(err)) + stack;
     Logger.log(text);
   }
   return CardService.newActionResponseBuilder()
@@ -448,10 +449,27 @@ function setupDatabaseTabsCore_() {
   // defaults and keep it hidden. It must exist before validations run.
   createConfigSheet_(ss).hideSheet();
 
-  const refs = applyLinkedFormulas_(ss);
-  applyValidations_(ss);
-  applyDuplicateHighlighting_(ss);
-  refreshPreviewColumns_(ss);
+  let refs;
+  try {
+    refs = applyLinkedFormulas_(ss);
+  } catch (e) {
+    throw new Error('applyLinkedFormulas_ failed: ' + (e && e.message ? e.message : String(e)));
+  }
+  try {
+    applyValidations_(ss);
+  } catch (e) {
+    throw new Error('applyValidations_ failed: ' + (e && e.message ? e.message : String(e)));
+  }
+  try {
+    applyDuplicateHighlighting_(ss);
+  } catch (e) {
+    throw new Error('applyDuplicateHighlighting_ failed: ' + (e && e.message ? e.message : String(e)));
+  }
+  try {
+    refreshPreviewColumns_(ss);
+  } catch (e) {
+    throw new Error('refreshPreviewColumns_ failed: ' + (e && e.message ? e.message : String(e)));
+  }
 
   let note = '';
   if (refs.repaired > 0) {
