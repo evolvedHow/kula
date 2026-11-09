@@ -1,0 +1,25 @@
+[project]
+name = "kula"
+version = "2.0.0"
+description = "Static, browser-only family tree published with GitHub Pages."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "PyYAML>=6.0",
+    "pyswisseph>=2.10",
+    "timezonefinder>=6.2",
+    "icalendar>=6.0",
+    "python-dateutil>=2.9",
+]
+
+[project.optional-dependencies]
+# Push events into a Google Calendar instead of subscribing to the .ics feed.
+# The feed itself needs none of these.
+gcal = [
+    "google-api-python-client>=2.100",
+    "google-auth>=2.23",
+    "google-auth-oauthlib>=1.1",
+]
+
+[tool.uv]
+package = false

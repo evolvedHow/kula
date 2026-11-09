@@ -18,12 +18,12 @@ genealogy tool.
 2. Download the `.ged` file and place it at
    `docs/data/trees/<tree>/tree.ged` (for example `docs/data/trees/peru/tree.ged`).
 
-3. Set up the importer environment once (a virtualenv keeps the optional
-   horoscope dependencies isolated):
+3. Set up the importer environment once (uv keeps the optional horoscope
+   dependencies isolated):
 
    ```
-   python3 -m venv .venv
-   .venv/bin/pip install -r requirements.txt
+   uv venv
+   uv pip install -e .
    ```
 
 4. Regenerate the public data:
@@ -40,7 +40,7 @@ genealogy tool.
    ```
    node --test scripts/test_frontend.mjs
    .venv/bin/python -m unittest scripts.test_horoscope
-   git add docs scripts README.md requirements.txt
+   git add docs scripts README.md pyproject.toml uv.lock
    git commit -m "Update family data"
    git push
    ```
@@ -337,7 +337,7 @@ already reduced to city level for living people.
   year is unknown, enter it as text instead (for example `29 June`); the
   importer warns about these.
 - **"pyswisseph is not installed" warning:** run the importer with the
-  project virtualenv (`.venv/bin/python scripts/import_sheet.py`), not the
+  project virtualenv (`.venv/bin/python scripts/import_gedcom.py`), not the
   system `python3`.
 - **A place cannot be geocoded:** add it under `places:` in
   `docs/config.yml`. Use `--offline` to avoid network lookups entirely.
@@ -437,8 +437,8 @@ For local testing:
 ```
 
 `sync-google` is optional. It copies events into a Google calendar through the
-API instead of subscribing; install the three `google-*` packages listed as
-comments in `requirements.txt`, then create an OAuth client at
+API instead of subscribing; install the optional `gcal` dependency with
+`uv pip install -e '.[gcal]'`, then create an OAuth client at
 `private/google-credentials.json` (or a service account) and run with
 `--dry-run` first.
 

@@ -739,10 +739,11 @@ def main(argv=None):
         help="Site config YAML (default: docs/config.yml)."
     )
     parser.add_argument(
-        "--tree", default="peru",
+        "--tree", default="celestial",
         help=(
             "Tree id to write. The output folder is read from docs/config.yml "
-            "'trees:' list when present (default: peru)."
+            "'trees:' list when present (default: celestial, the sheet add-on's "
+            "dummy tree)."
         )
     )
     parser.add_argument(
