@@ -5,7 +5,8 @@ This replaces the old Google-Sheet importer. The expected workflow is:
 
 1. Enter or export data in the kula-data Google Sheet.
 2. Use the kula-data Apps Script to export a GEDCOM 5.5.1 file to Drive.
-3. Place/download that .ged file into docs/data/trees/<tree>/tree.ged.
+3. Place/download that .ged file into docs/data/trees/<tree>/tree.ged, or pass
+   --drive-id to download it directly from Google Drive.
 4. Run this script to regenerate docs/data/trees/<tree>/tree.json.
 
 The script preserves custom Kula attributes written by the Apps Script exporter
@@ -15,12 +16,15 @@ person id, so round-tripping through GEDCOM keeps the same IDs.
 """
 
 import argparse
+import io
 import json
 import re
 import sys
+import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from urllib.parse import parse_qs, urlparse
 
 # Re-use the horoscope/geocode helpers for parity with the old importer.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -711,6 +715,93 @@ def build_tree(gedcom_path: Path, config: dict[str, Any], tree_id: str) -> dict[
     return tree
 
 
+
+
+def extract_drive_file_id(value: str) -> str | None:
+    """Extract a Google Drive file id from a URL or bare id string."""
+    text = (value or "").strip()
+    if not text:
+        return None
+    # Bare file id: alphanumeric, underscores, dashes, typically 25-44 chars.
+    if re.match(r"^[A-Za-z0-9_-]{10,}$", text):
+        return text
+    url = urlparse(text)
+    # https://drive.google.com/file/d/FILE_ID/view
+    m = re.match(r"/file/d/([A-Za-z0-9_-]+)", url.path)
+    if m:
+        return m.group(1)
+    # https://drive.google.com/open?id=FILE_ID
+    qs = parse_qs(url.query)
+    if "id" in qs:
+        return qs["id"][0]
+    return None
+
+
+DRIVE_SCOPE = "https://www.googleapis.com/auth/drive.readonly"
+
+
+def download_from_drive(file_id: str, credentials_path: Path, token_path: Path | None = None) -> Path:
+    """Download a GEDCOM file from Google Drive to a temporary path.
+
+    Supports both service-account JSON files and OAuth desktop client secrets.
+    For OAuth, the first run opens a browser and saves a token file for later
+    runs.
+    """
+    try:
+        from google.oauth2 import service_account
+        from googleapiclient.discovery import build
+        from googleapiclient.http import MediaIoBaseDownload
+    except ImportError as exc:  # pragma: no cover - optional dependency
+        raise RuntimeError(
+            "Google Drive download needs the optional packages:\n"
+            "  uv pip install -r pyproject.toml --extra google\n"
+            "You can also download the .ged manually and pass --gedcom."
+        ) from exc
+
+    credentials_path = credentials_path.resolve()
+    if not credentials_path.exists():
+        raise FileNotFoundError(f"Credentials file not found: {credentials_path}")
+
+    raw = credentials_path.read_text(encoding="utf-8")
+    is_service_account = "service_account" in raw
+
+    if is_service_account:
+        credentials = service_account.Credentials.from_service_account_file(
+            str(credentials_path), scopes=[DRIVE_SCOPE]
+        )
+    else:
+        from google.auth.transport.requests import Request
+        from google.oauth2.credentials import Credentials
+        from google_auth_oauthlib.flow import InstalledAppFlow
+
+        credentials = None
+        if token_path and token_path.exists():
+            credentials = Credentials.from_authorized_user_file(str(token_path), [DRIVE_SCOPE])
+        if not credentials or not credentials.valid:
+            if credentials and credentials.expired and credentials.refresh_token:
+                credentials.refresh(Request())
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    str(credentials_path), [DRIVE_SCOPE]
+                )
+                credentials = flow.run_local_server(port=0)
+            if token_path:
+                token_path.parent.mkdir(parents=True, exist_ok=True)
+                token_path.write_text(credentials.to_json(), encoding="utf-8")
+
+    service = build("drive", "v3", credentials=credentials, cache_discovery=False)
+    request = service.files().get_media(fileId=file_id)
+    handle = io.BytesIO()
+    downloader = MediaIoBaseDownload(handle, request)
+    done = False
+    while not done:
+        _, done = downloader.next_chunk()
+
+    suffix = ".ged"
+    with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
+        tmp.write(handle.getvalue())
+        return Path(tmp.name)
+
 def repo_root() -> Path:
     """Return the repository root from the location of this script.
 
@@ -746,8 +837,20 @@ def main(argv=None):
         description="Convert a GEDCOM 5.5.1 file into a Kula tree.json file."
     )
     parser.add_argument(
-        "--gedcom", required=True,
-        help="Path to the .ged file exported from the Kula add-on."
+        "--gedcom",
+        help="Path to a local .ged file exported from the Kula add-on."
+    )
+    parser.add_argument(
+        "--drive-id",
+        help="Google Drive file id (or shareable URL) of the .ged file."
+    )
+    parser.add_argument(
+        "--credentials", default=str(repo / "private" / "google-credentials.json"),
+        help="Service-account or OAuth desktop-client JSON file for Drive access."
+    )
+    parser.add_argument(
+        "--token", default=str(repo / "private" / "google-token.json"),
+        help="Where to cache the OAuth token (default: private/google-token.json)."
     )
     parser.add_argument(
         "--config", default=str(default_config),
@@ -767,7 +870,21 @@ def main(argv=None):
     )
     args = parser.parse_args(argv)
 
-    gedcom_path = Path(args.gedcom).resolve()
+    drive_id = extract_drive_file_id(args.drive_id) if args.drive_id else None
+    if not args.gedcom and not drive_id:
+        parser.error("Provide either --gedcom <path> or --drive-id <id/url>")
+
+    gedcom_path: Path
+    if drive_id:
+        gedcom_path = download_from_drive(
+            drive_id,
+            Path(args.credentials),
+            Path(args.token) if args.token else None,
+        )
+        print(f"Downloaded Drive file {drive_id} to {gedcom_path}")
+    else:
+        gedcom_path = Path(args.gedcom).resolve()
+
     config_path = Path(args.config).resolve()
     config = load_config(config_path)
 

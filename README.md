@@ -34,6 +34,29 @@ genealogy tool.
 
    The importer reads the GEDCOM and writes `docs/data/trees/peru/tree.json`.
 
+   Alternatively, download the `.ged` straight from Google Drive:
+
+   ```
+   .venv/bin/python scripts/import_gedcom.py --drive-id FILE_ID --tree peru
+   ```
+
+   `--drive-id` accepts a bare file id or a shareable Drive URL. The first run
+   opens a browser to authorize Drive read access and caches the token in
+   `private/google-token.json`. You can also use a service-account JSON file:
+
+   ```
+   .venv/bin/python scripts/import_gedcom.py \
+     --drive-id FILE_ID \
+     --credentials private/service-account.json \
+     --tree peru
+   ```
+
+   Install the optional Google client libraries first:
+
+   ```
+   uv pip install -r pyproject.toml --extra google
+   ```
+
 5. Run the front-end and importer tests, then commit and push the changed
    data/config:
 
@@ -437,8 +460,8 @@ For local testing:
 ```
 
 `sync-google` is optional. It copies events into a Google calendar through the
-API instead of subscribing; install the optional `gcal` dependency with
-`uv pip install -r pyproject.toml --extra gcal`, then create an OAuth client at
+API instead of subscribing; install the optional Google dependency with
+`uv pip install -r pyproject.toml --extra google`, then create an OAuth client at
 `private/google-credentials.json` (or a service account) and run with
 `--dry-run` first.
 

@@ -13,8 +13,15 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-# Push events into a Google Calendar instead of subscribing to the .ics feed.
-# The feed itself needs none of these.
+# Google API client libraries. Needed for downloading a GEDCOM from Drive
+# (--drive-id) or pushing panchang events to a Google Calendar. The .ics feed
+# and the site itself need none of these.
+google = [
+    "google-api-python-client>=2.100",
+    "google-auth>=2.23",
+    "google-auth-oauthlib>=1.1",
+]
+# Deprecated alias, kept for backward compatibility.
 gcal = [
     "google-api-python-client>=2.100",
     "google-auth>=2.23",
