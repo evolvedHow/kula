@@ -20,11 +20,11 @@ chart renderer in docs/assets/chart.js:
       "rasis": {"Mesha": ["Su", "Me"], "Vrishabha": ["La", "Mo"], ...}
     }
 
-Only computed when the sheet supplies a birth date AND time AND place; the
+Only computed when the GEDCOM supplies a birth date AND time AND place; the
 importer skips chart generation otherwise (the UI then hides the Jatagam
 button).
 
-This module needs the project virtualenv:  .venv/bin/python scripts/import_sheet.py
+This module needs the project virtualenv:  .venv/bin/python scripts/import_gedcom.py
 """
 
 import re

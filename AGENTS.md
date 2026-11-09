@@ -9,20 +9,22 @@ Static, browser-only family tree ("Kula") published with GitHub Pages from
 CSV dump predates the panchang work and stays untracked; `private/` is
 gitignored).
 
-- Source of truth: a Google Sheet → `scripts/import_sheet.py` →
-  `docs/data/trees/<tree>/tree.json`. Never edit `tree.json` by hand;
-  regenerate it. The default tree lives at `docs/data/trees/peru/`.
+- Source of truth: a Google Sheet → Kula add-on GEDCOM 5.5.1 export →
+  `scripts/import_gedcom.py` → `docs/data/trees/<tree>/tree.json`. Never edit
+  `tree.json` by hand; regenerate it. The default tree lives at
+  `docs/data/trees/peru/`.
 - Relationships are entered in the sheet's `KG` tab as readable triples
   (`SUBJECT`, `PREDICATE`, `OBJECT`), e.g. `P-101-Himavan spouseOf P-102-Mena`.
-  `import_sheet.py` extracts the PID prefix and builds the union/children model.
-  `KG` is the only relationship store: the old `Unions`/`Offsprings` tabs are
-  gone and are not read.
+  The GEDCOM exporter converts those triples into `FAM` records; the importer
+  rebuilds the union/children model from them. `KG` is the only relationship
+  store: the old `Unions`/`Offsprings` tabs are gone and are not read.
 - Multiple independent trees can coexist in one site. Configure them in
   `docs/config.yml` under `trees:`; each tree has its own data folder
   (`<folder>/tree.json`, `vedic.json`, optional `panchang/`). Use
-  `scripts/import_sheet.py --tree <id>` to write to `docs/data/trees/<id>/`.
-  Per-tree `auth.google.allowed_domains` / `allowed_emails` can gate the UI on
-  a static site, but the underlying JSON files remain public URLs.
+  `scripts/import_gedcom.py --gedcom <path> --tree <id>` to write to
+  `docs/data/trees/<id>/`. Per-tree `auth.google.allowed_domains` /
+  `allowed_emails` can gate the UI on a static site, but the underlying JSON
+  files remain public URLs.
 - Config: `docs/config.yml` (site, theme, auth, `panchang:` block,
   `source.tabs`, and `trees:`).
 - Python work always uses the venv: `.venv/bin/python`.

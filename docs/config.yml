@@ -18,8 +18,9 @@ site:
   # Leave empty to hide the links.
   repo: "evolvedHow/kula"
 
-# Where the public data comes from. The Google Sheet is the source of truth.
-# Share it as "Anyone with the link can view", then run scripts/import_sheet.py.
+# Where the public data comes from. The Google Sheet is the mass-input source
+# of truth; the Kula add-on exports it to a GEDCOM 5.5.1 file, and the importer
+# regenerates tree.json from that GEDCOM.
 source:
   sheet_url: "https://docs.google.com/spreadsheets/d/1ay96j0dTHfk3qEyKid1wgBO0HJxIqd-B-ByMuYt3VTc/edit?usp=sharing"
   # Optional local cache written by the importer (git-ignored).
@@ -31,28 +32,6 @@ source:
     vedic: "Vedic"
     config: "$Config"
     kg: "KG"
-  # The older hierarchical family sheet is the authority for birth, death and
-  # living status. It is matched to the Persons tab by name; authority values
-  # win, but blank authority cells never erase current data. Remove this block
-  # to import only the relational sheet.
-  authority:
-    sheet_url: "https://docs.google.com/spreadsheets/d/10sC17l2apMUhDj02TA4Rpgv4D56t0j4SWCoSK57senM/edit?usp=sharing"
-    cache: "private/original-sheet.xlsx"
-    # Empty scans every tab that has a recognisable name header.
-    tabs: []
-    # Fuzzy name-match threshold (0-1). Date, birth place and status only
-    # break ties between similar names.
-    min_score: 0.86
-    candidate_score: 0.80
-    # Header names in the original sheet. Add aliases here if you reuse the
-    # importer with a differently worded workbook.
-    columns:
-      name: ["Full Name", "Name", "Person"]
-      dob: ["Date of birth", "DOB", "Birth date"]
-      pob: ["Place of birth", "POB", "Birth place"]
-      status: ["Living/Deceased", "Living or deceased", "Status"]
-      dod: ["Date of death", "DOD", "Death date"]
-      pod: ["Place of death", "POD", "Death place"]
 
 # Multiple independent trees can live in the same site. Each tree has its own
 # data folder with tree.json, vedic.json and an optional panchang/ subfolder.

@@ -3,14 +3,22 @@
 A static, browser-only family tree. The public site is published with GitHub
 Pages from the `docs/` folder.
 
-The **Google Sheet is the source of truth** for people and relationships;
-`docs/data/trees/<tree>/tree.json` is generated from it. Gramps desktop is a
-downstream consumer, fed by the add-on's GEDCOM export.
+The **Google Sheet is the mass-input source of truth** for people and
+relationships. The Kula add-on exports it to a **GEDCOM 5.5.1** file, and
+`docs/data/trees/<tree>/tree.json` is regenerated from that GEDCOM. GEDCOM is
+the single interchange format: it feeds the site, Gramps desktop, and any other
+genealogy tool.
 
 ## Updating the tree
 
-1. Make sure the sheet is shared as **Anyone with the link can view**.
-2. Set up the importer environment once (a virtualenv keeps the optional
+1. In the Google Sheet, open **Extensions → Kula Genealogy → Export GEDCOM
+   5.5.1 File**. The add-on writes `<workbook>_FamilyTree_<timestamp>.ged` to
+   your Google Drive and shows a download link.
+
+2. Download the `.ged` file and place it at
+   `docs/data/trees/<tree>/tree.ged` (for example `docs/data/trees/peru/tree.ged`).
+
+3. Set up the importer environment once (a virtualenv keeps the optional
    horoscope dependencies isolated):
 
    ```
@@ -18,38 +26,20 @@ downstream consumer, fed by the add-on's GEDCOM export.
    .venv/bin/pip install -r requirements.txt
    ```
 
-3. Rebuild the public data (the sheet URL is now required on the command
-   line):
+4. Regenerate the public data:
 
    ```
-   .venv/bin/python scripts/import_sheet.py --url "YOUR_GOOGLE_SHEET_URL"
+   .venv/bin/python scripts/import_gedcom.py --gedcom docs/data/trees/peru/tree.ged --tree peru
    ```
 
-   The importer downloads the workbook, caches it in
-   `private/relatives-sheet.xlsx`, and writes `docs/data/tree.json`. It reads
-   the `Persons`, `Vedic`, `$Config`, `KG` and `Stories` tabs directly. A local
-   `.xlsx` can be used instead:
+   The importer reads the GEDCOM and writes `docs/data/trees/peru/tree.json`.
 
-   ```
-   .venv/bin/python scripts/import_sheet.py --url "YOUR_GOOGLE_SHEET_URL" private/relatives.xlsx
-   ```
-
-   To ignore the older authority sheet and use only the relational sheet:
-
-   ```
-   .venv/bin/python scripts/import_sheet.py --url "YOUR_GOOGLE_SHEET_URL" --override
-   ```
-
-   If `source.authority` is configured, the older hierarchical family sheet is
-   downloaded too and merged over the `Persons` tab (see below). Pass
-   `--authority path/to/original.xlsx` to use a local copy instead.
-
-4. Run the front-end and importer tests, then commit and push the changed
+5. Run the front-end and importer tests, then commit and push the changed
    data/config:
 
    ```
    node --test scripts/test_frontend.mjs
-   .venv/bin/python -m unittest scripts.test_authority scripts.test_import_sheet scripts.test_horoscope
+   .venv/bin/python -m unittest scripts.test_horoscope
    git add docs scripts README.md requirements.txt
    git commit -m "Update family data"
    git push
@@ -65,12 +55,13 @@ Everything specific to an instance lives in configuration or data:
 * `docs/config.yml` — title, sheet URL, default person, theme, Google account
   mapping, repo, tab names.
 * `docs/data/vedic.json` — gotra → pravara mappings, aliases and help text.
-* `docs/data/tree.json` — generated from the sheet; do not edit by hand.
+* `docs/data/trees/<tree>/tree.json` — generated from the GEDCOM; do not edit by
+  hand.
 
 To start a new instance, copy the repo, point `source.sheet_url` at your
-workbook, change `site.default_person` and `auth.google.people`, and run the
-importer. The sheet tabs and column headers are documented below; the tab names
-can be overridden in `source.tabs`.
+workbook, change `site.default_person` and `auth.google.people`, export a GEDCOM
+from the sheet, and run `scripts/import_gedcom.py`. The sheet tabs and column
+headers are documented below; the tab names can be overridden in `source.tabs`.
 
 ### Sheet layout
 
@@ -110,42 +101,21 @@ attribute on the person or union node. The site graph has:
 * `partner` edges from a person to their union;
 * `offspring` edges from a union to each child.
 
-### Original sheet authority
-
-The older hierarchical family sheet is still the authority for birth, death
-and living status. Configure it under `source.authority`; the current URL and
-cache path live in `docs/config.yml`. The importer:
-
-1. finds the header row by column name (so a title block, reordered columns or
-   differently worded headers are fine);
-2. fuzzy-matches each authority row to a `Persons` row by full name;
-3. uses birth day/month, birth place and living status only to break ties
-   between similar or duplicate names;
-4. overrides **only** non-empty `DOB`, `POB`, `STATUS`, `DOD` and `POD` values.
-
-A blank authority cell never erases data already in the `Persons` tab. Because
-the merge happens before chart generation, an authoritative `DOB` and `POB`
-also drive the jatagam. Every override is printed by the importer, along with
-unmatched authority rows and impossible dates such as a death before birth.
-Remove the `source.authority` block to import only the relational sheet.
-
-Tab names and header aliases can be changed in the same block, so the importer
-can be reused with another family's workbook. A data-less stub row (a name but
-no dates or status) is ignored.
-
 ### Living people
 
 Locations for anyone whose `STATUS` is not `Deceased` are reduced to the city
 level before publishing (for example `Marietta, Georgia, USA` becomes
 `Marietta`). Birth places are treated the same way. This is a build-time rule
-in `scripts/import_sheet.py`.
+in `scripts/import_gedcom.py`.
 
-### Gramps desktop export
+### GEDCOM export
 
-Gramps is fed from the sheet, never the other way round. In the spreadsheet,
-open **Extensions → Kula Genealogy → Export GEDCOM 5.5.1 File**. The add-on
-writes `<workbook>_FamilyTree_<timestamp>.ged` to your Google Drive and shows a
-download link; import it in Gramps with **Family Trees → Import → GEDCOM**.
+The spreadsheet add-on is the only exporter. Open **Extensions → Kula
+Genealogy → Export GEDCOM 5.5.1 File**; the add-on writes
+`<workbook>_FamilyTree_<timestamp>.ged` to your Google Drive and shows a
+download link. Use that same `.ged` file both to regenerate the site
+(`scripts/import_gedcom.py`) and to import into Gramps (**Family Trees →
+Import → GEDCOM**).
 
 What survives the trip:
 
@@ -156,8 +126,9 @@ What survives the trip:
 * the original sheet PID, as the `_PID` attribute, so records can be traced
   back to the sheet.
 
-What does not: the sidereal birth chart (no GEDCOM equivalent), the generation
-column, and the site's tree/list layout.
+What does not: the sidereal birth chart (no GEDCOM equivalent), and the site's
+tree/list layout. The generation letter is recovered from `_PID` when the PID
+starts with a single uppercase letter.
 
 ## Tree view
 

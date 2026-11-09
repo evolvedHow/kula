@@ -255,6 +255,32 @@ function exportGedcomFileCore_() {
   }
 
   /**
+   * Extracts a 24-hour HH:MM time from a sheet date-time string.
+   *
+   * @param {*} value Raw sheet value.
+   * @return {string} Time in "HH:MM" form, or an empty string.
+   */
+  function extractTime_(value) {
+    const text = String(value == null ? '' : value);
+    const match = text.match(/(\d{1,2}):(\d{2})/);
+    if (match) {
+      return `${match[1].padStart(2, '0')}:${match[2]}`;
+    }
+    // Sheets/Excel serial dates encode time in the fractional part.
+    const serial = parseFloat(text);
+    if (!isNaN(serial) && serial > 1) {
+      const fraction = serial % 1;
+      if (fraction > 0) {
+        const totalMinutes = Math.round(fraction * 24 * 60);
+        const hours = Math.floor(totalMinutes / 60) % 24;
+        const minutes = totalMinutes % 60;
+        return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+      }
+    }
+    return '';
+  }
+
+  /**
    * Splits a sheet name into given, surname and nickname.
    *
    * A trailing parenthetical is treated as a nickname, e.g.
@@ -482,19 +508,23 @@ function exportGedcomFileCore_() {
     if (genderMap[pid]) gedcom.push(`1 SEX ${genderMap[pid]}`);
 
     const dob = formatGedcomDate(person.DOB);
+    const birthTime = extractTime_(person.DOB);
     const pob = gedcomText_(person.POB);
     if (dob || pob) {
       gedcom.push('1 BIRT');
       if (dob) gedcom.push(`2 DATE ${dob}`);
+      if (birthTime) gedcom.push(`2 TIME ${birthTime}`);
       if (pob) gedcom.push(`2 PLAC ${pob}`);
     }
 
     const status = String(person.STATUS == null ? '' : person.STATUS).trim().toLowerCase();
     const dod = formatGedcomDate(person.DOD);
+    const deathTime = extractTime_(person.DOD);
     const pod = gedcomText_(person.POD);
     if (status === 'deceased' || dod || pod) {
       gedcom.push('1 DEAT');
       if (dod) gedcom.push(`2 DATE ${dod}`);
+      if (deathTime) gedcom.push(`2 TIME ${deathTime}`);
       if (pod) gedcom.push(`2 PLAC ${pod}`);
     }
 

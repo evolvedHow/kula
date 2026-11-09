@@ -252,7 +252,7 @@ def load_from_tree(config: AppConfig, path: Path | None = None) -> FamilyData:
     path = path or config.tree_path
     if not path.exists():
         raise FileNotFoundError(
-            f"Family tree data not found: {path}. Run scripts/import_sheet.py first."
+            f"Family tree data not found: {path}. Run scripts/import_gedcom.py first."
         )
     try:
         tree = json.loads(path.read_text(encoding="utf-8"))
