@@ -14,8 +14,10 @@ gitignored).
   `tree.json` by hand; regenerate it. The default tree lives at
   `docs/data/trees/peru/`.
 - Relationships are entered in the sheet's `KG` tab as readable triples
-  (`SUBJECT`, `PREDICATE`, `OBJECT`), e.g. `P-101-Himavan spouseOf P-102-Mena`.
-  The GEDCOM exporter converts those triples into `FAM` records; the importer
+  (`SUBJECT`, `PREDICATE`, `OBJECT`), e.g.
+  `VenkiteswaraIyerA001 spouseOf RajammalA002` (REF_NAME = FULL_NAME without
+  spaces + PID). The GEDCOM exporter converts those triples into `FAM`
+  records; the importer
   rebuilds the union/children model from them. `KG` is the only relationship
   store: the old `Unions`/`Offsprings` tabs are gone and are not read.
 - Multiple independent trees can coexist in one site. Configure them in

@@ -71,8 +71,11 @@ function exportGedcomFileCore_() {
   /**
    * Extracts the PID from a readable reference.
    *
-   * `A001-Venkiteswara Iyer`, `P-101-Himavan` and a bare `P001` all reduce
-   * to their PID prefix. The name half is only a label and may be stale.
+   * References come in two layouts. REF_NAME puts the PID last
+   * ("VenkiteswaraIyerA001", FULL_NAME without spaces plus PID), while the
+   * Vedic and Stories tabs still store PID-first references
+   * ("A001-Venkiteswara Iyer", "P-101-Himavan"); a bare PID ("P001") is also
+   * accepted. The name half is only a label and may be stale.
    *
    * @param {*} value Cell value.
    * @return {string} Upper-case PID, or an empty string when absent.
@@ -80,8 +83,10 @@ function exportGedcomFileCore_() {
   function cleanId(value) {
     const text = String(value == null ? '' : value).trim();
     if (!text) return '';
-    const match = text.match(/^([A-Z]-?\d+)\b/i);
-    return match ? match[1].toUpperCase() : '';
+    const lead = text.match(/^([A-Z]-?\d+)\b/i);
+    if (lead) return lead[1].toUpperCase();
+    const trail = text.match(/([A-Z]-?\d+)$/i);
+    return trail ? trail[1].toUpperCase() : '';
   }
 
   /**

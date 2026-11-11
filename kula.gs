@@ -38,39 +38,39 @@ const PREDICATES = ['spouseOf', 'parentOf', 'childOf'];
  */
 const SCHEMA = {
   [CFG.PERSONS]: {
-    headers: ["PID", "KNOWN_NAME", "FULL_NAME", "REF_NAME", "EMAIL", "GENDER", "DOB", "POB", "STATUS", "DOD", "NOTES", "GEN"],
+    headers: ["PID", "FULL_NAME", "KNOWN_NAME", "REF_NAME", "EMAIL", "GENDER", "DOB", "POB", "STATUS", "DOD", "NOTES", "GEN"],
     sample: [
-      ["P-101", "Himavan", "King Himavan", "himavan", "himavan@kula.internal", "Male", "1932-01-15T07:00:00", "Uttarkashi, Uttarakhand, India", "Deceased", "2015-08-20T10:00:00", "Maternal Grandfather (King of Himalayas)", "1"],
-      ["P-102", "Mena", "Queen Menavati", "menavati", "menavati@kula.internal", "Female", "1935-06-10T08:30:00", "Uttarkashi, Uttarakhand, India", "Deceased", "2018-11-12T14:15:00", "Maternal Grandmother (Wife of Himavan)", "1"],
-      ["P-201", "Shiva", "Lord Mahadeva Shiva", "shiva", "shiva@kula.internal", "Male", "1955-03-04T23:45:00", "Chidambaram, Tamil Nadu, India", "Living", "", "Father / Consort of Parvati", "2"],
-      ["P-202", "Parvati", "Goddess Meenakshi Parvati", "parvati", "parvati@kula.internal", "Female", "1960-04-14T05:30:00", "Varanasi, Uttar Pradesh, India", "Living", "", "Mother / Daughter of Himavan & Menavati", "2"],
-      ["P-203", "Mainaka", "Mainaka Parvata", "mainaka", "mainaka@kula.internal", "Male", "1958-08-18T12:00:00", "Uttarkashi, Uttarakhand, India", "Living", "", "Maternal Uncle (Son of Himavan & Menavati)", "2"],
-      ["P-204", "Ganga", "Goddess Ganga Devi", "ganga", "ganga@kula.internal", "Female", "1962-10-05T09:15:00", "Gangotri, Uttarakhand, India", "Living", "", "Maternal Aunt (Daughter of Himavan & Menavati)", "2"],
-      ["P-301", "Murugan", "Lord Kartikeya Subramanya", "murugan", "murugan@kula.internal", "Male", "1983-05-24T06:15:00", "Madurai, Tamil Nadu, India", "Living", "", "Eldest Son / Commander of Divine Forces", "3"],
-      ["P-302", "Ganesha", "Lord Vinayagar Ganesha", "ganesha", "ganesha@kula.internal", "Male", "1985-09-18T11:45:00", "Chinchwad, Maharashtra, India", "Living", "", "Younger Son / Lord of Wisdom & Obstacles", "3"],
-      ["P-303", "Ashokasundari", "Goddess Ashokasundari", "ashokasundari", "ashokasundari@kula.internal", "Female", "1988-11-12T14:20:00", "Ujjain, Madhya Pradesh, India", "Living", "", "Daughter of Shiva & Parvati", "3"],
-      ["P-304", "Valli", "Valli Devi", "valli", "valli@kula.internal", "Female", "1986-02-14T10:00:00", "Vellore, Tamil Nadu, India", "Living", "", "Spouse of Murugan", "3"],
+      ["P-101", "King Himavan", "Himavan", "KingHimavanP-101", "himavan@kula.internal", "Male", "1932-01-15T07:00:00", "Uttarkashi, Uttarakhand, India", "Deceased", "2015-08-20T10:00:00", "Maternal Grandfather (King of Himalayas)", "1"],
+      ["P-102", "Queen Menavati", "Mena", "QueenMenavatiP-102", "menavati@kula.internal", "Female", "1935-06-10T08:30:00", "Uttarkashi, Uttarakhand, India", "Deceased", "2018-11-12T14:15:00", "Maternal Grandmother (Wife of Himavan)", "1"],
+      ["P-201", "Lord Mahadeva Shiva", "Shiva", "LordMahadevaShivaP-201", "shiva@kula.internal", "Male", "1955-03-04T23:45:00", "Chidambaram, Tamil Nadu, India", "Living", "", "Father / Consort of Parvati", "2"],
+      ["P-202", "Goddess Meenakshi Parvati", "Parvati", "GoddessMeenakshiParvatiP-202", "parvati@kula.internal", "Female", "1960-04-14T05:30:00", "Varanasi, Uttar Pradesh, India", "Living", "", "Mother / Daughter of Himavan & Menavati", "2"],
+      ["P-203", "Mainaka Parvata", "Mainaka", "MainakaParvataP-203", "mainaka@kula.internal", "Male", "1958-08-18T12:00:00", "Uttarkashi, Uttarakhand, India", "Living", "", "Maternal Uncle (Son of Himavan & Menavati)", "2"],
+      ["P-204", "Goddess Ganga Devi", "Ganga", "GoddessGangaDeviP-204", "ganga@kula.internal", "Female", "1962-10-05T09:15:00", "Gangotri, Uttarakhand, India", "Living", "", "Maternal Aunt (Daughter of Himavan & Menavati)", "2"],
+      ["P-301", "Lord Kartikeya Subramanya", "Murugan", "LordKartikeyaSubramanyaP-301", "murugan@kula.internal", "Male", "1983-05-24T06:15:00", "Madurai, Tamil Nadu, India", "Living", "", "Eldest Son / Commander of Divine Forces", "3"],
+      ["P-302", "Lord Vinayagar Ganesha", "Ganesha", "LordVinayagarGaneshaP-302", "ganesha@kula.internal", "Male", "1985-09-18T11:45:00", "Chinchwad, Maharashtra, India", "Living", "", "Younger Son / Lord of Wisdom & Obstacles", "3"],
+      ["P-303", "Goddess Ashokasundari", "Ashokasundari", "GoddessAshokasundariP-303", "ashokasundari@kula.internal", "Female", "1988-11-12T14:20:00", "Ujjain, Madhya Pradesh, India", "Living", "", "Daughter of Shiva & Parvati", "3"],
+      ["P-304", "Valli Devi", "Valli", "ValliDeviP-304", "valli@kula.internal", "Female", "1986-02-14T10:00:00", "Vellore, Tamil Nadu, India", "Living", "", "Spouse of Murugan", "3"],
       [
-        "P-305", "Deivayanai", "Devasena Devi", "deivayanai", "deivayanai@kula.internal", "Female",
+        "P-305", "Devasena Devi", "Deivayanai", "DevasenaDeviP-305", "deivayanai@kula.internal", "Female",
         "1985-07-20T16:30:00", "Tiruttani, Tamil Nadu, India", "Living", "", "Spouse of Murugan", "3"
       ]
     ]
   },
   [CFG.KG]: {
-    // SUBJECT and OBJECT store REF_NAME (PID-KNOWN_NAME) so the sheet reads
-    // like a simple graph: Node — Predicate — Node.
+    // SUBJECT and OBJECT store REF_NAME (FULL_NAME without spaces plus the
+    // PID) so the sheet reads like a simple graph: Node — Predicate — Node.
     headers: ["SUBJECT", "PREDICATE", "OBJECT", "DATE", "NOTES"],
     sample: [
-      ["P-101-Himavan", "spouseOf", "P-102-Mena", "", "Himavan married to Menavati"],
-      ["P-101-Himavan", "parentOf", "P-202-Parvati", "", "Himavan parent of Parvati"],
-      ["P-101-Himavan", "parentOf", "P-203-Mainaka", "", "Himavan parent of Mainaka"],
-      ["P-101-Himavan", "parentOf", "P-204-Ganga", "", "Himavan parent of Ganga"],
-      ["P-201-Shiva", "spouseOf", "P-202-Parvati", "", "Shiva married to Parvati"],
-      ["P-202-Parvati", "parentOf", "P-301-Murugan", "", "Parvati parent of Murugan"],
-      ["P-202-Parvati", "parentOf", "P-302-Ganesha", "", "Parvati parent of Ganesha"],
-      ["P-202-Parvati", "parentOf", "P-303-Ashokasundari", "", "Parvati parent of Ashokasundari"],
-      ["P-301-Murugan", "spouseOf", "P-304-Valli", "", "Murugan married to Valli"],
-      ["P-301-Murugan", "spouseOf", "P-305-Deivayanai", "", "Murugan married to Deivayanai"]
+      ["KingHimavanP-101", "spouseOf", "QueenMenavatiP-102", "", "Himavan married to Menavati"],
+      ["KingHimavanP-101", "parentOf", "GoddessMeenakshiParvatiP-202", "", "Himavan parent of Parvati"],
+      ["KingHimavanP-101", "parentOf", "MainakaParvataP-203", "", "Himavan parent of Mainaka"],
+      ["KingHimavanP-101", "parentOf", "GoddessGangaDeviP-204", "", "Himavan parent of Ganga"],
+      ["LordMahadevaShivaP-201", "spouseOf", "GoddessMeenakshiParvatiP-202", "", "Shiva married to Parvati"],
+      ["GoddessMeenakshiParvatiP-202", "parentOf", "LordKartikeyaSubramanyaP-301", "", "Parvati parent of Murugan"],
+      ["GoddessMeenakshiParvatiP-202", "parentOf", "LordVinayagarGaneshaP-302", "", "Parvati parent of Ganesha"],
+      ["GoddessMeenakshiParvatiP-202", "parentOf", "GoddessAshokasundariP-303", "", "Parvati parent of Ashokasundari"],
+      ["LordKartikeyaSubramanyaP-301", "spouseOf", "ValliDeviP-304", "", "Murugan married to Valli"],
+      ["LordKartikeyaSubramanyaP-301", "spouseOf", "DevasenaDeviP-305", "", "Murugan married to Deivayanai"]
     ]
   },
   [CFG.VEDIC]: {
@@ -538,7 +538,7 @@ function setupDatabaseTabsCore_() {
     note = ` ${refs.repaired} reference(s) in KG/Vedic/Stories were re-spelled ` +
            `to match the rebuilt REF_NAME, so no relationship was orphaned.`;
   } else if (refs.drifted > 0) {
-    note = ` ${refs.drifted} stored REF_NAME value(s) differed from PID-KNOWN_NAME ` +
+    note = ` ${refs.drifted} stored REF_NAME value(s) differed from the derived value ` +
            `and were rebuilt; run 'Validate Reference Integrity' to check the edges.`;
   }
 
@@ -630,7 +630,8 @@ function normalizeReferences() {
 
 /**
  * Refreshes every stored relationship reference to the current REF_NAME
- * (e.g. "P-101-Himavan") and installs the read-only name preview columns.
+ * (e.g. "VenkiteswaraIyerA001") and installs the read-only name preview
+ * columns.
  *
  * Humans enter relationships using REF_NAME so they can see who is who. The
  * export to the public Kula app can map REF_NAME back to the bare PID. Bare
@@ -724,9 +725,29 @@ function normalizeReferencesCore_(dryRun) {
 }
 
 /**
+ * Extracts the PID from a person reference in either layout.
+ *
+ * REF_NAME puts the PID last ("VenkiteswaraIyerA001", FULL_NAME without
+ * spaces plus PID), the Vedic and Stories tabs still store PID-first
+ * references ("A001-Venkiteswara Iyer", "P-101-Himavan"), and a bare PID
+ * ("P001") is also accepted.
+ *
+ * @param {*} value Cell value.
+ * @return {string} Upper-case PID, or an empty string when absent.
+ */
+function pidFromRef_(value) {
+  const text = String(value == null ? '' : value).trim();
+  if (!text) return '';
+  const lead = text.match(/^([A-Z]-?\d+)\b/i);
+  if (lead) return lead[1].toUpperCase();
+  const trail = text.match(/([A-Z]-?\d+)$/i);
+  return trail ? trail[1].toUpperCase() : '';
+}
+
+/**
  * Rewrites one reference (or a separated list of them) to the current
- * REF_NAME from the Persons tab. Bare PIDs become "P-101-Name", and stale
- * composite refs are refreshed.
+ * REF_NAME from the Persons tab. Bare PIDs become "KingHimavanP-101"-style
+ * values, and stale composite refs are refreshed.
  *
  * @param {string} text Cell contents.
  * @param {Set<string>} knownPids Uppercased PIDs that exist in Persons.
@@ -743,13 +764,12 @@ function normalizeRefText_(text, knownPids, pidToRefName, split) {
     const trimmed = token.trim();
     if (!trimmed) return token;
 
-    const m = trimmed.match(/^([A-Z]-?\d+)(?:-[\s\S]*)?$/i);
-    if (!m) {
+    const pid = pidFromRef_(trimmed);
+    if (!pid) {
       unresolved.push(trimmed);
       return token;
     }
 
-    const pid = m[1].toUpperCase();
     if (!knownPids.has(pid)) {
       unresolved.push(trimmed);
       return token;
@@ -906,6 +926,10 @@ function refreshPreviewColumns_(ss) {
 /**
  * Builds the preview formula for one row.
  *
+ * The PID is extracted with two patterns: the first covers PID-first
+ * references ("A001-Venkiteswara Iyer"), the second covers REF_NAME, which
+ * puts the PID last ("VenkiteswaraIyerA001").
+ *
  * @param {string} refLetter Column letter of the stored reference.
  * @param {number} row Sheet row the formula sits on.
  * @param {string} source Absolute PID/KNOWN_NAME range, e.g. 'Persons'!$A:$B.
@@ -914,13 +938,16 @@ function refreshPreviewColumns_(ss) {
  */
 function previewFormula_(refLetter, row, source, list) {
   const ref = `$${refLetter}${row}`;
+  const pidOf = target =>
+    `IFERROR(REGEXEXTRACT(${target},"^([A-Z]-?\\d+)"),REGEXEXTRACT(${target},"([A-Z]-?\\d+)$"))`;
+
   if (!list) {
-    return `=IF(${ref}="","",IFERROR(VLOOKUP(REGEXEXTRACT(${ref},"^([A-Z]-?\\d+)"),${source},2,FALSE),"?"))`;
+    return `=IF(${ref}="","",IFERROR(VLOOKUP(${pidOf(ref)},${source},2,FALSE),"?"))`;
   }
 
   return `=IF(${ref}="","",TEXTJOIN(", ",TRUE,MAP(` +
          `SPLIT(REGEXREPLACE(${ref},";",","),",",TRUE,TRUE),` +
-         `LAMBDA(id,IFERROR(VLOOKUP(REGEXEXTRACT(id,"^([A-Z]-?\\d+)"),${source},2,FALSE),"?")))))`;
+         `LAMBDA(id,IFERROR(VLOOKUP(${pidOf('id')},${source},2,FALSE),"?")))))`;
 }
 
 /**
@@ -967,20 +994,20 @@ function populateInstructionsSheet_(sheet) {
     ["Define simple direct edges in the 'KG' tab instead of a separate relationship table:"],
     [""],
     ["  SUBJECT", "PREDICATE", "OBJECT"],
-    ["  A001-Name", "spouseOf", "A002-Name"],
-    ["  A002-Name", "parentOf", "B001-Name"],
+    ["  NameA001", "spouseOf", "NameA002"],
+    ["  NameA002", "parentOf", "NameB001"],
     [""],
     ["💡 KEY FEATURES & INFERENCES"],
     ["• Automatic Co-Parenting", "If A001 spouseOf A002, and A002 parentOf B001, the system infers A001 parentOf B001."],
     ["• Bidirectional Links", "Running 'Flatten All' generates reciprocal spouseOf edges and reverse childOf edges."],
     ["• Generational PIDs", "Running 'Person Numbering > Apply Generational PIDs' assigns Axxx, Bxxx, Cxxx by distance from the patriarch."],
-    ["• Derived REF_NAME", "REF_NAME is a formula, PID and KNOWN_NAME joined by a hyphen. Never type into it."],
-    ["• REF_NAME relationships", "KG stores REF_NAME (PID-KNOWN_NAME) in SUBJECT and OBJECT so it reads like a graph. Vedic and Stories store bare PIDs; PERSON_NAME and TAGGED_NAMES are read-only formulas that render the names."],
-    ["• Stale REF_NAME cells", "If a KNOWN_NAME changes, the name half of a stored reference goes stale. 'Normalize References (REF_NAME)' rewrites every cell to the current REF_NAME."],
+    ["• Derived REF_NAME", "REF_NAME is a formula, FULL_NAME without spaces followed by the PID. Never type into it."],
+    ["• REF_NAME relationships", "KG stores REF_NAME in SUBJECT and OBJECT so it reads like a graph. Vedic and Stories store bare PIDs; PERSON_NAME and TAGGED_NAMES are read-only formulas that render the names."],
+    ["• Stale REF_NAME cells", "If a FULL_NAME changes, the name half of a stored reference goes stale. 'Normalize References (REF_NAME)' rewrites every cell to the current REF_NAME."],
     [""],
     ["⚙️ QUICK START MENU COMMANDS"],
     ["• Setup / Reset Workspace Tabs", "Creates the five core tabs, REF_NAME formulas and dropdowns."],
-    ["• Normalize References (REF_NAME)", "Refreshes relationship cells to the current REF_NAME (e.g. 'P-101-Himavan') and adds name-preview columns."],
+    ["• Normalize References (REF_NAME)", "Refreshes relationship cells to the current REF_NAME (e.g. 'VenkiteswaraIyerA001') and adds name-preview columns."],
     ["• Flatten Knowledge Graph", "Compiles graph edges into the 'KG_FLAT' tab."],
     ["• Person Numbering", "Previews or applies generational renumbering and rewrites every reference."],
     ["• Validate Reference Integrity", "Reports orphan references, duplicate PIDs and unknown predicates."]
@@ -1080,13 +1107,14 @@ function setupCoverage_(sheet) {
 
 /**
  * Makes REF_NAME a formula rather than a typed field, so it can never drift
- * out of sync with PID or KNOWN_NAME. This is what makes generational
+ * out of sync with PID or FULL_NAME. REF_NAME is FULL_NAME with spaces
+ * removed, followed by the PID ("VenkiteswaraIyerA001"), which sorts by name
+ * and matches the dropdowns on the KG tab. This is what makes generational
  * renumbering safe: the reference text follows the PID automatically.
  *
- * Rows whose stored REF_NAME differed from `PID-KNOWN_NAME` are counted. Where
- * the difference is only spacing around the hyphen, the matching references
- * in KG, Vedic and Stories are re-spelled too, so the rewrite cannot orphan a
- * relationship that was previously valid.
+ * Rows whose stored REF_NAME differed from the derived value are counted, so
+ * a stale hand-typed value can be noticed; 'Normalize References' rewrites
+ * the tabs that store references to the current value.
  *
  * @param {SpreadsheetApp.Spreadsheet} ss Spreadsheet being set up.
  * @return {{drifted: number, repaired: number}} How many stored refs differed
@@ -1101,30 +1129,35 @@ function applyLinkedFormulas_(ss) {
 
   const header = persons.getRange(1, 1, 1, lastCol).getValues()[0];
   const pidCol = columnOf_(header, 'PID');
-  const nameCol = columnOf_(header, 'KNOWN_NAME');
+  // FULL_NAME drives the REF_NAME text; a legacy workbook without that
+  // column falls back to KNOWN_NAME.
+  const nameCol = columnOf_(header, 'FULL_NAME') !== -1
+    ? columnOf_(header, 'FULL_NAME')
+    : columnOf_(header, 'KNOWN_NAME');
   const refCol = columnOf_(header, 'REF_NAME');
   if (pidCol === -1 || nameCol === -1 || refCol === -1) return { drifted: 0, repaired: 0 };
 
   const pidRef = columnLetter_(pidCol);
   const nameRef = columnLetter_(nameCol);
 
-  // Inspect the stored refs before overwriting them, so spacing-only drift can
-  // be propagated to the tabs that reference people by that exact string.
+  // Inspect the stored refs before overwriting them. A stored value that
+  // differs from the derived one only by spacing can be re-spelled across
+  // the tabs that reference people by that exact string.
   const stored = persons.getRange(2, 1, setupCoverage_(persons) - 1, lastCol).getValues();
   const respellings = {};
-  let drifted = 0;
+  let driftCount = 0;
 
   stored.forEach(row => {
     const pid = String(row[pidCol - 1] || '').trim();
-    const known = String(row[nameCol - 1] || '').trim();
+    const name = String(row[nameCol - 1] || '').trim();
     const old = String(row[refCol - 1] || '').trim();
-    if (!pid || !known || !old) return;
+    if (!pid || !name || !old) return;
 
-    const canonical = `${pid}-${known}`;
+    const canonical = `${name.replace(/ /g, '')}${pid}`;
     if (old === canonical) return;
 
-    drifted++;
-    if (old.replace(/\s*-\s*/, '-') === canonical) {
+    driftCount++;
+    if (old.replace(/ /g, '') === canonical) {
       respellings[old.toUpperCase()] = canonical;
     }
   });
@@ -1132,12 +1165,12 @@ function applyLinkedFormulas_(ss) {
   const coverage = setupCoverage_(persons);
   const formulas = [];
   for (let r = 2; r <= coverage; r++) {
-    formulas.push([`=IF(OR($${pidRef}${r}="",$${nameRef}${r}=""),"",$${pidRef}${r}&"-"&$${nameRef}${r})`]);
+    formulas.push([`=IF(OR($${pidRef}${r}="",$${nameRef}${r}=""),"",SUBSTITUTE($${nameRef}${r}," ","")&$${pidRef}${r})`]);
   }
   persons.getRange(2, refCol, coverage - 1, 1).setFormulas(formulas);
 
   const repaired = repairReferenceSpelling_(ss, respellings);
-  return { drifted, repaired };
+  return { drifted: driftCount, repaired };
 }
 
 /**
@@ -1250,7 +1283,8 @@ function applyValidations_(ss) {
   const personsRows = setupCoverage_(persons) - 1;
   const pidRange = pidCol === -1 || personsRows <= 0 ? null : persons.getRange(2, pidCol, personsRows, 1);
   const refNameRange = refNameCol === -1 || personsRows <= 0 ? null : persons.getRange(2, refNameCol, personsRows, 1);
-  // Prefer REF_NAME for dropdowns so humans see "P-101-Himavan" instead of a bare PID.
+  // Prefer REF_NAME for dropdowns so humans see "VenkiteswaraIyerA001"
+  // instead of a bare PID.
   const personRefRange = refNameRange || pidRange;
 
   // Persons tab: obvious pick-lists. Invalid values are still allowed so the
@@ -1690,9 +1724,10 @@ function renumberCore_(dryRun) {
   const spouseGraph = {};
 
   function extractPid(str) {
-    // match() returns an array or null; read the captured group, not the array.
-    const m = String(str).match(/([A-Z]-?\d+)/i);
-    return m ? m[1].toUpperCase() : String(str).trim().toUpperCase();
+    // pidFromRef_ reads both layouts: PID first (legacy "A001-Name" and the
+    // Vedic/Stories references) and PID last (REF_NAME "VenkiteswaraIyerA001").
+    // Anything else keeps its whole text as the node key, as before.
+    return pidFromRef_(str) || String(str).trim().toUpperCase();
   }
 
   for (let i = 1; i < kgData.length; i++) {
@@ -1918,9 +1953,14 @@ function rewritePidRefs_(sheet, colIdxs, lookup, apply, splitList, names) {
 }
 
 /**
- * Maps one reference through the PID lookup. A bare PID stays bare; a full
- * "PID-KNOWN_NAME" reference keeps its readable half, refreshed from the
- * current roster so a renamed person does not leave a stale suffix behind.
+ * Maps one reference through the PID lookup. A bare PID stays bare; a
+ * reference in either layout keeps its readable half so a renamed person
+ * does not leave a stale name behind.
+ *
+ * PID-first references ("A001-Venkiteswara Iyer") keep their "-Name" suffix,
+ * refreshed from the current roster when one is passed. REF_NAME references
+ * ("VenkiteswaraIyerA001") keep their name prefix; run 'Normalize References'
+ * afterwards to refresh the prefix from the current roster.
  *
  * @param {*} value Cell value; anything non-string is returned untouched.
  * @param {Object<string,string>} lookup Uppercased old PID -> new PID.
@@ -1933,18 +1973,22 @@ function remapRef_(value, lookup, names) {
   const text = String(value).trim();
   if (!text) return value;
 
-  const m = text.match(/^([A-Z]-?\d+)(-[\s\S]*)?$/i);
-  if (!m) return value;
+  const key = pidFromRef_(text);
+  if (!key) return value;
 
-  const key = m[1].toUpperCase();
   const next = lookup[key];
   if (!next) return value;
 
-  if (m[2] && names && names[key]) {
-    return `${next}-${names[key]}`;
+  const lead = text.match(/^([A-Z]-?\d+)(-[\s\S]*)?$/i);
+  if (lead) {
+    if (lead[2] && names && names[key]) {
+      return `${next}-${names[key]}`;
+    }
+    return next + (lead[2] || '');
   }
 
-  return next + (m[2] || '');
+  const trail = text.match(/^(.+?)([A-Z]-?\d+)$/i);
+  return trail ? trail[1] + next : value;
 }
 
 /**
@@ -2124,7 +2168,9 @@ function validateDataCore_() {
 
   /**
    * True when a relationship cell names a known person. Only the PID half is
-   * treated as identity; a trailing name is a label and may be out of date.
+   * treated as identity, in either layout: REF_NAME puts the PID last, the
+   * Vedic and Stories tabs put it first. A trailing or leading name is a
+   * label and may be out of date.
    *
    * @param {string} value Cell contents.
    * @return {boolean} Whether it resolves.
@@ -2133,10 +2179,8 @@ function validateDataCore_() {
     const text = String(value || '').trim();
     if (!text) return true;
 
-    const m = text.match(/^([A-Z]-?\d+)(?:-[\s\S]*)?$/i);
-    if (!m) return false;
-
-    return pids.has(m[1].toUpperCase());
+    const pid = pidFromRef_(text);
+    return pid ? pids.has(pid) : false;
   };
 
   const kgSheet = ss.getSheetByName(CFG.KG);
