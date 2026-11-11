@@ -1,5 +1,6 @@
 import { layoutTree } from "./layout.js";
 import { layoutOutline, outlineHTML } from "./list.js";
+import { layoutWheel, layoutDescendantFan, renderWheelSVG } from "./wheel.js";
 import { relationship, sentenceFor } from "./relate.js";
 import { pravaraFor } from "./vedic.js";
 import { renderJatagam } from "./chart.js";
@@ -11,6 +12,7 @@ const DEFAULTS = {
   fonts: { heading: "Roboto", body: "Roboto", load_from_google: false },
   layout: {
     default_view: "tree", orientation: "vertical", generations_up: 4, generations_down: 4,
+    wheel_generations: 7,
     card_width: 188, card_height: 84, gap_x: 26, gap_y: 92, corner_radius: 16,
     connector_style: "angular", show_years: true, show_places: true, show_child_counts: true,
   },
@@ -22,7 +24,8 @@ const DEFAULTS = {
     search_placeholder: "Find a family member…", tree_tab: "Tree", people_tab: "Everyone",
     stories_tab: "Stories", set_me: "This is me", view_tree: "Tree",
     panchang_tab: "Tithis",
-    view_vertical: "Vertical", view_horizontal: "Horizontal", view_list: "List", tagged_people: "Tagged relatives",
+    view_ancestors: "Ancestors", view_descendants: "Descendants",
+    view_vertical: "Vertical", view_horizontal: "Horizontal", view_list: "List", view_wheel: "Wheel", tagged_people: "Tagged relatives",
     read_story: "Read story", back: "Back",
   },
   presets: {},
@@ -59,6 +62,7 @@ const state = {
   tree: null, trees: [],
   // List view: collapsed person ids and the generation last jumped to.
   collapsed: new Set(), listGen: null,
+  wheelRings: null, wheelMode: null,
 };
 let googleReady = false;
 
@@ -296,7 +300,8 @@ function finishBoot() {
   }
   const narrow = window.innerWidth <= 640;
   state.view = narrow ? "list" : (CFG.layout.default_view || "tree");
-  if (state.view !== "tree" && state.view !== "list") state.view = "tree";
+  if (!["tree", "list", "wheel"].includes(state.view)) state.view = "tree";
+  if (state.view === "wheel" && !window.d3) state.view = "tree";
   state.orientation = CFG.layout.orientation === "horizontal" ? "horizontal" : "vertical";
 
   renderTreeSelector();
@@ -429,9 +434,18 @@ function applyText() {
   const views = $$("#view-switch button");
   views[0].textContent = text.view_tree || "Tree";
   views[1].textContent = text.view_list || "List";
+  if (views[2]) {
+    views[2].textContent = text.view_wheel || "Wheel";
+    views[2].hidden = !window.d3;
+  }
   const orientations = $$("#orientation-switch button");
   orientations[0].textContent = text.view_vertical;
   orientations[1].textContent = text.view_horizontal;
+  const wheelModes = $$("#wheel-mode button");
+  if (wheelModes.length === 2) {
+    wheelModes[0].textContent = text.view_ancestors || "Ancestors";
+    wheelModes[1].textContent = text.view_descendants || "Descendants";
+  }
   const visible = DATA.people.filter((p) => !p.hidden).length;
   const counts = DATA.counts || {};
   $("#footer").innerHTML = `<span>${esc(site.footer || "")}</span>
@@ -714,12 +728,19 @@ function route() {
   } else {
     showView("tree");
     const focus = arg && IDX.people[arg] ? arg : defaultFocus();
-    const view = ["tree", "list"].includes(params.v) ? params.v : state.view;
+    let view = ["tree", "list", "wheel"].includes(params.v) ? params.v : state.view;
+    if (view === "wheel" && !window.d3) view = "tree";
     const orientation = ["vertical", "horizontal"].includes(params.o) ? params.o : state.orientation;
+    const ringsParam = parseInt(params.r, 10);
+    const wheelRings = ringsParam >= 4 && ringsParam <= 10 ? ringsParam : state.wheelRings;
+    const wheelMode = ["up", "down"].includes(params.m) ? params.m : state.wheelMode;
     const changed = focus !== state.focus || view !== state.view
-      || orientation !== state.orientation;
+      || orientation !== state.orientation || wheelRings !== state.wheelRings
+      || wheelMode !== state.wheelMode;
     state.view = view;
     state.orientation = orientation;
+    state.wheelRings = wheelRings;
+    state.wheelMode = wheelMode;
     if (focus !== state.focus) {
       // A new focus re-roots the list; start that view fully expanded.
       state.collapsed.clear();
@@ -781,11 +802,14 @@ function renderListStage(focusId, { preserveScroll = false } = {}) {
 
 function renderTree(focusId) {
   const isList = state.view === "list";
+  const isWheel = state.view === "wheel";
   const listStage = $("#list-stage");
-  $("#viewport").hidden = isList;
+  const wheelStage = $("#wheel-stage");
+  $("#viewport").hidden = isList || isWheel;
   listStage.hidden = !isList;
 
   if (isList) {
+    wheelStage.hidden = true;
     if (!renderListStage(focusId)) return;
 
     for (const b of $$("#view-switch button")) {
@@ -800,6 +824,68 @@ function renderTree(focusId) {
   }
 
   $("#viewport").hidden = false;
+  wheelStage.hidden = !isWheel;
+  $("#cards").hidden = isWheel;
+  $("#links").hidden = isWheel;
+
+  if (isWheel) {
+    // Auto direction: ancestors when the focus has known ancestors, otherwise
+    // descendants (a founder like the patriarch has a full fan downward).
+    let mode = state.wheelMode;
+    if (!mode) {
+      const p = IDX.people[focusId];
+      const pf = p?.parent_family ? IDX.families[p.parent_family] : null;
+      const hasParents = Boolean(pf?.father || pf?.mother);
+      const hasKids = (p?.families || []).some((fid) => IDX.families[fid]?.children?.length);
+      mode = hasParents || !hasKids ? "up" : "down";
+    }
+    const wheelOpts = {
+      rings: state.wheelRings || undefined,
+      cap: CFG.layout.wheel_generations ?? 7,
+    };
+    const L = mode === "down"
+      ? layoutDescendantFan(IDX, focusId, wheelOpts)
+      : layoutWheel(IDX, focusId, wheelOpts);
+    if (!L) {
+      $("#tree-empty").hidden = false;
+      return;
+    }
+    $("#tree-empty").hidden = true;
+    state.focus = focusId;
+    state.layout = L;
+    wheelStage.style.setProperty("--wheel-w", `${L.width}px`);
+    wheelStage.style.setProperty("--wheel-h", `${L.height}px`);
+    wheelStage.innerHTML = "";
+    const svg = renderWheelSVG(L, {
+      onSelect: (id) => {
+        if (id && id !== focusId) go("tree", id, { v: "wheel" });
+        else if (id) selectPerson(id);
+      },
+    });
+    wheelStage.appendChild(svg);
+
+    for (const b of $$("#view-switch button")) {
+      const on = b.dataset.view === state.view;
+      b.setAttribute("aria-selected", on);
+      b.setAttribute("aria-checked", on);
+    }
+    for (const b of $$("#wheel-rings button")) {
+      const on = Number(b.dataset.rings) === L.rings;
+      b.setAttribute("aria-selected", on);
+      b.setAttribute("aria-checked", on);
+    }
+    for (const b of $$("#wheel-mode button")) {
+      const on = b.dataset.mode === mode;
+      b.setAttribute("aria-selected", on);
+      b.setAttribute("aria-checked", on);
+    }
+    document.body.dataset.treeview = "wheel";
+    centerOn(L);
+    refreshMeChip();
+    renderGenerationsRail();
+    return;
+  }
+
   const L = layoutTree(IDX, focusId, layoutOptions(state.view === "tree" ? "hourglass" : state.view));
   if (!L) {
     $("#tree-empty").hidden = false;
@@ -943,6 +1029,17 @@ function centerOn(L) {
   const panelOpen = !$("#panel").hidden && !narrow;
   const usableW = vw - (panelOpen ? 400 : 0);
 
+  if (state.view === "wheel") {
+    const diameter = L.radius * 2;
+    const pad = narrow ? 8 : 28;
+    const fitK = Math.min((usableW - pad * 2) / diameter, (vh - pad * 2) / diameter);
+    state.k = clamp(fitK, 0.15, 1.25);
+    state.x = usableW / 2;
+    state.y = vh / 2;
+    applyTransform();
+    return;
+  }
+
   const cw = CFG.layout.card_width;
   const ch = CFG.layout.card_height;
   const pad = 24;
@@ -985,6 +1082,9 @@ function markSelectedCards() {
     const on = Boolean(state.selected)
       && (row.dataset.person === state.selected || row.dataset.family === state.selected);
     row.classList.toggle("selected", on);
+  }
+  for (const sector of $$(".wheel-sector")) {
+    sector.classList.toggle("selected", Boolean(state.selected) && sector.dataset.id === state.selected);
   }
 }
 
@@ -1720,6 +1820,23 @@ function bindEvents() {
     const b = e.target.closest("button[data-orientation]");
     if (!b) return;
     go("tree", state.focus, { v: state.view, o: b.dataset.orientation });
+  });
+
+  $("#wheel-rings").addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-rings]");
+    if (!b) return;
+    const rings = Number(b.dataset.rings);
+    // Ignore clicks on the ring count that is already in effect.
+    if (rings === (state.wheelRings ?? state.layout?.rings)) return;
+    go("tree", state.focus, { v: "wheel", o: state.orientation, r: rings });
+  });
+
+  $("#wheel-mode").addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-mode]");
+    if (!b) return;
+    // Ignore clicks on the direction that is already in effect.
+    if (b.dataset.mode === (state.wheelMode ?? state.layout?.mode)) return;
+    go("tree", state.focus, { v: "wheel", o: state.orientation, m: b.dataset.mode });
   });
 
   $("#list-stage").addEventListener("click", (e) => {

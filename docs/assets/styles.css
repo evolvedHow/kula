@@ -585,6 +585,67 @@ a { color: inherit; }
 
 .cards { position: absolute; left: 0; top: 0; }
 
+.wheel-stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--wheel-w, 640px);
+  height: var(--wheel-h, 640px);
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.wheel-stage[hidden] { display: none; }
+
+.wheel-chart {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.wheel-sector {
+  cursor: pointer;
+  transition: opacity 0.2s, filter 0.2s;
+}
+
+.wheel-sector:hover { filter: brightness(1.05); }
+.wheel-sector:focus { outline: none; }
+.wheel-sector:focus path:first-child {
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--accent) 60%, transparent));
+}
+.wheel-sector.selected path:first-child {
+  stroke-width: 3;
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--accent) 55%, transparent));
+}
+
+.wheel-sector text {
+  font-size: 11px;
+  fill: var(--text);
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.wheel-sector .wheel-years {
+  font-size: 9px;
+  fill: var(--muted);
+}
+
+.wheel-sector.unknown text {
+  fill: var(--muted);
+  font-style: italic;
+}
+
+.wheel-sector.unknown path {
+  stroke-dasharray: 3 3;
+}
+
+.wheel-sector[data-id=""] {
+  pointer-events: none;
+}
+
 /* ---------- Indented list view ---------- */
 
 .list-stage {
@@ -1712,11 +1773,34 @@ details summary { cursor: pointer; font-weight: 600; font-size: 0.9rem; }
     height: 1.9rem;
     font-size: 0.78rem;
   }
+
+  .segmented button[data-view="wheel"] { padding-inline: 0.5rem; }
+
+  body[data-treeview="wheel"] .tree-toolbar .toolbar-group {
+    justify-content: center;
+    width: 100%;
+  }
+  body[data-treeview="wheel"] #orientation-switch {
+    display: none;
+  }
+
+  .wheel-sector text { font-size: 13px; }
+  .wheel-sector .wheel-years { font-size: 10px; }
 }
 
 /* The list is a scrolling outline, so orientation and zoom do not apply. */
 body[data-treeview="list"] #orientation-switch,
 body[data-treeview="list"] .zoom {
+  display: none;
+}
+
+body[data-treeview="wheel"] #orientation-switch {
+  display: none;
+}
+
+/* The generation picker and direction toggle only make sense for the fan chart. */
+body:not([data-treeview="wheel"]) #wheel-rings,
+body:not([data-treeview="wheel"]) #wheel-mode {
   display: none;
 }
 

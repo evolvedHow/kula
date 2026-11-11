@@ -79,6 +79,9 @@ layout:
   orientation: vertical
   generations_up: 4
   generations_down: 4
+  # Maximum rings shown in the wheel/fan chart. The visitor can switch between
+  # 4-9 rings with the number buttons shown in the wheel view.
+  wheel_generations: 7
   card_width: 188
   card_height: 84
   gap_x: 26
@@ -186,6 +189,7 @@ text:
   set_me: "This is me"
   view_tree: "Tree"
   view_list: "List"
+  view_wheel: "Wheel"
   view_vertical: "Vertical"
   view_horizontal: "Horizontal"
   tagged_people: "Tagged relatives"

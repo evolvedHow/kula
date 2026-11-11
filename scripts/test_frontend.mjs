@@ -10,6 +10,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import vm from "node:vm";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const docs = path.resolve(here, "..", "docs");
@@ -23,6 +24,12 @@ async function loadModule(relativePath) {
 
 const { layoutTree } = await loadModule("assets/layout.js");
 const { layoutGraph } = await loadModule("assets/graph.js");
+const d3Source = read("vendor/d3-hierarchy.min.js");
+const d3Mod = { exports: {} };
+vm.runInNewContext(d3Source, { module: d3Mod, exports: d3Mod.exports, globalThis, self: globalThis, define: undefined });
+globalThis.window = globalThis;
+globalThis.d3 = d3Mod.exports;
+const { layoutWheel, layoutDescendantFan } = await loadModule("assets/wheel.js");
 const { layoutOutline, outlineHTML } = await loadModule("assets/list.js");
 const { relationship, sentenceFor } = await loadModule("assets/relate.js");
 const { normalizeGotra, pravaraFor } = await loadModule("assets/vedic.js");
@@ -364,6 +371,108 @@ test("graph layout focuses the connected family branch", () => {
   assert.equal(syntheticFull.cards.length, 4);
   assert.equal(syntheticBranch.cards.length, 3);
   assert.ok(!syntheticBranch.cards.some((c) => c.id === "X1"), "unrelated person should be trimmed");
+});
+
+// ---------- Wheel layout ----------
+
+test("wheel layout produces a 3-ring ancestor fan with the focus at the centre", () => {
+  const L = layoutWheel(index, focus, { rings: 3, width: 400, height: 400 });
+  assert.ok(L, "wheel layout should be produced");
+  assert.equal(L.rings, 3);
+  assert.equal(L.sectors.length, 15, "3 rings should produce 1 + 2 + 4 + 8 = 15 sectors");
+  const focusSector = L.sectors.find((s) => s.depth === 0);
+  assert.ok(focusSector, "focus sector should exist");
+  assert.equal(focusSector.id, focus, "focus sector should match the requested focus");
+  for (const s of L.sectors) {
+    assert.ok(Number.isFinite(s.labelX) && Number.isFinite(s.labelY), `${s.name} label position should be finite`);
+    assert.ok(typeof s.d === "string" && s.d.startsWith("M"), `${s.name} should have an SVG path`);
+  }
+});
+
+test("the wheel honours an explicit deep ring count", () => {
+  const L = layoutWheel(index, focus, { rings: 8 });
+  assert.equal(L.rings, 8);
+  assert.equal(L.sectors.length, 2 ** 9 - 1, "8 rings = 1 + 2 + ... + 256 = 511 sectors");
+  for (const s of L.sectors) {
+    assert.ok(!s.unknown || s.label === "none", "placeholders never carry labels");
+    if (s.depth >= 7) assert.equal(s.label, "none", "thin outer wedges get no label");
+  }
+});
+
+test("the wheel sizes itself to the known ancestry when no ring count is given", () => {
+  // The fixture focus is the patriarch: no recorded ancestors, so the fan
+  // falls back to its 4-ring floor instead of drawing 9 empty rings.
+  const L = layoutWheel(index, focus, { cap: 7 });
+  assert.equal(L.rings, 4);
+  assert.equal(L.sectors.length, 2 ** 5 - 1);
+});
+
+test("auto rings grow with the family's known depth", () => {
+  const deep = tree.people.find((p) => p.generation === "F" && !p.hidden);
+  assert.ok(deep, "fixture should include a generation-F person");
+  const L = layoutWheel(index, deep.id, { cap: 7 });
+  assert.ok(L.rings >= 5 && L.rings <= 7, `expected 5-7 rings, got ${L.rings}`);
+  assert.equal(L.sectors.length, 2 ** (L.rings + 1) - 1);
+  const parents = L.sectors.filter((s) => s.depth === 1 && !s.unknown);
+  assert.ok(parents.length && parents.every((s) => s.label === "full"),
+    "inner rings should carry full name + years labels");
+});
+
+// ---------- Descendant fan ----------
+
+function descendantStats(startId) {
+  let depth = 0;
+  let frontier = [startId];
+  const seen = new Set(frontier);
+  const kids = (id) => {
+    const out = [];
+    for (const fid of people[id]?.families || []) {
+      for (const c of families[fid]?.children || []) {
+        if (people[c] && !out.includes(c)) out.push(c);
+      }
+    }
+    return out;
+  };
+  while (frontier.length) {
+    const next = [];
+    for (const id of frontier) {
+      for (const c of kids(id)) {
+        if (!seen.has(c)) { seen.add(c); next.push(c); }
+      }
+    }
+    if (!next.length) break;
+    depth += 1;
+    frontier = next;
+  }
+  return { depth, count: seen.size };
+}
+
+test("the descendant fan shows the focus and all its descendants, with no placeholders", () => {
+  const { depth, count } = descendantStats(focus);
+  const L = layoutDescendantFan(index, focus, { cap: 7 });
+  assert.equal(L.mode, "down");
+  assert.equal(L.rings, Math.min(7, Math.max(1, depth)));
+  assert.equal(L.sectors.length, count, "fan should contain the focus plus every descendant");
+  assert.ok(L.sectors.every((s) => !s.unknown && s.person), "descendant fans have no placeholders");
+  assert.equal(L.sectors.filter((s) => s.depth === 0).length, 1, "exactly one centre sector");
+});
+
+test("descendant fan orders siblings by birth year around the fan", () => {
+  const L = layoutDescendantFan(index, focus, { cap: 7 });
+  const siblings = L.sectors.filter((s) => s.depth === 1)
+    .sort((a, b) => a.startAngle - b.startAngle);
+  const years = siblings.map((s) => s.person.birth?.year ?? 9999);
+  assert.deepEqual(years, [...years].sort((a, b) => a - b), "children should read eldest-first clockwise");
+});
+
+test("a descendant fan trims to the generations that actually exist", () => {
+  const L = layoutDescendantFan(index, focus, { rings: 9 });
+  const { depth } = descendantStats(focus);
+  assert.ok(L.rings <= Math.max(1, depth), "requesting 9 rings cannot exceed the data depth");
+  const leaf = tree.people.find((p) => !(p.families || []).some((f) => families[f]?.children?.length));
+  const lone = layoutDescendantFan(index, leaf.id, {});
+  assert.equal(lone.rings, 1);
+  assert.equal(lone.sectors.length, 1, "a childless person is a lone centre circle");
 });
 
 // ---------- Indented list layout ----------
