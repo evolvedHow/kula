@@ -2040,3 +2040,41 @@ body.chart-open { overflow: hidden; }
   stroke: var(--accent);
   stroke-width: 3;
 }
+
+
+/* The wheel stays visible while a compact person record is open. */
+.panel.wheel-details {
+  width: min(340px, calc(100% - 1.2rem));
+  padding: 1rem 1.05rem 1.3rem;
+}
+.panel.wheel-details .person-head {
+  gap: 0.7rem;
+  padding-right: 1.8rem;
+}
+.panel.wheel-details .person-head .avatar {
+  width: 3.4rem;
+  height: 3.4rem;
+  font-size: 1.2rem;
+}
+.panel.wheel-details .person-name {
+  font-size: 1.08rem;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.panel.wheel-details .person-sub {
+  font-size: 0.78rem;
+}
+.panel.wheel-details .section-title {
+  margin-top: 1rem;
+}
+@media (max-width: 640px) {
+  .panel.wheel-details {
+    width: calc(100% - 1rem);
+    max-height: min(48vh, 390px);
+    top: auto;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    border-radius: 20px;
+  }
+}
