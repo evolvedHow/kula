@@ -622,15 +622,23 @@ a { color: inherit; }
 }
 
 .wheel-sector text {
-  font-size: 11px;
+  font-size: 10px;
   fill: var(--text);
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  paint-order: stroke;
+  stroke: color-mix(in srgb, var(--surface) 78%, transparent);
+  stroke-width: 2.2px;
+  stroke-linejoin: round;
   pointer-events: none;
 }
 
 .wheel-sector .wheel-years {
-  font-size: 9px;
+  font-size: 8px;
   fill: var(--muted);
+  font-weight: 500;
+  letter-spacing: 0;
+  stroke-width: 1.6px;
 }
 
 .wheel-sector.unknown text {
@@ -2004,4 +2012,31 @@ body.chart-open { overflow: hidden; }
   .chart-center span, .chart-summary .k, .chart-disclaimer, .chart-engine { color: #333; }
   .chart-report { width: 100%; }
   .chart-table { break-inside: avoid; }
+}
+
+
+/* Wheel refinements: quieter dividers, legible tangential labels and clear
+   focus/placeholder hierarchy. */
+.wheel-sector path:first-child {
+  vector-effect: non-scaling-stroke;
+}
+.wheel-sector.unknown path {
+  stroke-dasharray: 2 4;
+  stroke-width: 0.9;
+}
+.wheel-sector.unknown {
+  cursor: default;
+}
+.wheel-rim {
+  opacity: 0.34;
+  stroke-width: 2.5;
+  pointer-events: none;
+}
+.wheel-sector:hover path:first-child {
+  stroke-width: 2;
+  stroke-opacity: 1;
+}
+.wheel-sector:focus-visible path:first-child {
+  stroke: var(--accent);
+  stroke-width: 3;
 }
