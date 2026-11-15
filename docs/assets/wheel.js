@@ -212,14 +212,14 @@ function sectorsFromRoot(rootData, rings, width, height, margin, leafWeighted) {
     const labelX = Math.cos(midAngle - Math.PI / 2) * midR;
     const labelY = Math.sin(midAngle - Math.PI / 2) * midR;
     const arc = span * midR;
-    // Radial labels: keep text upright by flipping on the left half.
+    // Tangential labels follow the ring rather than the spoke. This uses the
+    // wedge's arc as the available text width and keeps names out of adjacent
+    // generations. Flip the lower half so labels remain upright.
     let rotate = 0;
     if (!isCenter) {
       let angle = (midAngle * 180) / Math.PI;
-      if (angle > 90 && angle < 270) {
-        angle += 180;
-      }
-      rotate = angle - 90;
+      if (angle > 90 && angle < 270) angle += 180;
+      rotate = angle;
     }
 
     const dPath = isCenter
@@ -245,7 +245,7 @@ function sectorsFromRoot(rootData, rings, width, height, margin, leafWeighted) {
       span,
       arc,
       label: labelTier(isUnknown, isCenter, arc),
-      rim: !isUnknown && !isCenter && arc >= 8,
+      rim: !isUnknown && !isCenter && arc >= 18,
       tone: genderTone(p),
       name: isUnknown ? "Unknown" : displayName(p),
       initials: isUnknown ? "?" : initials(p),
@@ -334,10 +334,19 @@ export function renderWheelSVG(layout, { onSelect } = {}) {
 
     const path = document.createElementNS(ns, "path");
     path.setAttribute("d", s.d);
-    path.setAttribute("fill", s.unknown ? "transparent" : "var(--surface)");
+    path.setAttribute("fill", s.unknown ? "transparent"
+      : `color-mix(in srgb, ${s.tone} ${s.center ? 18 : 9}%, var(--surface))`);
     path.setAttribute("stroke", s.unknown ? "var(--line)" : s.tone);
-    path.setAttribute("stroke-width", s.depth === 0 ? "2" : "1.5");
+    path.setAttribute("stroke-opacity", s.unknown ? "0.48" : "0.72");
+    path.setAttribute("stroke-width", s.depth === 0 ? "2.5" : "1");
     g.appendChild(path);
+
+    // Preserve the complete name and lifespan without forcing long text into
+    // narrow wedges. Native SVG titles work with mouse, touch and assistive tech.
+    const title = document.createElementNS(ns, "title");
+    title.textContent = s.unknown ? "Unknown ancestor"
+      : [s.name, s.years].filter(Boolean).join(" · ");
+    g.appendChild(title);
 
     // Tone accent on the outer rim for non-focus sectors wide enough to see.
     if (s.rim) {
@@ -358,14 +367,20 @@ export function renderWheelSVG(layout, { onSelect } = {}) {
       text.setAttribute("dominant-baseline", "middle");
       text.setAttribute("transform", s.depth > 0 ? `rotate(${s.rotate}, ${s.labelX}, ${s.labelY})` : "");
 
-      // In the centre, prefer initials when the full name would overflow the
-      // small circle. Everywhere, trim very long names so thin wedges do not
-      // spill across their neighbours.
-      const short = s.label === "initials" || (s.center && s.name.length > 14);
-      const labelName = short ? s.initials
-        : s.name.length > 26 ? `${s.name.slice(0, 25)}…`
+      // The label runs tangentially, so its width is bounded by the wedge arc.
+      // Reserve a little room at both ends; never allow text to cross a sector.
+      const maxChars = Math.max(2, Math.floor((s.arc - 12) / 6.4));
+      const words = s.name.trim().split(/\\s+/).filter(Boolean);
+      const compact = words.length > 1
+        ? `${words[0]} ${words[words.length - 1][0]}.`
         : s.name;
-      const showYears = s.years && s.label === "full";
+      const candidate = s.label === "initials" ? s.initials
+        : (s.center && s.name.length > maxChars ? compact : s.name);
+      const labelName = candidate.length > maxChars
+        ? (maxChars <= 3 ? s.initials.slice(0, maxChars)
+          : `${candidate.slice(0, Math.max(1, maxChars - 1))}…`)
+        : candidate;
+      const showYears = s.years && s.label === "full" && s.arc >= 118;
       const tspanName = document.createElementNS(ns, "tspan");
       tspanName.textContent = labelName;
       tspanName.setAttribute("x", s.labelX);
