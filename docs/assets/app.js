@@ -857,9 +857,10 @@ function renderTree(focusId) {
     wheelStage.style.setProperty("--wheel-h", `${L.height}px`);
     wheelStage.innerHTML = "";
     const svg = renderWheelSVG(L, {
+      // Selecting a wedge opens the full person record without moving the
+      // wheel's centre. This keeps browsing fluid and avoids losing context.
       onSelect: (id) => {
-        if (id && id !== focusId) go("tree", id, { v: "wheel" });
-        else if (id) selectPerson(id);
+        if (id) selectPerson(id);
       },
     });
     wheelStage.appendChild(svg);
@@ -1097,6 +1098,7 @@ function selectPerson(id) {
   if (!p) return;
   const panel = $("#panel");
   panel.classList.remove("vedic-open");
+  panel.classList.toggle("wheel-details", state.view === "wheel");
   panel.innerHTML = personPanelHTML(p);
   panel.hidden = false;
   panel.scrollTop = 0;
@@ -1111,6 +1113,7 @@ function selectUnion(id) {
   markSelectedCards();
   const panel = $("#panel");
   panel.classList.remove("vedic-open");
+  panel.classList.remove("wheel-details");
   panel.innerHTML = unionPanelHTML(fam);
   panel.hidden = false;
   panel.scrollTop = 0;
@@ -1147,7 +1150,7 @@ function unionPanelHTML(fam) {
 
 function hidePanel() {
   $("#panel").hidden = true;
-  $("#panel").classList.remove("vedic-open");
+  $("#panel").classList.remove("vedic-open", "wheel-details");
   state.selected = null;
   markSelectedCards();
 }
